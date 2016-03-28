@@ -16,7 +16,7 @@
   "readme": "README.md",
   "dependencies": {
     "babel-polyfill": "^6.7.2",
-    "material-ui": "^0.15.0-alpha.2",
+    "material-ui": "^0.14.4",
     "react": "^0.14.7",
     "react-dom": "^15.0.0-rc.2",
     "react-gmaps": "^1.4.4",

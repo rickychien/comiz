@@ -41,7 +41,7 @@ export default class App extends React.Component {
       comicChapters: [],
       comicPictures: [],
       chapterId: null,
-      favorites: ['3903', '3099']
+      favorites: new Set()
     }
   }
 
@@ -137,6 +137,22 @@ export default class App extends React.Component {
     return chapters[index + 1]
   }
 
+  _addFavorite = (id) => {
+    let favorites = this.state.favorites
+    favorites.add(id)
+    this.setState({
+      favorites: favorites
+    })
+  }
+
+  _removeFavorite = (id) => {
+    let favorites = this.state.favorites
+    favorites.delete(id)
+    this.setState({
+      favorites: favorites
+    })
+  }
+
   componentDidMount = () => {
     fetch(`/api/allcomics.json`)
       .then((res) => res.ok ? res.json() : [])
@@ -160,11 +176,12 @@ export default class App extends React.Component {
         background: '#063047'
       },
       appBarTextInput: {
-        marginTop: '8px'
+        marginTop: '8px',
+        color: '#EEE'
       },
       appbarButton: {
-        margin: '15px 5px',
-        color: 'white'
+        margin: 'auto',
+        color: '#EEE'
       },
       allcomics: {
         margin: '80px 0',
@@ -225,21 +242,19 @@ export default class App extends React.Component {
           <AppBar
             title="Comiz"
             style={styles.appbar}
+            titleStyle={{ width: '60%' }}
             iconElementLeft={
               <IconButton onTouchTap={this._closeReadingMode}>
                 { !this.state.readingMode ? <ContentWeekend /> : <ArrowBack /> }
               </IconButton>
             }
           >
+            <ActionSearch style={{ margin: 'auto' }} color="#EEE" />
             <TextField
-              style={styles.appBarTextInput}
+              style={{ margin: '7px 12% 0 5px' }}
+              inputStyle={{ color: '#EEE' }}
               hintStyle={{ color: '#afafaf' }}
-              hintText="Search comics"
-            />
-            <FlatButton
-              style={styles.appbarButton}
-              onClick={this._openNavigation}
-              icon={<ActionSearch />}
+              hintText="Search"
             />
             <FlatButton
               style={styles.appbarButton}
@@ -273,8 +288,12 @@ export default class App extends React.Component {
               ) : (
                 <div style={styles.reading}>
                   {
-                    this.state.comicPictures.map((pic) => (
-                      <img style={styles.picture} src={pic.url}/>
+                    this.state.comicPictures.map((pic, idx) => (
+                      <img
+                        key={idx}
+                        style={styles.picture}
+                        src={pic.url}
+                      />
                     ))
                   }
                   {
@@ -325,18 +344,27 @@ export default class App extends React.Component {
                     <img src={this._getComicCover(this.state.currentComic.id)}/>
                   </CardMedia>
                   <ListItem
+                    key={this.state.currentComic.id}
                     primaryText={this.state.currentComic.name}
                     secondaryText={'Author Name'}
+                    disabled={true}
                     rightIconButton={
-                      <IconButton>
+                      !this.state.favorites.has(this.state.currentComic.id) ?
+                      <IconButton
+                        onTouchTap={this._addFavorite.bind(this, this.state.currentComic.id)}>
                         <ToggleStarBorder />
+                      </IconButton>
+                      :
+                      <IconButton
+                        onTouchTap={this._removeFavorite.bind(this, this.state.currentComic.id)}>
+                        <ToggleStar />
                       </IconButton>
                     }
                   />
                   <Divider />
                   <div style={styles.chapters}>
                   {
-                    this.state.comicChapters.reverse().map((chapter) => (
+                    this.state.comicChapters.map((chapter) => (
                       <FlatButton
                         key={chapter.id}
                         label={chapter.name}
@@ -351,19 +379,21 @@ export default class App extends React.Component {
               ) : (
                 <GridList cellHeight={140} cols={1}>
                   {
-                    this.state.favorites.map((id) => {
-                      let comic = this._getComicById(id)
-                      return (
-                        <div onTouchTap={this._handleComicToggle.bind(this, comic)}>
-                          <GridTile
-                            style={styles.favoriteTile}
-                            key={comic.id}
-                            title={comic.name}>
-                            <img src={this._getComicCover(id)}/>
-                          </GridTile>
-                        </div>
-                      )
-                    })
+                    [...this.state.favorites]
+                      .filter(this._getComicById)
+                      .map((id) => {
+                        let comic = this._getComicById(id)
+                        return (
+                          <div onTouchTap={this._handleComicToggle.bind(this, comic)}>
+                            <GridTile
+                              key={id}
+                              style={styles.favoriteTile}
+                              title={comic.name}>
+                              <img src={this._getComicCover(id)}/>
+                            </GridTile>
+                          </div>
+                        )
+                      })
                   }
                 </GridList>
               )
