@@ -23,6 +23,7 @@ import ToggleStar from 'material-ui/lib/svg-icons/toggle/star'
 import ToggleStarBorder from 'material-ui/lib/svg-icons/toggle/star-border'
 import ListItem from 'material-ui/lib/lists/list-item'
 import TextField from 'material-ui/lib/text-field'
+import CheckBox from 'material-ui/lib/checkbox'
 
 export default class App extends React.Component {
 
@@ -138,15 +139,12 @@ export default class App extends React.Component {
     return chapters[index + 1]
   }
 
-  _addFavorite = (id) => {
-    this.setState({
-      favorites: this.state.favorites.add(id)
-    })
-  }
+  _toggleFavorite = (id) => {
+    let favorites = this.state.favorites
+    favorites.has(id) ? favorites.delete(id) : favorites.add(id)
 
-  _removeFavorite = (id) => {
     this.setState({
-      favorites: this.state.favorites.delete(id) && this.state.favorites
+      favorites: favorites
     })
   }
 
@@ -355,17 +353,13 @@ export default class App extends React.Component {
                     primaryText={this.state.currentComic.name}
                     secondaryText={'Author Name'}
                     disabled={true}
-                    rightIconButton={
-                      !this.state.favorites.has(this.state.currentComic.id) ?
-                      <IconButton
-                        onTouchTap={this._addFavorite.bind(this, this.state.currentComic.id)}>
-                        <ToggleStarBorder />
-                      </IconButton>
-                      :
-                      <IconButton
-                        onTouchTap={this._removeFavorite.bind(this, this.state.currentComic.id)}>
-                        <ToggleStar />
-                      </IconButton>
+                    leftCheckbox={
+                      <CheckBox
+                        checked={this.state.favorites.has(this.state.currentComic.id)}
+                        checkedIcon={<ToggleStar />}
+                        unCheckedIcon={<ToggleStarBorder />}
+                        onCheck={this._toggleFavorite.bind(this, this.state.currentComic.id)}
+                      />
                     }
                   />
                   <Divider />
