@@ -35,7 +35,6 @@ export default class App extends React.Component {
     this.state = {
       open: false,
       readingMode: false,
-      favoriteMode: true,
       currentComic: {
         id: '',
         name: ''
@@ -54,8 +53,7 @@ export default class App extends React.Component {
   _handleComicToggle = (currentComic) => {
     this.setState({
       currentComic: currentComic,
-      open: true,
-      favoriteMode: false
+      open: true
     })
 
     fetch(`/api/comic_${currentComic.id}.json`)
@@ -94,12 +92,6 @@ export default class App extends React.Component {
       })
   }
 
-  _handleRightNavBack = () => {
-    this.setState({
-      favoriteMode: true
-    })
-  }
-
   _getComicById = (id) => {
     return this.state.allcomics.find((element) => element.id === id)
   }
@@ -110,8 +102,7 @@ export default class App extends React.Component {
 
   _openNavigation = () => {
     this.setState({
-      open: true,
-      favoriteMode: true
+      open: true
     })
   }
 
@@ -362,74 +353,44 @@ export default class App extends React.Component {
         <LeftNav width={300} openRight={true} open={this.state.open}>
           <AppBar
             style={styles.navAppBar}
-            title={this.state.favoriteMode ? 'Favorites' : ''}
-            iconElementLeft={
-              this.state.favoriteMode ? (
-                <IconButton><TurnedIn /></IconButton>
-              ) : (
-                <IconButton onTouchTap={this._handleRightNavBack}>
-                  <ArrowBack />
-                </IconButton>
-              )
-            }>
+            title={'About'}
+            iconElementLeft={<IconButton><TurnedIn /></IconButton>}>
           </AppBar>
           <div style={styles.navContent}>
             {
-              !this.state.favoriteMode ? (
-                <Card>
-                  <CardMedia>
-                    <img src={this._getComicCover(this.state.currentComic.id)}/>
-                  </CardMedia>
-                  <ListItem
-                    key={this.state.currentComic.id}
-                    primaryText={this.state.currentComic.name}
-                    secondaryText={'Author Name'}
-                    disabled={true}
-                    leftCheckbox={
-                      <CheckBox
-                        checked={this.state.favorites.has(this.state.currentComic.id)}
-                        checkedIcon={<ToggleStar />}
-                        unCheckedIcon={<ToggleStarBorder />}
-                        onCheck={this._toggleFavorite.bind(this, this.state.currentComic.id)}
-                      />
-                    }
-                  />
-                  <Divider />
-                  <div style={styles.chapters}>
-                  {
-                    this.state.comicChapters.map((chapter) => (
-                      <FlatButton
-                        key={chapter.id}
-                        label={chapter.name}
-                        onTouchTap={
-                          this._downloadComicChapter.bind(this,
-                            this.state.currentComic.id, chapter.id)
-                        }/>
-                    ))
+              <Card>
+                <CardMedia>
+                  <img src={this._getComicCover(this.state.currentComic.id)}/>
+                </CardMedia>
+                <ListItem
+                  key={this.state.currentComic.id}
+                  primaryText={this.state.currentComic.name}
+                  secondaryText={'Author Name'}
+                  disabled={true}
+                  leftCheckbox={
+                    <CheckBox
+                      checked={this.state.favorites.has(this.state.currentComic.id)}
+                      checkedIcon={<ToggleStar />}
+                      unCheckedIcon={<ToggleStarBorder />}
+                      onCheck={this._toggleFavorite.bind(this, this.state.currentComic.id)}
+                    />
                   }
-                  </div>
-                </Card>
-              ) : (
-                <GridList cellHeight={140} cols={1}>
-                  {
-                    [...this.state.favorites]
-                      .filter(this._getComicById)
-                      .map((id) => {
-                        let comic = this._getComicById(id)
-                        return (
-                          <div onTouchTap={this._handleComicToggle.bind(this, comic)}>
-                            <GridTile
-                              key={id}
-                              style={styles.favoriteTile}
-                              title={comic.name}>
-                              <img src={this._getComicCover(id)}/>
-                            </GridTile>
-                          </div>
-                        )
-                      })
-                  }
-                </GridList>
-              )
+                />
+                <Divider />
+                <div style={styles.chapters}>
+                {
+                  this.state.comicChapters.map((chapter) => (
+                    <FlatButton
+                      key={chapter.id}
+                      label={chapter.name}
+                      onTouchTap={
+                        this._downloadComicChapter.bind(this,
+                          this.state.currentComic.id, chapter.id)
+                      }/>
+                  ))
+                }
+                </div>
+              </Card>
             }
           </div>
         </LeftNav>
