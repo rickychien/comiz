@@ -41,7 +41,8 @@ export default class App extends React.Component {
       comicChapters: [],
       comicPictures: [],
       chapterId: null,
-      favorites: new Set()
+      favorites: new Set(),
+      filterPattern: /.+/
     }
   }
 
@@ -138,19 +139,21 @@ export default class App extends React.Component {
   }
 
   _addFavorite = (id) => {
-    let favorites = this.state.favorites
-    favorites.add(id)
     this.setState({
-      favorites: favorites
+      favorites: this.state.favorites.add(id)
     })
   }
 
   _removeFavorite = (id) => {
-    let favorites = this.state.favorites
-    favorites.delete(id)
     this.setState({
-      favorites: favorites
+      favorites: this.state.favorites.delete(id) && this.state.favorites
     })
+  }
+
+  _filterComics = (event) => {
+    this.setState({
+      filterPattern: new RegExp(event.target.value) || /.+/
+    });
   }
 
   componentDidMount = () => {
@@ -251,10 +254,12 @@ export default class App extends React.Component {
           >
             <ActionSearch style={{ margin: 'auto' }} color="#EEE" />
             <TextField
+              ref={'searchText'}
               style={{ margin: '7px 12% 0 5px' }}
               inputStyle={{ color: '#EEE' }}
               hintStyle={{ color: '#afafaf' }}
               hintText="Search"
+              onChange={this._filterComics}
             />
             <FlatButton
               style={styles.appbarButton}
@@ -272,16 +277,18 @@ export default class App extends React.Component {
                     cellHeight={200}
                     padding={12}>
                     {
-                      this.state.allcomics.map((comic) => (
-                        <GridTile
-                          style={styles.comicTile}
-                          key={comic.id}
-                          title={comic.name}
-                          onClick={this._handleComicToggle.bind(this, comic)}
-                          titleBackground={styles.tileTitle}>
-                            <img src={this._getComicCover(comic.id)}/>
-                        </GridTile>
-                      ))
+                      this.state.allcomics
+                        .filter((comic) => this.state.filterPattern.test(comic.name))
+                        .map((comic) => (
+                          <GridTile
+                            style={styles.comicTile}
+                            key={comic.id}
+                            title={comic.name}
+                            onClick={this._handleComicToggle.bind(this, comic)}
+                            titleBackground={styles.tileTitle}>
+                              <img src={this._getComicCover(comic.id)}/>
+                          </GridTile>
+                        ))
                     }
                   </GridList>
                 </div>
