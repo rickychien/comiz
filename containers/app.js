@@ -244,15 +244,16 @@ export default class App extends React.Component {
       previousChapter: {
         position: 'fixed',
         left: '1%',
-        top: '50%',
-        backgroundColor: '#123',
-        color: '#333'
+        top: '10%',
+        height: '80%',
+        backgroundColor: 'rgba(#112233, 0.24)'
       },
       nextChapter: {
         position: 'fixed',
         right: '1%',
-        top: '50%',
-        backgroundColor: '#123'
+        top: '10%',
+        height: '80%',
+        backgroundColor: 'rgba(#112233, 0.24)'
       },
       favoriteTile: {
         cursor: 'pointer'
@@ -326,25 +327,23 @@ export default class App extends React.Component {
                   }
                   {
                     !this._previousChapter() ? '' :
-                      <FloatingActionButton
-                        backgroundColor={styles.previousChapter.backgroundColor}
+                      <IconButton
                         style={styles.previousChapter}
                         onTouchTap={this._downloadComicChapter.bind(this,
                           this.state.currentComic.id, this._previousChapter().id)}
                       >
-                        <ChevronLeft />
-                      </FloatingActionButton>
+                        <ChevronLeft color={'#ffffff'} />
+                      </IconButton>
                   }
                   {
                     !this._nextChapter() ? '' :
-                      <FloatingActionButton
-                        backgroundColor={styles.nextChapter.backgroundColor}
-                        style={styles.nextChapter}
-                        onTouchTap={this._downloadComicChapter.bind(this,
-                          this.state.currentComic.id, this._nextChapter().id)}
-                      >
-                        <ChevronRight />
-                      </FloatingActionButton>
+                    <IconButton
+                      style={styles.nextChapter}
+                      onTouchTap={this._downloadComicChapter.bind(this,
+                        this.state.currentComic.id, this._nextChapter().id)}
+                    >
+                      <ChevronRight color={'#ffffff'} />
+                    </IconButton>
                   }
                 </div>
               )
