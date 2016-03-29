@@ -24,6 +24,8 @@ import ToggleStarBorder from 'material-ui/lib/svg-icons/toggle/star-border'
 import ListItem from 'material-ui/lib/lists/list-item'
 import TextField from 'material-ui/lib/text-field'
 import CheckBox from 'material-ui/lib/checkbox'
+import DropDownMenu from 'material-ui/lib/DropDownMenu'
+import MenuItem from 'material-ui/lib/menus/menu-item'
 
 export default class App extends React.Component {
 
@@ -43,7 +45,9 @@ export default class App extends React.Component {
       comicPictures: [],
       chapterId: null,
       favorites: new Set(),
-      filterPattern: /.+/
+      category: 'SHOW_LATEST',
+      searchFilter: () => true,
+      categoryFilter: () => true
     }
   }
 
@@ -58,7 +62,7 @@ export default class App extends React.Component {
       .then((res) => res.ok ? res.json() : [])
       .then((comicChapters) => {
         this.setState({
-          comicChapters: comicChapters
+          comicChapters: comicChapters.reverse()
         })
       })
       .catch(() => {
@@ -148,10 +152,30 @@ export default class App extends React.Component {
     })
   }
 
-  _filterComics = (event) => {
+  _onSearchTextChanged = (event) => {
+    let regexp = new RegExp(event.target.value) || /.+/
     this.setState({
-      filterPattern: new RegExp(event.target.value) || /.+/
-    });
+      searchFilter: function (comic) {
+        return regexp.test(comic.name)
+      }
+    })
+
+  }
+
+  _onCategoryChanged = (event, index, category) => {
+    let categoryFilter
+    switch(category) {
+      case 'SHOW_LATEST':
+        categoryFilter = () => true
+        break;
+      case 'SHOW_FAVORITE':
+        categoryFilter = (comic) => this.state.favorites.has(comic.id)
+        break;
+    }
+    this.setState({
+      category,
+      categoryFilter
+    })
   }
 
   componentDidMount = () => {
@@ -170,7 +194,14 @@ export default class App extends React.Component {
   render() {
     const navWidth = this.state.open ? '300px' : '0px';
     const styles = {
-      appbar: {
+      appBar: {
+        position: 'fixed',
+        margin: '0',
+        top: 0,
+        maxWidth: `calc(100% - ${navWidth})`,
+        background: '#063047'
+      },
+      navAppBar: {
         position: 'fixed',
         margin: '0',
         top: 0,
@@ -242,7 +273,7 @@ export default class App extends React.Component {
         <div onTouchTap={this._closeNavigation}>
           <AppBar
             title="Comiz"
-            style={styles.appbar}
+            style={styles.appBar}
             titleStyle={{ width: '60%' }}
             iconElementLeft={
               <IconButton onTouchTap={this._closeReadingMode}>
@@ -250,20 +281,20 @@ export default class App extends React.Component {
               </IconButton>
             }
           >
-            <ActionSearch style={{ margin: 'auto' }} color="#EEE" />
+            <DropDownMenu
+              value={this.state.category}
+              labelStyle={{ color: 'white' }}
+              onChange={this._onCategoryChanged}>
+              <MenuItem value={'SHOW_LATEST'} primaryText="Latest"/>
+              <MenuItem value={'SHOW_FAVORITE'} primaryText="Favorite"/>
+            </DropDownMenu>
             <TextField
               ref={'searchText'}
-              style={{ margin: '7px 12% 0 5px' }}
+              style={{ margin: '7px 0', width: '200px' }}
               inputStyle={{ color: '#EEE' }}
               hintStyle={{ color: '#afafaf' }}
-              hintText="Search"
-              onChange={this._filterComics}
-            />
-            <FlatButton
-              style={styles.appbarButton}
-              label="Favorites"
-              onClick={this._openNavigation}
-              icon={<TurnedIn />}
+              hintText={<ActionSearch style={{ margin: 'auto' }} color="#afafaf" />}
+              onChange={this._onSearchTextChanged}
             />
           </AppBar>
            {
@@ -276,7 +307,8 @@ export default class App extends React.Component {
                     padding={12}>
                     {
                       this.state.allcomics
-                        .filter((comic) => this.state.filterPattern.test(comic.name))
+                        .filter(this.state.categoryFilter)
+                        .filter(this.state.searchFilter)
                         .map((comic) => (
                           <GridTile
                             style={styles.comicTile}
@@ -329,7 +361,7 @@ export default class App extends React.Component {
         </div>
         <LeftNav width={300} openRight={true} open={this.state.open}>
           <AppBar
-            style={styles.appbar}
+            style={styles.navAppBar}
             title={this.state.favoriteMode ? 'Favorites' : ''}
             iconElementLeft={
               this.state.favoriteMode ? (
