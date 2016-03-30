@@ -330,9 +330,8 @@ export default class App extends React.Component {
                       <IconButton
                         style={styles.previousChapter}
                         onTouchTap={this._downloadComicChapter.bind(this,
-                          this.state.currentComic.id, this._previousChapter().id)}
-                      >
-                        <ChevronLeft color={'#ffffff'} />
+                          this.state.currentComic.id, this._previousChapter().id)}>
+                        <ChevronLeft color={'#aaaaaa'}/>
                       </IconButton>
                   }
                   {
@@ -340,9 +339,8 @@ export default class App extends React.Component {
                     <IconButton
                       style={styles.nextChapter}
                       onTouchTap={this._downloadComicChapter.bind(this,
-                        this.state.currentComic.id, this._nextChapter().id)}
-                    >
-                      <ChevronRight color={'#ffffff'} />
+                        this.state.currentComic.id, this._nextChapter().id)}>
+                      <ChevronRight color={'#aaaaaa'}/>
                     </IconButton>
                   }
                 </div>
