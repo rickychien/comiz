@@ -1,4 +1,5 @@
 import React from 'react'
+import Radium from 'radium'
 import AppBar from 'material-ui/lib/app-bar'
 import GridList from 'material-ui/lib/grid-list/grid-list'
 import GridTile from 'material-ui/lib/grid-list/grid-tile'
@@ -21,12 +22,14 @@ import TurnedIn from 'material-ui/lib/svg-icons/action/turned-in'
 import ActionSearch from 'material-ui/lib/svg-icons/action/search'
 import ToggleStar from 'material-ui/lib/svg-icons/toggle/star'
 import ToggleStarBorder from 'material-ui/lib/svg-icons/toggle/star-border'
+import ImportContacts from 'material-ui/lib/svg-icons/communication/import-contacts'
 import ListItem from 'material-ui/lib/lists/list-item'
 import TextField from 'material-ui/lib/text-field'
 import CheckBox from 'material-ui/lib/checkbox'
 import DropDownMenu from 'material-ui/lib/DropDownMenu'
 import MenuItem from 'material-ui/lib/menus/menu-item'
 
+@Radium
 export default class App extends React.Component {
 
   constructor(props) {
@@ -239,7 +242,10 @@ export default class App extends React.Component {
       },
       picture: {
         margin: '10px 0',
-        borderRadius: '8px'
+        borderRadius: '8px',
+        '@media only screen and (maxWidth: 600px)': {
+          width: '100%'
+        }
       },
       previousChapter: {
         position: 'fixed',
@@ -273,21 +279,29 @@ export default class App extends React.Component {
               </IconButton>
             }
           >
-            <DropDownMenu
-              value={this.state.category}
-              labelStyle={{ color: 'white' }}
-              onChange={this._onCategoryChanged}>
-              <MenuItem value={'SHOW_LATEST'} primaryText="Latest"/>
-              <MenuItem value={'SHOW_FAVORITE'} primaryText="Favorite"/>
-            </DropDownMenu>
-            <TextField
-              ref={'searchText'}
-              style={{ margin: '7px 0', width: '200px' }}
-              inputStyle={{ color: '#EEE' }}
-              hintStyle={{ color: '#afafaf' }}
-              hintText={<ActionSearch style={{ margin: 'auto' }} color="#afafaf" />}
-              onChange={this._onSearchTextChanged}
-            />
+            {
+              !this.state.readingMode ? [
+                <DropDownMenu
+                  value={this.state.category}
+                  labelStyle={{ color: 'white' }}
+                  onChange={this._onCategoryChanged}>
+                    <MenuItem value={'SHOW_LATEST'} primaryText="Latest"/>
+                    <MenuItem value={'SHOW_FAVORITE'} primaryText="Favorite"/>
+                </DropDownMenu>,
+                <TextField
+                  style={{ margin: '7px 0', width: '200px' }}
+                  inputStyle={{ color: '#EEE' }}
+                  hintStyle={{ color: '#afafaf' }}
+                  hintText={<ActionSearch style={{ margin: 'auto' }} color="#afafaf" />}
+                  onChange={this._onSearchTextChanged}
+                />
+              ] :
+                <FlatButton
+                  style={{ margin: '12px 0', padding: '2% 1%' }}
+                  onClick={this._handleComicToggle.bind(this, this.state.currentComic)}>
+                    <ImportContacts color="white"></ImportContacts>
+                </FlatButton>
+            }
           </AppBar>
            {
               !this.state.readingMode ? (
@@ -380,6 +394,7 @@ export default class App extends React.Component {
                     <FlatButton
                       key={chapter.id}
                       label={chapter.name}
+                      backgroundColor={chapter.id === this.state.chapterId ? '#bed8ff' : ''}
                       onTouchTap={
                         this._downloadComicChapter.bind(this,
                           this.state.currentComic.id, chapter.id)
