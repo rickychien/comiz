@@ -45,7 +45,7 @@ export default class App extends React.Component {
       allcomics: [],
       comicChapters: [],
       comicPictures: [],
-      chapterId: null,
+      watchingChapterId: null,
       favorites: new Set(),
       category: 'SHOW_LATEST',
       searchFilter: () => true,
@@ -79,19 +79,20 @@ export default class App extends React.Component {
     })
   }
 
-  _downloadComicChapter = (comicId, chapterId) => {
-    fetch(`/api/comic_${comicId}_${chapterId}.json`)
+  _downloadComicChapter = (watchingComicId, watchingChapterId) => {
+    fetch(`/api/comic_${watchingComicId}_${watchingChapterId}.json`)
       .then((res) => res.ok ? res.json() : [])
       .then((comicPictures) => {
         this.setState({
           comicPictures: comicPictures,
           readingMode: true,
           open: false,
-          chapterId: chapterId
+          watchingComicId,
+          watchingChapterId
         })
       })
       .catch((err) => {
-        console.err(err)
+        console.error(err)
       })
   }
 
@@ -124,7 +125,7 @@ export default class App extends React.Component {
   _previousChapter = () => {
     let chapters = this.state.comicChapters
     let index = chapters.findIndex((chapter) => (
-      chapter.id === this.state.chapterId
+      chapter.id === this.state.watchingChapterId
     ))
     return chapters[index - 1]
   }
@@ -132,7 +133,7 @@ export default class App extends React.Component {
   _nextChapter = () => {
     let chapters = this.state.comicChapters
     let index = chapters.findIndex((chapter) => (
-      chapter.id === this.state.chapterId
+      chapter.id === this.state.watchingChapterId
     ))
     return chapters[index + 1]
   }
@@ -181,7 +182,7 @@ export default class App extends React.Component {
         })
       })
       .catch((err) => {
-        console.err(err)
+        console.error(err)
       })
   }
 
@@ -394,7 +395,11 @@ export default class App extends React.Component {
                     <FlatButton
                       key={chapter.id}
                       label={chapter.name}
-                      backgroundColor={chapter.id === this.state.chapterId ? '#bed8ff' : ''}
+                      backgroundColor={
+                        this.state.currentComic.id === this.state.watchingComicId &&
+                        chapter.id === this.state.watchingChapterId ?
+                        '#bed8ff' : ''
+                      }
                       onTouchTap={
                         this._downloadComicChapter.bind(this,
                           this.state.currentComic.id, chapter.id)
