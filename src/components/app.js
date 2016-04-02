@@ -1,5 +1,4 @@
 import React from 'react'
-import AppBar from 'material-ui/lib/app-bar'
 import GridList from 'material-ui/lib/grid-list/grid-list'
 import GridTile from 'material-ui/lib/grid-list/grid-tile'
 import LeftNav from 'material-ui/lib/left-nav'
@@ -28,6 +27,7 @@ import CheckBox from 'material-ui/lib/checkbox'
 import DropDownMenu from 'material-ui/lib/DropDownMenu'
 import MenuItem from 'material-ui/lib/menus/menu-item'
 
+import AppBar from './app-bar'
 import styles from './app.css'
 
 export default class App extends React.Component {
@@ -204,12 +204,10 @@ export default class App extends React.Component {
         <div onTouchTap={this._closeNavigation}>
           <AppBar
             title="Comiz"
-            className={styles.appBar}
-            titleStyle={{ width: '60%' }}
-            iconElementLeft={
-              <IconButton onTouchTap={this._closeReadingMode}>
-                { !this.state.readingMode ? <FingerPrint /> : <ArrowBack /> }
-              </IconButton>
+            logoElement={
+              !this.state.readingMode ?
+              <i className="material-icons">fingerprint</i> :
+              <i className="material-icons">arrow back</i>
             }
           >
             {
