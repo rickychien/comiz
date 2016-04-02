@@ -4,8 +4,8 @@ Comic land
 
 ## Prerequisites
 
-* [nodejs] >= 5.x
-* [npm] >= 3.x
+* [node] >= 5.9.x
+* [npm] >= 3.7.x
 
 ## Techniques
 
@@ -19,19 +19,19 @@ Comic land
 ## Contribute
 
 1. Install npm packages
-
-	```npm install```
-
+  ```
+  npm install
+  ```
 
 2. Start webpack dev server
+  ```
+  npm start
+  ```
 
-	```npm start```
+3. Open up <http://localhost:3990> in browser
 
 
-3. Open up http://localhost:3990
-
-
-[nodejs]: https://nodejs.org/
+[node]: https://nodejs.org/
 [npm]: https://www.npmjs.com/
 [react]: https://github.com/facebook/react
 [redux]: http://redux.js.org/
