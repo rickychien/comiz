@@ -4,6 +4,7 @@
   "description": "Comic viewer",
   "main": "index.js",
   "scripts": {
+    "postinstall": "rm -rf ./static/ && ./node_modules/.bin/webpack --progress --colors",
     "start": "node server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },

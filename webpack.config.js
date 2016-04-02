@@ -2,10 +2,13 @@ const webpack = require('webpack')
 
 module.exports = {
   entry: {
-    bundle: ['./index.js', 'webpack-hot-middleware/client']
+    bundle: [
+      './src/index.js',
+      'webpack-hot-middleware/client'
+    ]
   },
   output: {
-    path: '/',
+    path: __dirname + '/static/',
     filename: '[name].js',
     publicPath: '/static/'
   },

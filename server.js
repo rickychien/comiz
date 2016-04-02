@@ -24,7 +24,7 @@ app.get('/', function(req, res) {
 })
 
 app.get('/api/*', function(req, res) {
-  res.sendFile(__dirname + req.url)
+  res.sendFile(__dirname + '/src' + req.url)
 })
 
 app.listen(port, function(error) {
