@@ -20,8 +20,6 @@
     "material-ui": "^0.14.4",
     "react": "^0.14.7",
     "react-dom": "^15.0.0-rc.2",
-    "react-gmaps": "^1.4.4",
-    "react-highcharts": "^8.0.3",
     "react-tap-event-plugin": "^0.2.2",
     "whatwg-fetch": "^0.11.0"
   },
