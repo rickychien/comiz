@@ -59,6 +59,18 @@ export default class App extends React.Component {
       open: true
     })
 
+    fetch(`https://atecomic.wcpan.me/comics/${currentComic.id}`)
+      .then((res) => res.ok ? res.json() : [])
+      .then((comic) => {
+        this.setState({
+          currentComic: Object.assign({}, currentComic, comic)
+        })
+        console.log(Object.assign({}, currentComic, comic))
+      })
+      .catch((err) => {
+        console.error(err)
+      })
+
     fetch(`https://atecomic.wcpan.me/comics/${currentComic.id}/episodes`)
       .then((res) => res.ok ? res.json() : [])
       .then((comicChapters) => {
@@ -174,7 +186,7 @@ export default class App extends React.Component {
   }
 
   componentDidMount = () => {
-    fetch(`https://atecomic.wcpan.me/updates`)
+    fetch(`/api/updates`)
       .then((res) => res.ok ? res.json() : [])
       .then((allcomics) => {
         this.setState({
@@ -282,7 +294,7 @@ export default class App extends React.Component {
               )
           }
         </div>
-        <LeftNav width={300} openRight={true} open={this.state.open}>
+        <LeftNav width={281} openRight={true} open={this.state.open}>
           <AppBar
             className={styles.navAppBar}
             title={'About'}
@@ -308,6 +320,9 @@ export default class App extends React.Component {
                     />
                   }
                 />
+                <div className={styles.brief}>
+                  {this.state.currentComic.brief}
+                </div>
                 <Divider />
                 <div className={styles.chapters}>
                 {
