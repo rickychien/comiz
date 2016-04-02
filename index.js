@@ -3,14 +3,15 @@ import React from 'react'
 import { render } from 'react-dom'
 import { Provider } from 'react-redux'
 import App from './containers/app'
-import './style/index.css'
 import injectTapEventPlugin from 'react-tap-event-plugin'
+
+import './index.css'
 
 injectTapEventPlugin();
 
 render(
   <Provider>
-    <App />
+    <App/>
   </Provider>,
   document.getElementById('root')
 )

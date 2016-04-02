@@ -1,0 +1,85 @@
+.appBar {
+  position: fixed !important;
+  margin: 0 !important;
+  top: 0 !important;
+  max-width: 100% !important;
+  background-color: #063047 !important;
+}
+
+.navAppBar {
+  position: fixed !important;
+  margin: 0 !important;
+  top: 0 !important;
+  background: #063047 !important;
+}
+
+.appBarTextInput {
+  margin-top: 8px !important;
+  color: #EEE !important;
+}
+
+.appbarButton {
+  margin: auto !important;
+  color: #EEE !important;
+}
+
+.allcomics {
+  margin: 80px 0 !important;
+  width: 100% !important;
+}
+
+.gridList {
+  display: flex !important;
+  justify-content: center !important;
+  margin: 0 auto !important;
+}
+
+.navContent {
+  margin: 80px 3% !important;
+}
+
+.comicTile {
+  width: 150px !important;
+  cursor: pointer !important;
+}
+
+.chapters {
+  text-align: center !important;
+}
+
+.reading {
+  background: #1b1b1b !important;
+  text-align: center !important;
+  margin-top: 60px !important;
+}
+
+.picture {
+  margin: 15px 0 !important;
+  border-radius: 8px !important;
+}
+
+@media screen and (max-width: 600px) {
+  .picture {
+    width: 100% !important;
+  }
+}
+
+.previousChapter {
+  position: fixed !important;
+  left: 1% !important;
+  top: 10% !important;
+  height: 80% !important;
+  background-color: rgba(#112233, 0.24) !important;
+}
+
+.nextChapter {
+  position: fixed !important;
+  right: 1% !important;
+  top: 10% !important;
+  height: 80% !important;
+  background-color: rgba(#112233, 0.24) !important;
+}
+
+.favoriteTile {
+  cursor: pointer !important;
+}

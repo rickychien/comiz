@@ -1,5 +1,4 @@
 import React from 'react'
-import Radium from 'radium'
 import AppBar from 'material-ui/lib/app-bar'
 import GridList from 'material-ui/lib/grid-list/grid-list'
 import GridTile from 'material-ui/lib/grid-list/grid-tile'
@@ -14,7 +13,7 @@ import FlatButton from 'material-ui/lib/flat-button'
 import Divider from 'material-ui/lib/divider'
 import FontIcon from 'material-ui/lib/font-icon'
 import FloatingActionButton from 'material-ui/lib/floating-action-button'
-import ContentWeekend from 'material-ui/lib/svg-icons/content/weekend'
+import FingerPrint from 'material-ui/lib/svg-icons/action/fingerprint'
 import ArrowBack from 'material-ui/lib/svg-icons/navigation/arrow-back'
 import ChevronLeft from 'material-ui/lib/svg-icons/navigation/chevron-left'
 import ChevronRight from 'material-ui/lib/svg-icons/navigation/chevron-right'
@@ -29,7 +28,8 @@ import CheckBox from 'material-ui/lib/checkbox'
 import DropDownMenu from 'material-ui/lib/DropDownMenu'
 import MenuItem from 'material-ui/lib/menus/menu-item'
 
-@Radium
+import styles from './app.css'
+
 export default class App extends React.Component {
 
   constructor(props) {
@@ -59,7 +59,7 @@ export default class App extends React.Component {
       open: true
     })
 
-    fetch(`/api/comic_${currentComic.id}.json`)
+    fetch(`https://atecomic.wcpan.me/comics/${currentComic.id}/episodes`)
       .then((res) => res.ok ? res.json() : [])
       .then((comicChapters) => {
         this.setState({
@@ -80,7 +80,7 @@ export default class App extends React.Component {
   }
 
   _downloadComicChapter = (watchingComicId, watchingChapterId) => {
-    fetch(`/api/comic_${watchingComicId}_${watchingChapterId}.json`)
+    fetch(`https://atecomic.wcpan.me/comics/${watchingComicId}/episodes/${watchingChapterId}/pages`)
       .then((res) => res.ok ? res.json() : [])
       .then((comicPictures) => {
         this.setState({
@@ -148,10 +148,10 @@ export default class App extends React.Component {
   }
 
   _onSearchTextChanged = (event) => {
-    let regexp = new RegExp(event.target.value) || /.+/
+    let regexp = new RegExp(event.target.value, 'i') || /.+/
     this.setState({
       searchFilter: function (comic) {
-        return regexp.test(comic.name)
+        return regexp.test(comic.title)
       }
     })
 
@@ -174,7 +174,7 @@ export default class App extends React.Component {
   }
 
   componentDidMount = () => {
-    fetch(`/api/allcomics.json`)
+    fetch(`https://atecomic.wcpan.me/updates`)
       .then((res) => res.ok ? res.json() : [])
       .then((allcomics) => {
         this.setState({
@@ -187,96 +187,16 @@ export default class App extends React.Component {
   }
 
   render() {
-    const navWidth = this.state.open ? '300px' : '0px';
-    const styles = {
-      appBar: {
-        position: 'fixed',
-        margin: '0',
-        top: 0,
-        maxWidth: `calc(100% - ${navWidth})`,
-        background: '#063047'
-      },
-      navAppBar: {
-        position: 'fixed',
-        margin: '0',
-        top: 0,
-        background: '#063047'
-      },
-      appBarTextInput: {
-        marginTop: '8px',
-        color: '#EEE'
-      },
-      appbarButton: {
-        margin: 'auto',
-        color: '#EEE'
-      },
-      allcomics: {
-        margin: '80px 0',
-        width: `calc(100% - ${navWidth})`
-      },
-      gridList: {
-        display: 'flex',
-        justifyContent: 'center',
-        margin: '0 auto'
-      },
-      navContent: {
-        margin: '80px 3%'
-      },
-      comicTile: {
-        width: '150px',
-        cursor: 'pointer'
-      },
-      tileTitle: `
-        linear-gradient(
-          to top,
-          rgba(0,0,0,0.7) 0%,
-          rgba(0,0,0,0.3) 70%,
-          rgba(0,0,0,0) 100%
-        )`
-      ,
-      chapters: {
-        textAlign: 'center'
-      },
-      reading: {
-        background: '#1b1b1b',
-        textAlign: 'center'
-      },
-      picture: {
-        margin: '10px 0',
-        borderRadius: '8px',
-        '@media only screen and (maxWidth: 600px)': {
-          width: '100%'
-        }
-      },
-      previousChapter: {
-        position: 'fixed',
-        left: '1%',
-        top: '10%',
-        height: '80%',
-        backgroundColor: 'rgba(#112233, 0.24)'
-      },
-      nextChapter: {
-        position: 'fixed',
-        right: '1%',
-        top: '10%',
-        height: '80%',
-        backgroundColor: 'rgba(#112233, 0.24)'
-      },
-      favoriteTile: {
-        cursor: 'pointer'
-      }
-    }
-
     return (
       <div>
         <div onTouchTap={this._closeNavigation}>
           <AppBar
             title="Comiz"
-            style={styles.appBar}
+            className={styles.appBar}
             titleStyle={{ width: '60%' }}
             iconElementLeft={
               <IconButton onTouchTap={this._closeReadingMode}>
-                { !this.state.readingMode ? <ContentWeekend /> : <ArrowBack /> }
+                { !this.state.readingMode ? <FingerPrint /> : <ArrowBack /> }
               </IconButton>
             }
           >
@@ -298,7 +218,7 @@ export default class App extends React.Component {
                 />
               ] :
                 <FlatButton
-                  style={{ margin: '12px 0', padding: '2% 1%' }}
+                  style={{ minWidth: '50px', margin: '0' }}
                   onClick={this._handleComicToggle.bind(this, this.state.currentComic)}>
                     <ImportContacts color="white"></ImportContacts>
                 </FlatButton>
@@ -306,9 +226,9 @@ export default class App extends React.Component {
           </AppBar>
            {
               !this.state.readingMode ? (
-                <div style={styles.allcomics}>
+                <div className={styles.allcomics}>
                   <GridList
-                    style={styles.gridList}
+                    className={styles.gridList}
                     cols={0}
                     cellHeight={200}
                     padding={12}>
@@ -316,34 +236,34 @@ export default class App extends React.Component {
                       this.state.allcomics
                         .filter(this.state.categoryFilter)
                         .filter(this.state.searchFilter)
-                        .map((comic) => (
-                          <GridTile
-                            style={styles.comicTile}
+                        .map((comic) => {
+                          return <GridTile
+                            className={styles.comicTile}
                             key={comic.id}
-                            title={comic.name}
+                            title={comic.title}
                             onClick={this._handleComicToggle.bind(this, comic)}
-                            titleBackground={styles.tileTitle}>
-                              <img src={this._getComicCover(comic.id)}/>
+                            titleBackground={'linear-gradient( to top, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.3) 70%, rgba(0,0,0,0) 100%)'}>
+                              <img src={comic.cover_url}/>
                           </GridTile>
-                        ))
+                        })
                     }
                   </GridList>
                 </div>
               ) : (
-                <div style={styles.reading}>
+                <div className={styles.reading}>
                   {
-                    this.state.comicPictures.map((pic, idx) => (
+                    this.state.comicPictures.map((page, idx) => (
                       <img
                         key={idx}
-                        style={styles.picture}
-                        src={pic.url}
+                        className={styles.picture}
+                        src={page}
                       />
                     ))
                   }
                   {
                     !this._previousChapter() ? '' :
                       <IconButton
-                        style={styles.previousChapter}
+                        className={styles.previousChapter}
                         onTouchTap={this._downloadComicChapter.bind(this,
                           this.state.currentComic.id, this._previousChapter().id)}>
                         <ChevronLeft color={'#aaaaaa'}/>
@@ -352,7 +272,7 @@ export default class App extends React.Component {
                   {
                     !this._nextChapter() ? '' :
                     <IconButton
-                      style={styles.nextChapter}
+                      className={styles.nextChapter}
                       onTouchTap={this._downloadComicChapter.bind(this,
                         this.state.currentComic.id, this._nextChapter().id)}>
                       <ChevronRight color={'#aaaaaa'}/>
@@ -364,20 +284,20 @@ export default class App extends React.Component {
         </div>
         <LeftNav width={300} openRight={true} open={this.state.open}>
           <AppBar
-            style={styles.navAppBar}
+            className={styles.navAppBar}
             title={'About'}
             iconElementLeft={<IconButton><TurnedIn /></IconButton>}>
           </AppBar>
-          <div style={styles.navContent}>
+          <div className={styles.navContent}>
             {
               <Card>
                 <CardMedia>
-                  <img src={this._getComicCover(this.state.currentComic.id)}/>
+                  <img src={this.state.currentComic.cover_url}/>
                 </CardMedia>
                 <ListItem
                   key={this.state.currentComic.id}
-                  primaryText={this.state.currentComic.name}
-                  secondaryText={'Author Name'}
+                  primaryText={this.state.currentComic.title}
+                  secondaryText={this.state.currentComic.author}
                   disabled={true}
                   leftCheckbox={
                     <CheckBox
@@ -389,12 +309,12 @@ export default class App extends React.Component {
                   }
                 />
                 <Divider />
-                <div style={styles.chapters}>
+                <div className={styles.chapters}>
                 {
                   this.state.comicChapters.map((chapter) => (
                     <FlatButton
                       key={chapter.id}
-                      label={chapter.name}
+                      label={chapter.title}
                       backgroundColor={
                         this.state.currentComic.id === this.state.watchingComicId &&
                         chapter.id === this.state.watchingChapterId ?

@@ -1,0 +1,13 @@
+* {
+  box-sizing: border-box;
+}
+
+html {
+  font-family: "Helvetica Neue";
+}
+
+body {
+  margin: 0;
+  font-size: 13px;
+  line-height: 20px;
+}

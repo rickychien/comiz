@@ -1,5 +1,4 @@
-var webpack = require('webpack')
-var hotMiddlewareScript = 'webpack-hot-middleware/client'
+const webpack = require('webpack')
 
 module.exports = {
   entry: {
@@ -26,12 +25,12 @@ module.exports = {
         exclude: /node_modules/
       },
       {
-        test: /\.css$/,
-        loader: 'style!css'
-      },
-      {
         test: /\.jpe?g$|\.gif$|\.png|\.woff2?|\.ttf|\.eot|\.svg$/,
         loader: 'url'
+      },
+      {
+        test: /\.css$/,
+        loader: 'style!css-loader?modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]'
       },
       {
         test: /\.json$/,
