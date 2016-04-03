@@ -41,8 +41,8 @@ export default class App extends React.Component {
       open: false,
       readingMode: false,
       currentComic: {
-        id: '',
-        name: ''
+        id: '325',
+        name: '暗殺教室'
       },
       allcomics: [],
       comicChapters: [],
@@ -203,35 +203,21 @@ export default class App extends React.Component {
   render() {
     return (
       <div>
-        <div onTouchTap={this._closeNavigation}>
+        <div onTouchTap={ this._closeNavigation }>
           <AppBar
             title="Comiz"
-            logoElement={
-              !this.state.readingMode ?
-              <i className="material-icons">fingerprint</i> :
-              <i className="material-icons">arrow back</i>
-            }
-          >
-            {
-              !this.state.readingMode ? [
-                <SelectField
-                  value={this.state.category}
-                  menuItems={[
-                    { text: "Latest", value: 'SHOW_LATEST' },
-                    { text: "Favorite", value: 'SHOW_FAVORITE' }
-                  ]}
-                  onChange={this._onCategoryChanged}>
-                </SelectField>,
-                <SearchBar
-                  onChange={this._onSearchTextChanged}>
-                </SearchBar>
-              ] :
-                <FlatButton
-                  style={{ minWidth: '50px', margin: '0' }}
-                  onClick={this.onComicTap.bind(this, this.state.currentComic)}>
-                    <ImportContacts color="white"></ImportContacts>
-                </FlatButton>
-            }
+            materialIcon="fingerprint">
+              <SelectField
+                value={ this.state.category }
+                menuItems={[
+                  { text: "Latest", value: 'SHOW_LATEST' },
+                  { text: "Favorite", value: 'SHOW_FAVORITE' }
+                ]}
+                onChange={ this._onCategoryChanged }>
+              </SelectField>
+              <SearchBar
+                onChange={ this._onSearchTextChanged }>
+              </SearchBar>
           </AppBar>
            {
               !this.state.readingMode ? (
