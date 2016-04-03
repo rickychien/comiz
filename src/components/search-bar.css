@@ -1,0 +1,29 @@
+.searchBar {
+  width: 200px;
+}
+
+@media screen and (max-width: 500px) {
+  .searchBar {
+    width: 100px;
+  }
+}
+
+.searchField {
+  display: flex;
+  align-items: center;
+}
+
+.input {
+  color: inherit;
+  background-color: transparent;
+  font-size: 15px;
+  border: medium none;
+  outline: medium none;
+}
+
+.underline {
+  margin: 2px 0;
+  border-width: medium medium 1px;
+  border-style: none none solid;
+  border-color: inherit;
+}

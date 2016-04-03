@@ -28,6 +28,7 @@ import DropDownMenu from 'material-ui/lib/DropDownMenu'
 import MenuItem from 'material-ui/lib/menus/menu-item'
 
 import AppBar from './app-bar'
+import SearchBar from './search-bar'
 import styles from './app.css'
 
 export default class App extends React.Component {
@@ -65,7 +66,6 @@ export default class App extends React.Component {
         this.setState({
           currentComic: Object.assign({}, currentComic, comic)
         })
-        console.log(Object.assign({}, currentComic, comic))
       })
       .catch((err) => {
         console.error(err)
@@ -219,13 +219,9 @@ export default class App extends React.Component {
                     <MenuItem value={'SHOW_LATEST'} primaryText="Latest"/>
                     <MenuItem value={'SHOW_FAVORITE'} primaryText="Favorite"/>
                 </DropDownMenu>,
-                <TextField
-                  style={{ margin: '7px 0', width: '200px' }}
-                  inputStyle={{ color: '#EEE' }}
-                  hintStyle={{ color: '#afafaf' }}
-                  hintText={<ActionSearch style={{ margin: 'auto' }} color="#afafaf" />}
-                  onChange={this._onSearchTextChanged}
-                />
+                <SearchBar
+                  onChange={this._onSearchTextChanged}>
+                </SearchBar>
               ] :
                 <FlatButton
                   style={{ minWidth: '50px', margin: '0' }}
