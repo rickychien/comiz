@@ -52,23 +52,6 @@
   flex-wrap: wrap !important;
 }
 
-.reading {
-  background: #1b1b1b !important;
-  text-align: center !important;
-  margin-top: 60px !important;
-}
-
-.picture {
-  margin: 15px 0 !important;
-  border-radius: 8px !important;
-}
-
-@media screen and (max-width: 600px) {
-  .picture {
-    width: 100% !important;
-  }
-}
-
 .previousChapter {
   position: fixed !important;
   left: 1% !important;

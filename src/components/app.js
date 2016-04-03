@@ -28,6 +28,7 @@ import MenuItem from 'material-ui/lib/menus/menu-item'
 
 import AppBar from './app-bar'
 import ComicList from './comic-list'
+import ComicViewer from './comic-viewer'
 import SearchBar from './search-bar'
 import SelectField from './select-field'
 import styles from './app.css'
@@ -39,15 +40,19 @@ export default class App extends React.Component {
 
     this.state = {
       open: false,
-      readingMode: false,
+      readingMode: true,
       currentComic: {
-        id: '325',
-        name: '暗殺教室'
+        id: '1',
+        name: '001'
       },
       allcomics: [],
-      comicChapters: [],
+      episodes: [
+        {"id":1,"title":"第01話","volume":false,"chapter":true},
+        {"id":2,"title":"第02話","volume":false,"chapter":true},
+        {"id":3,"title":"第03話","volume":false,"chapter":true}
+      ],
       comicPictures: [],
-      watchingChapterId: null,
+      watchingEpisodeId: 1,
       favorites: new Set(),
       category: 'SHOW_LATEST',
       searchFilter: () => true,
@@ -74,14 +79,14 @@ export default class App extends React.Component {
 
     fetch(`https://atecomic.wcpan.me/comics/${currentComic.id}/episodes`)
       .then((res) => res.ok ? res.json() : [])
-      .then((comicChapters) => {
+      .then((episodes) => {
         this.setState({
-          comicChapters: comicChapters.reverse()
+          episodes: episodes.reverse()
         })
       })
       .catch(() => {
         this.setState({
-          comicChapters: []
+          episodes: []
         })
       })
   }
@@ -90,23 +95,6 @@ export default class App extends React.Component {
     this.setState({
       open: false
     })
-  }
-
-  _downloadComicChapter = (watchingComicId, watchingChapterId) => {
-    fetch(`https://atecomic.wcpan.me/comics/${watchingComicId}/episodes/${watchingChapterId}/pages`)
-      .then((res) => res.ok ? res.json() : [])
-      .then((comicPictures) => {
-        this.setState({
-          comicPictures: comicPictures,
-          readingMode: true,
-          open: false,
-          watchingComicId,
-          watchingChapterId
-        })
-      })
-      .catch((err) => {
-        console.error(err)
-      })
   }
 
   _getComicById = (id) => {
@@ -135,20 +123,30 @@ export default class App extends React.Component {
     })
   }
 
-  _previousChapter = () => {
-    let chapters = this.state.comicChapters
-    let index = chapters.findIndex((chapter) => (
-      chapter.id === this.state.watchingChapterId
+  getEpisodeByOffset = (offset) => {
+    let episodes = this.state.episodes
+    let index = episodes.findIndex((episode) => (
+      episode.id === this.state.watchingEpisodeId
     ))
-    return chapters[index - 1]
+    return episodes[index + offset]
   }
 
-  _nextChapter = () => {
-    let chapters = this.state.comicChapters
-    let index = chapters.findIndex((chapter) => (
-      chapter.id === this.state.watchingChapterId
-    ))
-    return chapters[index + 1]
+  updatePrevEpisode = () => {
+    let episode = this.getEpisodeByOffset(-1)
+    if (episode) {
+      this.setState({
+        watchingEpisodeId: episode.id
+      })
+    }
+  }
+
+  updateNextEpisode = () => {
+    let episode = this.getEpisodeByOffset(+1)
+    if (episode) {
+      this.setState({
+        watchingEpisodeId: episode.id
+      })
+    }
   }
 
   _toggleFavorite = (id) => {
@@ -187,77 +185,45 @@ export default class App extends React.Component {
     })
   }
 
-  componentDidMount = () => {
-    fetch(`/api/updates`)
-      .then((res) => res.ok ? res.json() : [])
-      .then((allcomics) => {
-        this.setState({
-          allcomics: allcomics
-        })
-      })
-      .catch((err) => {
-        console.error(err)
-      })
-  }
-
   render() {
     return (
       <div>
         <div onTouchTap={ this._closeNavigation }>
-          <AppBar
-            title="Comiz"
-            materialIcon="fingerprint">
-              <SelectField
-                value={ this.state.category }
-                menuItems={[
-                  { text: "Latest", value: 'SHOW_LATEST' },
-                  { text: "Favorite", value: 'SHOW_FAVORITE' }
-                ]}
-                onChange={ this._onCategoryChanged }>
-              </SelectField>
-              <SearchBar
-                onChange={ this._onSearchTextChanged }>
-              </SearchBar>
-          </AppBar>
-           {
-              !this.state.readingMode ? (
-                <div className={styles.allcomics}>
-                  <ComicList
-                    comics={ this.state.allcomics }
-                    onComicTap={ this.handleComicTap }>
-                  </ComicList>
-                </div>
-              ) : (
-                <div className={styles.reading}>
-                  {
-                    this.state.comicPictures.map((page, idx) => (
-                      <img
-                        key={idx}
-                        className={styles.picture}
-                        src={page}
-                      />
-                    ))
-                  }
-                  {
-                    !this._previousChapter() ? '' :
-                      <IconButton
-                        className={styles.previousChapter}
-                        onTouchTap={this._downloadComicChapter.bind(this,
-                          this.state.currentComic.id, this._previousChapter().id)}>
-                        <ChevronLeft color={'#aaaaaa'}/>
-                      </IconButton>
-                  }
-                  {
-                    !this._nextChapter() ? '' :
-                    <IconButton
-                      className={styles.nextChapter}
-                      onTouchTap={this._downloadComicChapter.bind(this,
-                        this.state.currentComic.id, this._nextChapter().id)}>
-                      <ChevronRight color={'#aaaaaa'}/>
-                    </IconButton>
-                  }
-                </div>
-              )
+
+          {
+            !this.state.readingMode ?
+              <div>
+                <AppBar
+                  title="Comiz"
+                  materialIcon="fingerprint">
+                    <SelectField
+                      value={ this.state.category }
+                      menuItems={[
+                        { text: "Latest", value: 'SHOW_LATEST' },
+                        { text: "Favorite", value: 'SHOW_FAVORITE' }
+                      ]}
+                      onChange={ this._onCategoryChanged }>
+                    </SelectField>
+                    <SearchBar
+                      onChange={ this._onSearchTextChanged }>
+                    </SearchBar>
+                </AppBar>
+                <ComicList
+                  url={ `/api/updates` }
+                  comics={ this.state.allcomics }
+                  onComicTap={ this.handleComicTap }>
+                </ComicList>
+              </div>
+            :
+              <div>
+                <ComicViewer
+                  url={ `/api/comics/${this.state.currentComic.id}/episodes/${this.state.watchingEpisodeId}/pages` }
+                  prevEpisodeDisabled={ !this.getEpisodeByOffset(-1) }
+                  onPrevEpisodeTap={ this.updatePrevEpisode }
+                  nextEpisodeDisabled={ !this.getEpisodeByOffset(+1) }
+                  onNextEpisodeTap={ this.updateNextEpisode }>
+                </ComicViewer>
+              </div>
           }
         </div>
         <LeftNav width={281} openRight={true} open={this.state.open}>
@@ -292,18 +258,14 @@ export default class App extends React.Component {
                 <Divider />
                 <div className={styles.chapters}>
                 {
-                  this.state.comicChapters.map((chapter) => (
+                  this.state.episodes.map((episode) => (
                     <FlatButton
-                      key={chapter.id}
-                      label={chapter.title}
+                      key={episode.id}
+                      label={episode.title}
                       backgroundColor={
                         this.state.currentComic.id === this.state.watchingComicId &&
-                        chapter.id === this.state.watchingChapterId ?
+                        episode.id === this.state.watchingEpisodeId ?
                         '#bed8ff' : ''
-                      }
-                      onTouchTap={
-                        this._downloadComicChapter.bind(this,
-                          this.state.currentComic.id, chapter.id)
                       }/>
                   ))
                 }

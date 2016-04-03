@@ -5,14 +5,25 @@ import styles from './comic-list.css'
 export default class ComicList extends React.Component {
 
   static propTypes = {
-    comics: React.PropTypes.arrayOf(
-      React.PropTypes.shape({
-        id: React.PropTypes.number.isRequired,
-        title: React.PropTypes.string.isRequir,
-        cover_url: React.PropTypes.string.isRequired
-      })
-    ),
+    url: React.PropTypes.string,
     onComicTap: React.PropTypes.func
+  }
+
+  state = {
+    comics: []
+  }
+
+  componentDidMount() {
+    fetch(this.props.url)
+      .then((res) => res.ok ? res.json() : [])
+      .then((comics) => {
+        this.setState({
+          comics
+        })
+      })
+      .catch((err) => {
+        console.error(err)
+      })
   }
 
   onComicTap = (comic) => {
@@ -24,7 +35,7 @@ export default class ComicList extends React.Component {
       <div className={ styles.comicList }>
         <div className={ styles.comicListInner }>
         {
-          this.props.comics.map((comic) => (
+          this.state.comics.map((comic) => (
             <div
               key={ comic.id }
               className={ styles.comic }

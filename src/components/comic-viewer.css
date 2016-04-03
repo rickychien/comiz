@@ -1,0 +1,49 @@
+.comicViewer {
+  text-align: center;
+  padding-top: 60px;
+}
+
+.img {
+  margin: 15px 0;
+  border-radius: 8px;
+}
+
+@media screen and (max-width: 500px) {
+  .img {
+    width: 100%;
+  }
+}
+
+.navigateEpisode {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  position: fixed;
+  top: 10%;
+  width: 5%;
+  min-width: 40px;
+  height: 80%;
+  background-color: rgba(#112233, 0.24);
+}
+
+.prevEpisode {
+  composes: navigateEpisode;
+  left: 1%;
+  float: left;
+}
+
+.nextEpisode {
+  composes: navigateEpisode;
+  right: 1%;
+  float: right;
+}
+
+.chevron {
+  font-size: 35px;
+  color: rgba(56, 63, 82, 0.37);
+}
+
+.navigateEpisode:hover .chevron {
+  color: #bdc5da;
+}

@@ -1,6 +1,7 @@
 :root {
   --main-color: #dbdbdb;
   --main-bg-color: #142638;
+  --body-bg-color: #1c1f2b;
 }
 
 * {
@@ -12,6 +13,7 @@ html {
 }
 
 body {
+  background-color: var(--body-bg-color);
   margin: 0;
   font-size: 13px;
   line-height: 20px;

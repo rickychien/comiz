@@ -7,7 +7,7 @@ export default class AppBar extends React.Component {
   static propTypes = {
     materialIcon: React.PropTypes.string,
     title: React.PropTypes.string,
-    children: React.PropTypes.element
+    children: React.PropTypes.node
   }
 
   render() {
