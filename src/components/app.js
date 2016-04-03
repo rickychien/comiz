@@ -29,6 +29,7 @@ import MenuItem from 'material-ui/lib/menus/menu-item'
 
 import AppBar from './app-bar'
 import SearchBar from './search-bar'
+import SelectField from './select-field'
 import styles from './app.css'
 
 export default class App extends React.Component {
@@ -169,7 +170,8 @@ export default class App extends React.Component {
 
   }
 
-  _onCategoryChanged = (event, index, category) => {
+  _onCategoryChanged = (event) => {
+    let category = event.target.value
     let categoryFilter
     switch(category) {
       case 'SHOW_LATEST':
@@ -212,13 +214,14 @@ export default class App extends React.Component {
           >
             {
               !this.state.readingMode ? [
-                <DropDownMenu
+                <SelectField
                   value={this.state.category}
-                  labelStyle={{ color: 'white' }}
+                  menuItems={[
+                    { text: "Latest", value: 'SHOW_LATEST' },
+                    { text: "Favorite", value: 'SHOW_FAVORITE' }
+                  ]}
                   onChange={this._onCategoryChanged}>
-                    <MenuItem value={'SHOW_LATEST'} primaryText="Latest"/>
-                    <MenuItem value={'SHOW_FAVORITE'} primaryText="Favorite"/>
-                </DropDownMenu>,
+                </SelectField>,
                 <SearchBar
                   onChange={this._onSearchTextChanged}>
                 </SearchBar>

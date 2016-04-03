@@ -1,5 +1,6 @@
 .searchBar {
   width: 200px;
+  height: 30px;
 }
 
 @media screen and (max-width: 500px) {
@@ -9,6 +10,7 @@
 }
 
 .searchField {
+  height: 24px;
   display: flex;
   align-items: center;
 }
