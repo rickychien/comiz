@@ -24,8 +24,9 @@ export default class ComicList extends React.Component {
       <div className={ styles.comicList }>
         <div className={ styles.comicListInner }>
         {
-          this.props.comics.map(comic => (
+          this.props.comics.map((comic) => (
             <div
+              key={ comic.id }
               className={ styles.comic }
               onClick={ this.onComicTap.bind(this, comic) }>
               <img className={ styles.img } src={ comic.cover_url }></img>

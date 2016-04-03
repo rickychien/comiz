@@ -24,8 +24,12 @@ export default class SelectField extends React.Component {
         <div>
           <select className={ styles.select } onChange={ this.props.onChange }>
             {
-              this.props.menuItems.map(item => (
-                <option value={ item.value }>{ item.text }</option>
+              this.props.menuItems.map((item) => (
+                <option
+                  key={ item.value }
+                  value={ item.value }>
+                  { item.text }
+                </option>
               ))
             }
           </select>
