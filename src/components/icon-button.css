@@ -1,0 +1,11 @@
+.flatButton {
+  cursor: pointer;
+  margin: auto 0;
+  padding: 6px 12px;
+  border-radius: 2px;
+}
+
+.flatButton:hover {
+  background-color: rgba(96, 96, 96, 0.28);
+  color: #fcfcfc;
+}

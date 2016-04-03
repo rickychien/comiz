@@ -1,14 +1,13 @@
 import React from 'react'
 import GridTile from 'material-ui/lib/grid-list/grid-tile'
 import LeftNav from 'material-ui/lib/left-nav'
-import IconButton from 'material-ui/lib/icon-button'
 import NavigationClose from 'material-ui/lib/svg-icons/navigation/close'
 import Card from 'material-ui/lib/card/card'
 import CardHeader from 'material-ui/lib/card/card-header'
 import CardMedia from 'material-ui/lib/card/card-media'
 import CardTitle from 'material-ui/lib/card/card-title'
-import FlatButton from 'material-ui/lib/flat-button'
 import Divider from 'material-ui/lib/divider'
+import FlatButton from 'material-ui/lib/flat-button'
 import FontIcon from 'material-ui/lib/font-icon'
 import FloatingActionButton from 'material-ui/lib/floating-action-button'
 import FingerPrint from 'material-ui/lib/svg-icons/action/fingerprint'
@@ -29,6 +28,7 @@ import MenuItem from 'material-ui/lib/menus/menu-item'
 import AppBar from './app-bar'
 import ComicList from './comic-list'
 import ComicViewer from './comic-viewer'
+import IconButton from './icon-button'
 import SearchBar from './search-bar'
 import SelectField from './select-field'
 import styles from './app.css'
@@ -40,7 +40,7 @@ export default class App extends React.Component {
 
     this.state = {
       open: false,
-      readingMode: true,
+      readingMode: false,
       currentComic: {
         id: '1',
         name: '001'
@@ -111,7 +111,7 @@ export default class App extends React.Component {
     })
   }
 
-  _closeNavigation = () => {
+  closeNavigation = () => {
     this.setState({
       open: false
     })
@@ -188,7 +188,7 @@ export default class App extends React.Component {
   render() {
     return (
       <div>
-        <div onTouchTap={ this._closeNavigation }>
+        <div onTouchTap={ this.closeNavigation }>
 
           {
             !this.state.readingMode ?
@@ -216,6 +216,14 @@ export default class App extends React.Component {
               </div>
             :
               <div>
+                <AppBar
+                  materialIcon="arrow_back"
+                  onLogoClick={ this.closeNavigation }>
+                  <IconButton
+                    materialIcon="book"
+                    onTap={ this.handleComicTap }>
+                  </IconButton>
+                </AppBar>
                 <ComicViewer
                   url={ `/api/comics/${this.state.currentComic.id}/episodes/${this.state.watchingEpisodeId}/pages` }
                   prevEpisodeDisabled={ !this.getEpisodeByOffset(-1) }

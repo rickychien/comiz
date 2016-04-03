@@ -10,6 +10,9 @@
 }
 
 .baseElement {
+  padding: 6px 12px;
+  border-radius: 3px;
+  margin: auto 0;
   display: flex;
   align-items: center;
   color: var(--main-color);
@@ -26,10 +29,15 @@
   cursor: pointer;
 }
 
+.logo:hover {
+  background-color: rgba(96, 96, 96, 0.28);
+  color: #fcfcfc;
+}
+
 .icon {
   display: inline-block;
 }
 
 .title {
-  margin-left: 6px;
+  margin: 0 6px;
 }
