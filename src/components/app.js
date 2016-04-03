@@ -1,5 +1,4 @@
 import React from 'react'
-import GridList from 'material-ui/lib/grid-list/grid-list'
 import GridTile from 'material-ui/lib/grid-list/grid-tile'
 import LeftNav from 'material-ui/lib/left-nav'
 import IconButton from 'material-ui/lib/icon-button'
@@ -28,6 +27,7 @@ import DropDownMenu from 'material-ui/lib/DropDownMenu'
 import MenuItem from 'material-ui/lib/menus/menu-item'
 
 import AppBar from './app-bar'
+import ComicList from './comic-list'
 import SearchBar from './search-bar'
 import SelectField from './select-field'
 import styles from './app.css'
@@ -55,7 +55,7 @@ export default class App extends React.Component {
     }
   }
 
-  _handleComicToggle = (currentComic) => {
+  handleComicTap = (currentComic) => {
     this.setState({
       currentComic: currentComic,
       open: true
@@ -228,7 +228,7 @@ export default class App extends React.Component {
               ] :
                 <FlatButton
                   style={{ minWidth: '50px', margin: '0' }}
-                  onClick={this._handleComicToggle.bind(this, this.state.currentComic)}>
+                  onClick={this.onComicTap.bind(this, this.state.currentComic)}>
                     <ImportContacts color="white"></ImportContacts>
                 </FlatButton>
             }
@@ -236,27 +236,10 @@ export default class App extends React.Component {
            {
               !this.state.readingMode ? (
                 <div className={styles.allcomics}>
-                  <GridList
-                    className={styles.gridList}
-                    cols={0}
-                    cellHeight={200}
-                    padding={12}>
-                    {
-                      this.state.allcomics
-                        .filter(this.state.categoryFilter)
-                        .filter(this.state.searchFilter)
-                        .map((comic) => {
-                          return <GridTile
-                            className={styles.comicTile}
-                            key={comic.id}
-                            title={comic.title}
-                            onClick={this._handleComicToggle.bind(this, comic)}
-                            titleBackground={'linear-gradient( to top, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.3) 70%, rgba(0,0,0,0) 100%)'}>
-                              <img src={comic.cover_url}/>
-                          </GridTile>
-                        })
-                    }
-                  </GridList>
+                  <ComicList
+                    comics={ this.state.allcomics }
+                    onComicTap={ this.handleComicTap }>
+                  </ComicList>
                 </div>
               ) : (
                 <div className={styles.reading}>

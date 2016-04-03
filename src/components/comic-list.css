@@ -1,0 +1,42 @@
+.comicList {
+  display: flex;
+  justify-content: center;
+  margin: auto;
+}
+
+.comicListInner {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+}
+
+.comic {
+  position: relative;
+  cursor: pointer;
+  margin: 13px;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.16), 0 3px 10px rgba(0, 0, 0, 0.23);
+}
+
+.title {
+  font-size: 15px;
+  color: white;
+  display: flex;
+  padding: 0 10px;
+  align-items: center;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 48px;
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.7) 0%,
+    rgba(0, 0, 0, 0.3) 70%,
+    rgba(0, 0, 0, 0) 100%
+    );
+}
+
+.img {
+  width: 160px;
+  height: 240px;
+}
