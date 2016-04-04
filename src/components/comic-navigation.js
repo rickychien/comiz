@@ -48,7 +48,7 @@ export default class ComicNavigation extends React.Component {
     let episodes = this.state.episodes
 
     return (
-      <div className={ styles.comicNav + ' ' + styles.open }>
+      <div className={ styles.comicNav  + (this.props.open ? ' ' + styles.open : '') }>
         <AppBar
           materialIcon="close"
           onLogoTap={ this.onCloseTap }>
