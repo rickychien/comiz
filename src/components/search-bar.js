@@ -10,15 +10,15 @@ export default class SearchBar extends React.Component {
 
   render() {
     return (
-      <div className={styles.searchBar}>
-        <div className={styles.searchField}>
+      <div className={ styles.searchBar }>
+        <div className={ styles.searchField }>
           <i className="material-icons">search</i>
           <input
-            className={styles.input}
-            onChange={this.props.onChange}>
+            className={ styles.input }
+            onChange={ this.props.onChange }>
           </input>
         </div>
-        <hr className={styles.underline}/>
+        <hr className={ styles.underline }/>
       </div>
     )
   }

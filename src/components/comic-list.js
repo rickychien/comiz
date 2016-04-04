@@ -33,7 +33,7 @@ export default class ComicList extends React.Component {
             <div
               key={ comic.id }
               className={ styles.comic }
-              onClick={ this.onComicTap.bind(this, comic) }>
+              onClick={ this.onComicTap.bind(this, comic.id) }>
               <img className={ styles.img } src={ comic.coverUrl }></img>
               <div className={ styles.title }>
                 { comic.title }

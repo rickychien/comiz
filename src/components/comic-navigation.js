@@ -39,9 +39,18 @@ export default class ComicNavigation extends React.Component {
       .catch(err => console.error(err))
   }
 
+  componentWillReceiveProps() {
+    if (this.props.open) {
+      this.updateOverview(this.props.overviewUrl)
+      this.updateEpisodes(this.props.episodesUrl)
+    }
+  }
+
   componentDidMount() {
-    this.updateOverview(this.props.overviewUrl)
-    this.updateEpisodes(this.props.episodesUrl)
+    if (this.props.open) {
+      this.updateOverview(this.props.overviewUrl)
+      this.updateEpisodes(this.props.episodesUrl)
+    }
   }
 
   render() {
@@ -76,6 +85,7 @@ export default class ComicNavigation extends React.Component {
             {
               episodes.map((episode) => (
                 <FlatButton
+                  key={ episode.id }
                   title={ episode.title }
                   onTap={ this.handleComicTap }>
                 </FlatButton>

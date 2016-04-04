@@ -22,7 +22,7 @@ export default class CheckItem extends React.Component {
     let title = this.props.title
 
     return (
-      <label for="checkbox" className={ styles.label }>
+      <label htmlFor="checkbox" className={ styles.label }>
         <div className={ styles.checkbox }>
           <input
             id="checkbox"
