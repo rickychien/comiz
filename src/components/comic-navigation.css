@@ -1,0 +1,32 @@
+:root {
+  --nav-width: 300px;
+}
+
+.comicNav {
+	position: fixed;;
+  width: var(--nav-width);
+	height: 100%;
+  top: 0;
+	right: calc(0px - var(--nav-width));
+  z-index: 5;
+	background-color: #ebe8e8;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.16), 0 3px 10px rgba(0, 0, 0, 0.23);
+}
+
+.comicNav.open {
+  right: 0;
+  transition: all .3s ease-in-out;
+}
+
+.overview {
+  margin: 60px 5%;
+  height: 300px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.img {
+  flex: 1;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.16), 0 3px 10px rgba(0, 0, 0, 0.23);
+}

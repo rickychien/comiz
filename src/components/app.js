@@ -1,36 +1,13 @@
 import React from 'react'
-import GridTile from 'material-ui/lib/grid-list/grid-tile'
-import LeftNav from 'material-ui/lib/left-nav'
-import NavigationClose from 'material-ui/lib/svg-icons/navigation/close'
-import Card from 'material-ui/lib/card/card'
-import CardHeader from 'material-ui/lib/card/card-header'
-import CardMedia from 'material-ui/lib/card/card-media'
-import CardTitle from 'material-ui/lib/card/card-title'
-import Divider from 'material-ui/lib/divider'
-import FlatButton from 'material-ui/lib/flat-button'
-import FontIcon from 'material-ui/lib/font-icon'
-import FloatingActionButton from 'material-ui/lib/floating-action-button'
-import FingerPrint from 'material-ui/lib/svg-icons/action/fingerprint'
-import ArrowBack from 'material-ui/lib/svg-icons/navigation/arrow-back'
-import ChevronLeft from 'material-ui/lib/svg-icons/navigation/chevron-left'
-import ChevronRight from 'material-ui/lib/svg-icons/navigation/chevron-right'
-import TurnedIn from 'material-ui/lib/svg-icons/action/turned-in'
-import ActionSearch from 'material-ui/lib/svg-icons/action/search'
-import ToggleStar from 'material-ui/lib/svg-icons/toggle/star'
-import ToggleStarBorder from 'material-ui/lib/svg-icons/toggle/star-border'
-import ImportContacts from 'material-ui/lib/svg-icons/communication/import-contacts'
-import ListItem from 'material-ui/lib/lists/list-item'
-import TextField from 'material-ui/lib/text-field'
-import CheckBox from 'material-ui/lib/checkbox'
-import DropDownMenu from 'material-ui/lib/DropDownMenu'
-import MenuItem from 'material-ui/lib/menus/menu-item'
 
 import AppBar from './app-bar'
 import ComicList from './comic-list'
 import ComicViewer from './comic-viewer'
 import IconButton from './icon-button'
+import ComicNavigation from './comic-navigation'
 import SearchBar from './search-bar'
 import SelectField from './select-field'
+
 import styles from './app.css'
 
 export default class App extends React.Component {
@@ -39,18 +16,11 @@ export default class App extends React.Component {
     super(props)
 
     this.state = {
-      open: false,
+      comicNavigationOpened: false,
       readingMode: false,
-      currentComic: {
-        id: '1',
-        name: '001'
-      },
+      currentComic: { id: '1' },
       allcomics: [],
-      episodes: [
-        {"id":1,"title":"第01話","volume":false,"chapter":true},
-        {"id":2,"title":"第02話","volume":false,"chapter":true},
-        {"id":3,"title":"第03話","volume":false,"chapter":true}
-      ],
+      episodes: [],
       comicPictures: [],
       watchingEpisodeId: 1,
       favorites: new Set(),
@@ -63,37 +33,13 @@ export default class App extends React.Component {
   handleComicTap = (currentComic) => {
     this.setState({
       currentComic: currentComic,
-      open: true
+      comicNavigationOpened: true
     })
-
-    fetch(`https://atecomic.wcpan.me/comics/${currentComic.id}`)
-      .then((res) => res.ok ? res.json() : [])
-      .then((comic) => {
-        this.setState({
-          currentComic: Object.assign({}, currentComic, comic)
-        })
-      })
-      .catch((err) => {
-        console.error(err)
-      })
-
-    fetch(`https://atecomic.wcpan.me/comics/${currentComic.id}/episodes`)
-      .then((res) => res.ok ? res.json() : [])
-      .then((episodes) => {
-        this.setState({
-          episodes: episodes.reverse()
-        })
-      })
-      .catch(() => {
-        this.setState({
-          episodes: []
-        })
-      })
   }
 
   _handleCloseLeftNav = () => {
     this.setState({
-      open: false
+      comicNavigationOpened: false
     })
   }
 
@@ -107,13 +53,13 @@ export default class App extends React.Component {
 
   _openNavigation = () => {
     this.setState({
-      open: true
+      comicNavigationOpened: true
     })
   }
 
   closeNavigation = () => {
     this.setState({
-      open: false
+      comicNavigationOpened: false
     })
   }
 
@@ -165,7 +111,6 @@ export default class App extends React.Component {
         return regexp.test(comic.title)
       }
     })
-
   }
 
   _onCategoryChanged = (event) => {
@@ -189,7 +134,6 @@ export default class App extends React.Component {
     return (
       <div>
         <div onTouchTap={ this.closeNavigation }>
-
           {
             !this.state.readingMode ?
               <div>
@@ -234,54 +178,12 @@ export default class App extends React.Component {
               </div>
           }
         </div>
-        <LeftNav width={281} openRight={true} open={this.state.open}>
-          <AppBar
-            className={styles.navAppBar}
-            title={'About'}
-            iconElementLeft={<IconButton><TurnedIn /></IconButton>}>
-          </AppBar>
-          <div className={styles.navContent}>
-            {
-              <Card>
-                <CardMedia>
-                  <img src={this.state.currentComic.cover_url}/>
-                </CardMedia>
-                <ListItem
-                  key={this.state.currentComic.id}
-                  primaryText={this.state.currentComic.title}
-                  secondaryText={this.state.currentComic.author}
-                  disabled={true}
-                  leftCheckbox={
-                    <CheckBox
-                      checked={this.state.favorites.has(this.state.currentComic.id)}
-                      checkedIcon={<ToggleStar />}
-                      unCheckedIcon={<ToggleStarBorder />}
-                      onCheck={this._toggleFavorite.bind(this, this.state.currentComic.id)}
-                    />
-                  }
-                />
-                <div className={styles.brief}>
-                  {this.state.currentComic.brief}
-                </div>
-                <Divider />
-                <div className={styles.chapters}>
-                {
-                  this.state.episodes.map((episode) => (
-                    <FlatButton
-                      key={episode.id}
-                      label={episode.title}
-                      backgroundColor={
-                        this.state.currentComic.id === this.state.watchingComicId &&
-                        episode.id === this.state.watchingEpisodeId ?
-                        '#bed8ff' : ''
-                      }/>
-                  ))
-                }
-                </div>
-              </Card>
-            }
-          </div>
-        </LeftNav>
+        <ComicNavigation
+          open={ this.state.comicNavigationOpened }
+          onCloseTap={ this.closeNavigation }
+          overviewUrl={ `/api/comics/${this.state.currentComic.id}/overview` }
+          episodesUrl={ `/api/comics/${this.state.currentComic.id}/episodes/list` }>
+        </ComicNavigation>
       </div>
     )
   }

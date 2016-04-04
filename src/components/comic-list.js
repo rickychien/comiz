@@ -15,15 +15,9 @@ export default class ComicList extends React.Component {
 
   componentDidMount() {
     fetch(this.props.url)
-      .then((res) => res.ok ? res.json() : [])
-      .then((comics) => {
-        this.setState({
-          comics
-        })
-      })
-      .catch((err) => {
-        console.error(err)
-      })
+      .then(res => res.ok ? res.json() : [])
+      .then(comics => this.setState({ comics }))
+      .catch(err => console.error(err))
   }
 
   onComicTap = (comic) => {
@@ -40,7 +34,7 @@ export default class ComicList extends React.Component {
               key={ comic.id }
               className={ styles.comic }
               onClick={ this.onComicTap.bind(this, comic) }>
-              <img className={ styles.img } src={ comic.cover_url }></img>
+              <img className={ styles.img } src={ comic.coverUrl }></img>
               <div className={ styles.title }>
                 { comic.title }
               </div>
