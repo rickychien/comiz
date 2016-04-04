@@ -22,6 +22,7 @@ export default class App extends React.Component {
       comicId: null,
       episodeId: null
     },
+    favorites: new Set(),
     category: 'SHOW_LATEST',
     searchFilter: () => true,
     categoryFilter: () => true
@@ -97,15 +98,6 @@ export default class App extends React.Component {
     })
   }
 
-  onSearchTextChanged = (event) => {
-    let regexp = new RegExp(event.target.value, 'i')
-    this.setState({
-      searchFilter: function (comic) {
-        return regexp.test(comic.title)
-      }
-    })
-  }
-
   onCategoryChanged = (event) => {
     let category = event.target.value
     let categoryFilter
@@ -120,6 +112,15 @@ export default class App extends React.Component {
     this.setState({
       category,
       categoryFilter
+    })
+  }
+
+  onSearchTextChanged = (event) => {
+    let regexp = new RegExp(event.target.value, 'i')
+    this.setState({
+      searchFilter: function (comic) {
+        return regexp.test(comic.title)
+      }
     })
   }
 
