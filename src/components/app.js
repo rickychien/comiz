@@ -3,7 +3,7 @@ import React from 'react'
 import AppBar from './app-bar'
 import ComicList from './comic-list'
 import ComicViewer from './comic-viewer'
-import IconButton from './icon-button'
+import FlatButton from './flat-button'
 import ComicNavigation from './comic-navigation'
 import SearchBar from './search-bar'
 import SelectField from './select-field'
@@ -163,10 +163,10 @@ export default class App extends React.Component {
                 <AppBar
                   materialIcon="arrow_back"
                   onLogoClick={ this.closeNavigation }>
-                  <IconButton
+                  <FlatButton
                     materialIcon="book"
                     onTap={ this.handleComicTap }>
-                  </IconButton>
+                  </FlatButton>
                 </AppBar>
                 <ComicViewer
                   url={ `/api/comics/${this.state.currentComic.id}/episodes/${this.state.watchingEpisodeId}/pages` }

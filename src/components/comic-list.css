@@ -1,7 +1,7 @@
 .comicList {
   display: flex;
   justify-content: center;
-  margin: 60px auto;
+  margin: 60px auto 3px auto;
 }
 
 .comicListInner {

@@ -3,13 +3,14 @@
 }
 
 .comicNav {
-	position: fixed;;
+	position: fixed;
+  overflow: scroll;
   width: var(--nav-width);
 	height: 100%;
   top: 0;
 	right: calc(0px - var(--nav-width));
   z-index: 5;
-	background-color: #ebe8e8;
+	background-color: #fafafa;
   box-shadow: 0 3px 10px rgba(0, 0, 0, 0.16), 0 3px 10px rgba(0, 0, 0, 0.23);
 }
 
@@ -18,15 +19,35 @@
   transition: all .3s ease-in-out;
 }
 
-.overview {
-  margin: 60px 5%;
-  height: 300px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+.cover {
+  text-align: center;
+  margin: 65px 0 15px 0;
 }
 
 .img {
-  flex: 1;
-  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.16), 0 3px 10px rgba(0, 0, 0, 0.23);
+}
+
+.overview {
+  box-shadow: 0 1px 6px rgba(0, 0, 0, 0.12), 0 1px 4px rgba(0, 0, 0, 0.12);
+  border-radius: 2px;
+}
+
+.about {
+  height: 60px;
+}
+
+.brief {
+  margin: 12px 34px;
+}
+
+.hr {
+  height: 1px;
+  border: none;
+  background-color: #e0e0e0;
+}
+
+.episodes {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
 }

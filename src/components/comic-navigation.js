@@ -1,6 +1,8 @@
 import React from 'react'
 
 import AppBar from './app-bar'
+import CheckItem from './check-item'
+import FlatButton from './flat-button'
 
 import styles from './comic-navigation.css'
 
@@ -42,24 +44,42 @@ export default class ComicNavigation extends React.Component {
   }
 
   render() {
+    let comic = this.state.comic
+    let episodes = this.state.episodes
+
     return (
       <div className={ styles.comicNav + ' ' + styles.open }>
         <AppBar
           materialIcon="close"
           onLogoTap={ this.onCloseTap }>
         </AppBar>
+        <div className={ styles.cover }>
+          <img className={ styles.img } src={ comic.coverUrl }></img>
+        </div>
         <div className={ styles.overview }>
-          <div className={ styles.img }>
-            <img src={ this.state.comic.coverUrl }></img>
-          </div>
           <div className={ styles.about }>
-            <div className={ styles.brief }>
-
-            </div>
+            <CheckItem
+              iconUncheck="star_border"
+              iconChecked="star"
+              title={ comic.title }
+              subTitle={ comic.author }
+              >
+            </CheckItem>
           </div>
-          <hr/>
+          <hr className={ styles.hr }/>
+          <div className={ styles.brief }>
+            { comic.brief }
+          </div>
+          <hr className={ styles.hr }/>
           <div className={ styles.episodes }>
-
+            {
+              episodes.map((episode) => (
+                <FlatButton
+                  title={ episode.title }
+                  onTap={ this.handleComicTap }>
+                </FlatButton>
+              ))
+            }
           </div>
         </div>
       </div>
