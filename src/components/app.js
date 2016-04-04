@@ -15,7 +15,7 @@ export default class App extends React.Component {
   state = {
     comicNavigation: {
       opened: false,
-      comidId: null
+      comicId: null
     },
     comicViewer: {
       opened: false,
@@ -44,9 +44,21 @@ export default class App extends React.Component {
     })
   }
 
-  _closeReadingMode = () => {
+  handleComicViewerOpen = (comicId, episodeId) => {
     this.setState({
-      readingMode: false
+      comicViewer: {
+        opened: true,
+        comicId,
+        episodeId
+      }
+    })
+  }
+
+  handleComicViewerClose = (comicId) => {
+    this.setState({
+      comicViewer: {
+        opened: false
+      }
     })
   }
 
@@ -115,7 +127,7 @@ export default class App extends React.Component {
     return (
       <div>
         {
-          !this.state.readingMode ?
+          !this.state.comicViewer.opened ?
             <div>
               <AppBar
                 title="Comiz"
@@ -145,11 +157,11 @@ export default class App extends React.Component {
                 onLogoClick={ this.handleComicNavigationClose }>
                 <FlatButton
                   materialIcon="book"
-                  onTap={ this.handleComicNavigationOpen.bind(this, this.state.comicNavigation.comidId) }>
+                  onTap={ this.handleComicNavigationOpen.bind(this, this.state.comicNavigation.comicId) }>
                 </FlatButton>
               </AppBar>
               <ComicViewer
-                url={ `/api/comics/${this.state.comicNavigation.comidId}/episodes/${this.state.watchingEpisodeId}/pages` }
+                url={ `/api/comics/${this.state.comicNavigation.comicId}/episodes/${this.state.watchingEpisodeId}/pages` }
                 prevEpisodeDisabled={ !this.getEpisodeByOffset(-1) }
                 onPrevEpisodeTap={ this.updatePrevEpisode }
                 nextEpisodeDisabled={ !this.getEpisodeByOffset(+1) }
@@ -160,9 +172,9 @@ export default class App extends React.Component {
         <ComicNavigation
           open={ this.state.comicNavigation.opened }
           onCloseTap={ this.handleComicNavigationClose }
-          overviewUrl={ `/api/comics/${this.state.comicNavigation.comidId}/overview` }
-          episodesUrl={ `/api/comics/${this.state.comicNavigation.comidId}/episodes/list` }
-          onFavoriteTap={ this.toggleFavorite.bind(this, this.state.comicNavigation.comidId) }>
+          comicId={ this.state.comicNavigation.comicId }
+          onFavoriteTap={ this.toggleFavorite.bind(this, this.state.comicNavigation.comicId) }
+          onEpisodeTap={ this.handleComicViewerOpen }>
         </ComicNavigation>
       </div>
     )

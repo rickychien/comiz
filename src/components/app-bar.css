@@ -1,6 +1,6 @@
 .appBar {
   display: flex;
-  position: absolute;
+  position: fixed;
   top: 0;
   background-color: var(--main-bg-color);
   width: 100%;
