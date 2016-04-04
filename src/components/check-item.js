@@ -27,7 +27,8 @@ export default class CheckItem extends React.Component {
           <input
             id="checkbox"
             type="checkbox"
-            defaultChecked={ this.props.checked }>
+            defaultChecked={ this.props.checked }
+            onClick={ this.props.onTap }>
           </input>
           <i className={ 'material-icons ' + styles.uncheck }>
             { this.props.iconUncheck }

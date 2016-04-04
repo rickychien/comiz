@@ -95,16 +95,16 @@ export default class App extends React.Component {
     }
   }
 
-  _toggleFavorite = (id) => {
+  toggleFavorite = (id) => {
     let favorites = this.state.favorites
     favorites.has(id) ? favorites.delete(id) : favorites.add(id)
 
     this.setState({
       favorites: favorites
-    })
+    }, function() { console.log(this.state) })
   }
 
-  _onSearchTextChanged = (event) => {
+  onSearchTextChanged = (event) => {
     let regexp = new RegExp(event.target.value, 'i') || /.+/
     this.setState({
       searchFilter: function (comic) {
@@ -113,7 +113,7 @@ export default class App extends React.Component {
     })
   }
 
-  _onCategoryChanged = (event) => {
+  onCategoryChanged = (event) => {
     let category = event.target.value
     let categoryFilter
     switch(category) {
@@ -146,10 +146,10 @@ export default class App extends React.Component {
                         { text: "Latest", value: 'SHOW_LATEST' },
                         { text: "Favorite", value: 'SHOW_FAVORITE' }
                       ]}
-                      onChange={ this._onCategoryChanged }>
+                      onChange={ this.onCategoryChanged }>
                     </SelectField>
                     <SearchBar
-                      onChange={ this._onSearchTextChanged }>
+                      onChange={ this.onSearchTextChanged }>
                     </SearchBar>
                 </AppBar>
                 <ComicList
@@ -182,7 +182,8 @@ export default class App extends React.Component {
           open={ this.state.comicNavigationOpened }
           onCloseTap={ this.closeNavigation }
           overviewUrl={ `/api/comics/${this.state.currentComic.id}/overview` }
-          episodesUrl={ `/api/comics/${this.state.currentComic.id}/episodes/list` }>
+          episodesUrl={ `/api/comics/${this.state.currentComic.id}/episodes/list` }
+          onFavoriteTap={ this.toggleFavorite.bind(this, this.state.currentComic.id) }>
         </ComicNavigation>
       </div>
     )

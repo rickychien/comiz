@@ -11,6 +11,7 @@ export default class ComicNavigation extends React.Component {
   static propTypes = {
     open: React.PropTypes.bool,
     onCloseTap: React.PropTypes.func.isRequired,
+    onFavoriteTap: React.PropTypes.func.isRequired,
     overviewUrl: React.PropTypes.string.isRequired,
     episodesUrl: React.PropTypes.string.isRequired
   }
@@ -63,7 +64,7 @@ export default class ComicNavigation extends React.Component {
               iconChecked="star"
               title={ comic.title }
               subTitle={ comic.author }
-              >
+              onTap={ this.props.onFavoriteTap }>
             </CheckItem>
           </div>
           <hr className={ styles.hr }/>
