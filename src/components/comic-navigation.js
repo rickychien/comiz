@@ -14,7 +14,10 @@ export default class ComicNavigation extends React.Component {
 
   static propTypes = {
     open: React.PropTypes.bool,
-    comicId: React.PropTypes.string.isRequired,
+    comicId: React.PropTypes.oneOfType([
+      React.PropTypes.string,
+      React.PropTypes.number
+    ]),
     onCloseTap: React.PropTypes.func.isRequired,
     onFavoriteTap: React.PropTypes.func.isRequired,
     onEpisodeTap: React.PropTypes.func.isRequired
