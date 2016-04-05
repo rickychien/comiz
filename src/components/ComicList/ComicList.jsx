@@ -7,7 +7,6 @@ import styles from './ComicList.css'
 export default class ComicList extends React.Component {
 
   static propTypes = {
-    url: PropTypes.string.isRequired,
     onComicTap: PropTypes.func
   }
 
@@ -16,7 +15,7 @@ export default class ComicList extends React.Component {
   }
 
   componentDidMount() {
-    fetch(this.props.url)
+    fetch(`/api/updates`)
       .then(res => res.ok ? res.json() : [])
       .then(comics => this.setState({ comics }))
       .catch(err => console.error(err))

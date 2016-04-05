@@ -13,15 +13,10 @@ import styles from './App.css'
 export default class App extends React.Component {
 
   state = {
-    comicNavigation: {
-      opened: false,
-      comicId: null
-    },
-    comicViewer: {
-      opened: false,
-      comicId: null,
-      episodeId: null
-    },
+    comicNavigationOpened: false,
+    comicViewerOpened: false,
+    comicId: null,
+    episodeId: null,
     favorites: new Set(),
     category: 'SHOW_LATEST',
     searchFilter: () => true,
@@ -30,36 +25,27 @@ export default class App extends React.Component {
 
   handleComicNavigationOpen = (comic) => {
     this.setState({
-      comicNavigation: {
-        opened: true,
-        comicId: comic ? comic.id : this.state.comicNavigation.comicId
-      }
+      comicNavigationOpened: true,
+      comicId: comic ? comic.id : this.state.comicId
     })
   }
 
   handleComicNavigationClose = () => {
     this.setState({
-      comicNavigation: {
-        opened: false
-      }
+      comicNavigationOpened: false
     })
   }
 
-  handleComicViewerOpen = (comicId, episodeId) => {
+  handleComicViewerOpen = (episode) => {
     this.setState({
-      comicViewer: {
-        opened: true,
-        comicId,
-        episodeId
-      }
+      comicViewerOpened: true,
+      episodeId: episode ? episode.id : this.state.episodeId
     })
   }
 
   handleComicViewerClose = (comicId) => {
     this.setState({
-      comicViewer: {
-        opened: false
-      }
+      comicViewerOpened: false
     })
   }
 
@@ -75,7 +61,7 @@ export default class App extends React.Component {
     let episode = this.getEpisodeByOffset(-1)
     if (episode) {
       this.setState({
-        watchingEpisodeId: episode.id
+        episodeId: episode.id
       })
     }
   }
@@ -84,13 +70,13 @@ export default class App extends React.Component {
     let episode = this.getEpisodeByOffset(+1)
     if (episode) {
       this.setState({
-        watchingEpisodeId: episode.id
+        episodeId: episode.id
       })
     }
   }
 
   toggleFavorite = () => {
-    let comicId = this.state.comicNavigation.comidId
+    let comicId = this.state.comidId
     let favorites = this.state.favorites
     favorites.has(comicId) ? favorites.delete(comicId) : favorites.add(comicId)
 
@@ -129,7 +115,7 @@ export default class App extends React.Component {
     return (
       <div>
         {
-          !this.state.comicViewer.opened ?
+          !this.state.comicViewerOpened?
             <div>
               <AppBar
                 title="Comiz"
@@ -147,7 +133,6 @@ export default class App extends React.Component {
                   </SearchBar>
               </AppBar>
               <ComicList
-                url={ `/api/updates` }
                 onComicTap={ this.handleComicNavigationOpen }>
               </ComicList>
             </div>
@@ -162,7 +147,8 @@ export default class App extends React.Component {
                 </FlatButton>
               </AppBar>
               <ComicViewer
-                url={ `/api/comics/${this.state.comicNavigation.comicId}/episodes/${this.state.watchingEpisodeId}/pages` }
+                comicId={ this.state.comicId }
+                episodeId={ this.state.episodeId }
                 prevEpisodeDisabled={ !this.getEpisodeByOffset(-1) }
                 onPrevEpisodeTap={ this.updatePrevEpisode }
                 nextEpisodeDisabled={ !this.getEpisodeByOffset(+1) }
@@ -171,8 +157,8 @@ export default class App extends React.Component {
             </div>
         }
         <ComicNavigation
-          open={ this.state.comicNavigation.opened }
-          comicId={ this.state.comicNavigation.comicId }
+          open={ this.state.comicNavigationOpened }
+          comicId={ this.state.comicId }
           onCloseTap={ this.handleComicNavigationClose }
           onFavoriteTap={ this.toggleFavorite }
           onEpisodeTap={ this.handleComicViewerOpen }>

@@ -92,7 +92,6 @@ export default class ComicNavigation extends React.Component {
                     episodes.map((episode) => (
                       <ComicEpisode
                         key={ episode.id }
-                        comic={ comic }
                         episode={ episode }
                         onEpisodeTap={ this.props.onEpisodeTap }
                       />

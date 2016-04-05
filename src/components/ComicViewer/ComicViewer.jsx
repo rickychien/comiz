@@ -1,15 +1,16 @@
-import React from 'react'
+import React, { PropTypes } from 'react'
 
 import styles from './ComicViewer.css'
 
 export default class ComicViewer extends React.Component {
 
   static propTypes = {
-    url: React.PropTypes.string.isRequired,
-    prevEpisodeDisabled: React.PropTypes.bool.isRequired,
-    onPrevEpisodeTap: React.PropTypes.func.isRequired,
-    nextEpisodeDisabled: React.PropTypes.bool.isRequired,
-    onNextEpisodeTap: React.PropTypes.func.isRequired
+    comicId: PropTypes.string.isRequired,
+    episodeId: PropTypes.string.isRequired,
+    prevEpisodeDisabled: PropTypes.bool.isRequired,
+    onPrevEpisodeTap: PropTypes.func.isRequired,
+    nextEpisodeDisabled: PropTypes.bool.isRequired,
+    onNextEpisodeTap: PropTypes.func.isRequired
   }
 
   state = {
@@ -25,16 +26,10 @@ export default class ComicViewer extends React.Component {
   }
 
   updatePages = () => {
-    fetch(this.props.url)
-      .then((res) => res.ok ? res.json() : [])
-      .then((pages) => {
-        this.setState({
-          pages
-        })
-      })
-      .catch((err) => {
-        console.error(err)
-      })
+    fetch(`/api/comics/${this.props.comicId}/episodes/${this.props.episodeId}/pages`)
+      .then(res => res.ok ? res.json() : [])
+      .then(pages => this.setState({ pages }))
+      .catch(err => console.error(err))
   }
 
   render() {
@@ -42,24 +37,28 @@ export default class ComicViewer extends React.Component {
       <div className={ styles.comicViewer }>
       {
         this.state.pages.map((page) => (
-          <img key= { page } className={ styles.img } src={ page }></img>
+          <img key= { page } className={ styles.img } src={ page } />
         ))
       }
       {
-        this.props.prevEpisodeDisabled ? '' :
-        <div
-          className={ styles.prevEpisode }
-          onClick={ this.props.onPrevEpisodeTap }>
-          <i className={ 'material-icons ' + styles.chevron }>chevron_left</i>
-        </div>
+        !this.props.prevEpisodeDisabled && (
+          <div
+            className={ styles.prevEpisode }
+            onClick={ this.props.onPrevEpisodeTap }
+          >
+            <i className={ 'material-icons ' + styles.chevron }>chevron_left</i>
+          </div>
+        )
       }
       {
-        this.props.nextEpisodeDisabled ? '' :
-        <div
-          className={ styles.nextEpisode }
-          onClick={ this.props.onNextEpisodeTap }>
-          <i className={ 'material-icons ' + styles.chevron }>chevron_right</i>
-        </div>
+        !this.props.nextEpisodeDisabled && (
+          <div
+            className={ styles.nextEpisode }
+            onClick={ this.props.onNextEpisodeTap }
+          >
+            <i className={ 'material-icons ' + styles.chevron }>chevron_right</i>
+          </div>
+        )
       }
       </div>
     )
