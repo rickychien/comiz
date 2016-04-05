@@ -14,7 +14,6 @@ Comic land
 * [webpack] - module bundler.
 * [babel] - A compiler for writing next generation JavaScript.
 * [css-modules] - Modulize CSS.
-* [material-ui] - React Components that Implement Google's Material Design.
 
 ## Contribute
 
@@ -38,4 +37,3 @@ Comic land
 [webpack]: https://github.com/webpack/webpack
 [babel]: https://github.com/babel/babel
 [css-modules]: https://github.com/css-modules/css-modules
-[material-ui]: https://github.com/callemall/material-ui
