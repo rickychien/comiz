@@ -1,6 +1,6 @@
 import React from 'react'
 
-import styles from './app-bar.css'
+import styles from './AppBar.css'
 
 export default class AppBar extends React.Component {
 
@@ -19,7 +19,7 @@ export default class AppBar extends React.Component {
             <i className="material-icons">{ this.props.materialIcon }</i>
           </div>
           {
-            !this.props.title ? 
+            !this.props.title ?
             '' : <h1 className={ styles.title }>{ this.props.title }</h1>
           }
 

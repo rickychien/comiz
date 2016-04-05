@@ -1,10 +1,10 @@
 import React from 'react'
 
-import AppBar from './app-bar'
-import CheckItem from './check-item'
-import FlatButton from './flat-button'
+import AppBar from '../AppBar'
+import CheckItem from '../CheckItem'
+import FlatButton from '../FlatButton'
 
-import styles from './comic-navigation.css'
+import styles from './ComicNavigation.css'
 
 export default class ComicNavigation extends React.Component {
 

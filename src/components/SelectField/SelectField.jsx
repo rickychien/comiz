@@ -1,6 +1,6 @@
 import React from 'react'
 
-import styles from './select-field.css'
+import styles from './SelectField.css'
 
 export default class SelectField extends React.Component {
 

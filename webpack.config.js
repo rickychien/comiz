@@ -3,7 +3,7 @@ const webpack = require('webpack')
 module.exports = {
   entry: {
     bundle: [
-      './src/index.js',
+      './src/index.jsx',
       'webpack-hot-middleware/client'
     ]
   },
@@ -20,12 +20,23 @@ module.exports = {
     }),
     new webpack.NoErrorsPlugin()
   ],
+  resolve: {
+    extensions: ['', '.js', '.jsx']
+  },
   module: {
     loaders: [
       {
-        test: /\.js$/,
+        test: /\.jsx?$/,
         loader: 'babel',
-        exclude: /node_modules/
+        exclude: /node_modules/,
+        query: {
+          presets: ['es2015', 'react', 'stage-1'],
+          "env": {
+            "development": {
+              "presets": ["react-hmre"]
+            }
+          }
+        }
       },
       {
         test: /\.jpe?g$|\.gif$|\.png|\.woff2?|\.ttf|\.eot|\.svg$/,

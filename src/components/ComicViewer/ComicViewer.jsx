@@ -1,6 +1,6 @@
 import React from 'react'
 
-import styles from './comic-viewer.css'
+import styles from './ComicViewer.css'
 
 export default class ComicViewer extends React.Component {
 

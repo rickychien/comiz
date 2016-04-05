@@ -1,6 +1,6 @@
 import React from 'react'
 
-import styles from './check-item.css'
+import styles from './CheckItem.css'
 
 export default class CheckItem extends React.Component {
 

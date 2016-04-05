@@ -1,6 +1,6 @@
 import React from 'react'
 
-import styles from './flat-button.css'
+import styles from './FlatButton.css'
 
 export default class FlatButton extends React.Component {
 

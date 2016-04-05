@@ -1,14 +1,14 @@
 import React from 'react'
 
-import AppBar from './app-bar'
-import ComicList from './comic-list'
-import ComicViewer from './comic-viewer'
-import FlatButton from './flat-button'
-import ComicNavigation from './comic-navigation'
-import SearchBar from './search-bar'
-import SelectField from './select-field'
+import AppBar from '../AppBar'
+import ComicList from '../ComicList'
+import ComicViewer from '../ComicViewer'
+import FlatButton from '../FlatButton'
+import ComicNavigation from '../ComicNavigation'
+import SearchBar from '../SearchBar'
+import SelectField from '../SelectField'
 
-import styles from './app.css'
+import styles from './App.css'
 
 export default class App extends React.Component {
 

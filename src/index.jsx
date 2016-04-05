@@ -1,11 +1,11 @@
 import 'babel-polyfill'
 import React from 'react'
 import { render } from 'react-dom'
-import App from './components/app'
+import App from './components/App'
 
 import './index.css'
 
 render(
-  <App/>,
+  <App />,
   document.getElementById('root')
 )

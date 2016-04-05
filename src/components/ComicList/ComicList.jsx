@@ -1,6 +1,6 @@
 import React from 'react'
 
-import styles from './comic-list.css'
+import styles from './ComicList.css'
 
 export default class ComicList extends React.Component {
 
