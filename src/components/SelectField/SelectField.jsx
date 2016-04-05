@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { PropTypes } from 'react'
 
 import styles from './SelectField.css'
 
@@ -9,13 +9,13 @@ export default class SelectField extends React.Component {
   }
 
   static propTypes = {
-    menuItems: React.PropTypes.arrayOf(
-      React.PropTypes.shape({
-        text: React.PropTypes.string,
-        value: React.PropTypes.string
+    menuItems: PropTypes.arrayOf(
+      PropTypes.shape({
+        text: PropTypes.string,
+        value: PropTypes.string
       })
     ),
-    onChange: React.PropTypes.func
+    onChange: PropTypes.func
   }
 
   render() {
@@ -25,16 +25,14 @@ export default class SelectField extends React.Component {
           <select className={ styles.select } onChange={ this.props.onChange }>
             {
               this.props.menuItems.map((item) => (
-                <option
-                  key={ item.value }
-                  value={ item.value }>
+                <option key={ item.value } value={ item.value }>
                   { item.text }
                 </option>
               ))
             }
           </select>
         </div>
-        <hr className={ styles.underline }/>
+        <hr className={ styles.underline } />
       </div>
     )
   }

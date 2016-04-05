@@ -1,11 +1,15 @@
-import React from 'react'
+import React, { PropTypes } from 'react'
 
 import styles from './SearchBar.css'
 
 export default class SearchBar extends React.Component {
 
   static propTypes = {
-    onChange: React.PropTypes.func
+    onChange: PropTypes.func
+  }
+
+  onChange = () => {
+    this.props.onChange && this.props.onChange()
   }
 
   render() {
@@ -13,12 +17,9 @@ export default class SearchBar extends React.Component {
       <div className={ styles.searchBar }>
         <div className={ styles.searchField }>
           <i className="material-icons">search</i>
-          <input
-            className={ styles.input }
-            onChange={ this.props.onChange }>
-          </input>
+          <input className={ styles.input } onChange={ this.onChange } />
         </div>
-        <hr className={ styles.underline }/>
+        <hr className={ styles.underline } />
       </div>
     )
   }

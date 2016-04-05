@@ -32,12 +32,12 @@ export default class App extends React.Component {
     this.setState({
       comicNavigation: {
         opened: true,
-        comicId: comic.id
+        comicId: comic ? comic.id : this.state.comicNavigation.comicId
       }
     })
   }
 
-  handleComicNavigationClose = (event) => {
+  handleComicNavigationClose = () => {
     this.setState({
       comicNavigation: {
         opened: false
@@ -89,9 +89,10 @@ export default class App extends React.Component {
     }
   }
 
-  toggleFavorite = (id) => {
+  toggleFavorite = () => {
+    let comicId = this.state.comicNavigation.comidId
     let favorites = this.state.favorites
-    favorites.has(id) ? favorites.delete(id) : favorites.add(id)
+    favorites.has(comicId) ? favorites.delete(comicId) : favorites.add(comicId)
 
     this.setState({
       favorites: favorites
@@ -126,7 +127,7 @@ export default class App extends React.Component {
 
   render() {
     return (
-      <div onClick={ this.handleComicNavigationClose }>
+      <div>
         {
           !this.state.comicViewer.opened ?
             <div>
@@ -147,7 +148,6 @@ export default class App extends React.Component {
               </AppBar>
               <ComicList
                 url={ `/api/updates` }
-                comics={ [] }
                 onComicTap={ this.handleComicNavigationOpen }>
               </ComicList>
             </div>
@@ -158,7 +158,7 @@ export default class App extends React.Component {
                 onLogoClick={ this.handleComicNavigationClose }>
                 <FlatButton
                   materialIcon="book"
-                  onTap={ this.handleComicNavigationOpen.bind(this, this.state.comicNavigation.comicId) }>
+                  onTap={ this.handleComicNavigationOpen }>
                 </FlatButton>
               </AppBar>
               <ComicViewer
@@ -174,7 +174,7 @@ export default class App extends React.Component {
           open={ this.state.comicNavigation.opened }
           comicId={ this.state.comicNavigation.comicId }
           onCloseTap={ this.handleComicNavigationClose }
-          onFavoriteTap={ this.toggleFavorite.bind(this, this.state.comicNavigation.comicId) }
+          onFavoriteTap={ this.toggleFavorite }
           onEpisodeTap={ this.handleComicViewerOpen }>
         </ComicNavigation>
       </div>

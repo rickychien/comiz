@@ -1,14 +1,14 @@
-import React from 'react'
+import React, { PropTypes } from 'react'
 
 import styles from './AppBar.css'
 
 export default class AppBar extends React.Component {
 
   static propTypes = {
-    materialIcon: React.PropTypes.string,
-    title: React.PropTypes.string,
-    onLogoTap: React.PropTypes.func,
-    children: React.PropTypes.node
+    materialIcon: PropTypes.string,
+    title: PropTypes.string,
+    onLogoTap: PropTypes.func,
+    children: PropTypes.node
   }
 
   render() {
@@ -16,13 +16,17 @@ export default class AppBar extends React.Component {
       <div className={ styles.appBar }>
         <div className={ styles.logo } onClick={ this.props.onLogoTap }>
           <div className={ styles.icon }>
-            <i className="material-icons">{ this.props.materialIcon }</i>
+            <i className="material-icons">
+              { this.props.materialIcon }
+            </i>
           </div>
           {
-            !this.props.title ?
-            '' : <h1 className={ styles.title }>{ this.props.title }</h1>
+            this.props.title && (
+              <h1 className={ styles.title }>
+                { this.props.title }
+              </h1>
+            )
           }
-
         </div>
         <div className={ styles.children }>
           { this.props.children }

@@ -6,22 +6,21 @@ export default class ComicItem extends React.Component {
 
   static propTypes = {
     comic: PropTypes.object.isRequired,
-    onComicTap: PropTypes.func.isRequired
+    onComicTap: PropTypes.func
   }
 
-  onClick = (event) => {
-    event.stopPropagation()
-    this.props.onComicTap(this.props.comic)
+  onClick = () => {
+    this.props.onComicTap && this.props.onComicTap(this.props.comic)
   }
 
   render() {
-    let comic = this.props.comic
+    let { comic } = this.props
 
     return (
       <div
         className={ styles.comic }
         onClick={ this.onClick }>
-        <img className={ styles.img } src={ comic.coverUrl }></img>
+        <img className={ styles.img } src={ comic.coverUrl } />
         <div className={ styles.title }>
           { comic.title }
         </div>

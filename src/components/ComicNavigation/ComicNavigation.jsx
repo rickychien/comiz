@@ -2,7 +2,7 @@ import React, { PropTypes } from 'react'
 
 import AppBar from '../AppBar'
 import CheckItem from '../CheckItem'
-import FlatButton from '../FlatButton'
+import ComicEpisode from '../ComicEpisode'
 
 import styles from './ComicNavigation.css'
 
@@ -17,7 +17,7 @@ export default class ComicNavigation extends React.Component {
     comicId: PropTypes.oneOfType([
       PropTypes.string,
       PropTypes.number
-    ]).isRequired,
+    ]),
     onCloseTap: PropTypes.func.isRequired,
     onFavoriteTap: PropTypes.func.isRequired,
     onEpisodeTap: PropTypes.func.isRequired
@@ -58,20 +58,19 @@ export default class ComicNavigation extends React.Component {
   }
 
   render() {
-    let comic = this.state.comic
-    let episodes = this.state.episodes
+    let { comic, episodes } = this.state
 
     return (
-      <div className={ styles.comicNav + (this.props.open ? ' ' + styles.open : '') }>
+      <div className={ `${styles.comicNav} ${this.props.open && styles.open}` }>
         <AppBar
           materialIcon="close"
-          onLogoTap={ this.props.onCloseTap }>
-        </AppBar>
+          onLogoTap={ this.props.onCloseTap }
+        />
         {
           !this.state.error ? (
             <div>
               <div className={ styles.cover }>
-                <img className={ styles.img } src={ comic.coverUrl }></img>
+                <img className={ styles.img } src={ comic.coverUrl } />
               </div>
               <div className={ styles.overview }>
                 <div className={ styles.about }>
@@ -80,22 +79,23 @@ export default class ComicNavigation extends React.Component {
                     iconChecked="star"
                     title={ comic.title }
                     subTitle={ comic.author }
-                    onTap={ this.props.onFavoriteTap }>
-                  </CheckItem>
+                    onTap={ this.props.onFavoriteTap }
+                  />
                 </div>
-                <hr className={ styles.hr }/>
+                <hr className={ styles.hr } />
                 <div className={ styles.brief }>
                   { comic.brief }
                 </div>
-                <hr className={ styles.hr }/>
+                <hr className={ styles.hr } />
                 <div className={ styles.episodes }>
                   {
                     episodes.map((episode) => (
-                      <FlatButton
+                      <ComicEpisode
                         key={ episode.id }
-                        title={ episode.title }
-                        onTap={ this.props.onEpisodeTap.bind(this, comic.id, episode.id) }>
-                      </FlatButton>
+                        comic={ comic }
+                        episode={ episode }
+                        onEpisodeTap={ this.props.onEpisodeTap }
+                      />
                     ))
                   }
                 </div>

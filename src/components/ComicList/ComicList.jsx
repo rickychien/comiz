@@ -8,7 +8,7 @@ export default class ComicList extends React.Component {
 
   static propTypes = {
     url: PropTypes.string.isRequired,
-    onComicTap: PropTypes.func.isRequired
+    onComicTap: PropTypes.func
   }
 
   state = {
@@ -23,7 +23,7 @@ export default class ComicList extends React.Component {
   }
 
   onComicTap = (comic) => {
-    this.props.onComicTap(comic);
+    this.props.onComicTap && this.props.onComicTap(comic)
   }
 
   render() {
@@ -33,6 +33,7 @@ export default class ComicList extends React.Component {
         {
           this.state.comics.map((comic) => (
             <ComicItem
+              key= { comic.id }
               comic={ comic }
               onComicTap={ this.onComicTap }
             />
