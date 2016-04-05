@@ -28,16 +28,16 @@ export default class App extends React.Component {
     categoryFilter: () => true
   }
 
-  handleComicNavigationOpen = (comicId) => {
+  handleComicNavigationOpen = (comic) => {
     this.setState({
       comicNavigation: {
         opened: true,
-        comicId
+        comicId: comic.id
       }
     })
   }
 
-  handleComicNavigationClose = () => {
+  handleComicNavigationClose = (event) => {
     this.setState({
       comicNavigation: {
         opened: false
@@ -126,7 +126,7 @@ export default class App extends React.Component {
 
   render() {
     return (
-      <div>
+      <div onClick={ this.handleComicNavigationClose }>
         {
           !this.state.comicViewer.opened ?
             <div>
@@ -172,8 +172,8 @@ export default class App extends React.Component {
         }
         <ComicNavigation
           open={ this.state.comicNavigation.opened }
-          onCloseTap={ this.handleComicNavigationClose }
           comicId={ this.state.comicNavigation.comicId }
+          onCloseTap={ this.handleComicNavigationClose }
           onFavoriteTap={ this.toggleFavorite.bind(this, this.state.comicNavigation.comicId) }
           onEpisodeTap={ this.handleComicViewerOpen }>
         </ComicNavigation>

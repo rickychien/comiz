@@ -1,12 +1,14 @@
-import React from 'react'
+import React, { PropTypes } from 'react'
+
+import ComicItem from '../ComicItem'
 
 import styles from './ComicList.css'
 
 export default class ComicList extends React.Component {
 
   static propTypes = {
-    url: React.PropTypes.string,
-    onComicTap: React.PropTypes.func
+    url: PropTypes.string.isRequired,
+    onComicTap: PropTypes.func.isRequired
   }
 
   state = {
@@ -21,7 +23,7 @@ export default class ComicList extends React.Component {
   }
 
   onComicTap = (comic) => {
-    this.props.onComicTap && this.props.onComicTap(comic);
+    this.props.onComicTap(comic);
   }
 
   render() {
@@ -30,15 +32,10 @@ export default class ComicList extends React.Component {
         <div className={ styles.comicListInner }>
         {
           this.state.comics.map((comic) => (
-            <div
-              key={ comic.id }
-              className={ styles.comic }
-              onClick={ this.onComicTap.bind(this, comic.id) }>
-              <img className={ styles.img } src={ comic.coverUrl }></img>
-              <div className={ styles.title }>
-                { comic.title }
-              </div>
-            </div>
+            <ComicItem
+              comic={ comic }
+              onComicTap={ this.onComicTap }
+            />
           ))
         }
         </div>

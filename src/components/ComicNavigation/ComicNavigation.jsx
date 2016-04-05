@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { PropTypes } from 'react'
 
 import AppBar from '../AppBar'
 import CheckItem from '../CheckItem'
@@ -13,34 +13,20 @@ export default class ComicNavigation extends React.Component {
   }
 
   static propTypes = {
-    open: React.PropTypes.bool,
-    comicId: React.PropTypes.oneOfType([
-      React.PropTypes.string,
-      React.PropTypes.number
-    ]),
-    onCloseTap: React.PropTypes.func.isRequired,
-    onFavoriteTap: React.PropTypes.func.isRequired,
-    onEpisodeTap: React.PropTypes.func.isRequired
+    open: PropTypes.bool,
+    comicId: PropTypes.oneOfType([
+      PropTypes.string,
+      PropTypes.number
+    ]).isRequired,
+    onCloseTap: PropTypes.func.isRequired,
+    onFavoriteTap: PropTypes.func.isRequired,
+    onEpisodeTap: PropTypes.func.isRequired
   }
 
   state = {
     comic: [],
     episodes: [],
     error: null
-  }
-
-  updateOverview = (comicId) => {
-    fetch(`/api/comics/${comicId}/overview`)
-      .then(res => res.ok ? res.json() : Promise.reject('error'))
-      .then(comic => this.setState({ comic, error: null }))
-      .catch(error => this.setState({ error }))
-  }
-
-  updateEpisodes = (comicId) => {
-    fetch(`/api/comics/${comicId}/episodes/list`)
-      .then(res => res.ok ? res.json() : Promise.reject('error'))
-      .then(episodes => this.setState({ episodes: episodes.reverse(), error: null }))
-      .catch(error => this.setState({ error }))
   }
 
   componentWillReceiveProps(nextProps) {
@@ -57,6 +43,20 @@ export default class ComicNavigation extends React.Component {
     }
   }
 
+  updateOverview = (comicId) => {
+    fetch(`/api/comics/${comicId}/overview`)
+      .then(res => res.ok ? res.json() : Promise.reject('error'))
+      .then(comic => this.setState({ comic, error: null }))
+      .catch(error => this.setState({ error }))
+  }
+
+  updateEpisodes = (comicId) => {
+    fetch(`/api/comics/${comicId}/episodes/list`)
+      .then(res => res.ok ? res.json() : Promise.reject('error'))
+      .then(episodes => this.setState({ episodes: episodes.reverse(), error: null }))
+      .catch(error => this.setState({ error }))
+  }
+
   render() {
     let comic = this.state.comic
     let episodes = this.state.episodes
@@ -68,7 +68,7 @@ export default class ComicNavigation extends React.Component {
           onLogoTap={ this.props.onCloseTap }>
         </AppBar>
         {
-          !this.state.error ?
+          !this.state.error ? (
             <div>
               <div className={ styles.cover }>
                 <img className={ styles.img } src={ comic.coverUrl }></img>
@@ -101,13 +101,14 @@ export default class ComicNavigation extends React.Component {
                 </div>
               </div>
             </div>
-          :
+          ) : (
             <div className={ styles.errorPage }>
               <div>
                 <i className="material-icons">error_outline</i>
                 <h2>Unable to find comic</h2>
               </div>
             </div>
+          )
         }
       </div>
     )
