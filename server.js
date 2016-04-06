@@ -24,7 +24,10 @@ app.get('/', function(req, res) {
 })
 
 app.get('/api/*', function(req, res) {
-  res.sendFile(__dirname + '/src' + req.url)
+  // Imitate restful API pattern
+  var path = req.path
+  path = /api\/comics\/[\d]+(\/episodes)?/.test(path) ? path + '/data' : path
+  res.sendFile(__dirname + '/src' + path)
 })
 
 app.listen(port, function(error) {

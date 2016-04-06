@@ -44,14 +44,14 @@ export default class ComicNavigation extends React.Component {
   }
 
   updateOverview = (comicId) => {
-    fetch(`/api/comics/${comicId}/overview`)
+    fetch(`/api/comics/${comicId}`)
       .then(res => res.ok ? res.json() : Promise.reject('error'))
       .then(comic => this.setState({ comic, error: null }))
       .catch(error => this.setState({ error }))
   }
 
   updateEpisodes = (comicId) => {
-    fetch(`/api/comics/${comicId}/episodes/list`)
+    fetch(`/api/comics/${comicId}/episodes`)
       .then(res => res.ok ? res.json() : Promise.reject('error'))
       .then(episodes => this.setState({ episodes: episodes.reverse(), error: null }))
       .catch(error => this.setState({ error }))
