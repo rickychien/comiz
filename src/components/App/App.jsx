@@ -115,7 +115,7 @@ export default class App extends React.Component {
     return (
       <div>
         {
-          !this.state.comicViewerOpened?
+          !this.state.comicViewerOpened ? (
             <div>
               <AppBar
                 title="Comiz"
@@ -136,7 +136,7 @@ export default class App extends React.Component {
                 onComicTap={ this.handleComicNavigationOpen }>
               </ComicList>
             </div>
-          :
+          ) : (
             <div>
               <AppBar
                 materialIcon="arrow_back"
@@ -155,6 +155,7 @@ export default class App extends React.Component {
                 onNextEpisodeTap={ this.updateNextEpisode }>
               </ComicViewer>
             </div>
+          )
         }
         <ComicNavigation
           open={ this.state.comicNavigationOpened }

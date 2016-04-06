@@ -14,17 +14,14 @@ export default class ComicNavigation extends React.Component {
 
   static propTypes = {
     open: PropTypes.bool,
-    comicId: PropTypes.oneOfType([
-      PropTypes.string,
-      PropTypes.number
-    ]),
+    comicId: PropTypes.number.isRequired,
     onCloseTap: PropTypes.func.isRequired,
     onFavoriteTap: PropTypes.func.isRequired,
     onEpisodeTap: PropTypes.func.isRequired
   }
 
   state = {
-    comic: [],
+    comic: null,
     episodes: [],
     error: null
   }
@@ -33,13 +30,6 @@ export default class ComicNavigation extends React.Component {
     if (nextProps.open) {
       this.updateOverview(nextProps.comicId)
       this.updateEpisodes(nextProps.comicId)
-    }
-  }
-
-  componentDidMount() {
-    if (this.props.open) {
-      this.updateOverview(this.props.comicId)
-      this.updateEpisodes(this.props.comicId)
     }
   }
 
@@ -58,7 +48,7 @@ export default class ComicNavigation extends React.Component {
   }
 
   render() {
-    let { comic, episodes } = this.state
+    let { comic, episodes, error } = this.state
 
     return (
       <div className={ `${styles.comicNav} ${this.props.open && styles.open}` }>
@@ -67,7 +57,7 @@ export default class ComicNavigation extends React.Component {
           onLogoTap={ this.props.onCloseTap }
         />
         {
-          !this.state.error ? (
+          (comic && !error) ? (
             <div>
               <div className={ styles.cover }>
                 <img className={ styles.img } src={ comic.coverUrl } />
@@ -100,10 +90,17 @@ export default class ComicNavigation extends React.Component {
                 </div>
               </div>
             </div>
-          ) : (
-            <div className={ styles.errorPage }>
+          ) : (!error) ? (
+            <div className={ styles.statusPage }>
               <div>
-                <i className="material-icons">error_outline</i>
+                <i className="material-icons">access_time</i>
+                <h2>Loading...</h2>
+              </div>
+            </div>
+          ) : (
+            <div className={ styles.statusPage }>
+              <div>
+                <i className="material-icons">sentiment_very_dissatisfied</i>
                 <h2>Unable to find comic</h2>
               </div>
             </div>
