@@ -17,9 +17,9 @@
   "readme": "README.md",
   "dependencies": {
     "babel-polyfill": "^6.7.2",
+    "isomorphic-fetch": "^2.2.1",
     "react": "^0.14.8",
-    "react-dom": "^0.14.8",
-    "whatwg-fetch": "^0.11.0"
+    "react-dom": "^0.14.8"
   },
   "devDependencies": {
     "babel-core": "^6.7.2",
