@@ -78,15 +78,17 @@ export default class ComicNavigation extends React.Component {
                 </div>
                 <hr className={ styles.hr } />
                 <div className={ styles.episodes }>
-                  {
-                    episodes.map((episode) => (
-                      <ComicEpisode
-                        key={ episode.id }
-                        episode={ episode }
-                        onEpisodeTap={ this.props.onEpisodeTap }
-                      />
-                    ))
-                  }
+                  <div className={ styles.episodesInner }>
+                    {
+                      episodes.map((episode) => (
+                        <ComicEpisode
+                          key={ episode.id }
+                          episode={ episode }
+                          onEpisodeTap={ this.props.onEpisodeTap }
+                        />
+                      ))
+                    }
+                  </div>
                 </div>
               </div>
             </div>

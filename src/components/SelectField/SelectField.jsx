@@ -9,6 +9,7 @@ export default class SelectField extends React.Component {
   }
 
   static propTypes = {
+    selectedValue: PropTypes.string,
     menuItems: PropTypes.arrayOf(
       PropTypes.shape({
         text: PropTypes.string,
@@ -19,13 +20,19 @@ export default class SelectField extends React.Component {
   }
 
   render() {
+    let { selectedValue, menuItems, onChange } = this.props
+
     return (
       <div className={ styles.selectField }>
         <div>
-          <select className={ styles.select } onChange={ this.props.onChange }>
+          <select
+            className={ styles.select }
+            value={ selectedValue }
+            onChange={ onChange }
+          >
             {
-              this.props.menuItems.map((item) => (
-                <option key={ item.value } value={ item.value }>
+              menuItems.map((item) => (
+                <option key={ item.value } value={ item.value } >
                   { item.text }
                 </option>
               ))

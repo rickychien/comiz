@@ -6,7 +6,7 @@ import ComicViewer from '../ComicViewer'
 import FlatButton from '../FlatButton'
 import ComicNavigation from '../ComicNavigation'
 import SearchBar from '../SearchBar'
-import SelectField from '../SelectField'
+import CategorySelectField from '../../containers/CategorySelectField'
 
 import styles from './App.css'
 
@@ -85,23 +85,6 @@ export default class App extends React.Component {
     })
   }
 
-  onCategoryChanged = (event) => {
-    let category = event.target.value
-    let categoryFilter
-    switch(category) {
-      case 'SHOW_LATEST':
-        categoryFilter = () => true
-        break;
-      case 'SHOW_FAVORITE':
-        categoryFilter = (comic) => this.state.favorites.has(comic.id)
-        break;
-    }
-    this.setState({
-      category,
-      categoryFilter
-    })
-  }
-
   onSearchTextChanged = (event) => {
     let regexp = new RegExp(event.target.value, 'i')
     this.setState({
@@ -120,14 +103,7 @@ export default class App extends React.Component {
               <AppBar
                 title="Comiz"
                 materialIcon="fingerprint">
-                  <SelectField
-                    value={ this.state.category }
-                    menuItems={[
-                      { text: "Latest", value: 'SHOW_LATEST' },
-                      { text: "Favorite", value: 'SHOW_FAVORITE' }
-                    ]}
-                    onChange={ this.onCategoryChanged }>
-                  </SelectField>
+                  <CategorySelectField />
                   <SearchBar
                     onChange={ this.onSearchTextChanged }>
                   </SearchBar>

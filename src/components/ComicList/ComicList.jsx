@@ -7,6 +7,7 @@ import styles from './ComicList.css'
 export default class ComicList extends React.Component {
 
   static propTypes = {
+    comics: PropTypes.array.isRequired,
     onComicTap: PropTypes.func
   }
 
