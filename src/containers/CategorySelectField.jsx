@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 
 import SelectField from '../components/SelectField'
 
-import * as ActionTypes from '../actions'
+import * as Actions from '../actions'
 
 class CategorySelectField extends React.Component {
 
@@ -35,7 +35,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     onChange: (category) => {
-      dispatch(ActionTypes.filterCategory(category))
+      dispatch(Actions.filterCategory(category))
     }
   }
 }

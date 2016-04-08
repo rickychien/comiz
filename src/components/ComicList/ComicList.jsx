@@ -6,39 +6,23 @@ import styles from './ComicList.css'
 
 export default class ComicList extends React.Component {
 
-  static propTypes = {
-    comics: PropTypes.array.isRequired,
-    onComicTap: PropTypes.func
-  }
-
-  state = {
+  static defaultProps = {
     comics: []
   }
 
-  componentDidMount() {
-    fetch(`/api/updates`)
-      .then(res => res.ok ? res.json() : [])
-      .then(comics => this.setState({ comics }))
-      .catch(err => console.error(err))
-  }
-
-  onComicTap = (comic) => {
-    this.props.onComicTap && this.props.onComicTap(comic)
+  static propTypes = {
+    comics: PropTypes.array
   }
 
   render() {
     return (
       <div className={ styles.comicList }>
         <div className={ styles.comicListInner }>
-        {
-          this.state.comics.map((comic) => (
-            <ComicItem
-              key= { comic.id }
-              comic={ comic }
-              onComicTap={ this.onComicTap }
-            />
-          ))
-        }
+          {
+            this.props.comics.map(comic =>
+              <ComicItem key= { comic.id } comic={ comic } />
+            )
+          }
         </div>
       </div>
     )

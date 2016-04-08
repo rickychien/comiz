@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 
 import SearchBar from '../components/SearchBar'
 
-import * as ActionTypes from '../actions'
+import * as Actions from '../actions'
 
 class QuerySearchBar extends React.Component {
 
@@ -32,7 +32,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     onChange: (query) => {
-      dispatch(ActionTypes.filterQuery(query))
+      dispatch(Actions.filterQuery(query))
     }
   }
 }
