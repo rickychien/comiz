@@ -7,13 +7,9 @@ import * as ActionTypes from '../actions'
 
 class CategorySelectField extends React.Component {
 
-  static PropTypes = {
+  static propTypes = {
     category: PropTypes.string.isRequired,
-    onCategoryChanged: PropTypes.func.isRequired
-  }
-
-  onCategoryChanged = (event) => {
-    this.props.onCategoryChanged(event.target.value)
+    onChange: PropTypes.func.isRequired
   }
 
   render() {
@@ -24,7 +20,7 @@ class CategorySelectField extends React.Component {
           { text: 'Latest', value: 'SHOW_LATEST' },
           { text: 'Favorite', value: 'SHOW_FAVORITE' }
         ]}
-        onChange={ this.onCategoryChanged }>
+        onChange={ this.props.onChange }>
       </SelectField>
     )
   }
@@ -32,14 +28,14 @@ class CategorySelectField extends React.Component {
 
 const mapStateToProps = (state) => {
   return {
-    category: state.comicsFilter.category
+    category: state.filter.category
   }
 }
 
-const mapDispatchToProps = (dispatch, ownProps) => {
+const mapDispatchToProps = (dispatch) => {
   return {
-    onCategoryChanged: (category) => {
-      dispatch(ActionTypes.setComicListCategory(category))
+    onChange: (category) => {
+      dispatch(ActionTypes.filterCategory(category))
     }
   }
 }

@@ -5,8 +5,8 @@ import ComicList from '../ComicList'
 import ComicViewer from '../ComicViewer'
 import FlatButton from '../FlatButton'
 import ComicNavigation from '../ComicNavigation'
-import SearchBar from '../SearchBar'
 import CategorySelectField from '../../containers/CategorySelectField'
+import QuerySearchBar from '../../containers/QuerySearchBar'
 
 import styles from './App.css'
 
@@ -85,15 +85,6 @@ export default class App extends React.Component {
     })
   }
 
-  onSearchTextChanged = (event) => {
-    let regexp = new RegExp(event.target.value, 'i')
-    this.setState({
-      searchFilter: function (comic) {
-        return regexp.test(comic.title)
-      }
-    })
-  }
-
   render() {
     return (
       <div>
@@ -104,9 +95,7 @@ export default class App extends React.Component {
                 title="Comiz"
                 materialIcon="fingerprint">
                   <CategorySelectField />
-                  <SearchBar
-                    onChange={ this.onSearchTextChanged }>
-                  </SearchBar>
+                  <QuerySearchBar />
               </AppBar>
               <ComicList
                 onComicTap={ this.handleComicNavigationOpen }>

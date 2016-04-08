@@ -1,9 +1,9 @@
 import { combineReducers } from 'redux'
 
-import comicsFilter from './comicsFilter'
+import filter from './filter'
 
 const rootReducer = combineReducers({
-  comicsFilter
+  filter
 })
 
 export default rootReducer

@@ -19,8 +19,12 @@ export default class SelectField extends React.Component {
     onChange: PropTypes.func
   }
 
+  onChange = (event) => {
+    this.props.onChange && this.props.onChange(event.target.value)
+  }
+
   render() {
-    let { selectedValue, menuItems, onChange } = this.props
+    let { selectedValue, menuItems } = this.props
 
     return (
       <div className={ styles.selectField }>
@@ -28,7 +32,7 @@ export default class SelectField extends React.Component {
           <select
             className={ styles.select }
             value={ selectedValue }
-            onChange={ onChange }
+            onChange={ this.onChange }
           >
             {
               menuItems.map((item) => (

@@ -1,13 +1,13 @@
-export const setComicListCategory = (category) => {
+export const filterCategory = (category) => {
   return {
-    type: 'SET_COMICLIST_CATEGORY',
+    type: 'FILTER_CATEGORY',
     category
   }
 }
 
-export const setComicListName = (name) => {
+export const filterQuery = (query) => {
   return {
-    type: 'SET_COMICLIST_NAME',
-    name
+    type: 'FILTER_QUERY',
+    query
   }
 }
