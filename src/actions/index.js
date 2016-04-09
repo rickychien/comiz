@@ -35,25 +35,33 @@ export const hideComicNavigation = () => {
 
 // Fetch comics from server
 
-const requestComics = () => {
+const fetchComicsRequest = () => {
   return {
-    type: 'REQUEST_COMICS',
+    type: 'FETCH_COMICS_REQUEST'
   }
 }
 
-const receiveComics = (items) => {
+const fetchComicsSuccess = (comics) => {
   return {
-    type: 'RECEIVE_COMICS',
-    items
+    type: 'FETCH_COMICS_SUCCESS',
+    comics
+  }
+}
+
+const fetchComicsFailure = (error) => {
+  return {
+    type: 'FETCH_COMICS_FAILURE',
+    error
   }
 }
 
 const fetchComics = () => {
   return dispatch => {
-    dispatch(requestComics())
+    dispatch(fetchComicsRequest())
     return fetch(`/api/updates`)
       .then(res => res.json())
-      .then(json => dispatch(receiveComics(json)))
+      .then(json => dispatch(fetchComicsSuccess(json)))
+      .catch(err => dispatch(fetchComicsFailure(err)))
   }
 }
 
@@ -68,25 +76,33 @@ export function fetchComicsIfNeeded() {
 
 // Fetch single comic item from server
 
-const requestComicItem = () => {
+const fetchComicItemRequest = () => {
   return {
-    type: 'REQUEST_COMIC_ITEM',
+    type: 'FETCH_COMIC_ITEM_REQUEST'
   }
 }
 
-const receiveComicItem = (item) => {
+const fetchComicItemSuccess = (comic) => {
   return {
-    type: 'RECEIVE_COMIC_ITEM',
-    item
+    type: 'FETCH_COMIC_ITEM_SUCCESS',
+    comic
+  }
+}
+
+const fetchComicItemFailure = (error) => {
+  return {
+    type: 'FETCH_COMIC_ITEM_FAILURE',
+    error
   }
 }
 
 const fetchComicItem = (comicId) => {
   return dispatch => {
-    dispatch(requestComicItem())
+    dispatch(fetchComicItemRequest())
     return fetch(`/api/comics/${comicId}`)
       .then(res => res.json())
-      .then(json => dispatch(receiveComicItem(json)))
+      .then(json => dispatch(fetchComicItemSuccess(json)))
+      .catch(err => dispatch(fetchComicItemFailure(err)))
   }
 }
 
@@ -95,6 +111,47 @@ export function fetchComicItemIfNeeded(comicId) {
     const state = getState()
     if (!state.isFetching) {
       return dispatch(fetchComicItem(comicId))
+    }
+  }
+}
+
+// Fetch comic episodes from server
+
+const fetchComicEpisodesRequest = () => {
+  return {
+    type: 'FETCH_COMIC_EPISODES_REQUEST'
+  }
+}
+
+const fetchComicEpisodesSuccess = (episodes) => {
+  return {
+    type: 'FETCH_COMIC_EPISODES_SUCCESS',
+    episodes
+  }
+}
+
+const fetchComicEpisodesFailure = (error) => {
+  return {
+    type: 'FETCH_COMIC_EPISODES_FAILURE',
+    error
+  }
+}
+
+const fetchComicEpisodes = (comicId) => {
+  return dispatch => {
+    dispatch(fetchComicEpisodesRequest())
+    return fetch(`/api/comics/${comicId}/episodes`)
+      .then(res => res.json())
+      .then(json => dispatch(fetchComicEpisodesSuccess(json)))
+      .catch(err => dispatch(fetchComicEpisodesFailure(err)))
+  }
+}
+
+export function fetchComicEpisodesIfNeeded(comicId) {
+  return (dispatch, getState) => {
+    const state = getState()
+    if (!state.isFetching) {
+      return dispatch(fetchComicEpisodes(comicId))
     }
   }
 }

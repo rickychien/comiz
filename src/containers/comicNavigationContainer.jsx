@@ -10,7 +10,7 @@ class ComicNavigationContainer extends React.Component {
   static propTypes = {
     open: PropTypes.bool.isRequired,
     comicId: PropTypes.number.isRequired,
-    comics: PropTypes.array.isRequired,
+    comic: PropTypes.object.isRequired,
     episodes: PropTypes.array.isRequired,
     isFetching: PropTypes.bool.isRequired,
     fetchError: PropTypes.object.isRequired,
@@ -21,6 +21,7 @@ class ComicNavigationContainer extends React.Component {
     if (nextProps.comicId !== this.props.comicId) {
       const { dispatch, comicId } = nextProps
       dispatch(Actions.fetchComicItemIfNeeded(comicId))
+      dispatch(Actions.fetchComicEpisodesIfNeeded(comicId))
     }
   }
 
@@ -32,15 +33,11 @@ class ComicNavigationContainer extends React.Component {
 
   }
 
-  getComicByComicId = (comicId) => {
-    return this.props.comics.find(comic => comic.id === comicId)
-  }
-
   render() {
     return (
       <ComicNavigation
         open={ this.props.open }
-        comic={ this.getComicByComicId(this.props.comicId) }
+        comic={ this.props.comic }
         episodes={ this.props.episodes }
         isFetching={ this.props.isFetching }
         fetchError={ this.props.fetchError }
@@ -53,11 +50,15 @@ class ComicNavigationContainer extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-  const { open, comicId, isFetching, fetchError } = state.comicNavigation
+  const { open, comicId } = state.comicNavigation
+  const { comics, isFetching, fetchError } = state.comic
+  const comic = comics.find(comic => comic.id === comicId) || {}
+  const episodes = comic.episodes ? comic.episodes.reverse() : []
   return {
     open,
     comicId,
-    comics: state.comic.items,
+    comic,
+    episodes,
     isFetching,
     fetchError
   }

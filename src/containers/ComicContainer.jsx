@@ -41,7 +41,7 @@ class ComicContainer extends React.Component {
 const mapStateToProps = (state) => {
   return {
     filter: state.filter,
-    comics: state.comic.items
+    comics: state.comic.comics
   }
 }
 
