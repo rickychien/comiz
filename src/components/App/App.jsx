@@ -1,26 +1,34 @@
-import React from 'react'
+import React, { PropTypes } from 'react'
 
 import AppBar from '../AppBar'
-import ComicViewer from '../ComicViewer'
 import FlatButton from '../FlatButton'
 import CategorySelectField from '../../containers/CategorySelectField'
 import ComicContainer from '../../containers/ComicContainer'
+import ComicViewerContainer from '../../containers/ComicViewerContainer'
 import ComicNavigationContainer from '../../containers/ComicNavigationContainer'
-import QuerySearchBar from '../../containers/QuerySearchBar'
+import SearchBarContainer from '../../containers/SearchBarContainer'
 
 import styles from './App.css'
 
 export default class App extends React.Component {
 
+  static defaultProps = {
+    showComicList: true
+  }
+
+  static propTypes = {
+    showComicList: PropTypes.bool
+  }
+
   render() {
     return (
       <div>
         {
-          true ? (
+          this.props.showComicList ? (
             <div>
               <AppBar title="Comiz" materialIcon="fingerprint">
                 <CategorySelectField />
-                <QuerySearchBar />
+                <SearchBarContainer />
               </AppBar>
               <ComicContainer />
             </div>
@@ -29,7 +37,7 @@ export default class App extends React.Component {
               <AppBar materialIcon="arrow_back">
                 <FlatButton materialIcon="book" />
               </AppBar>
-              <ComicViewer />
+              <ComicViewerContainer />
             </div>
           )
         }

@@ -5,7 +5,7 @@ import SearchBar from '../components/SearchBar'
 
 import * as Actions from '../actions'
 
-class QuerySearchBar extends React.Component {
+class SearchBarContainer extends React.Component {
 
   static propTypes = {
     value: PropTypes.string.isRequired,
@@ -40,4 +40,4 @@ const mapDispatchToProps = (dispatch) => {
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(QuerySearchBar)
+)(SearchBarContainer)

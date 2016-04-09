@@ -170,9 +170,10 @@ export const toggleFavorite = (comic) => {
 
 // Show comic viewer
 
-export const showComicViewer = (comic) => {
+export const showComicViewer = (comicId, episodeId) => {
   return {
     type: 'SHOW_COMIC_VIEWER',
-    comic
+    comicId,
+    episodeId
   }
 }

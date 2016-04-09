@@ -8,28 +8,9 @@ export default class ComicViewer extends React.Component {
     comicId: PropTypes.string.isRequired,
     episodeId: PropTypes.string.isRequired,
     prevEpisodeDisabled: PropTypes.bool.isRequired,
-    onPrevEpisodeTap: PropTypes.func.isRequired,
+    onPrevEpisodeClick: PropTypes.func,
     nextEpisodeDisabled: PropTypes.bool.isRequired,
-    onNextEpisodeTap: PropTypes.func.isRequired
-  }
-
-  state = {
-    pages: []
-  }
-
-  componentDidMount() {
-    this.updatePages()
-  }
-
-  componentDidUpdate() {
-    this.updatePages()
-  }
-
-  updatePages = () => {
-    fetch(`/api/comics/${this.props.comicId}/episodes/${this.props.episodeId}/pages`)
-      .then(res => res.ok ? res.json() : [])
-      .then(pages => this.setState({ pages }))
-      .catch(err => console.error(err))
+    onNextEpisodeClick: PropTypes.func
   }
 
   render() {
@@ -44,7 +25,7 @@ export default class ComicViewer extends React.Component {
         !this.props.prevEpisodeDisabled && (
           <div
             className={ styles.prevEpisode }
-            onClick={ this.props.onPrevEpisodeTap }
+            onClick={ this.props.onPrevEpisodeClick }
           >
             <i className={ 'material-icons ' + styles.chevron }>chevron_left</i>
           </div>
@@ -54,7 +35,7 @@ export default class ComicViewer extends React.Component {
         !this.props.nextEpisodeDisabled && (
           <div
             className={ styles.nextEpisode }
-            onClick={ this.props.onNextEpisodeTap }
+            onClick={ this.props.onNextEpisodeClick }
           >
             <i className={ 'material-icons ' + styles.chevron }>chevron_right</i>
           </div>

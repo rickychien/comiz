@@ -8,7 +8,7 @@ import * as Actions from '../actions'
 const mapDispatchToProps = (dispatch) => {
   return {
     onEpisodeClick: (comic, episode) => {
-      dispatch(Actions.showComicViewer(comic, episode))
+      dispatch(Actions.showComicViewer(comic.id, episode.id))
     }
   }
 }

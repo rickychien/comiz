@@ -1,14 +1,16 @@
-const comicNavigation = (state = {
+const comicViewer = (state = {
   open: false,
-  comicId: null
+  comicId: null,
+  episodeId: null
 }, action) => {
   switch (action.type) {
-    case 'SHOW_COMIC_NAVIGATION':
+    case 'SHOW_COMIC_VIEWER':
       return Object.assign({}, state, {
         open: true,
-        comicId: action.comicId
+        comicId: action.comicId,
+        episodeId: action.episodeId
       })
-    case 'HIDE_COMIC_NAVIGATION':
+    case 'HIDE_COMIC_VIEWER':
       return Object.assign({}, state, {
         open: false
       })
@@ -17,4 +19,4 @@ const comicNavigation = (state = {
   }
 }
 
-export default comicNavigation
+export default comicViewer
