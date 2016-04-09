@@ -4,6 +4,21 @@ const episodeItem = (state, action) => {
       return Object.assign({}, state, {
         read: false
       })
+    case 'FETCH_COMIC_EPISODE_PAGES_REQUEST':
+      return Object.assign({}, state, {
+        isFetching: true,
+        fetchError: null
+      })
+    case 'FETCH_COMIC_EPISODE_PAGES_SUCCESS':
+      return Object.assign({}, state, {
+        isFetching: false,
+        pages: action.pages
+      })
+    case 'FETCH_COMIC_EPISODE_PAGES_FAILURE':
+      return Object.assign({}, state, {
+        isFetching: false,
+        fetchError: action.error
+      })
     default:
       return state
   }
@@ -35,6 +50,15 @@ const comicItem = (state, action) => {
       })
     case 'TOGGLE_FAVORITE':
       return Object.assign({}, state, { favorite: !state.favorite })
+    case 'FETCH_COMIC_EPISODE_PAGES_REQUEST':
+    case 'FETCH_COMIC_EPISODE_PAGES_SUCCESS':
+    case 'FETCH_COMIC_EPISODE_PAGES_FAILURE':
+      return Object.assign({}, state, {
+        episodes: state.episodes.map(episode => (
+          episode.id === action.episodeId ?
+            episodeItem(episode, action) : episode
+        ))
+      })
     default:
       return state
   }
@@ -73,6 +97,9 @@ const comic = (state = {
     case 'FETCH_COMIC_EPISODES_REQUEST':
     case 'FETCH_COMIC_EPISODES_SUCCESS':
     case 'FETCH_COMIC_EPISODES_FAILURE':
+    case 'FETCH_COMIC_EPISODE_PAGES_REQUEST':
+    case 'FETCH_COMIC_EPISODE_PAGES_SUCCESS':
+    case 'FETCH_COMIC_EPISODE_PAGES_FAILURE':
     case 'TOGGLE_FAVORITE':
       return Object.assign({}, state, {
         comics: state.comics.map(comic => (

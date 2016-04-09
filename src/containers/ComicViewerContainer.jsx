@@ -9,34 +9,49 @@ class ComicViewerContainer extends React.Component {
 
   static propTypes = {
     comicId: PropTypes.number.isRequired,
-    episodeId: PropTypes.number.isRequired,
-    prevEpisodeDisabled: PropTypes.bool.isRequired,
-    onPrevEpisodeClick: PropTypes.func.isRequired,
-    nextEpisodeDisabled: PropTypes.bool.isRequired,
-    onNextEpisodeClick: PropTypes.func.isRequired
+    episodeId: PropTypes.number.isRequired
+  }
+
+  componentDidMount() {
+    const { dispatch, comicId, episodeId } = this.props
+    dispatch(Actions.fetchComicEpisodePagesIfNeeded(comicId, episodeId))
+  }
+
+  onPrevEpisodeClick = () => {
+
+  }
+
+  onNextEpisodeClick = () => {
+
   }
 
   render() {
     return (
       <ComicViewer
-        comicId={ this.props.comicId }
-        episodeId={ this.props.episodeId }
+        pages={ this.props.pages }
         prevEpisodeDisabled={ this.props.prevEpisodeDisabled }
         onPrevEpisodeClick={ this.onPrevEpisodeClick }
         nextEpisodeDisabled={ this.props.nextEpisodeDisabled }
-        onNextEpisodeClick={ this.onPrevEpisodeClick }
+        onNextEpisodeClick={ this.onNextEpisodeClick }
       />
     )
   }
 
 }
 
-const mapStateToProps = () => {
-  return {
+const mapStateToProps = (state) => {
+  const { comicId, episodeId } = state.comicViewer
+  const comic = state.comic.comics.find(comic => comic.id === comicId) || {}
+  const episode = comic.episodes.find(episode => episode.id === episodeId) || {}
+  const pages = episode.pages
 
+  return {
+    comicId,
+    episodeId,
+    pages
   }
 }
 
 export default connect(
   mapStateToProps
-)(ComicViewer)
+)(ComicViewerContainer)

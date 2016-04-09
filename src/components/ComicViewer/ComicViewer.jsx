@@ -4,12 +4,15 @@ import styles from './ComicViewer.css'
 
 export default class ComicViewer extends React.Component {
 
+  static defaultProps = {
+    pages: []
+  }
+
   static propTypes = {
-    comicId: PropTypes.string.isRequired,
-    episodeId: PropTypes.string.isRequired,
-    prevEpisodeDisabled: PropTypes.bool.isRequired,
+    pages: PropTypes.array,
+    prevEpisodeDisabled: PropTypes.bool,
     onPrevEpisodeClick: PropTypes.func,
-    nextEpisodeDisabled: PropTypes.bool.isRequired,
+    nextEpisodeDisabled: PropTypes.bool,
     onNextEpisodeClick: PropTypes.func
   }
 
@@ -17,7 +20,7 @@ export default class ComicViewer extends React.Component {
     return (
       <div className={ styles.comicViewer }>
       {
-        this.state.pages.map((page) => (
+        this.props.pages.map((page) => (
           <img key= { page } className={ styles.img } src={ page } />
         ))
       }

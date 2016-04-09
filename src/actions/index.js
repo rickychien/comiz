@@ -177,3 +177,50 @@ export const showComicViewer = (comicId, episodeId) => {
     episodeId
   }
 }
+
+// Fetch comic episode pages from server
+
+const fetchComicEpisodePagesRequest = (comicId, episodeId) => {
+  return {
+    type: 'FETCH_COMIC_EPISODE_PAGES_REQUEST',
+    comicId,
+    episodeId
+  }
+}
+
+const fetchComicEpisodePagesSuccess = (comicId, episodeId, pages) => {
+  return {
+    type: 'FETCH_COMIC_EPISODE_PAGES_SUCCESS',
+    comicId,
+    episodeId,
+    pages
+  }
+}
+
+const fetchComicEpisodePagesFailure = (comicId, episodeId, error) => {
+  return {
+    type: 'FETCH_COMIC_EPISODE_PAGES_FAILURE',
+    comicId,
+    episodeId,
+    error
+  }
+}
+
+const fetchComicEpisodePages = (comicId, episodeId) => {
+  return dispatch => {
+    dispatch(fetchComicEpisodePagesRequest(comicId, episodeId))
+    return fetch(`/api/comics/${comicId}/episodes/${episodeId}/pages`)
+      .then(res => res.json())
+      .then(json => dispatch(fetchComicEpisodePagesSuccess(comicId, episodeId, json)))
+      .catch(err => dispatch(fetchComicEpisodePagesFailure(comicId, episodeId, err)))
+  }
+}
+
+export function fetchComicEpisodePagesIfNeeded(comicId, episodeId) {
+  return (dispatch, getState) => {
+    const state = getState()
+    if (!state.isFetching) {
+      return dispatch(fetchComicEpisodePages(comicId, episodeId))
+    }
+  }
+}

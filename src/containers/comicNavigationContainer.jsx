@@ -54,7 +54,7 @@ const mapStateToProps = (state) => {
   const navComicId = state.comicNavigation.comicId
   const { comics, isFetching, fetchError } = state.comic
   const comic = comics.find(comic => comic.id === navComicId) || {}
-  const episodes = comic.episodes ? [...comic.episodes].reverse() : []
+  const episodes = comic.episodes ? [...comic.episodes] : []
   const favorite = comic.favorite || false
 
   return {
