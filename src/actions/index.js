@@ -117,33 +117,36 @@ export function fetchComicItemIfNeeded(comicId) {
 
 // Fetch comic episodes from server
 
-const fetchComicEpisodesRequest = () => {
+const fetchComicEpisodesRequest = (comicId) => {
   return {
-    type: 'FETCH_COMIC_EPISODES_REQUEST'
+    type: 'FETCH_COMIC_EPISODES_REQUEST',
+    comicId
   }
 }
 
-const fetchComicEpisodesSuccess = (episodes) => {
+const fetchComicEpisodesSuccess = (comicId, episodes) => {
   return {
     type: 'FETCH_COMIC_EPISODES_SUCCESS',
+    comicId,
     episodes
   }
 }
 
-const fetchComicEpisodesFailure = (error) => {
+const fetchComicEpisodesFailure = (comicId, error) => {
   return {
     type: 'FETCH_COMIC_EPISODES_FAILURE',
+    comicId,
     error
   }
 }
 
 const fetchComicEpisodes = (comicId) => {
   return dispatch => {
-    dispatch(fetchComicEpisodesRequest())
+    dispatch(fetchComicEpisodesRequest(comicId))
     return fetch(`/api/comics/${comicId}/episodes`)
       .then(res => res.json())
-      .then(json => dispatch(fetchComicEpisodesSuccess(json)))
-      .catch(err => dispatch(fetchComicEpisodesFailure(err)))
+      .then(json => dispatch(fetchComicEpisodesSuccess(comicId, json)))
+      .catch(err => dispatch(fetchComicEpisodesFailure(comicId, err)))
   }
 }
 
@@ -158,9 +161,18 @@ export function fetchComicEpisodesIfNeeded(comicId) {
 
 // Toggle favorite
 
-export const toggleFavorite = (comicId) => {
+export const toggleFavorite = (comic) => {
   return {
     type: 'TOGGLE_FAVORITE',
-    comicId
+    comic
+  }
+}
+
+// Show comic viewer
+
+export const showComicViewer = (comic) => {
+  return {
+    type: 'SHOW_COMIC_VIEWER',
+    comic
   }
 }

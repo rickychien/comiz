@@ -9,20 +9,18 @@ class ComicNavigationContainer extends React.Component {
 
   static propTypes = {
     open: PropTypes.bool.isRequired,
-    comicId: PropTypes.number.isRequired,
     comic: PropTypes.object.isRequired,
     episodes: PropTypes.array.isRequired,
     favorite: PropTypes.bool.isRequired,
     isFetching: PropTypes.bool.isRequired,
-    fetchError: PropTypes.object.isRequired,
-    dispatch: PropTypes.func.isRequired
+    fetchError: PropTypes.object
   }
 
   componentWillReceiveProps(nextProps) {
-    if (nextProps.comicId !== this.props.comicId) {
-      const { dispatch, comicId } = nextProps
-      dispatch(Actions.fetchComicItemIfNeeded(comicId))
-      dispatch(Actions.fetchComicEpisodesIfNeeded(comicId))
+    if (nextProps.comic.id !== this.props.comic.id) {
+      const { dispatch, comic } = nextProps
+      dispatch(Actions.fetchComicItemIfNeeded(comic.id))
+      dispatch(Actions.fetchComicEpisodesIfNeeded(comic.id))
     }
   }
 
@@ -31,7 +29,7 @@ class ComicNavigationContainer extends React.Component {
   }
 
   onFavoriteClick = () => {
-    this.props.dispatch(Actions.toggleFavorite(this.props.comicId))
+    this.props.dispatch(Actions.toggleFavorite(this.props.comic))
   }
 
   render() {
@@ -52,14 +50,15 @@ class ComicNavigationContainer extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-  const { open, comicId } = state.comicNavigation
+  const open = state.comicNavigation.open
+  const navComicId = state.comicNavigation.comicId
   const { comics, isFetching, fetchError } = state.comic
-  const comic = comics.find(comic => comic.id === comicId) || {}
+  const comic = comics.find(comic => comic.id === navComicId) || {}
   const episodes = comic.episodes ? [...comic.episodes].reverse() : []
-  const favorite = comic.favorite
+  const favorite = comic.favorite || false
+
   return {
     open,
-    comicId,
     comic,
     episodes,
     favorite,

@@ -2,7 +2,7 @@ import React, { PropTypes } from 'react'
 
 import AppBar from '../AppBar'
 import CheckItem from '../CheckItem'
-import ComicEpisode from '../ComicEpisode'
+import ComicEpisodeContainer from '../../containers/ComicEpisodeContainer'
 
 import styles from './ComicNavigation.css'
 
@@ -62,7 +62,7 @@ export default class ComicNavigation extends React.Component {
                   <div className={ styles.episodesInner }>
                     {
                       episodes.map((episode) => (
-                        <ComicEpisode
+                        <ComicEpisodeContainer
                           key={ episode.id }
                           comic={ comic }
                           episode={ episode }

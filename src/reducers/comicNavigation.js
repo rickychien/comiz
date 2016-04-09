@@ -1,5 +1,6 @@
 const comicNavigation = (state = {
-  open: false
+  open: false,
+  comicId: {}
 }, action) => {
   switch (action.type) {
     case 'SHOW_COMIC_NAVIGATION':

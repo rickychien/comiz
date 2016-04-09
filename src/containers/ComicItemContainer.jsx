@@ -8,8 +8,7 @@ import * as Actions from '../actions'
 class ComicItemContainer extends React.Component {
 
   static propTypes = {
-    comic: PropTypes.object.isRequired,
-    onClick: PropTypes.func.isRequired
+    comic: PropTypes.object.isRequired
   }
 
   onClick = (comic) => {

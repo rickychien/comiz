@@ -7,11 +7,11 @@ export default class FlatButton extends React.Component {
   static propTypes = {
     materialIcon: PropTypes.string,
     title: PropTypes.string,
-    onTap: PropTypes.func
+    onClick: PropTypes.func
   }
 
   onClick = () => {
-    this.props.onTap && this.props.onTap()
+    this.props.onClick && this.props.onClick()
   }
 
   render() {

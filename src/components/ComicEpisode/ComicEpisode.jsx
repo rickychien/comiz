@@ -5,12 +5,14 @@ import FlatButton from '../FlatButton'
 export default class ComicEpisode extends React.Component {
 
   static propTypes = {
+    comic: PropTypes.object.isRequired,
     episode: PropTypes.object.isRequired,
     onEpisodeClick: PropTypes.func
   }
 
-  onEpisodeClick = () => {
-    this.props.onEpisodeClick && this.props.onEpisodeClick(this.props.episode)
+  onClick = () => {
+    const { comic, episode, onEpisodeClick } = this.props
+    onEpisodeClick && onEpisodeClick(comic, episode)
   }
 
   render() {
@@ -18,7 +20,7 @@ export default class ComicEpisode extends React.Component {
     return (
       <FlatButton
         title={ this.props.episode.title }
-        onTap={ this.onEpisodeClick }
+        onClick={ this.onClick }
       />
     )
   }
