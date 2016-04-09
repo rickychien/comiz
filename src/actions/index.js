@@ -155,3 +155,12 @@ export function fetchComicEpisodesIfNeeded(comicId) {
     }
   }
 }
+
+// Toggle favorite
+
+export const toggleFavorite = (comicId) => {
+  return {
+    type: 'TOGGLE_FAVORITE',
+    comicId
+  }
+}

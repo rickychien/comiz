@@ -36,6 +36,11 @@ const comicItem = (state, action) => {
         isFetching: false,
         fetchError: action.error
       })
+    case 'TOGGLE_FAVORITE':
+      if (state.id !== action.comicId) {
+        return state
+      }
+      return Object.assign({}, state, { favorite: !state.favorite })
     default:
       return state
   }
@@ -72,6 +77,7 @@ const comic = (state = {
     case 'FETCH_COMIC_EPISODES_REQUEST':
     case 'FETCH_COMIC_EPISODES_SUCCESS':
     case 'FETCH_COMIC_EPISODES_FAILURE':
+    case 'TOGGLE_FAVORITE':
       return Object.assign({}, state, {
         comics: state.comics.map(comic => comicItem(comic, action))
       })

@@ -21,6 +21,7 @@ export default class ComicNavigation extends React.Component {
     comic: PropTypes.object.isRequired,
     episodes: PropTypes.array.isRequired,
     isFetching: PropTypes.bool,
+    favorite: PropTypes.bool,
     fetchError: PropTypes.object,
     onCloseClick: PropTypes.func,
     onFavoriteClick: PropTypes.func
@@ -44,6 +45,7 @@ export default class ComicNavigation extends React.Component {
               <div className={ styles.overview }>
                 <div className={ styles.about }>
                   <CheckItem
+                    checked={ this.props.favorite }
                     iconUncheck="star_border"
                     iconChecked="star"
                     title={ comic.title }
