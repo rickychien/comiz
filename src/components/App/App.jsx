@@ -3,9 +3,9 @@ import React from 'react'
 import AppBar from '../AppBar'
 import ComicViewer from '../ComicViewer'
 import FlatButton from '../FlatButton'
-import ComicNavigation from '../ComicNavigation'
 import CategorySelectField from '../../containers/CategorySelectField'
 import ComicContainer from '../../containers/ComicContainer'
+import ComicNavigationContainer from '../../containers/ComicNavigationContainer'
 import QuerySearchBar from '../../containers/QuerySearchBar'
 
 import styles from './App.css'
@@ -33,7 +33,7 @@ export default class App extends React.Component {
             </div>
           )
         }
-        <ComicNavigation />
+        <ComicNavigationContainer />
       </div>
     )
   }

@@ -14,11 +14,11 @@ export default class CheckItem extends React.Component {
     iconChecked: PropTypes.string.isRequired,
     title: PropTypes.string,
     subTitle: PropTypes.string,
-    onTap: PropTypes.func
+    onClick: PropTypes.func
   }
 
-  onClick = (event) => {
-    this.props.onTap && this.props.onTap()
+  onClick = () => {
+    this.props.onClick && this.props.onClick()
   }
 
   render() {

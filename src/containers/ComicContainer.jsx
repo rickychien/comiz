@@ -9,8 +9,7 @@ class ComicContainer extends React.Component {
 
   static propTypes = {
     filter: PropTypes.object.isRequired,
-    comics: PropTypes.array.isRequired,
-    dispatch: PropTypes.func.isRequired
+    comics: PropTypes.array.isRequired
   }
 
   componentDidMount() {

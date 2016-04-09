@@ -6,11 +6,11 @@ export default class ComicEpisode extends React.Component {
 
   static propTypes = {
     episode: PropTypes.object.isRequired,
-    onEpisodeTap: PropTypes.func
+    onEpisodeClick: PropTypes.func
   }
 
-  onEpisodeTap = () => {
-    this.props.onEpisodeTap && this.props.onEpisodeTap(this.props.episode)
+  onEpisodeClick = () => {
+    this.props.onEpisodeClick && this.props.onEpisodeClick(this.props.episode)
   }
 
   render() {
@@ -18,7 +18,7 @@ export default class ComicEpisode extends React.Component {
     return (
       <FlatButton
         title={ this.props.episode.title }
-        onTap={ this.onEpisodeTap }
+        onTap={ this.onEpisodeClick }
       />
     )
   }

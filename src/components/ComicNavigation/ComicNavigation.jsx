@@ -9,55 +9,34 @@ import styles from './ComicNavigation.css'
 export default class ComicNavigation extends React.Component {
 
   static defaultProps = {
-    open: false
+    open: false,
+    comic: {},
+    episodes: [],
+    isFetching: false,
+    fetchError: null
   }
 
   static propTypes = {
     open: PropTypes.bool,
-    comicId: PropTypes.number.isRequired,
-    onCloseTap: PropTypes.func.isRequired,
-    onFavoriteTap: PropTypes.func.isRequired,
-    onEpisodeTap: PropTypes.func.isRequired
-  }
-
-  state = {
-    comic: null,
-    episodes: [],
-    error: null
-  }
-
-  componentWillReceiveProps(nextProps) {
-    if (nextProps.open) {
-      this.updateOverview(nextProps.comicId)
-      this.updateEpisodes(nextProps.comicId)
-    }
-  }
-
-  updateOverview = (comicId) => {
-    fetch(`/api/comics/${comicId}`)
-      .then(res => res.ok ? res.json() : Promise.reject('error'))
-      .then(comic => this.setState({ comic, error: null }))
-      .catch(error => this.setState({ error }))
-  }
-
-  updateEpisodes = (comicId) => {
-    fetch(`/api/comics/${comicId}/episodes`)
-      .then(res => res.ok ? res.json() : Promise.reject('error'))
-      .then(episodes => this.setState({ episodes: episodes.reverse(), error: null }))
-      .catch(error => this.setState({ error }))
+    comic: PropTypes.object.isRequired,
+    episodes: PropTypes.array.isRequired,
+    isFetching: PropTypes.bool,
+    fetchError: PropTypes.object,
+    onCloseClick: PropTypes.func,
+    onFavoriteClick: PropTypes.func
   }
 
   render() {
-    let { comic, episodes, error } = this.state
+    let { open, comic, episodes, isFetching, fetchError } = this.props
 
     return (
-      <div className={ `${styles.comicNav} ${this.props.open && styles.open}` }>
+      <div className={ `${styles.comicNav} ${open && styles.open}` }>
         <AppBar
           materialIcon="close"
-          onLogoTap={ this.props.onCloseTap }
+          onLogoTap={ this.props.onCloseClick }
         />
         {
-          (comic && !error) ? (
+          (!isFetching && !fetchError) ? (
             <div>
               <div className={ styles.cover }>
                 <img className={ styles.img } src={ comic.coverUrl } />
@@ -69,7 +48,7 @@ export default class ComicNavigation extends React.Component {
                     iconChecked="star"
                     title={ comic.title }
                     subTitle={ comic.author }
-                    onTap={ this.props.onFavoriteTap }
+                    onClick={ this.props.onFavoriteClick }
                   />
                 </div>
                 <hr className={ styles.hr } />
@@ -83,8 +62,8 @@ export default class ComicNavigation extends React.Component {
                       episodes.map((episode) => (
                         <ComicEpisode
                           key={ episode.id }
+                          comic={ comic }
                           episode={ episode }
-                          onEpisodeTap={ this.props.onEpisodeTap }
                         />
                       ))
                     }
@@ -92,7 +71,7 @@ export default class ComicNavigation extends React.Component {
                 </div>
               </div>
             </div>
-          ) : (!error) ? (
+          ) : !fetchError ? (
             <div className={ styles.statusPage }>
               <div>
                 <i className="material-icons">access_time</i>

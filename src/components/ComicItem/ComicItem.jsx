@@ -6,11 +6,11 @@ export default class ComicItem extends React.Component {
 
   static propTypes = {
     comic: PropTypes.object.isRequired,
-    onComicTap: PropTypes.func
+    onClick: PropTypes.func
   }
 
   onClick = () => {
-    this.props.onComicTap && this.props.onComicTap(this.props.comic)
+    this.props.onClick && this.props.onClick(this.props.comic)
   }
 
   render() {
