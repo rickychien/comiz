@@ -1,13 +1,13 @@
 import { combineReducers } from 'redux'
 
 import comic from './comic'
-import comicNavigation from './comicNavigation'
+import comicDrawer from './comicDrawer'
 import comicViewer from './comicViewer'
 import filter from './filter'
 
 const rootReducer = combineReducers({
   comic,
-  comicNavigation,
+  comicDrawer,
   comicViewer,
   filter
 })

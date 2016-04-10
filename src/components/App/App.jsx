@@ -4,7 +4,7 @@ import AppBar from '../AppBar'
 import FlatButton from '../FlatButton'
 import CategorySelectField from '../../containers/CategorySelectField'
 import ComicListContainer from '../../containers/ComicListContainer'
-import ComicNavigationContainer from '../../containers/ComicNavigationContainer'
+import ComicDrawerContainer from '../../containers/ComicDrawerContainer'
 import ComicViewerContainer from '../../containers/ComicViewerContainer'
 import SearchBarContainer from '../../containers/SearchBarContainer'
 
@@ -20,7 +20,7 @@ export default class App extends React.Component {
     showComicList: PropTypes.bool,
     shrink: PropTypes.bool,
     onBackClick: PropTypes.func,
-    onComicNavigationClick: PropTypes.func
+    onComicDrawerClick: PropTypes.func
   }
 
   render() {
@@ -48,14 +48,14 @@ export default class App extends React.Component {
               >
                 <FlatButton
                   materialIcon="book"
-                  onClick={ this.props.onComicNavigationClick }
+                  onClick={ this.props.onComicDrawerClick }
                 />
               </AppBar>
               <ComicViewerContainer />
             </div>
           )
         }
-        <ComicNavigationContainer />
+        <ComicDrawerContainer />
       </div>
     )
   }

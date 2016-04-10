@@ -1,11 +1,11 @@
 import React, { PropTypes } from 'react'
 import { connect } from 'react-redux'
 
-import ComicNavigation from '../components/ComicNavigation'
+import ComicDrawer from '../components/ComicDrawer'
 
 import * as Actions from '../actions'
 
-class ComicNavigationContainer extends React.Component {
+class ComicDrawerContainer extends React.Component {
 
   static propTypes = {
     open: PropTypes.bool.isRequired,
@@ -25,7 +25,7 @@ class ComicNavigationContainer extends React.Component {
   }
 
   onCloseClick = () => {
-    this.props.dispatch(Actions.hideComicNavigation())
+    this.props.dispatch(Actions.hideComicDrawer())
   }
 
   onFavoriteClick = () => {
@@ -34,7 +34,7 @@ class ComicNavigationContainer extends React.Component {
 
   render() {
     return (
-      <ComicNavigation
+      <ComicDrawer
         open={ this.props.open }
         comic={ this.props.comic }
         episodes={ this.props.episodes }
@@ -50,8 +50,8 @@ class ComicNavigationContainer extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-  const open = state.comicNavigation.open
-  const navComicId = state.comicNavigation.comicId
+  const open = state.comicDrawer.open
+  const navComicId = state.comicDrawer.comicId
   const { comics, isFetching, fetchError } = state.comic
   const comic = comics.find(comic => comic.id === navComicId) || {}
   const episodes = comic.episodes || []
@@ -69,4 +69,4 @@ const mapStateToProps = (state) => {
 
 export default connect(
   mapStateToProps
-)(ComicNavigationContainer)
+)(ComicDrawerContainer)

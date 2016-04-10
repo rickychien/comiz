@@ -80,7 +80,7 @@ A playground
     }
   },
 
-  comicNavigation: {
+  comicDrawer: {
     open: false,
     comicId: 1
   },

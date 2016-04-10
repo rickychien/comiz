@@ -16,20 +16,20 @@ export const filterQuery = (query) => {
   }
 }
 
-// Show comic navigation
+// Show comic drawer
 
-export const showComicNavigation = (comicId) => {
+export const showComicDrawer = (comicId) => {
   return {
-    type: 'SHOW_COMIC_NAVIGATION',
+    type: 'SHOW_COMIC_DRAWER',
     comicId
   }
 }
 
-// Hide comic navigation
+// Hide comic drawer
 
-export const hideComicNavigation = () => {
+export const hideComicDrawer = () => {
   return {
-    type: 'HIDE_COMIC_NAVIGATION'
+    type: 'HIDE_COMIC_DRAWER'
   }
 }
 

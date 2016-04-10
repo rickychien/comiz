@@ -12,7 +12,7 @@ class ComicItemContainer extends React.Component {
   }
 
   onClick = (comic) => {
-    this.props.dispatch(Actions.showComicNavigation(comic.id))
+    this.props.dispatch(Actions.showComicDrawer(comic.id))
   }
 
   render() {

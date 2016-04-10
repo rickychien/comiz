@@ -8,7 +8,7 @@ import * as Actions from '../actions'
 const mapStateToProps = (state) => {
   return {
     showComicList: !state.comicViewer.open,
-    shrink: state.comicNavigation.open
+    shrink: state.comicDrawer.open
   }
 }
 
@@ -17,8 +17,8 @@ const mapDispatchToProps = (dispatch) => {
     onBackClick: () => {
       dispatch(Actions.hideComicViewer())
     },
-    onComicNavigationClick: () => {
-      dispatch(Actions.showComicNavigation())
+    onComicDrawerClick: () => {
+      dispatch(Actions.showComicDrawer())
     }
   }
 }

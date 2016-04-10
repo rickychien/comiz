@@ -4,9 +4,9 @@ import AppBar from '../AppBar'
 import CheckItem from '../CheckItem'
 import ComicEpisodeContainer from '../../containers/ComicEpisodeContainer'
 
-import styles from './ComicNavigation.css'
+import styles from './ComicDrawer.css'
 
-export default class ComicNavigation extends React.Component {
+export default class ComicDrawer extends React.Component {
 
   static defaultProps = {
     open: false,
@@ -31,7 +31,7 @@ export default class ComicNavigation extends React.Component {
     let { open, comic, episodes, isFetching, fetchError } = this.props
 
     return (
-      <div className={ `${styles.comicNav} ${open && styles.open}` }>
+      <div className={ `${styles.comicDrawer} ${open && styles.open}` }>
         <AppBar
           materialIcon="close"
           onLogoClick={ this.props.onCloseClick }
