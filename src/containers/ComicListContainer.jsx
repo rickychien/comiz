@@ -5,7 +5,7 @@ import ComicList from '../components/ComicList'
 
 import * as Actions from '../actions'
 
-class ComicContainer extends React.Component {
+class ComicListContainer extends React.Component {
 
   static propTypes = {
     filter: PropTypes.object.isRequired,
@@ -47,4 +47,4 @@ const mapStateToProps = (state) => {
 
 export default connect(
   mapStateToProps
-)(ComicContainer)
+)(ComicListContainer)

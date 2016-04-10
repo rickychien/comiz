@@ -3,9 +3,9 @@ import React, { PropTypes } from 'react'
 import AppBar from '../AppBar'
 import FlatButton from '../FlatButton'
 import CategorySelectField from '../../containers/CategorySelectField'
-import ComicContainer from '../../containers/ComicContainer'
-import ComicViewerContainer from '../../containers/ComicViewerContainer'
+import ComicListContainer from '../../containers/ComicListContainer'
 import ComicNavigationContainer from '../../containers/ComicNavigationContainer'
+import ComicViewerContainer from '../../containers/ComicViewerContainer'
 import SearchBarContainer from '../../containers/SearchBarContainer'
 
 import styles from './App.css'
@@ -32,7 +32,7 @@ export default class App extends React.Component {
                 <CategorySelectField />
                 <SearchBarContainer />
               </AppBar>
-              <ComicContainer />
+              <ComicListContainer />
             </div>
           ) : (
             <div>
