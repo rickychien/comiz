@@ -7,12 +7,15 @@ export default class AppBar extends React.Component {
   static propTypes = {
     materialIcon: PropTypes.string,
     title: PropTypes.string,
-    onLogoClick: PropTypes.func
+    onLogoClick: PropTypes.func,
+    transparent: PropTypes.bool,
+    children: PropTypes.node
   }
 
   render() {
     return (
-      <div className={ styles.appBar }>
+      <div className={ `${styles.appBar} ${
+          this.props.transparent && styles.appBarTransparent}` }>
         <div className={ styles.logo } onClick={ this.props.onLogoClick }>
           <div className={ styles.icon }>
             <i className="material-icons">

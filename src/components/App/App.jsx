@@ -39,6 +39,7 @@ export default class App extends React.Component {
               <AppBar
                 materialIcon="arrow_back"
                 onLogoClick={ this.props.onBackClick }
+                transparent={ true }
               >
                 <FlatButton
                   materialIcon="book"

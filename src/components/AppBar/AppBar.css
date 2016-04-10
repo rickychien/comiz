@@ -9,6 +9,10 @@
   padding: 0 6px;
 }
 
+.appBarTransparent {
+  background-color: rgba(20, 38, 56, 0)
+}
+
 .baseElement {
   padding: 6px 12px;
   border-radius: 3px;
@@ -30,7 +34,7 @@
 }
 
 .logo:hover {
-  color: #fcfcfc;
+  color: white;
 }
 
 .icon {
