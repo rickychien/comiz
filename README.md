@@ -31,8 +31,11 @@ A playground
 
 ## Application State Structure
 
+Note: This state structure haven't implemented yet
+
 ```js
 {
+  // Save in localStorage
   userPref: {
     favorites: [1, 3, 7],
     reads: [{ cid: 1, eid: 2 }, { cid: 2, eid: 3 }]
