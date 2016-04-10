@@ -1,3 +1,8 @@
+:root {
+  --comic-item-with: cal(var(--comic-item-height) * 0.75);
+  --comic-item-height: 200px;
+}
+
 .comic {
   position: relative;
   cursor: pointer;
@@ -6,8 +11,22 @@
 }
 
 .img {
-  width: 150px;
-  height: 200px;
+  width: var(--comic-item-with);
+  height: var(--comic-item-height);
+}
+
+@media screen and (max-width: 360px) {
+  .img {
+    width: cal(180px * 0.75);
+    height: 180px;
+  }
+}
+
+@media screen and (max-width: 320px) {
+  .img {
+    width: cal(160px * 0.75);
+    height: 160px;
+  }
 }
 
 .title {
