@@ -31,7 +31,7 @@ A playground
 
 ## Application State Structure
 
-Note: This state structure haven't implemented yet
+Note: This state structure hasn't been implemented yet see.  See issue #4
 
 ```js
 {
