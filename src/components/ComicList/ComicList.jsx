@@ -7,16 +7,21 @@ import styles from './ComicList.css'
 export default class ComicList extends React.Component {
 
   static defaultProps = {
-    comics: []
+    comics: [],
+    shrink: false
   }
 
   static propTypes = {
-    comics: PropTypes.array
+    comics: PropTypes.array,
+    shrink: PropTypes.bool
   }
 
   render() {
+    let comicListStyles = [styles.comicList]
+    this.props.shrink && comicListStyles.push(styles.comicListShrink)
+
     return (
-      <div className={ styles.comicList }>
+      <div className={ comicListStyles.join(' ') }>
         <div className={ styles.comicListInner }>
           {
             this.props.comics.map((comic) => (

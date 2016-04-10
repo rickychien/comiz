@@ -4,18 +4,27 @@ import styles from './AppBar.css'
 
 export default class AppBar extends React.Component {
 
+  static defaultProps = {
+    transparent: false,
+    shrink: false
+  }
+
   static propTypes = {
     materialIcon: PropTypes.string,
     title: PropTypes.string,
     onLogoClick: PropTypes.func,
     transparent: PropTypes.bool,
-    children: PropTypes.node
+    shrink: PropTypes.bool,
+    children: PropTypes.node,
   }
 
   render() {
+    let appBarStyles = [styles.appBar]
+    this.props.transparent && appBarStyles.push(styles.appBarTransparent)
+    this.props.shrink && appBarStyles.push(styles.appBarShrink)
+
     return (
-      <div className={ `${styles.appBar} ${
-          this.props.transparent && styles.appBarTransparent}` }>
+      <div className={ appBarStyles.join(' ') }>
         <div className={ styles.logo } onClick={ this.props.onLogoClick }>
           <div className={ styles.icon }>
             <i className="material-icons">

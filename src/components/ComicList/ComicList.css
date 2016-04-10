@@ -1,12 +1,19 @@
 .comicList {
   display: flex;
   justify-content: center;
+  width: 100%;
   padding: 60px auto 3px auto;
+}
+
+@media screen and (min-width: 500px) {
+  .comicListShrink {
+    width: calc(100% - var(--nav-width));
+  }
 }
 
 .comicListInner {
   display: flex;
-  justify-content: space-around;
+  justify-content: center;
   flex-wrap: wrap;
   padding: 60px 10px 10px 10px;
 }

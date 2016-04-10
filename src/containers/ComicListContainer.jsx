@@ -9,7 +9,8 @@ class ComicListContainer extends React.Component {
 
   static propTypes = {
     filter: PropTypes.object.isRequired,
-    comics: PropTypes.array.isRequired
+    comics: PropTypes.array.isRequired,
+    shrink: PropTypes.bool.isRequired
   }
 
   componentDidMount() {
@@ -39,7 +40,7 @@ class ComicListContainer extends React.Component {
 
   render() {
     return (
-      <ComicList comics={ this.filterComics() } />
+      <ComicList comics={ this.filterComics() } shrink={this.props.shrink} />
     )
   }
 

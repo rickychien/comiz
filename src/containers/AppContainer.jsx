@@ -7,7 +7,8 @@ import * as Actions from '../actions'
 
 const mapStateToProps = (state) => {
   return {
-    showComicList: !state.comicViewer.open
+    showComicList: !state.comicViewer.open,
+    shrink: state.comicNavigation.open
   }
 }
 

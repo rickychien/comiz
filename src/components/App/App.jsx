@@ -18,6 +18,7 @@ export default class App extends React.Component {
 
   static propTypes = {
     showComicList: PropTypes.bool,
+    shrink: PropTypes.bool,
     onBackClick: PropTypes.func,
     onComicNavigationClick: PropTypes.func
   }
@@ -28,11 +29,15 @@ export default class App extends React.Component {
         {
           this.props.showComicList ? (
             <div>
-              <AppBar title="Comiz" materialIcon="fingerprint">
+              <AppBar
+                title="Comiz"
+                materialIcon="fingerprint"
+                shrink={ this.props.shrink }
+              >
                 <CategorySelectField />
                 <SearchBarContainer />
               </AppBar>
-              <ComicListContainer />
+              <ComicListContainer shrink={ this.props.shrink } />
             </div>
           ) : (
             <div>
