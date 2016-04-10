@@ -14,7 +14,9 @@ class ComicListContainer extends React.Component {
   }
 
   componentDidMount() {
-    this.props.dispatch(Actions.fetchComicsIfNeeded())
+    if (!this.props.comics || this.props.comics.length === 0) {
+      this.props.dispatch(Actions.fetchComicsIfNeeded())
+    }
   }
 
   filterComics = () => {
