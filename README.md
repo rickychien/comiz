@@ -1,6 +1,6 @@
 # Comiz
 
-Comic land
+A playground
 
 ## Prerequisites
 
@@ -29,6 +29,74 @@ Comic land
 
 3. Open up <http://localhost:3990> in browser
 
+## Application State Structure
+
+```js
+{
+  userPref: {
+    favorites: [1, 3, 7],
+    reads: [{ cid: 1, eid: 2 }, { cid: 2, eid: 3 }]
+  },
+
+  comics: {
+    isFetching: false,
+    fetchError: false,
+    entries: {
+      1: {
+        id: 1,
+        title: 'title1'
+      },
+      2: {
+        id: 2,
+        title: 'title2'
+      }
+    }
+  },
+
+  episodes: {
+    comicId: 1,
+    isFetching: false,
+    fetchError: false,
+    entries: {
+      1: {
+        id: 1,
+        title: 'title1'
+      },
+      2: {
+        id: 2,
+        title: 'title2'
+      }
+    }
+  },
+
+  pages: {
+    comicId: 1,
+    episodeId: 2,
+    isFetching: false,
+    fetchError: false,
+    entries: {
+      1: 'http://path/to/page1',
+      2: 'http://path/to/page2'
+    }
+  },
+
+  comicNavigation: {
+    open: false,
+    comicId: 1
+  },
+
+  comicViewer: {
+    open: false,
+    comicId: 1,
+    episodeId: 1
+  },
+
+  filter: {
+    category: 'SHOW_LATEST',
+    query: 'user query string'
+  }
+}
+```
 
 [node]: https://nodejs.org/
 [npm]: https://www.npmjs.com/
