@@ -161,10 +161,10 @@ export function fetchComicEpisodesIfNeeded(comicId) {
 
 // Toggle favorite
 
-export const toggleFavorite = (comic) => {
+export const toggleFavorite = (comicId) => {
   return {
     type: 'TOGGLE_FAVORITE',
-    comic
+    comicId
   }
 }
 

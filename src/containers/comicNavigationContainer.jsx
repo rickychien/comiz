@@ -29,7 +29,7 @@ class ComicNavigationContainer extends React.Component {
   }
 
   onFavoriteClick = () => {
-    this.props.dispatch(Actions.toggleFavorite(this.props.comic))
+    this.props.dispatch(Actions.toggleFavorite(this.props.comic.id))
   }
 
   render() {
