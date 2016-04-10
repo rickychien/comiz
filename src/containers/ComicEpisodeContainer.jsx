@@ -9,6 +9,7 @@ const mapDispatchToProps = (dispatch) => {
   return {
     onEpisodeClick: (comic, episode) => {
       dispatch(Actions.showComicViewer(comic.id, episode.id))
+      dispatch(Actions.hideComicNavigation())
     }
   }
 }

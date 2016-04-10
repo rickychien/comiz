@@ -11,6 +11,18 @@ const mapStateToProps = (state) => {
   }
 }
 
+const mapDispatchToProps = (dispatch) => {
+  return {
+    onBackClick: () => {
+      dispatch(Actions.hideComicViewer())
+    },
+    onComicNavigationClick: () => {
+      dispatch(Actions.showComicNavigation())
+    }
+  }
+}
+
 export default connect(
-  mapStateToProps
+  mapStateToProps,
+  mapDispatchToProps
 )(App)

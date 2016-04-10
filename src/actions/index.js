@@ -178,6 +178,14 @@ export const showComicViewer = (comicId, episodeId) => {
   }
 }
 
+// Hide comic viewer
+
+export const hideComicViewer = () => {
+  return {
+    type: 'HIDE_COMIC_VIEWER'
+  }
+}
+
 // Fetch comic episode pages from server
 
 const fetchComicEpisodePagesRequest = (comicId, episodeId) => {

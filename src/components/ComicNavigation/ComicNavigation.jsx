@@ -34,7 +34,7 @@ export default class ComicNavigation extends React.Component {
       <div className={ `${styles.comicNav} ${open && styles.open}` }>
         <AppBar
           materialIcon="close"
-          onLogoTap={ this.props.onCloseClick }
+          onLogoClick={ this.props.onCloseClick }
         />
         {
           (!isFetching && !fetchError) ? (

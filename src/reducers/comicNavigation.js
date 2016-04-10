@@ -6,7 +6,7 @@ const comicNavigation = (state = {
     case 'SHOW_COMIC_NAVIGATION':
       return Object.assign({}, state, {
         open: true,
-        comicId: action.comicId
+        comicId: action.comicId || state.comicId
       })
     case 'HIDE_COMIC_NAVIGATION':
       return Object.assign({}, state, {

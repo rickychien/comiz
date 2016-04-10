@@ -17,7 +17,9 @@ export default class App extends React.Component {
   }
 
   static propTypes = {
-    showComicList: PropTypes.bool
+    showComicList: PropTypes.bool,
+    onBackClick: PropTypes.func,
+    onComicNavigationClick: PropTypes.func
   }
 
   render() {
@@ -34,8 +36,14 @@ export default class App extends React.Component {
             </div>
           ) : (
             <div>
-              <AppBar materialIcon="arrow_back">
-                <FlatButton materialIcon="book" />
+              <AppBar
+                materialIcon="arrow_back"
+                onLogoClick={ this.props.onBackClick }
+              >
+                <FlatButton
+                  materialIcon="book"
+                  onClick={ this.props.onComicNavigationClick }
+                />
               </AppBar>
               <ComicViewerContainer />
             </div>
