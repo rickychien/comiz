@@ -49,6 +49,7 @@ class ComicViewerContainer extends React.Component {
     const { dispatch, comics, comicId } = this.props
     const episode = this.getEpisodeByIndexOffset(-1)
     if (episode) {
+      dispatch(Actions.showComicViewer(comicId, episode.id))
       dispatch(Actions.fetchComicEpisodePagesIfNeeded(comicId, episode.id))
     }
   }
@@ -57,6 +58,7 @@ class ComicViewerContainer extends React.Component {
     const { dispatch, comics, comicId } = this.props
     const episode = this.getEpisodeByIndexOffset(+1)
     if (episode) {
+      dispatch(Actions.showComicViewer(comicId, episode.id))
       dispatch(Actions.fetchComicEpisodePagesIfNeeded(comicId, episode.id))
     }
   }
