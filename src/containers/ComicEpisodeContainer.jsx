@@ -5,6 +5,14 @@ import ComicEpisode from '../components/ComicEpisode'
 
 import * as Actions from '../actions'
 
+const mapStateToProps = (state, ownProps) => {
+  const { comicId, episodeId } = state.comicViewer
+  const { comic, episode } = ownProps
+  return {
+    highlight: comicId === comic.id && episodeId === episode.id
+  }
+}
+
 const mapDispatchToProps = (dispatch) => {
   return {
     onEpisodeClick: (comic, episode) => {
@@ -15,6 +23,6 @@ const mapDispatchToProps = (dispatch) => {
 }
 
 export default connect(
-  null,
+  mapStateToProps,
   mapDispatchToProps
 )(ComicEpisode)

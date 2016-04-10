@@ -18,7 +18,10 @@ export default class FlatButton extends React.Component {
     let { materialIcon, title } = this.props
 
     return (
-      <div className={ styles.flatButton } onClick={ this.onClick }>
+      <div
+        className={ `${styles.flatButton} ${this.props.styles}` }
+        onClick={ this.onClick }
+      >
         {
           materialIcon && (
             <i className="material-icons">
