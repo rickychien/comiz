@@ -6,6 +6,7 @@
 .img {
   margin: 15px 0;
   border-radius: 8px;
+  max-width: 100%;
 }
 
 @media screen and (max-width: 500px) {
