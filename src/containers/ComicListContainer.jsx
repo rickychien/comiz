@@ -27,7 +27,7 @@ class ComicListContainer extends React.Component {
 
     let reg
     try {
-      reg = new RegExp(filter.query || /.+/, 'i')
+      reg = new RegExp(filter.query || '.+', 'i')
     } catch (err) {
       return []
     }
