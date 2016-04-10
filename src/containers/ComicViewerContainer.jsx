@@ -9,12 +9,13 @@ class ComicViewerContainer extends React.Component {
 
   static propTypes = {
     comicId: PropTypes.number.isRequired,
-    episodeId: PropTypes.number.isRequired
+    episodeId: PropTypes.number.isRequired,
+    comics: PropTypes.array.isRequired
   }
 
   componentWillReceiveProps(nextProps) {
     const { dispatch, comicId, episodeId, comics } = nextProps
-    if (!this.getPages(comics, comicId, episodeId) &&
+    if (!this.getPagesByEpisodeId(comics, comicId, episodeId) &&
         (comicId !== this.props.comicId ||
         episodeId !== this.props.episodeId)) {
       dispatch(Actions.fetchComicEpisodePagesIfNeeded(comicId, episodeId))
@@ -26,28 +27,48 @@ class ComicViewerContainer extends React.Component {
     dispatch(Actions.fetchComicEpisodePagesIfNeeded(comicId, episodeId))
   }
 
-  getPages = (comics, comicId, episodeId) => {
-    const comic = comics.find(c => c.id === comicId) || {}
-    const episode = comic.episodes.find(e => e.id === episodeId) || {}
-    return episode.pages
+  getEpisodesByComicId = (comics, comicId) => {
+    const comic = comics.find(c => c.id === comicId)
+    return comic && comic.episodes
+  }
+
+  getPagesByEpisodeId = (comics, comicId, episodeId) => {
+    const episodes = this.getEpisodesByComicId(comics, comicId) || []
+    const episode = episodes.find(e => e.id === episodeId)
+    return episode && episode.pages
+  }
+
+  getEpisodeByIndexOffset = (offset) => {
+    const { comics, comicId, episodeId } = this.props
+    const episodes = this.getEpisodesByComicId(comics, comicId) || []
+    const episodeIndex = episodes.findIndex(e => e.id === episodeId)
+    return episodes[episodeIndex + offset]
   }
 
   onPrevEpisodeClick = () => {
-
+    const { dispatch, comics, comicId } = this.props
+    const episode = this.getEpisodeByIndexOffset(-1)
+    if (episode) {
+      dispatch(Actions.fetchComicEpisodePagesIfNeeded(comicId, episode.id))
+    }
   }
 
   onNextEpisodeClick = () => {
-
+    const { dispatch, comics, comicId } = this.props
+    const episode = this.getEpisodeByIndexOffset(+1)
+    if (episode) {
+      dispatch(Actions.fetchComicEpisodePagesIfNeeded(comicId, episode.id))
+    }
   }
 
   render() {
     const { comicId, episodeId, comics } = this.props
     return (
       <ComicViewer
-        pages={ this.getPages(comics, comicId, episodeId) }
-        prevEpisodeDisabled={ this.props.prevEpisodeDisabled }
+        pages={ this.getPagesByEpisodeId(comics, comicId, episodeId) }
+        prevEpisodeDisabled={ !this.getEpisodeByIndexOffset(-1) }
         onPrevEpisodeClick={ this.onPrevEpisodeClick }
-        nextEpisodeDisabled={ this.props.nextEpisodeDisabled }
+        nextEpisodeDisabled={ !this.getEpisodeByIndexOffset(+1) }
         onNextEpisodeClick={ this.onNextEpisodeClick }
       />
     )
