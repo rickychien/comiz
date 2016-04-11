@@ -42,12 +42,9 @@ A playground
 
 ## Application State Structure
 
-Note: This state structure hasn't been implemented yet see.  See issue #4
-
 ```js
 {
-  // Save in localStorage
-  userPref: {
+  userPrefs: {
     favorites: [1, 3, 7],
     reads: [{ cid: 1, eid: 2 }, { cid: 2, eid: 3 }]
   },
@@ -88,10 +85,10 @@ Note: This state structure hasn't been implemented yet see.  See issue #4
     episodeId: 2,
     isFetching: false,
     fetchError: false,
-    entries: {
-      1: 'http://path/to/page1',
-      2: 'http://path/to/page2'
-    }
+    entries: [
+      'http://path/to/page1',
+      'http://path/to/page2'
+    ]
   },
 
   comicDrawer: {
@@ -107,6 +104,10 @@ Note: This state structure hasn't been implemented yet see.  See issue #4
 
   filter: {
     category: 'SHOW_LATEST',
+    categories: {
+      SHOW_LATEST: 'Latest',
+      SHOW_FAVORITE: 'favorite'
+    },
     query: 'user query string'
   }
 }

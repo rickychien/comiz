@@ -2,38 +2,27 @@ import React, { PropTypes } from 'react'
 
 import styles from './FlatButton.css'
 
-export default class FlatButton extends React.Component {
+function FlatButton({ materialIcon, extraStyles, title, onClick }) {
+  let flatButtonStyles = [styles.flatButton]
+  extraStyles && flatButtonStyles.push(extraStyles)
 
-  static propTypes = {
-    materialIcon: PropTypes.string,
-    title: PropTypes.string,
-    onClick: PropTypes.func
-  }
-
-  onClick = () => {
-    this.props.onClick && this.props.onClick()
-  }
-
-  render() {
-    let { materialIcon, title } = this.props
-
-    return (
-      <div
-        className={ `${styles.flatButton} ${this.props.styles}` }
-        onClick={ this.onClick }
-      >
-        {
-          materialIcon && (
-            <i className="material-icons">
-              { materialIcon }
-            </i>
-          )
-        }
-        {
-          title && <span>{ title }</span>
-        }
-      </div>
-    )
-  }
-
+  return (
+    <div className={ flatButtonStyles.join(' ') } onClick={ onClick }>
+      {
+        materialIcon && <i className="material-icons">{ materialIcon }</i>
+      }
+      {
+        title && <span>{ title }</span>
+      }
+    </div>
+  )
 }
+
+FlatButton.propTypes = {
+  materialIcon: PropTypes.string,
+  extraStyles: PropTypes.string,
+  title: PropTypes.string,
+  onClick: PropTypes.func
+}
+
+export default FlatButton

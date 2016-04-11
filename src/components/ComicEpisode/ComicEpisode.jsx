@@ -1,36 +1,32 @@
 import React, { PropTypes } from 'react'
 
-import FlatButton from '../FlatButton'
+import { FlatButton } from '../FlatButton'
 
 import styles from './ComicEpisode.css'
 
-export default class ComicEpisode extends React.Component {
-
-  static defaultProps = {
-    highlight: false
+function ComicEpisode({ comic, episode, highlight, onEpisodeClick }) {
+  function onClick() {
+    onEpisodeClick && onEpisodeClick(comic.id, episode.id)
   }
 
-  static propTypes = {
-    comic: PropTypes.object.isRequired,
-    episode: PropTypes.object.isRequired,
-    highlight: PropTypes.bool,
-    onEpisodeClick: PropTypes.func
-  }
-
-  onClick = () => {
-    const { comic, episode, onEpisodeClick } = this.props
-    onEpisodeClick && onEpisodeClick(comic, episode)
-  }
-
-  render() {
-
-    return (
-      <FlatButton
-        title={ this.props.episode.title }
-        onClick={ this.onClick }
-        styles={ this.props.highlight && styles.highlight }
-      />
-    )
-  }
-
+  return (
+    <FlatButton
+      title={ episode.title }
+      extraStyles={ highlight ? styles.highlight : '' }
+      onClick={ onClick }
+    />
+  )
 }
+
+ComicEpisode.defaultProps = {
+  highlight: false
+}
+
+ComicEpisode.propTypes = {
+  comic: PropTypes.object.isRequired,
+  episode: PropTypes.object.isRequired,
+  highlight: PropTypes.bool,
+  onEpisodeClick: PropTypes.func
+}
+
+export default ComicEpisode
