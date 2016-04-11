@@ -29,6 +29,17 @@ A playground
 
 3. Open up <http://localhost:3990> in browser
 
+### Build static resources
+
+* Package all static resources into ./static/*
+  ```
+  npm run build
+  ```
+* Clean static resources
+  ```
+  npm run clean
+  ```
+
 ## Application State Structure
 
 Note: This state structure hasn't been implemented yet see.  See issue #4
