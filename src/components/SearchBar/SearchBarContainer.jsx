@@ -13,8 +13,8 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    onChange(query) {
-      dispatch(Actions.filterQuery(query))
+    onChange(evt) {
+      dispatch(Actions.filterQuery(evt.target.value))
     }
   }
 }
