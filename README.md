@@ -29,14 +29,22 @@ A playground
 
 3. Open up <http://localhost:3990> in browser
 
-## Application State Structure
+### Build static resources
 
-Note: This state structure hasn't been implemented yet see.  See issue #4
+* Package all static resources into ./static/*
+  ```
+  npm run build
+  ```
+* Clean static resources
+  ```
+  npm run clean
+  ```
+
+## Application State Structure
 
 ```js
 {
-  // Save in localStorage
-  userPref: {
+  userPrefs: {
     favorites: [1, 3, 7],
     reads: [{ cid: 1, eid: 2 }, { cid: 2, eid: 3 }]
   },
@@ -77,10 +85,10 @@ Note: This state structure hasn't been implemented yet see.  See issue #4
     episodeId: 2,
     isFetching: false,
     fetchError: false,
-    entries: {
-      1: 'http://path/to/page1',
-      2: 'http://path/to/page2'
-    }
+    entries: [
+      'http://path/to/page1',
+      'http://path/to/page2'
+    ]
   },
 
   comicDrawer: {
@@ -96,6 +104,10 @@ Note: This state structure hasn't been implemented yet see.  See issue #4
 
   filter: {
     category: 'SHOW_LATEST',
+    categories: {
+      SHOW_LATEST: 'Latest',
+      SHOW_FAVORITE: 'favorite'
+    },
     query: 'user query string'
   }
 }

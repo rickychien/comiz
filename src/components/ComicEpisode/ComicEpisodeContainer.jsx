@@ -1,11 +1,11 @@
 import React, { PropTypes } from 'react'
 import { connect } from 'react-redux'
 
-import ComicEpisode from '../components/ComicEpisode'
+import ComicEpisode from './ComicEpisode'
 
-import * as Actions from '../actions'
+import * as Actions from '../../actions'
 
-const mapStateToProps = (state, ownProps) => {
+function mapStateToProps(state, ownProps) {
   const { comicId, episodeId } = state.comicViewer
   const { comic, episode } = ownProps
   return {
@@ -13,10 +13,10 @@ const mapStateToProps = (state, ownProps) => {
   }
 }
 
-const mapDispatchToProps = (dispatch) => {
+function mapDispatchToProps(dispatch) {
   return {
-    onEpisodeClick: (comic, episode) => {
-      dispatch(Actions.showComicViewer(comic.id, episode.id))
+    onEpisodeClick(comicId, episodeId) {
+      dispatch(Actions.showComicViewer(comicId, episodeId))
       dispatch(Actions.hideComicDrawer())
     }
   }

@@ -1,26 +1,18 @@
 import React, { PropTypes } from 'react'
 import { connect } from 'react-redux'
 
-import ComicDrawer from '../components/ComicDrawer'
+import ComicDrawer from './ComicDrawer'
 
-import * as Actions from '../actions'
+import * as Actions from '../../actions'
 
 class ComicDrawerContainer extends React.Component {
 
-  static propTypes = {
-    open: PropTypes.bool.isRequired,
-    comic: PropTypes.object.isRequired,
-    episodes: PropTypes.array.isRequired,
-    favorite: PropTypes.bool.isRequired,
-    isFetching: PropTypes.bool.isRequired,
-    fetchError: PropTypes.object
-  }
-
   componentWillReceiveProps(nextProps) {
-    if (nextProps.comic.id !== this.props.comic.id) {
+    if (nextProps.comic.id !== this.props.comic.id ||
+        nextProps.open !== this.props.open) {
       const { dispatch, comic } = nextProps
-      dispatch(Actions.fetchComicItemIfNeeded(comic.id))
-      dispatch(Actions.fetchComicEpisodesIfNeeded(comic.id))
+      dispatch(Actions.fetchComic(comic.id))
+      dispatch(Actions.fetchEpisodes(comic.id))
     }
   }
 
@@ -49,21 +41,20 @@ class ComicDrawerContainer extends React.Component {
 
 }
 
-const mapStateToProps = (state) => {
-  const open = state.comicDrawer.open
-  const navComicId = state.comicDrawer.comicId
-  const { comics, isFetching, fetchError } = state.comic
-  const comic = comics.find(comic => comic.id === navComicId) || {}
-  const episodes = comic.episodes || []
-  const favorite = comic.favorite || false
+function mapStateToProps(state) {
+  const { open, comicId } = state.comicDrawer
+  const { isFetching, fetchError } = state.comics
+  const comic = state.comics.entries[comicId] || {}
+  let episodes = state.episodes.entries
+  episodes = Object.keys(episodes).map(key => episodes[key])
 
   return {
     open,
+    isFetching,
+    fetchError,
     comic,
     episodes,
-    favorite,
-    isFetching,
-    fetchError
+    favorite: state.userPrefs.favorites.indexOf(comicId) > 0
   }
 }
 

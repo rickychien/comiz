@@ -1,15 +1,19 @@
 import { combineReducers } from 'redux'
 
-import comic from './comic'
+import comics from './comics'
+import episodes from './episodes'
+import pages from './pages'
 import comicDrawer from './comicDrawer'
 import comicViewer from './comicViewer'
 import filter from './filter'
+import userPrefs from './userPrefs'
 
-const rootReducer = combineReducers({
-  comic,
+export default combineReducers({
+  comics,
+  episodes,
+  pages,
   comicDrawer,
   comicViewer,
-  filter
+  filter,
+  userPrefs
 })
-
-export default rootReducer

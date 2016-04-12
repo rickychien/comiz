@@ -1,1 +1,4 @@
-export default from './ComicDrawer'
+import ComicDrawer from './ComicDrawer'
+import ComicDrawerContainer from './ComicDrawerContainer'
+
+export { ComicDrawer, ComicDrawerContainer }

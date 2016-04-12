@@ -3,6 +3,7 @@ const webpack = require('webpack')
 module.exports = {
   entry: {
     bundle: [
+      'babel-polyfill',
       './src/index.jsx',
       'webpack-hot-middleware/client'
     ]

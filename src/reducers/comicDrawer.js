@@ -1,20 +1,16 @@
-const comicDrawer = (state = {
+const initialState = {
   open: false,
-  comicId: null
-}, action) => {
+  comicId: 0
+}
+
+export default function (state = initialState, action) {
   switch (action.type) {
     case 'SHOW_COMIC_DRAWER':
-      return Object.assign({}, state, {
-        open: true,
-        comicId: action.comicId || state.comicId
-      })
+      const comicId = action.comicId || state.comicId || initialState.comicId
+      return { ...state, open: true, comicId }
     case 'HIDE_COMIC_DRAWER':
-      return Object.assign({}, state, {
-        open: false
-      })
+      return { ...state, open: false }
     default:
       return state
   }
 }
-
-export default comicDrawer

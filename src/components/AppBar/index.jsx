@@ -1,1 +1,2 @@
-export default from './AppBar.jsx'
+import AppBar from './AppBar'
+export { AppBar }

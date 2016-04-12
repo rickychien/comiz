@@ -1,19 +1,19 @@
-const filter = (state = {
+const initialState = {
   category: 'SHOW_LATEST',
+  categories: {
+    SHOW_LATEST: 'Latest',
+    SHOW_FAVORITE: 'Favorite'
+  },
   query: ''
-}, action) => {
+}
+
+export default function(state = initialState, action) {
   switch (action.type) {
     case 'FILTER_CATEGORY':
-      return Object.assign({}, state, {
-        category: action.category
-      })
+      return { ...state, category: action.category }
     case 'FILTER_QUERY':
-      return Object.assign({}, state, {
-        query: action.query
-      })
+      return { ...state, query: action.query }
     default:
       return state
   }
 }
-
-export default filter
