@@ -22,7 +22,7 @@
   }
 }
 
-@media screen and (max-width: 320px) {
+@media screen and (max-width: 330px) {
   .img {
     width: cal(160px * 0.75);
     height: 160px;

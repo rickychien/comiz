@@ -16,8 +16,7 @@ class ComicViewerContainer extends React.Component {
 
   componentWillReceiveProps(nextProps) {
     const { dispatch, comicId, episodeId } = nextProps
-    if (comicId !== this.props.comicId ||
-        episodeId !== this.props.episodeId) {
+    if (comicId !== this.props.comicId || episodeId !== this.props.episodeId) {
       dispatch(Actions.fetchPages(comicId, episodeId))
       dispatch(Actions.markRead(comicId, episodeId))
     }
