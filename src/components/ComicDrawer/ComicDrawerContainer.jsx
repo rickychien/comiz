@@ -9,7 +9,7 @@ class ComicDrawerContainer extends React.Component {
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.comic.id !== this.props.comic.id ||
-        nextProps.open !== this.props.open) {
+        (nextProps.open && !this.props.open)) {
       const { dispatch, comic } = nextProps
       dispatch(Actions.fetchComic(comic.id))
       dispatch(Actions.fetchEpisodes(comic.id))
