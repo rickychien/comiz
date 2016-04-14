@@ -3,5 +3,6 @@
 }
 
 .markRead {
-  background-color: rgba(179, 186, 191, 0.63);
+  color: rgba(159, 159, 159, 1);
+  background-color: rgba(210, 218, 224, 0.63);
 }
