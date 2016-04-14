@@ -54,7 +54,7 @@ function mapStateToProps(state) {
     fetchError,
     comic,
     episodes,
-    favorite: state.userPrefs.favorites.indexOf(comicId) > 0
+    favorite: state.userPrefs.favorites.indexOf(comicId) !== -1
   }
 }
 

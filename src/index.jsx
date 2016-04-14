@@ -6,7 +6,24 @@ import configureStore from './store'
 
 import './index.css'
 
-const store = configureStore()
+function getStoreUserPrefs(key) {
+  let result
+  try {
+    result = JSON.parse(localStorage[key])
+  } catch (err) {
+    result = []
+  }
+  return result
+}
+
+const initialState = {
+  userPrefs: {
+    favorites: getStoreUserPrefs('userPrefs.favorites'),
+    reads: getStoreUserPrefs('userPrefs.reads')
+  }
+}
+
+const store = configureStore(initialState)
 
 render(
   <Provider store={store}>

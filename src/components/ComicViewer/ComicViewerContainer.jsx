@@ -35,7 +35,6 @@ class ComicViewerContainer extends React.Component {
     if (episode) {
       dispatch(Actions.showComicViewer(comicId, episode.id))
       dispatch(Actions.fetchPages(comicId, episode.id))
-      dispatch(Actions.markRead(comicId, episodeId))
     }
   }
 
