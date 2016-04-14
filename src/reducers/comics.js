@@ -19,11 +19,14 @@ export default function(state = initialState, action) {
         fetchError: null
       })
     case 'FETCH_COMICS_SUCCESS':
-    case 'FETCH_COMIC_SUCCESS':
-      const comics = action.comics || [action.comic]
       return Object.assign({}, state, {
         isFetching: false,
-        entries: mergeEntries(state.entries, comics)
+        entries: mergeEntries({}, action.comics)
+      })
+    case 'FETCH_COMIC_SUCCESS':
+      return Object.assign({}, state, {
+        isFetching: false,
+        entries: mergeEntries(state.entries, [action.comic])
       })
     case 'FETCH_COMICS_FAILURE':
     case 'FETCH_COMIC_FAILURE':

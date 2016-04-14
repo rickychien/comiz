@@ -22,7 +22,7 @@ export default function(state = initialState, action) {
     case 'FETCH_EPISODES_SUCCESS':
       return Object.assign({}, state, {
         isFetching: false,
-        entries: mergeEntries(state.entries, action.episodes),
+        entries: mergeEntries({}, action.episodes),
         comicId: action.comicId
       })
     case 'FETCH_EPISODES_FAILURE':
