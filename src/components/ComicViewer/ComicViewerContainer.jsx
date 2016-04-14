@@ -19,12 +19,14 @@ class ComicViewerContainer extends React.Component {
     if (comicId !== this.props.comicId ||
         episodeId !== this.props.episodeId) {
       dispatch(Actions.fetchPages(comicId, episodeId))
+      dispatch(Actions.markRead(comicId, episodeId))
     }
   }
 
   componentDidMount() {
     const { dispatch, comicId, episodeId } = this.props
     dispatch(Actions.fetchPages(comicId, episodeId))
+    dispatch(Actions.markRead(comicId, episodeId))
   }
 
   goNextEpisodeByOffset = (offset) => {
@@ -33,6 +35,7 @@ class ComicViewerContainer extends React.Component {
     if (episode) {
       dispatch(Actions.showComicViewer(comicId, episode.id))
       dispatch(Actions.fetchPages(comicId, episode.id))
+      dispatch(Actions.markRead(comicId, episodeId))
     }
   }
 

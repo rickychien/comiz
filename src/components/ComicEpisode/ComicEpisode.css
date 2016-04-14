@@ -1,3 +1,7 @@
 .highlight {
   background-color: rgba(98, 167, 236, 0.75);
 }
+
+.markRead {
+  background-color: rgba(179, 186, 191, 0.63);
+}

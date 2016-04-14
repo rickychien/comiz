@@ -153,6 +153,26 @@ export function toggleFavorite(comicId) {
   }
 }
 
+// Mark read
+
+export function markRead(comicId, episodeId) {
+  return {
+    type: 'MARK_READ',
+    comicId,
+    episodeId
+  }
+}
+
+// Unmark read
+
+export function unmarkRead(comicId, episodeId) {
+  return {
+    type: 'UNMARK_READ',
+    comicId,
+    episodeId
+  }
+}
+
 // Show comic viewer
 
 export function showComicViewer(comicId, episodeId) {
