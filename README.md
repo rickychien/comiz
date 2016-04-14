@@ -46,7 +46,16 @@ A playground
 {
   userPrefs: {
     favorites: [1, 3, 7],
-    reads: [{ cid: 1, eid: 2 }, { cid: 2, eid: 3 }]
+    reads: [
+      {
+        comicId: 1,
+        episodeId: 1
+      },
+      {
+        comicId: 1,
+        episodeId: 2
+      }
+    ]
   },
 
   comics: {
