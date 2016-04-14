@@ -10,21 +10,30 @@ function toggleFavorite(favorites, comicId) {
   } else {
     favorites.splice(idx, 1)
   }
-  return [...favorites.sort()]
+  localStorage.setItem('userPrefs.favorites', JSON.stringify(favorites.sort()))
+  return [...favorites]
 }
 
 function markRead(reads, comicId, episodeId) {
   const found = reads.find(read => (
     read.comicId === comicId && read.episodeId === episodeId
   ))
-  return found ? reads : [...reads.push({ comicId, episodeId })]
+  if (!found) {
+    reads.push({ comicId, episodeId })
+    localStorage.setItem('userPrefs.reads', JSON.stringify(reads))
+  }
+  return [...reads]
 }
 
 function unmarkRead(reads, comicId, episodeId) {
   const index = reads.findIndex(read => (
     read.comicId === comicId && read.episodeId === episodeId
   ))
-  return index > 0 ? [...reads.splice(index, 1)] : reads
+  if (index > 0) {
+    reads.splice(index, 1)
+    localStorage.setItem('userPrefs.reads', JSON.stringify(reads))
+  }
+  return [...reads]
 }
 
 export default function (state = initialState, action) {
