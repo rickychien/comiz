@@ -105,6 +105,11 @@ A playground
     comicId: 1
   },
 
+  comicList: {
+    offset: 0,
+    comicsPerPage: 35
+  },
+
   comicViewer: {
     open: false,
     comicId: 1,
