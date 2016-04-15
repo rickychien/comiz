@@ -49,6 +49,7 @@ class ComicListContainer extends React.Component {
   onNextPageClick = () => {
     const { dispatch, offset, comicsPerPage } = this.props
     dispatch(Actions.updateComicList(offset + comicsPerPage, comicsPerPage))
+    window.scrollTo(0, 0)
   }
 
   render() {
