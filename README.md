@@ -29,6 +29,8 @@ A playground
 
 3. Open up <http://localhost:3990> in browser
 
+NOTE: Comiz fetches a fake self hosted data by default unless you could set ```const DEVELOPMENT = false``` in src/actions/index.js line 1.
+
 ### Build static resources
 
 * Package all static resources into ./static/*

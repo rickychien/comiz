@@ -1,3 +1,6 @@
+const DEVELOPMENT = true
+const SERVER_URL = DEVELOPMENT ? '': 'https://atecomic.wcpan.me'
+
 // Filter comics by category
 
 export function filterCategory(category) {
@@ -60,7 +63,7 @@ export function fetchComics() {
     if (!getState().comics.isFetching) {
       return dispatch(dispatch => {
         dispatch(fetchComicsRequest())
-        return fetch(`/api/v1/updates`)
+        return fetch(SERVER_URL + `/api/v1/updates`)
           .then(res => res.json())
           .then(json => dispatch(fetchComicsSuccess(json)))
           .catch(err => dispatch(fetchComicsFailure(err)))
@@ -106,7 +109,7 @@ export function fetchComic(comicId) {
     if (!getState().comics.isFetching) {
       return dispatch(dispatch => {
         dispatch(fetchComicRequest())
-        return fetch(`/api/v1/comics/${comicId}`)
+        return fetch(SERVER_URL + `/api/v1/comics/${comicId}`)
           .then(res => res.json())
           .then(json => dispatch(fetchComicSuccess(json)))
           .catch(err => dispatch(fetchComicFailure(err)))
@@ -145,7 +148,7 @@ export function fetchEpisodes(comicId) {
     if (!getState().episodes.isFetching) {
       return dispatch(dispatch => {
         dispatch(fetchEpisodesRequest(comicId))
-        return fetch(`/api/v1/comics/${comicId}/episodes`)
+        return fetch(SERVER_URL + `/api/v1/comics/${comicId}/episodes`)
           .then(res => res.json())
           .then(json => dispatch(fetchEpisodesSuccess(comicId, json)))
           .catch(err => dispatch(fetchEpisodesFailure(comicId, err)))
@@ -234,7 +237,8 @@ export function fetchPages(comicId, episodeId) {
     if (!getState().pages.isFetching) {
       return dispatch(dispatch => {
         dispatch(fetchPagesRequest(comicId, episodeId))
-        return fetch(`/api/v1/comics/${comicId}/episodes/${episodeId}/pages`)
+        return fetch(SERVER_URL +
+          `/api/v1/comics/${comicId}/episodes/${episodeId}/pages`)
           .then(res => res.json())
           .then(json => dispatch(fetchPagesSuccess(comicId, episodeId, json)))
           .catch(err => dispatch(fetchPagesFailure(comicId, episodeId, err)))
