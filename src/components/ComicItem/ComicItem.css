@@ -1,5 +1,5 @@
 :root {
-  --comic-item-with: cal(var(--comic-item-height) * 0.75);
+  --comic-item-with: 150px;
   --comic-item-height: 200px;
 }
 
