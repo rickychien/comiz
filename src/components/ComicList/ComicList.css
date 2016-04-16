@@ -1,12 +1,16 @@
+.container {
+  width: 100%;
+}
+
 .comicList {
   display: flex;
   justify-content: center;
   width: 100%;
-  padding: 60px auto 3px auto;
+  padding: 60px auto 10px auto;
 }
 
 @media screen and (min-width: 500px) {
-  .comicListShrink {
+  .containerShrink {
     width: calc(100% - var(--nav-width));
   }
 }
@@ -16,4 +20,35 @@
   justify-content: center;
   flex-wrap: wrap;
   padding: 60px 10px 10px 10px;
+}
+
+.pagination {
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  position: relative;
+  margin: 0 auto;
+  width: 100%;
+  height: 20px;
+  background-color: rgba(#112233, 0.24);
+}
+
+.prevPage {
+  composes: pagination;
+  top: 55px;
+}
+
+.nextPage {
+  composes: pagination;
+  bottom: 15px;
+}
+
+.expand {
+  font-size: 35px;
+  color: rgba(50, 74, 139, 0.88);
+}
+
+.pagination:hover .expand {
+  color: #bdc5da;
 }

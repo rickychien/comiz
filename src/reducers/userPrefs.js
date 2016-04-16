@@ -32,7 +32,7 @@ function unmarkRead(reads, comicId, episodeId) {
   return [...reads]
 }
 
-export default function (state = initialState, action) {
+export default function(state = initialState, action) {
   switch (action.type) {
     case 'TOGGLE_FAVORITE':
       return {

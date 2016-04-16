@@ -69,6 +69,16 @@ export function fetchComics() {
   }
 }
 
+// Update comic list for pagination
+
+export function updateComicList(offset, comicsPerPage) {
+  return {
+    type: 'UPDATE_COMIC_LIST',
+    offset,
+    comicsPerPage
+  }
+}
+
 // Fetch single comic item from server
 
 function fetchComicRequest() {
