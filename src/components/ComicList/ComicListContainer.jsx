@@ -32,12 +32,13 @@ class ComicListContainer extends React.Component {
         comics = Object.keys(comics).map(key => comics[key])
         break
       case 'SHOW_FAVORITE':
-        comics = favorites.map(comicId => comics[comicId])
+        comics = favorites
+          .map(comicId => comics[comicId])
+          .filter(comic => comic)
         break
     }
 
-    return comics
-      .filter(comic => reg.test(comic.title))
+    return comics.filter(comic => reg.test(comic.title))
   }
 
   onPrevPageClick = () => {
