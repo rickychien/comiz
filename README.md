@@ -1,5 +1,7 @@
 # Comiz
 
+[![Build Status](https://img.shields.io/travis/rickychien/comiz/master.svg?style=flat-square)](https://travis-ci.org/rickychien/comiz)
+
 A playground
 
 ## Prerequisites
