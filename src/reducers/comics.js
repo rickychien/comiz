@@ -1,38 +1,38 @@
 const initialState = {
   isFetching: false,
   fetchError: null,
-  entries: {}
+  entries: {},
 }
 
 function mergeEntries(object, array) {
-  return array.reduce((prev, curr) => {
-    return Object.assign(prev, { [curr.id]: curr })
-  }, Object.assign({}, object))
+  return array.reduce((prev, curr) => (
+    Object.assign(prev, { [curr.id]: curr })
+  ), Object.assign({}, object))
 }
 
-export default function(state = initialState, action) {
+export default function (state = initialState, action) {
   switch (action.type) {
     case 'FETCH_COMICS_REQUEST':
     case 'FETCH_COMIC_REQUEST':
       return Object.assign({}, state, {
         isFetching: true,
-        fetchError: null
+        fetchError: null,
       })
     case 'FETCH_COMICS_SUCCESS':
       return Object.assign({}, state, {
         isFetching: false,
-        entries: mergeEntries({}, action.comics)
+        entries: mergeEntries({}, action.comics),
       })
     case 'FETCH_COMIC_SUCCESS':
       return Object.assign({}, state, {
         isFetching: false,
-        entries: mergeEntries(state.entries, [action.comic])
+        entries: mergeEntries(state.entries, [action.comic]),
       })
     case 'FETCH_COMICS_FAILURE':
     case 'FETCH_COMIC_FAILURE':
       return Object.assign({}, state, {
         isFetching: false,
-        fetchError: action.error
+        fetchError: action.error,
       })
     default:
       return state

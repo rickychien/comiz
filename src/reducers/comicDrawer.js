@@ -1,9 +1,9 @@
 const initialState = {
   open: false,
-  comicId: 0
+  comicId: 0,
 }
 
-export default function(state = initialState, action) {
+export default function (state = initialState, action) {
   switch (action.type) {
     case 'SHOW_COMIC_DRAWER':
       const comicId = action.comicId || state.comicId || initialState.comicId

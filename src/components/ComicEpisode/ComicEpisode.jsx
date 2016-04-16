@@ -6,12 +6,13 @@ import styles from './ComicEpisode.css'
 
 function ComicEpisode({ comic, episode, highlight, markRead, onEpisodeClick }) {
   function onClick() {
-    onEpisodeClick && onEpisodeClick(comic.id, episode.id)
+    if (onEpisodeClick) {
+      onEpisodeClick(comic.id, episode.id)
+    }
   }
 
-  const extraStyles =
-    highlight ? styles.highlight :
-    markRead ? styles.markRead : null
+  let extraStyles = highlight ? styles.highlight : null
+  extraStyles = extraStyles || (markRead && styles.markRead)
 
   return (
     <FlatButton
@@ -23,7 +24,7 @@ function ComicEpisode({ comic, episode, highlight, markRead, onEpisodeClick }) {
 }
 
 ComicEpisode.defaultProps = {
-  highlight: false
+  highlight: false,
 }
 
 ComicEpisode.propTypes = {
@@ -31,7 +32,7 @@ ComicEpisode.propTypes = {
   episode: PropTypes.object.isRequired,
   highlight: PropTypes.bool,
   markRead: PropTypes.bool,
-  onEpisodeClick: PropTypes.func
+  onEpisodeClick: PropTypes.func,
 }
 
 export default ComicEpisode

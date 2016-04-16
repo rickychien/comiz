@@ -9,58 +9,71 @@ function ComicViewer({
   prevEpisodeDisabled,
   nextEpisodeDisabled,
   onPrevEpisodeClick,
-  onNextEpisodeClick
+  onNextEpisodeClick,
 }) {
   return (
     <div className={ styles.comicViewer }>
       {
-        (!isFetching && !fetchError) ? (
-          <div>
-            {
-              pages.map((page, i) => (
-                <img key={ i } className={ styles.img } src={ page } />
-              ))
-            }
-            {
-              !prevEpisodeDisabled && (
-                <div
-                  className={ styles.prevEpisode }
-                  onClick={ onPrevEpisodeClick }
-                >
-                  <i className={ `material-icons ${styles.chevron}` }>
-                    chevron_left
-                  </i>
+        (() => {
+          if (isFetching) {
+            return (
+              <div className={ styles.statusPage }>
+                <div>
+                  <i className="material-icons">access_time</i>
+                  <h2>Loading...</h2>
                 </div>
-              )
-            }
-            {
-              !nextEpisodeDisabled && (
-                <div
-                  className={ styles.nextEpisode }
-                  onClick={ onNextEpisodeClick }
-                >
-                  <i className={ `material-icons ${styles.chevron}` }>
-                    chevron_right
-                  </i>
+              </div>
+            )
+          } else if (fetchError) {
+            return (
+              <div className={ styles.statusPage }>
+                <div>
+                  <i className="material-icons">sentiment_very_dissatisfied</i>
+                  <h2>Unable to find comic</h2>
                 </div>
-              )
-            }
-          </div>
-        ) : isFetching ? (
-          <div className={ styles.statusPage }>
+              </div>
+            )
+          }
+
+          return (
             <div>
-              <i className="material-icons">access_time</i>
-              <h2>Loading...</h2>
+              {
+                pages.map((page, i) => (
+                  <img
+                    key={ i }
+                    className={ styles.img }
+                    src={ page }
+                    alt={ `page ${i}` }
+                  />
+                ))
+              }
+              {
+                !prevEpisodeDisabled && (
+                  <div
+                    className={ styles.prevEpisode }
+                    onClick={ onPrevEpisodeClick }
+                  >
+                    <i className={ `material-icons ${styles.chevron}` }>
+                      chevron_left
+                    </i>
+                  </div>
+                )
+              }
+              {
+                !nextEpisodeDisabled && (
+                  <div
+                    className={ styles.nextEpisode }
+                    onClick={ onNextEpisodeClick }
+                  >
+                    <i className={ `material-icons ${styles.chevron}` }>
+                      chevron_right
+                    </i>
+                  </div>
+                )
+              }
             </div>
-          </div>
-        ) : (
-          <div className={ styles.statusPage }>
-            <div>
-              <i className="material-icons">sentiment_very_dissatisfied</i>
-              <h2>Unable to find comic</h2>
-            </div>
-          </div>
-        )
+          )
+        })()
       }
     </div>
   )
@@ -71,7 +84,7 @@ ComicViewer.defaultProps = {
   isFetching: false,
   fetchError: null,
   prevEpisodeDisabled: true,
-  nextEpisodeDisabled: true
+  nextEpisodeDisabled: true,
 }
 
 ComicViewer.propTypes = {
@@ -81,7 +94,7 @@ ComicViewer.propTypes = {
   prevEpisodeDisabled: PropTypes.bool,
   nextEpisodeDisabled: PropTypes.bool,
   onPrevEpisodeClick: PropTypes.func,
-  onNextEpisodeClick: PropTypes.func
+  onNextEpisodeClick: PropTypes.func,
 }
 
 export default ComicViewer

@@ -1,4 +1,3 @@
-import React, { PropTypes } from 'react'
 import { connect } from 'react-redux'
 
 import ComicEpisode from './ComicEpisode'
@@ -13,7 +12,7 @@ function mapStateToProps(state, ownProps) {
   ))
   return {
     highlight: comicId === comic.id && episodeId === episode.id,
-    markRead: !!markRead
+    markRead: !!markRead,
   }
 }
 
@@ -22,7 +21,7 @@ function mapDispatchToProps(dispatch) {
     onEpisodeClick(comicId, episodeId) {
       dispatch(Actions.showComicViewer(comicId, episodeId))
       dispatch(Actions.hideComicDrawer())
-    }
+    },
   }
 }
 

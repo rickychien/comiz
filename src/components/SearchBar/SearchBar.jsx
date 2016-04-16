@@ -20,7 +20,7 @@ function SearchBar({ value, onChange }) {
 
 SearchBar.propTypes = {
   value: PropTypes.string,
-  onChange: PropTypes.func
+  onChange: PropTypes.func,
 }
 
 export default SearchBar
