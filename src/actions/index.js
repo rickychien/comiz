@@ -1,4 +1,4 @@
-const DEVELOPMENT = false
+const DEVELOPMENT = true
 const SERVER_URL = DEVELOPMENT ? '' : 'https://atecomic.wcpan.me'
 
 // Filter comics by category
