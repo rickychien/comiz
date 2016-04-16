@@ -13,7 +13,14 @@ class ComicViewerContainer extends React.Component {
     isFetching: PropTypes.bool.isRequired,
     fetchError: PropTypes.object,
     episodes: PropTypes.object.isRequired,
-    pages: PropTypes.array.isRequired
+    pages: PropTypes.array.isRequired,
+    dispatch: PropTypes.func.isRequired,
+  }
+
+  componentDidMount() {
+    const { dispatch, comicId, episodeId } = this.props
+    dispatch(Actions.fetchPages(comicId, episodeId))
+    dispatch(Actions.markRead(comicId, episodeId))
   }
 
   componentWillReceiveProps(nextProps) {
@@ -24,11 +31,9 @@ class ComicViewerContainer extends React.Component {
     }
   }
 
-  componentDidMount() {
-    const { dispatch, comicId, episodeId } = this.props
-    dispatch(Actions.fetchPages(comicId, episodeId))
-    dispatch(Actions.markRead(comicId, episodeId))
-  }
+  onPrevEpisodeClick = () => this.goNextEpisodeByOffset(-1)
+
+  onNextEpisodeClick = () => this.goNextEpisodeByOffset(+1)
 
   goNextEpisodeByOffset = (offset) => {
     const { dispatch, comicId, episodeId, episodes } = this.props
@@ -39,10 +44,6 @@ class ComicViewerContainer extends React.Component {
       dispatch(Actions.markRead(comicId, episodeId))
     }
   }
-
-  onPrevEpisodeClick = () => this.goNextEpisodeByOffset(-1)
-
-  onNextEpisodeClick = () => this.goNextEpisodeByOffset(+1)
 
   render() {
     const { episodeId, episodes, isFetching, fetchError, pages } = this.props
@@ -64,14 +65,15 @@ class ComicViewerContainer extends React.Component {
 
 function mapStateToProps(state) {
   const { comicId, episodeId } = state.comicViewer
+  const { isFetching, fetchError } = state.pages
 
   return {
     comicId,
     episodeId,
-    isFetching: state.pages.isFetching,
-    fetchError: state.pages.fetchError,
+    isFetching,
+    fetchError,
     episodes: state.episodes.entries,
-    pages: state.pages.entries
+    pages: state.pages.entries,
   }
 }
 

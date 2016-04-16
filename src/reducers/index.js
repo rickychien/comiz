@@ -17,5 +17,5 @@ export default combineReducers({
   comicList,
   comicViewer,
   filter,
-  userPrefs
+  userPrefs,
 })

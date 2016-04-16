@@ -15,7 +15,7 @@ function AppContainer({
   showComicViewer,
   shrink,
   onBackClick,
-  onComicDrawerClick
+  onComicDrawerClick,
 }) {
   return (
     <div>
@@ -33,7 +33,7 @@ function AppContainer({
             <AppBar
               materialIcon="arrow_back"
               onLogoClick={ onBackClick }
-              transparent={ true }
+              transparent
             >
               <FlatButton materialIcon="book" onClick={ onComicDrawerClick } />
             </AppBar>
@@ -49,7 +49,7 @@ function AppContainer({
 function mapStateToProps(state) {
   return {
     showComicViewer: state.comicViewer.open,
-    shrink: state.comicDrawer.open
+    shrink: state.comicDrawer.open,
   }
 }
 
@@ -60,15 +60,15 @@ function mapDispatchToProps(dispatch) {
     },
     onComicDrawerClick() {
       dispatch(Actions.showComicDrawer())
-    }
+    },
   }
 }
 
 AppContainer.propTypes = {
-  showComicList: PropTypes.bool,
+  showComicViewer: PropTypes.bool,
   shrink: PropTypes.bool,
   onBackClick: PropTypes.func,
-  onComicDrawerClick: PropTypes.func
+  onComicDrawerClick: PropTypes.func,
 }
 
 export default connect(

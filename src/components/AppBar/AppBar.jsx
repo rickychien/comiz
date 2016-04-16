@@ -8,14 +8,18 @@ function AppBar({
   transparent,
   shrink,
   onLogoClick,
-  children
+  children,
 }) {
-  let appBarStyles = [styles.appBar]
-  transparent && appBarStyles.push(styles.appBarTransparent)
-  shrink && appBarStyles.push(styles.appBarShrink)
+  let appBarStyles = styles.appBar
+  if (transparent) {
+    appBarStyles = appBarStyles.concat(` ${styles.appBarTransparent}`)
+  }
+  if (shrink) {
+    appBarStyles = appBarStyles.concat(` ${styles.appBarShrink}`)
+  }
 
   return (
-    <div className={ appBarStyles.join(' ') }>
+    <div className={ appBarStyles }>
       <div className={ styles.logo } onClick={ onLogoClick }>
         <div className={ styles.icon }>
           <i className="material-icons">
@@ -31,7 +35,7 @@ function AppBar({
 
 AppBar.defaultProps = {
   transparent: false,
-  shrink: false
+  shrink: false,
 }
 
 AppBar.propTypes = {
@@ -40,7 +44,7 @@ AppBar.propTypes = {
   transparent: PropTypes.bool,
   shrink: PropTypes.bool,
   onLogoClick: PropTypes.func,
-  children: PropTypes.node
+  children: PropTypes.node,
 }
 
 export default AppBar

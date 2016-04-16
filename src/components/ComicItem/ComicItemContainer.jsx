@@ -15,12 +15,13 @@ function mapDispatchToProps(dispatch) {
   return {
     onClick(comicId) {
       dispatch(Actions.showComicDrawer(comicId))
-    }
+    },
   }
 }
 
 ComicItemContainer.propTypes = {
-  comic: PropTypes.object.isRequired
+  comic: PropTypes.object.isRequired,
+  onClick: PropTypes.func.isRequired,
 }
 
 export default connect(

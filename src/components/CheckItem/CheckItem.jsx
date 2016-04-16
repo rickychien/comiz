@@ -8,7 +8,7 @@ function CheckItem({
   iconChecked,
   title,
   subTitle,
-  onClick
+  onClick,
 }) {
   return (
     <label htmlFor="checkbox" className={ styles.label }>
@@ -19,8 +19,8 @@ function CheckItem({
           defaultChecked={ checked }
           onClick={ onClick }
         />
-        <i className={ 'material-icons ' + styles.uncheck }>{ iconUncheck }</i>
-        <i className={ 'material-icons ' + styles.checked }>{ iconChecked }</i>
+        <i className={ `material-icons ${styles.uncheck}` }>{ iconUncheck }</i>
+        <i className={ `material-icons ${styles.checked}` }>{ iconChecked }</i>
       </div>
       <div className={ styles.title }>{ title }</div>
       <div className={ styles.subTitle }>{ subTitle }</div>
@@ -29,7 +29,7 @@ function CheckItem({
 }
 
 CheckItem.defaultProps = {
-  checked: false
+  checked: false,
 }
 
 CheckItem.propTypes = {
@@ -38,7 +38,7 @@ CheckItem.propTypes = {
   iconChecked: PropTypes.string.isRequired,
   title: PropTypes.string,
   subTitle: PropTypes.string,
-  onClick: PropTypes.func
+  onClick: PropTypes.func,
 }
 
 export default CheckItem

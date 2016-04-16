@@ -19,8 +19,8 @@ function getStoreUserPrefs(key) {
 const initialState = {
   userPrefs: {
     favorites: getStoreUserPrefs('userPrefs.favorites'),
-    reads: getStoreUserPrefs('userPrefs.reads')
-  }
+    reads: getStoreUserPrefs('userPrefs.reads'),
+  },
 }
 
 const store = configureStore(initialState)

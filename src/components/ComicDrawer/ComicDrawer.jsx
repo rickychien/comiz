@@ -14,64 +14,78 @@ function ComicDrawer({
   episodes,
   favorite,
   onCloseClick,
-  onFavoriteClick
+  onFavoriteClick,
 }) {
-  let comicDrawerStyles = [styles.comicDrawer]
-  open && comicDrawerStyles.push(styles.open)
+  let comicDrawerStyles = styles.comicDrawer
+  if (open) {
+    comicDrawerStyles = comicDrawerStyles.concat(` ${styles.open}`)
+  }
 
   return (
-    <div className={ comicDrawerStyles.join(' ') }>
-      <AppBar materialIcon="close" onLogoClick={ onCloseClick }/>
+    <div className={ comicDrawerStyles }>
+      <AppBar materialIcon="close" onLogoClick={ onCloseClick } />
       {
-        (!isFetching && !fetchError) ? (
-          <div>
-            <div className={ styles.cover }>
-              <img className={ styles.img } src={ comic.coverUrl } />
-            </div>
-            <div className={ styles.overview }>
-              <div className={ styles.about }>
-                <CheckItem
-                  checked={ favorite }
-                  iconUncheck="star_border"
-                  iconChecked="star"
-                  title={ comic.title }
-                  subTitle={ comic.author }
-                  onClick={ onFavoriteClick }
+        (() => {
+          if (isFetching) {
+            return (
+              <div className={ styles.statusPage }>
+                <div>
+                  <i className="material-icons">access_time</i>
+                  <h2>Loading...</h2>
+                </div>
+              </div>
+            )
+          } else if (fetchError) {
+            return (
+              <div className={ styles.statusPage }>
+                <div>
+                  <i className="material-icons">sentiment_very_dissatisfied</i>
+                  <h2>Unable to find comic</h2>
+                </div>
+              </div>
+            )
+          }
+
+          return (
+            <div>
+              <div className={ styles.cover }>
+                <img
+                  className={ styles.img }
+                  src={ comic.coverUrl }
+                  alt="cover"
                 />
               </div>
-              <hr className={ styles.hr } />
-              <div className={ styles.brief }>{ comic.brief }</div>
-              <hr className={ styles.hr } />
-              <div className={ styles.episodes }>
-                <div className={ styles.episodesInner }>
-                  {
-                    episodes.map((episode) => (
-                      <ComicEpisodeContainer
-                        key={ episode.id }
-                        comic={ comic }
-                        episode={ episode }
-                      />
-                    ))
-                  }
+              <div className={ styles.overview }>
+                <div className={ styles.about }>
+                  <CheckItem
+                    checked={ favorite }
+                    iconUncheck="star_border"
+                    iconChecked="star"
+                    title={ comic.title }
+                    subTitle={ comic.author }
+                    onClick={ onFavoriteClick }
+                  />
+                </div>
+                <hr className={ styles.hr } />
+                <div className={ styles.brief }>{ comic.brief }</div>
+                <hr className={ styles.hr } />
+                <div className={ styles.episodes }>
+                  <div className={ styles.episodesInner }>
+                    {
+                      episodes.map((episode) => (
+                        <ComicEpisodeContainer
+                          key={ episode.id }
+                          comic={ comic }
+                          episode={ episode }
+                        />
+                      ))
+                    }
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-        ) : !fetchError ? (
-          <div className={ styles.statusPage }>
-            <div>
-              <i className="material-icons">access_time</i>
-              <h2>Loading...</h2>
-            </div>
-          </div>
-        ) : (
-          <div className={ styles.statusPage }>
-            <div>
-              <i className="material-icons">sentiment_very_dissatisfied</i>
-              <h2>Unable to find comic</h2>
-            </div>
-          </div>
-        )
+          )
+        })()
       }
     </div>
   )
@@ -81,7 +95,7 @@ ComicDrawer.defaultProps = {
   open: false,
   isFetching: false,
   fetchError: null,
-  comic: {}
+  comic: {},
 }
 
 ComicDrawer.propTypes = {
@@ -92,7 +106,7 @@ ComicDrawer.propTypes = {
   episodes: PropTypes.array.isRequired,
   favorite: PropTypes.bool,
   onCloseClick: PropTypes.func,
-  onFavoriteClick: PropTypes.func
+  onFavoriteClick: PropTypes.func,
 }
 
 export default ComicDrawer

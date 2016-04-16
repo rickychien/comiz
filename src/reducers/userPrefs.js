@@ -1,11 +1,15 @@
 const initialState = {
   favorites: [],
-  reads: []
+  reads: [],
 }
 
 function toggleFavorite(favorites, comicId) {
   const idx = favorites.indexOf(comicId)
-  idx === -1 ? favorites.push(comicId) : favorites.splice(idx, 1)
+  if (idx === -1) {
+    favorites.push(comicId)
+  } else {
+    favorites.splice(idx, 1)
+  }
   localStorage.setItem('userPrefs.favorites', JSON.stringify(favorites.sort()))
   return [...favorites]
 }
@@ -32,22 +36,22 @@ function unmarkRead(reads, comicId, episodeId) {
   return [...reads]
 }
 
-export default function(state = initialState, action) {
+export default function (state = initialState, action) {
   switch (action.type) {
     case 'TOGGLE_FAVORITE':
       return {
         ...state,
-        favorites: toggleFavorite(state.favorites, action.comicId)
+        favorites: toggleFavorite(state.favorites, action.comicId),
       }
     case 'MARK_READ':
       return {
         ...state,
-        reads: markRead(state.reads, action.comicId, action.episodeId)
+        reads: markRead(state.reads, action.comicId, action.episodeId),
       }
     case 'UNMARK_READ':
       return {
         ...state,
-        reads: unmarkRead(state.reads, action.comicId, action.episodeId)
+        reads: unmarkRead(state.reads, action.comicId, action.episodeId),
       }
     default:
       return state

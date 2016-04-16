@@ -7,6 +7,16 @@ import * as Actions from '../../actions'
 
 class ComicDrawerContainer extends React.Component {
 
+  static propTypes = {
+    open: PropTypes.bool.isRequired,
+    comic: PropTypes.object.isRequired,
+    episodes: PropTypes.array.isRequired,
+    favorite: PropTypes.bool.isRequired,
+    isFetching: PropTypes.bool.isRequired,
+    fetchError: PropTypes.object,
+    dispatch: PropTypes.func.isRequired,
+  }
+
   componentWillReceiveProps(nextProps) {
     if (nextProps.comic.id !== this.props.comic.id ||
         (nextProps.open && !this.props.open)) {
@@ -54,7 +64,7 @@ function mapStateToProps(state) {
     fetchError,
     comic,
     episodes,
-    favorite: state.userPrefs.favorites.indexOf(comicId) !== -1
+    favorite: state.userPrefs.favorites.indexOf(comicId) !== -1,
   }
 }
 

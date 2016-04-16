@@ -1,12 +1,12 @@
-const DEVELOPMENT = true
-const SERVER_URL = DEVELOPMENT ? '': 'https://atecomic.wcpan.me'
+const DEVELOPMENT = false
+const SERVER_URL = DEVELOPMENT ? '' : 'https://atecomic.wcpan.me'
 
 // Filter comics by category
 
 export function filterCategory(category) {
   return {
     type: 'FILTER_CATEGORY',
-    category
+    category,
   }
 }
 
@@ -15,7 +15,7 @@ export function filterCategory(category) {
 export function filterQuery(query) {
   return {
     type: 'FILTER_QUERY',
-    query
+    query,
   }
 }
 
@@ -24,7 +24,7 @@ export function filterQuery(query) {
 export function showComicDrawer(comicId) {
   return {
     type: 'SHOW_COMIC_DRAWER',
-    comicId
+    comicId,
   }
 }
 
@@ -32,7 +32,7 @@ export function showComicDrawer(comicId) {
 
 export function hideComicDrawer() {
   return {
-    type: 'HIDE_COMIC_DRAWER'
+    type: 'HIDE_COMIC_DRAWER',
   }
 }
 
@@ -40,35 +40,34 @@ export function hideComicDrawer() {
 
 function fetchComicsRequest() {
   return {
-    type: 'FETCH_COMICS_REQUEST'
+    type: 'FETCH_COMICS_REQUEST',
   }
 }
 
 function fetchComicsSuccess(comics) {
   return {
     type: 'FETCH_COMICS_SUCCESS',
-    comics
+    comics,
   }
 }
 
 function fetchComicsFailure(error) {
   return {
     type: 'FETCH_COMICS_FAILURE',
-    error
+    error,
   }
 }
 
 export function fetchComics() {
   return (dispatch, getState) => {
     if (!getState().comics.isFetching) {
-      return dispatch(dispatch => {
-        dispatch(fetchComicsRequest())
-        return fetch(SERVER_URL + `/api/v1/updates`)
-          .then(res => res.json())
-          .then(json => dispatch(fetchComicsSuccess(json)))
-          .catch(err => dispatch(fetchComicsFailure(err)))
-      })
+      dispatch(fetchComicsRequest())
+      return fetch(`${SERVER_URL}/api/v1/updates`)
+        .then(res => res.json())
+        .then(json => dispatch(fetchComicsSuccess(json)))
+        .catch(err => dispatch(fetchComicsFailure(err)))
     }
+    return false
   }
 }
 
@@ -78,7 +77,7 @@ export function updateComicList(offset, comicsPerPage) {
   return {
     type: 'UPDATE_COMIC_LIST',
     offset,
-    comicsPerPage
+    comicsPerPage,
   }
 }
 
@@ -86,35 +85,34 @@ export function updateComicList(offset, comicsPerPage) {
 
 function fetchComicRequest() {
   return {
-    type: 'FETCH_COMIC_REQUEST'
+    type: 'FETCH_COMIC_REQUEST',
   }
 }
 
 function fetchComicSuccess(comic) {
   return {
     type: 'FETCH_COMIC_SUCCESS',
-    comic
+    comic,
   }
 }
 
 function fetchComicFailure(error) {
   return {
     type: 'FETCH_COMIC_FAILURE',
-    error
+    error,
   }
 }
 
 export function fetchComic(comicId) {
   return (dispatch, getState) => {
     if (!getState().comics.isFetching) {
-      return dispatch(dispatch => {
-        dispatch(fetchComicRequest())
-        return fetch(SERVER_URL + `/api/v1/comics/${comicId}`)
-          .then(res => res.json())
-          .then(json => dispatch(fetchComicSuccess(json)))
-          .catch(err => dispatch(fetchComicFailure(err)))
-      })
+      dispatch(fetchComicRequest())
+      return fetch(`${SERVER_URL}/api/v1/comics/${comicId}`)
+        .then(res => res.json())
+        .then(json => dispatch(fetchComicSuccess(json)))
+        .catch(err => dispatch(fetchComicFailure(err)))
     }
+    return false
   }
 }
 
@@ -123,7 +121,7 @@ export function fetchComic(comicId) {
 function fetchEpisodesRequest(comicId) {
   return {
     type: 'FETCH_EPISODES_REQUEST',
-    comicId
+    comicId,
   }
 }
 
@@ -131,7 +129,7 @@ function fetchEpisodesSuccess(comicId, episodes) {
   return {
     type: 'FETCH_EPISODES_SUCCESS',
     comicId,
-    episodes
+    episodes,
   }
 }
 
@@ -139,21 +137,20 @@ function fetchEpisodesFailure(comicId, error) {
   return {
     type: 'FETCH_EPISODES_FAILURE',
     comicId,
-    error
+    error,
   }
 }
 
 export function fetchEpisodes(comicId) {
   return (dispatch, getState) => {
     if (!getState().episodes.isFetching) {
-      return dispatch(dispatch => {
-        dispatch(fetchEpisodesRequest(comicId))
-        return fetch(SERVER_URL + `/api/v1/comics/${comicId}/episodes`)
-          .then(res => res.json())
-          .then(json => dispatch(fetchEpisodesSuccess(comicId, json)))
-          .catch(err => dispatch(fetchEpisodesFailure(comicId, err)))
-      })
+      dispatch(fetchEpisodesRequest(comicId))
+      return fetch(`${SERVER_URL}/api/v1/comics/${comicId}/episodes`)
+        .then(res => res.json())
+        .then(json => dispatch(fetchEpisodesSuccess(comicId, json)))
+        .catch(err => dispatch(fetchEpisodesFailure(comicId, err)))
     }
+    return false
   }
 }
 
@@ -162,7 +159,7 @@ export function fetchEpisodes(comicId) {
 export function toggleFavorite(comicId) {
   return {
     type: 'TOGGLE_FAVORITE',
-    comicId
+    comicId,
   }
 }
 
@@ -172,7 +169,7 @@ export function markRead(comicId, episodeId) {
   return {
     type: 'MARK_READ',
     comicId,
-    episodeId
+    episodeId,
   }
 }
 
@@ -182,7 +179,7 @@ export function unmarkRead(comicId, episodeId) {
   return {
     type: 'UNMARK_READ',
     comicId,
-    episodeId
+    episodeId,
   }
 }
 
@@ -192,7 +189,7 @@ export function showComicViewer(comicId, episodeId) {
   return {
     type: 'SHOW_COMIC_VIEWER',
     comicId,
-    episodeId
+    episodeId,
   }
 }
 
@@ -200,7 +197,7 @@ export function showComicViewer(comicId, episodeId) {
 
 export function hideComicViewer() {
   return {
-    type: 'HIDE_COMIC_VIEWER'
+    type: 'HIDE_COMIC_VIEWER',
   }
 }
 
@@ -210,7 +207,7 @@ function fetchPagesRequest(comicId, episodeId) {
   return {
     type: 'FETCH_PAGES_REQUEST',
     comicId,
-    episodeId
+    episodeId,
   }
 }
 
@@ -219,7 +216,7 @@ function fetchPagesSuccess(comicId, episodeId, pages) {
     type: 'FETCH_PAGES_SUCCESS',
     comicId,
     episodeId,
-    pages
+    pages,
   }
 }
 
@@ -228,21 +225,19 @@ function fetchPagesFailure(comicId, episodeId, error) {
     type: 'FETCH_PAGES_FAILURE',
     comicId,
     episodeId,
-    error
+    error,
   }
 }
 
 export function fetchPages(comicId, episodeId) {
   return (dispatch, getState) => {
     if (!getState().pages.isFetching) {
-      return dispatch(dispatch => {
-        dispatch(fetchPagesRequest(comicId, episodeId))
-        return fetch(SERVER_URL +
-          `/api/v1/comics/${comicId}/episodes/${episodeId}/pages`)
-          .then(res => res.json())
-          .then(json => dispatch(fetchPagesSuccess(comicId, episodeId, json)))
-          .catch(err => dispatch(fetchPagesFailure(comicId, episodeId, err)))
-      })
+      dispatch(fetchPagesRequest(comicId, episodeId))
+      return fetch(`${SERVER_URL}/api/v1/comics/${comicId}/episodes/${episodeId}/pages`)
+        .then(res => res.json())
+        .then(json => dispatch(fetchPagesSuccess(comicId, episodeId, json)))
+        .catch(err => dispatch(fetchPagesFailure(comicId, episodeId, err)))
     }
+    return false
   }
 }

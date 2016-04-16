@@ -26,7 +26,7 @@ function SelectField({ selectedValue, menuItems, onChange }) {
 }
 
 SelectField.defaultProps = {
-  menuItems: []
+  menuItems: [],
 }
 
 SelectField.propTypes = {
@@ -34,10 +34,10 @@ SelectField.propTypes = {
   menuItems: PropTypes.arrayOf(
     PropTypes.shape({
       text: PropTypes.string,
-      value: PropTypes.string
+      value: PropTypes.string,
     })
   ),
-  onChange: PropTypes.func
+  onChange: PropTypes.func,
 }
 
 export default SelectField

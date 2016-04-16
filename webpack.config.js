@@ -5,24 +5,24 @@ module.exports = {
     bundle: [
       'babel-polyfill',
       './src/index.jsx',
-      'webpack-hot-middleware/client'
-    ]
+      'webpack-hot-middleware/client',
+    ],
   },
   output: {
-    path: __dirname + '/static/',
+    path: `${__dirname}/static/`,
     filename: '[name].js',
-    publicPath: '/static/'
+    publicPath: '/static/',
   },
   plugins: [
     new webpack.optimize.OccurenceOrderPlugin(),
     new webpack.HotModuleReplacementPlugin(),
     new webpack.ProvidePlugin({
-      'fetch': 'imports?this=>global!exports?global.fetch!isomorphic-fetch'
+      fetch: 'imports?this=>global!exports?global.fetch!isomorphic-fetch',
     }),
-    new webpack.NoErrorsPlugin()
+    new webpack.NoErrorsPlugin(),
   ],
   resolve: {
-    extensions: ['', '.js', '.jsx']
+    extensions: ['', '.js', '.jsx'],
   },
   devtool: 'source-map',
   module: {
@@ -33,25 +33,25 @@ module.exports = {
         exclude: /node_modules/,
         query: {
           presets: ['es2015', 'react', 'stage-1', 'stage-2'],
-          "env": {
-            "development": {
-              "presets": ["react-hmre"]
-            }
-          }
-        }
+          env: {
+            development: {
+              presets: ['react-hmre'],
+            },
+          },
+        },
       },
       {
         test: /\.jpe?g$|\.gif$|\.png|\.woff2?|\.ttf|\.eot|\.svg$/,
-        loader: 'url'
+        loader: 'url',
       },
       {
         test: /\.css$/,
-        loader: 'style!css?modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]'
+        loader: 'style!css?modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]',
       },
       {
         test: /\.json$/,
-        loader: 'json'
-      }
-    ]
-  }
+        loader: 'json',
+      },
+    ],
+  },
 }

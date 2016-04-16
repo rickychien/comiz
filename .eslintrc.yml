@@ -1,0 +1,9 @@
+parser: babel-eslint
+parserOptions:
+  ecmaFeatures:
+    jsx: true
+    experimentalObjectRestSpread: true
+extends: airbnb
+rules:
+  semi: off
+  no-case-declarations: off
