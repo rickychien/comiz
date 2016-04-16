@@ -10,14 +10,14 @@
   height: 200px;
 }
 
-@media screen and (max-width: 360px) {
+@media screen and (max-width: 370px) {
   .img {
     width: 135px;
     height: 180px;
   }
 }
 
-@media screen and (max-width: 320px) {
+@media screen and (max-width: 340px) {
   .img {
     width: 120px;
     height: 160px;
