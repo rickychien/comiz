@@ -53,14 +53,16 @@ class ComicListContainer extends React.Component {
   }
 
   render() {
-    let { comics, filter, favorites, shrink, offset,
-          comicsPerPage } = this.props
+    const { comics, isFetching, fetchError, filter, favorites, shrink, offset,
+            comicsPerPage } = this.props
     let filterResult = this.filterComics(comics, filter, favorites)
     let paginationResult = filterResult.slice(offset, offset + comicsPerPage)
 
     return (
       <ComicList
         comics={ paginationResult }
+        isFetching={ isFetching }
+        fetchError={ fetchError }
         shrink={ shrink }
         disablePrevPageClick={ !filterResult[offset - comicsPerPage] }
         disableNextPageClick={ !filterResult[offset + comicsPerPage] }
@@ -75,6 +77,8 @@ class ComicListContainer extends React.Component {
 function mapStateToProps(state) {
   return {
     comics: state.comics.entries,
+    isFetching: state.comics.isFetching,
+    fetchError: state.comics.fetchError,
     filter: state.filter,
     favorites: state.userPrefs.favorites,
     offset: state.comicList.offset,
