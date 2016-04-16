@@ -35,7 +35,7 @@ function AppBar({
 
 AppBar.defaultProps = {
   transparent: false,
-  shrink: false,
+  shrink: false
 }
 
 AppBar.propTypes = {
