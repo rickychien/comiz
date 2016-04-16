@@ -30,22 +30,22 @@
   position: relative;
   margin: 0 auto;
   width: 100%;
-  height: 20px;
+  height: 40px;
   background-color: rgba(#112233, 0.24);
 }
 
 .prevPage {
   composes: pagination;
-  top: 55px;
+  top: 63px;
 }
 
 .nextPage {
   composes: pagination;
-  bottom: 15px;
+  bottom: 13px;
 }
 
 .expand {
-  font-size: 35px;
+  font-size: 48px;
   color: rgba(50, 74, 139, 0.88);
 }
 
