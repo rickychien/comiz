@@ -19,7 +19,7 @@ class ComicListContainer extends React.Component {
     this.props.dispatch(Actions.fetchComics())
   }
 
-  filterComics = (comics, filter, favorites, offset, comicsPerPage) => {
+  filterComics = (comics, filter, favorites) => {
     let reg
     try {
       reg = new RegExp(filter.query || '.+', 'i')
@@ -38,7 +38,6 @@ class ComicListContainer extends React.Component {
 
     return comics
       .filter(comic => reg.test(comic.title))
-      .slice(offset, offset + comicsPerPage)
   }
 
   onPrevPageClick = () => {
@@ -55,15 +54,15 @@ class ComicListContainer extends React.Component {
   render() {
     let { comics, filter, favorites, shrink, offset,
           comicsPerPage } = this.props
-    let result = this.filterComics(comics, filter, favorites,
-                                   offset, comicsPerPage)
-    comics = Object.keys(comics)
+    let filterResult = this.filterComics(comics, filter, favorites)
+    let paginationResult = filterResult.slice(offset, offset + comicsPerPage)
+
     return (
       <ComicList
-        comics={ result }
+        comics={ paginationResult }
         shrink={ shrink }
-        disablePrevPageClick={ !comics[offset - comicsPerPage] }
-        disableNextPageClick={ !comics[offset + comicsPerPage] }
+        disablePrevPageClick={ !filterResult[offset - comicsPerPage] }
+        disableNextPageClick={ !filterResult[offset + comicsPerPage] }
         onPrevPageClick={ this.onPrevPageClick }
         onNextPageClick={ this.onNextPageClick }
       />
