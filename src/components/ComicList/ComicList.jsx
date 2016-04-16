@@ -21,7 +21,7 @@ function ComicList({
 
   return (
     (() => {
-      if (isFetching) {
+      if (isFetching && comics.length === 0) {
         return (
           <div className={ styles.statusPage }>
             <div>
@@ -30,7 +30,7 @@ function ComicList({
             </div>
           </div>
         )
-      } else if (fetchError) {
+      } else if (fetchError && comics.length === 0) {
         return (
           <div className={ styles.statusPage }>
             <div>
