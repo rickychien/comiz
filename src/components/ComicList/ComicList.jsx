@@ -20,7 +20,7 @@ function ComicList({
       {
         !disablePrevPageClick && (
           <div className={ styles.prevPage } onClick={ onPrevPageClick }>
-            <i className={ `material-icons ${styles.chevron}` }>chevron_top</i>
+            <i className={ `material-icons ${styles.expand}` }>expand_less</i>
           </div>
         )
       }
@@ -36,7 +36,7 @@ function ComicList({
       {
         !disableNextPageClick && (
           <div className={ styles.nextPage } onClick={ onNextPageClick }>
-            <i className={ `material-icons ${styles.chevron}` }>chevron_bottom</i>
+            <i className={ `material-icons ${styles.expand}` }>expand_more</i>
           </div>
         )
       }

@@ -6,7 +6,7 @@
   display: flex;
   justify-content: center;
   width: 100%;
-  padding: 60px auto 3px auto;
+  padding: 60px auto 10px auto;
 }
 
 @media screen and (min-width: 500px) {
@@ -36,19 +36,19 @@
 
 .prevPage {
   composes: pagination;
-  top: 60px;
+  top: 55px;
 }
 
 .nextPage {
   composes: pagination;
-  bottom: 0;
+  bottom: 15px;
 }
 
-.chevron {
+.expand {
   font-size: 35px;
-  color: rgba(56, 63, 82, 0.37);
+  color: rgba(50, 74, 139, 0.88);
 }
 
-.pagination:hover .chevron {
+.pagination:hover .expand {
   color: #bdc5da;
 }
