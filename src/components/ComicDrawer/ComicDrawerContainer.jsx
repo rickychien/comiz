@@ -46,7 +46,7 @@ function mapStateToProps(state) {
   const { isFetching, fetchError } = state.comics
   const comic = state.comics.entries[comicId] || {}
   let episodes = state.episodes.entries
-  episodes = Object.keys(episodes).map(key => episodes[key])
+  episodes = Object.keys(episodes).map(key => episodes[key]).reverse()
 
   return {
     open,
