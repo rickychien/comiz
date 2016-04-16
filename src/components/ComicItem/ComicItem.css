@@ -1,32 +1,25 @@
-:root {
-  --comic-item-with: 150px;
-  --comic-item-height: 200px;
-}
-
 .comic {
   position: relative;
   cursor: pointer;
   margin: 13px;
-  width: var(--comic-item-with);
-  height: var(--comic-item-height);
   box-shadow: 0 3px 10px rgba(0, 0, 0, 0.16), 0 3px 10px rgba(0, 0, 0, 0.23);
 }
 
 .img {
-  width: var(--comic-item-with);
-  height: var(--comic-item-height);
+  width: 150px;
+  height: 200px;
 }
 
 @media screen and (max-width: 360px) {
   .img {
-    width: cal(180px * 0.75);
+    width: 135px;
     height: 180px;
   }
 }
 
-@media screen and (max-width: 330px) {
+@media screen and (max-width: 320px) {
   .img {
-    width: cal(160px * 0.75);
+    width: 120px;
     height: 160px;
   }
 }
