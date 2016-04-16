@@ -1,15 +1,21 @@
----
 language: node_js
+
 node_js:
   - 5
+
 git:
   depth: 3
+
 sudo: false
+
 cache:
   directories:
-  - node_modules
+    - node_modules
+
 script:
   npm run $TEST_TYPE
+
 env:
   matrix:
-  - TEST_TYPE=lint
+    - TEST_TYPE=build
+    - TEST_TYPE=lint
