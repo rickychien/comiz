@@ -6,7 +6,7 @@ const initialState = {
 export default function (state = initialState, action) {
   switch (action.type) {
     case 'UPDATE_COMIC_LIST':
-      return { offset: action.offset, comicsPerPage: action.comicsPerPage }
+      return { ...state, offset: action.offset }
     default:
       return state
   }
