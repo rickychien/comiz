@@ -20,6 +20,7 @@ function mapDispatchToProps(dispatch) {
   return {
     onChange: (evt) => {
       dispatch(Actions.filterCategory(evt.target.value))
+      dispatch(Actions.updateComicList(0))
     },
   }
 }
