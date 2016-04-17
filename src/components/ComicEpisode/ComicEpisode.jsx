@@ -4,10 +4,24 @@ import { FlatButton } from '../FlatButton'
 
 import styles from './ComicEpisode.css'
 
-function ComicEpisode({ comic, episode, highlight, markRead, onEpisodeClick }) {
+function ComicEpisode({
+  comic,
+  episode,
+  highlight,
+  markRead,
+  onEpisodeClick,
+  onEpisodeRightClick,
+}) {
   function onClick() {
     if (onEpisodeClick) {
       onEpisodeClick(comic.id, episode.id)
+    }
+  }
+
+  function onContextMenu(evt) {
+    evt.preventDefault()
+    if (onEpisodeRightClick) {
+      onEpisodeRightClick(comic.id, episode.id, markRead)
     }
   }
 
@@ -19,6 +33,7 @@ function ComicEpisode({ comic, episode, highlight, markRead, onEpisodeClick }) {
       title={ episode.title }
       extraStyles={ extraStyles }
       onClick={ onClick }
+      onContextMenu={ onContextMenu }
     />
   )
 }
@@ -33,6 +48,7 @@ ComicEpisode.propTypes = {
   highlight: PropTypes.bool,
   markRead: PropTypes.bool,
   onEpisodeClick: PropTypes.func,
+  onEpisodeRightClick: PropTypes.func,
 }
 
 export default ComicEpisode

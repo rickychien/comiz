@@ -22,6 +22,13 @@ function mapDispatchToProps(dispatch) {
       dispatch(Actions.showComicViewer(comicId, episodeId))
       dispatch(Actions.hideComicDrawer())
     },
+    onEpisodeRightClick(comicId, episodeId, markRead) {
+      if (markRead) {
+        dispatch(Actions.unmarkRead(comicId, episodeId))
+      } else {
+        dispatch(Actions.markRead(comicId, episodeId))
+      }
+    },
   }
 }
 
