@@ -16,6 +16,7 @@ A playground
 * [webpack] - module bundler.
 * [babel] - A compiler for writing next generation JavaScript.
 * [css-modules] - Modulize CSS.
+* [react-swipeable] - Swipe bindings for react.
 
 ## Contribute
 
@@ -146,3 +147,4 @@ in src/actions/index.js line 1.
 [webpack]: https://github.com/webpack/webpack
 [babel]: https://github.com/babel/babel
 [css-modules]: https://github.com/css-modules/css-modules
+[react-swipeable]: https://github.com/dogfessional/react-swipeable
