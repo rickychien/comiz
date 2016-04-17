@@ -1,5 +1,6 @@
 import React, { PropTypes } from 'react'
 import Swipeable from 'react-swipeable'
+import EventListener from 'react-event-listener'
 
 import { AppBar } from '../AppBar'
 import { CheckItem } from '../CheckItem'
@@ -52,16 +53,17 @@ class ComicDrawer extends React.Component {
   onSwipedRight = (evt, xDelta) => {
     const width = this.props.width
     if (width - Math.abs(xDelta) < (width / 2)) {
-      this.setState({
-        open: false,
-      })
-      if (this.props.onCloseClick) {
-        this.props.onCloseClick()
-      }
+      this.handleClose()
     } else {
       this.setState({
         xDelta: 0,
       })
+    }
+  }
+
+  onKeyUp = (evt) => {
+    if (evt.code === 'Escape' || evt.keyCode === 27) {
+      this.handleClose()
     }
   }
 
@@ -76,6 +78,16 @@ class ComicDrawer extends React.Component {
     }
   }
 
+  handleClose = () => {
+    this.setState({
+      open: false,
+    })
+
+    if (this.props.onCloseClick) {
+      this.props.onCloseClick()
+    }
+  }
+
   render() {
     const {
       isFetching,
@@ -83,7 +95,6 @@ class ComicDrawer extends React.Component {
       comic,
       episodes,
       favorite,
-      onCloseClick,
       onFavoriteClick,
     } = this.props
 
@@ -97,16 +108,19 @@ class ComicDrawer extends React.Component {
         className={ comicDrawerStyles }
         style={ this.getStyles() }
         onSwipingRight={ this.onSwipingRight }
-        onSwipedRight= { this.onSwipedRight }
+        onSwipedRight={ this.onSwipedRight }
       >
-        <AppBar materialIcon="close" onLogoClick={ onCloseClick } />
+        <EventListener elementName="window" onKeyUp={ this.onKeyUp } />
+        <AppBar materialIcon="close" onLogoClick={ this.handleClose } />
         {
           (() => {
             if (isFetching) {
               return (
                 <div className={ styles.statusPage }>
                   <div>
-                    <i className="material-icons">access_time</i>
+                    <i className="material-icons">
+                      access_time
+                    </i>
                     <h2>Loading...</h2>
                   </div>
                 </div>
@@ -115,7 +129,9 @@ class ComicDrawer extends React.Component {
               return (
                 <div className={ styles.statusPage }>
                   <div>
-                    <i className="material-icons">sentiment_very_dissatisfied</i>
+                    <i className="material-icons">
+                      sentiment_very_dissatisfied
+                    </i>
                     <h2>Unable to find comic</h2>
                   </div>
                 </div>
