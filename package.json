@@ -4,7 +4,7 @@
   "description": "Comic viewer",
   "main": "index.js",
   "scripts": {
-    "build": "npm run clean && ./node_modules/.bin/webpack --progress --colors",
+    "build": "npm run clean && ./node_modules/.bin/webpack --progress --colors --config ./webpack.prod.config.js",
     "clean": "rm -rf ./static",
     "lint": "./node_modules/.bin/eslint 'src/**/*.+(js|jsx)'",
     "test": "echo \"Error: no test specified\" && exit 1"
