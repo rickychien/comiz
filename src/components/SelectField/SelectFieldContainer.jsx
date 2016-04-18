@@ -11,7 +11,7 @@ function mapStateToProps(state) {
   ))
 
   return {
-    category,
+    selectedValue: category,
     menuItems,
   }
 }
