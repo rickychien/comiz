@@ -39,13 +39,13 @@ A playground
 ```
 npm start
 ```
-it runs DEBUG mode by default and Comiz will fetche self hosted data (see ```src/api/*```)
+it will enable [redux-logger] and fetch fake data from local at ```src/api/*```
 
-#### Run on DEBUG mode with test server
+#### Run on DEBUG mode with accessing to server
 ```
 DEBUG=SERVER npm start
 ```
-it runs DEBUG mode as well as accessing to test server, Comiz will fetche data from server which url is defined at ```src/actions/index.js`
+it runs DEBUG mode as well as accessing to server and fetch data from server which url is defined at ```src/actions/index.js`
 
 ### Build static resources
 
@@ -154,3 +154,4 @@ it runs DEBUG mode as well as accessing to test server, Comiz will fetche data f
 [css-modules]: https://github.com/css-modules/css-modules
 [react-event-listener]: https://github.com/oliviertassinari/react-event-listener
 [react-swipeable]: https://github.com/dogfessional/react-swipeable
+[redux-logger]: https://github.com/fcomb/redux-logger
