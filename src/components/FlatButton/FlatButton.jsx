@@ -24,7 +24,7 @@ function FlatButton({
         materialIcon && <i className="material-icons">{ materialIcon }</i>
       }
       {
-        title && <span>{ title }</span>
+        title && <div>{ title }</div>
       }
     </div>
   )

@@ -1,5 +1,7 @@
 import React, { PropTypes } from 'react'
 
+import { FlatButton } from '../FlatButton'
+
 import styles from './ComicViewer.css'
 
 function ComicViewer({
@@ -36,7 +38,21 @@ function ComicViewer({
           }
 
           return (
-            <div>
+            <div className={ styles.comicViewer }>
+              {
+                !prevEpisodeDisabled && (
+                  <div
+                    className={ styles.prevEpisode }
+                    onClick={ onPrevEpisodeClick }
+                  >
+                    <FlatButton
+                      materialIcon="chevron_left"
+                      extraStyles={ styles.episodeButton }
+                      title="Previous Episode"
+                    />
+                  </div>
+                )
+              }
               {
                 pages.map((page, i) => (
                   <img
@@ -48,26 +64,16 @@ function ComicViewer({
                 ))
               }
               {
-                !prevEpisodeDisabled && (
-                  <div
-                    className={ styles.prevEpisode }
-                    onClick={ onPrevEpisodeClick }
-                  >
-                    <i className={ `material-icons ${styles.chevron}` }>
-                      chevron_left
-                    </i>
-                  </div>
-                )
-              }
-              {
                 !nextEpisodeDisabled && (
                   <div
                     className={ styles.nextEpisode }
                     onClick={ onNextEpisodeClick }
                   >
-                    <i className={ `material-icons ${styles.chevron}` }>
-                      chevron_right
-                    </i>
+                    <FlatButton
+                      materialIcon="chevron_right"
+                      extraStyles={ styles.episodeButton }
+                      title="Next Episode"
+                    />
                   </div>
                 )
               }
