@@ -20,6 +20,9 @@ module.exports = {
       fetch: 'imports?this=>global!exports?global.fetch!isomorphic-fetch',
     }),
     new webpack.NoErrorsPlugin(),
+    new webpack.DefinePlugin({
+      DEBUG: `"${process.env.DEBUG}"`,
+    }),
   ],
   resolve: {
     extensions: ['', '.js', '.jsx'],

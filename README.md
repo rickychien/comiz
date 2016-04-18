@@ -33,15 +33,19 @@ A playground
 
 3. Open up <http://localhost:3990> in browser
 
-#### Note:
+### Development options:
 
-Comiz fetches a fake self hosted data by default otherwise you could set
-
-```js
-const DEVELOPMENT = false
-
+#### Run on DEBUG mode (default)
 ```
-in src/actions/index.js line 1.
+npm start
+```
+it runs DEBUG mode by default and Comiz will fetche self hosted data (see ```src/api/*```)
+
+#### Run on DEBUG mode with test server
+```
+DEBUG=SERVER npm start
+```
+it runs DEBUG mode as well as accessing to test server, Comiz will fetche data from server which url is defined at ```src/actions/index.js`
 
 ### Build static resources
 

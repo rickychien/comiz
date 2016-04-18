@@ -1,5 +1,5 @@
-const DEVELOPMENT = true
-const SERVER_URL = DEVELOPMENT ? '' : 'https://atecomic.wcpan.me'
+const SERVER_URL =
+  (DEBUG && DEBUG !== 'SERVER') ? '' : 'https://atecomic.wcpan.me'
 
 // Filter comics by category
 

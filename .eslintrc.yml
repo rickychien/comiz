@@ -7,3 +7,5 @@ extends: airbnb
 rules:
   semi: off
   no-case-declarations: off
+globals:
+    DEBUG: true
