@@ -6,10 +6,11 @@ import styles from './ComicViewer.css'
 
 function ComicViewer({
   pages,
+  episode,
   isFetching,
   fetchError,
-  prevEpisodeDisabled,
-  nextEpisodeDisabled,
+  prevEpisode,
+  nextEpisode,
   onPrevEpisodeClick,
   onNextEpisodeClick,
 }) {
@@ -40,7 +41,12 @@ function ComicViewer({
           return (
             <div className={ styles.comicViewer }>
               {
-                !prevEpisodeDisabled && (
+                <div className={ styles.title }>
+                  { episode.title }
+                </div>
+              }
+              {
+                prevEpisode && (
                   <div
                     className={ styles.prevEpisode }
                     onClick={ onPrevEpisodeClick }
@@ -48,7 +54,7 @@ function ComicViewer({
                     <FlatButton
                       materialIcon="chevron_left"
                       extraStyles={ styles.episodeButton }
-                      title="Previous Episode"
+                      title={ prevEpisode.title }
                     />
                   </div>
                 )
@@ -64,7 +70,7 @@ function ComicViewer({
                 ))
               }
               {
-                !nextEpisodeDisabled && (
+                nextEpisode && (
                   <div
                     className={ styles.nextEpisode }
                     onClick={ onNextEpisodeClick }
@@ -72,7 +78,7 @@ function ComicViewer({
                     <FlatButton
                       materialIcon="chevron_right"
                       extraStyles={ styles.episodeButton }
-                      title="Next Episode"
+                      title={ nextEpisode.title }
                     />
                   </div>
                 )
@@ -95,10 +101,11 @@ ComicViewer.defaultProps = {
 
 ComicViewer.propTypes = {
   pages: PropTypes.array,
+  episode: PropTypes.object,
   isFetching: PropTypes.bool,
   fetchError: PropTypes.object,
-  prevEpisodeDisabled: PropTypes.bool,
-  nextEpisodeDisabled: PropTypes.bool,
+  prevEpisode: PropTypes.object,
+  nextEpisode: PropTypes.object,
   onPrevEpisodeClick: PropTypes.func,
   onNextEpisodeClick: PropTypes.func,
 }

@@ -15,6 +15,13 @@
   }
 }
 
+.title {
+  color: var(--main-color);
+  font-size: 40px;
+  margin: 40px 0 20px 0;
+  height: auto;
+}
+
 .navigateEpisode {
   display: flex;
   justify-content: center;

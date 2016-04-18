@@ -51,10 +51,11 @@ class ComicViewerContainer extends React.Component {
     return (
       <ComicViewer
         pages={ pages }
+        episode= { episodes[episodeId] }
         isFetching= { isFetching }
         fetchError={ fetchError }
-        prevEpisodeDisabled={ !episodes[episodeId - 1] }
-        nextEpisodeDisabled={ !episodes[episodeId + 1] }
+        prevEpisode={ episodes[episodeId - 1] }
+        nextEpisode={ episodes[episodeId + 1] }
         onPrevEpisodeClick={ this.onPrevEpisodeClick }
         onNextEpisodeClick={ this.onNextEpisodeClick }
       />
