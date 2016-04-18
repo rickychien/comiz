@@ -35,24 +35,27 @@ A playground
 
 ### Development options:
 
-#### Run on DEBUG mode (default)
-```
-npm start
-```
+* Run on DEBUG mode (default)
+  ```
+  npm start
+  ```
 it will enable [redux-logger] and fetch fake data from local at ```src/api/*```
 
-#### Run on DEBUG mode with accessing to server
-```
-DEBUG=SERVER npm start
-```
-it runs DEBUG mode as well as accessing to server and fetch data from server which url is defined at ```src/actions/index.js`
+* Run on DEBUG mode with accessing to server
+  ```
+  DEBUG=SERVER npm start
+  ```
+it runs DEBUG mode as well as accessing to server and fetch data from server which url is defined at ```src/actions/index.js```
 
-### Build static resources
+* Build with production
 
-* Package all static resources into ./static/*
+Production build will exclude unnecessary resources, setup server url and minimize resources size as small as possible to optimize website experience.
+
+* Package all static resources into ./static/* (it also run clean before packaging)
   ```
   npm run build
   ```
+
 * Clean static resources
   ```
   npm run clean
