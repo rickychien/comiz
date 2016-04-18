@@ -235,7 +235,10 @@ export function fetchPages(comicId, episodeId) {
       dispatch(fetchPagesRequest(comicId, episodeId))
       return fetch(`${SERVER_URL}/api/v1/comics/${comicId}/episodes/${episodeId}/pages`)
         .then(res => res.json())
-        .then(json => dispatch(fetchPagesSuccess(comicId, episodeId, json)))
+        .then(json => {
+          dispatch(fetchPagesSuccess(comicId, episodeId, json))
+          dispatch(markRead(comicId, episodeId))
+        })
         .catch(err => dispatch(fetchPagesFailure(comicId, episodeId, err)))
     }
     return false
