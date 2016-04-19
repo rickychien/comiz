@@ -31,9 +31,9 @@ A playground
   npm start
   ```
 
-3. Open up <http://localhost:3990> in browser
+3. Visit <http://localhost:3990> in browser
 
-### Development options:
+### Development Guide:
 
 #### Run on DEBUG mode (default)
   ```
@@ -55,6 +55,13 @@ it runs DEBUG mode as well as accessing to server and fetch data from server whi
   ```
   npm run build
   ```
+
+  It's up to you to spin up a local server in static folder to see production result, for example launching a python server
+
+  ```
+  python -m SimpleHTTPServer
+  ```
+  and go to visit <http://localhost:8000>
 
 #### Clean static resources
   ```
