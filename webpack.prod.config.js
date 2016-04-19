@@ -44,9 +44,7 @@ module.exports = {
       },
       {
         test: /\.css$/,
-        // NOTE: There is a bug in css-load to minimize calc(100% - xxx),
-        // so we disalbe it with -minimize
-        loader: 'style!css?-minimize&modules&importLoaders=1&localIdentName=[name]_[local]__[hash:base64:5]',
+        loader: 'style!css?modules&importLoaders=1&localIdentName=[name]_[local]__[hash:base64:5]',
       },
     ],
   },
