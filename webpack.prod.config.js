@@ -23,6 +23,9 @@ module.exports = {
     }),
     new webpack.DefinePlugin({
       DEBUG: false,
+      'process.env': {
+        'NODE_ENV': '"production"'
+      }
     }),
   ],
   resolve: {

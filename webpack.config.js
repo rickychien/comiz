@@ -22,6 +22,9 @@ module.exports = {
     new webpack.NoErrorsPlugin(),
     new webpack.DefinePlugin({
       DEBUG: `"${process.env.DEBUG}"`,
+      'process.env': {
+        'NODE_ENV': '"development"'
+      }
     }),
   ],
   resolve: {
