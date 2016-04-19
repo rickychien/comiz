@@ -44,7 +44,7 @@
   bottom: 13px;
 }
 
-.expand {
+.pagination > .expand {
   font-size: 48px;
   color: rgba(50, 74, 139, 0.88);
 }
