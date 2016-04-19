@@ -35,33 +35,33 @@ A playground
 
 ### Development options:
 
-* Run on DEBUG mode (default)
+#### Run on DEBUG mode (default)
   ```
   npm start
   ```
-it will enable [redux-logger] and fetch fake data from local at ```src/api/*```
+it will enable [redux-logger] and fetch fake data from local at [src/api/](https://github.com/rickychien/comiz/blob/master/src/api/))
 
-* Run on DEBUG mode with accessing to server
+#### Run on DEBUG mode with accessing to server
   ```
   DEBUG=SERVER npm start
   ```
-it runs DEBUG mode as well as accessing to server and fetch data from server which url is defined at ```src/actions/index.js```
+it runs DEBUG mode as well as accessing to server and fetch data from server which url is defined at [src/actions/index.js](https://github.com/rickychien/comiz/blob/master/src/actions/index.js#L2)
 
-* Build with production
+#### Build with production
 
-Production build will exclude unnecessary resources, setup server url and minimize resources size as small as possible to optimize website experience.
+  Production build will exclude unnecessary resources, setup server url and minimize resources size as small as possible to optimize website experience.
 
-* Package all static resources into ./static/* (it also run clean before packaging)
+#### Package all static resources into ./static/* (it also run clean before packaging)
   ```
   npm run build
   ```
 
-* Clean static resources
+#### Clean static resources
   ```
   npm run clean
   ```
 
-* Push to gh-pages (it will invoke ```npm run build``` first)
+#### Push to gh-pages (it will pre-build by ```npm run build``` first)
   ```
   npm run gh-pages
   ```
