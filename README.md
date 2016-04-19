@@ -61,6 +61,11 @@ Production build will exclude unnecessary resources, setup server url and minimi
   npm run clean
   ```
 
+* Push to gh-pages (it will invoke ```npm run build``` first)
+  ```
+  npm run gh-pages
+  ```
+
 ## Application State Structure
 
 ```js
