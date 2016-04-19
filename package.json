@@ -4,10 +4,11 @@
   "description": "Comic viewer",
   "main": "index.js",
   "scripts": {
-    "build": "npm run clean && ./node_modules/.bin/webpack --progress --colors --config ./webpack.prod.config.js",
+    "build": "npm run clean && ./node_modules/.bin/webpack --progress --colors --config ./webpack.prod.config.js && cp ./src/index.html ./static/",
     "clean": "rm -rf ./static",
     "lint": "./node_modules/.bin/eslint 'src/**/*.+(js|jsx)'",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "gh-pages": "git subtree push --prefix static origin gh-pages"
   },
   "author": "Ricky Chien <ricky060709@gmail.com>",
   "license": "ISC",
