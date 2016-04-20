@@ -1,14 +1,13 @@
-import React, { PropTypes } from 'react'
 import { connect } from 'react-redux'
 
 import ComicItem from './ComicItem'
 
 import * as Actions from '../../actions'
 
-function ComicItemContainer({ comic, onClick }) {
-  return (
-    <ComicItem comic={ comic } onClick={ onClick } />
-  )
+function mapStateToProps(state, ownProps) {
+  return {
+    comic: ownProps.comic,
+  }
 }
 
 function mapDispatchToProps(dispatch) {
@@ -19,12 +18,7 @@ function mapDispatchToProps(dispatch) {
   }
 }
 
-ComicItemContainer.propTypes = {
-  comic: PropTypes.object.isRequired,
-  onClick: PropTypes.func.isRequired,
-}
-
 export default connect(
-  null,
+  mapStateToProps,
   mapDispatchToProps
-)(ComicItemContainer)
+)(ComicItem)
