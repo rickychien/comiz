@@ -68,7 +68,7 @@ it runs DEBUG mode as well as accessing to server and fetch data from server whi
   npm run clean
   ```
 
-#### Push to gh-pages (it will pre-build by ```npm run build``` first)
+#### Push to gh-pages (it requires ```npm run build``` and follow a ```git commit``` before publishing)
   ```
   npm run gh-pages
   ```
