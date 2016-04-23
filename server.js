@@ -6,10 +6,9 @@ const webpackHotMiddleware = require('webpack-hot-middleware')
 const express = require('express')
 const config = require('./webpack.config')
 
-const port = 3990
-
 const compiler = webpack(config)
 const app = express()
+const port = 3990
 
 app.use(webpackDevMiddleware(compiler, {
   noInfo: true,

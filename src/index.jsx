@@ -7,7 +7,6 @@ import configureStore from './store'
 import './index.css'
 import './assets/materialicons.css'
 
-
 function getStoreUserPrefs(key) {
   let result
   try {
@@ -25,10 +24,8 @@ const initialState = {
   },
 }
 
-const store = configureStore(initialState)
-
 render(
-  <Provider store={store}>
+  <Provider store={configureStore(initialState)}>
     <AppContainer />
   </Provider>,
   document.getElementById('root')
