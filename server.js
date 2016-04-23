@@ -35,6 +35,6 @@ app.listen(port, (error) => {
   if (error) {
     console.error(error)
   } else {
-    console.info('==> 🌎  Open up http://localhost:%s/ in your browser.', port)
+    console.info('==> Open up http://localhost:%s/ in your browser.', port)
   }
 })
