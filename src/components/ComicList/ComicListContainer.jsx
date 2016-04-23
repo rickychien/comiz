@@ -48,13 +48,14 @@ class ComicListContainer extends React.Component {
     const screenWidth = window.innerWidth
     let imgWidth = 120
 
-    if (screenWidth >= 340) {
-      imgWidth = 135
-    } else if (screenWidth >= 370) {
+    if (screenWidth >= 370) {
       imgWidth = 150
+    } else if (screenWidth >= 340) {
+      imgWidth = 135
     }
 
-    const columns = Math.floor((screenWidth - 20) / imgWidth)
+    const imgMargin = 26
+    const columns = Math.floor((screenWidth - 20) / (imgWidth + imgMargin))
 
     if (columns >= 8) {
       return columns * 12
