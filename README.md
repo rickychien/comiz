@@ -2,7 +2,7 @@
 
 [![Build Status](https://img.shields.io/travis/rickychien/comiz/master.svg?style=flat-square)](https://travis-ci.org/rickychien/comiz)
 
-A playground
+A fantastic comic viewer in the world.
 
 ## Prerequisites
 
@@ -33,7 +33,7 @@ A playground
 
 3. Visit <http://localhost:3990> in browser
 
-### Development Guide:
+### Development Guide
 
 #### Run on DEBUG mode (default)
   ```
