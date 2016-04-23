@@ -1,6 +1,5 @@
 import React, { PropTypes } from 'react'
 import Swipeable from 'react-swipeable'
-import EventListener from 'react-event-listener'
 
 import { AppBar } from '../AppBar'
 import { CheckItem } from '../CheckItem'
@@ -35,6 +34,10 @@ class ComicDrawer extends React.Component {
     xDelta: 0,
   }
 
+  componentDidMount() {
+    window.addEventListener('keyup', this.onKeyUp)
+  }
+
   componentWillReceiveProps(nextProps) {
     if (nextProps.open !== this.props.open) {
       this.setState({
@@ -42,6 +45,10 @@ class ComicDrawer extends React.Component {
         xDelta: 0,
       })
     }
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('keyup', this.onKeyUp);
   }
 
   onSwipingRight = (evt, xDelta) => {
@@ -110,7 +117,6 @@ class ComicDrawer extends React.Component {
         onSwipingRight={ this.onSwipingRight }
         onSwipedRight={ this.onSwipedRight }
       >
-        <EventListener elementName="window" onKeyUp={ this.onKeyUp } />
         <AppBar materialIcon="close" onLogoClick={ this.handleClose } />
         {
           (() => {
