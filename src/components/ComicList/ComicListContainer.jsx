@@ -25,6 +25,12 @@ class ComicListContainer extends React.Component {
 
   componentDidMount() {
     this.props.dispatch(Actions.fetchComics())
+    this.updateComicPerPage()
+    window.addEventListener('resize', this.updateComicPerPage)
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('resize', this.updateComicPerPage);
   }
 
   onPrevPageClick = () => {
@@ -36,6 +42,27 @@ class ComicListContainer extends React.Component {
     const { dispatch, offset, comicsPerPage } = this.props
     dispatch(Actions.updateComicList(offset + comicsPerPage))
     window.scrollTo(0, 0)
+  }
+
+  getComicsPerPage = () => {
+    const screenWidth = window.innerWidth
+    let imgWidth = 120
+
+    if (screenWidth >= 340) {
+      imgWidth = 135
+    } else if (screenWidth >= 370) {
+      imgWidth = 150
+    }
+
+    const columns = Math.floor((screenWidth - 20) / imgWidth)
+
+    if (columns >= 8) {
+      return columns * 12
+    } else if (columns >= 4) {
+      return columns * 8
+    }
+
+    return columns * 6
   }
 
   getAllComics = () => {
@@ -63,6 +90,15 @@ class ComicListContainer extends React.Component {
     }
 
     return comicArray.filter(comic => reg.test(comic.title))
+  }
+
+  updateComicPerPage = () => {
+    const { dispatch, offset, comicsPerPage } = this.props
+    const newComicsPerPage = this.getComicsPerPage()
+
+    if (comicsPerPage !== newComicsPerPage) {
+      dispatch(Actions.updateComicList(offset, newComicsPerPage))
+    }
   }
 
   render() {
