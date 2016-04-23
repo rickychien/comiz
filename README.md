@@ -73,6 +73,12 @@ it runs DEBUG mode as well as accessing to server and fetch data from server whi
   npm run gh-pages
   ```
 
+  Steps to gh-pages publish
+
+  1. npm run build
+  2. git commit new changes (including build results in statics/*)
+  3. npm run gh-pages
+
 ## Application State Structure
 
 ```js
