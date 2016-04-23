@@ -51,19 +51,19 @@ it runs DEBUG mode as well as accessing to server and fetch data from server whi
 
   Production build will exclude unnecessary resources, setup server url and minimize resources size as small as possible to optimize website experience.
 
-#### Package all static resources into ./static/* (it also run clean before packaging)
+#### Package all dist resources into ./dist/* (it also run clean before packaging)
   ```
   npm run build
   ```
 
-  It's up to you to spin up a local server in static folder to see production result, for example launching a python server
+  It's up to you to spin up a local server in dist folder to see production result, for example launching a python server
 
   ```
   python -m SimpleHTTPServer
   ```
   and go to visit <http://localhost:8000>
 
-#### Clean static resources
+#### Clean dist resources
   ```
   npm run clean
   ```
@@ -76,7 +76,7 @@ it runs DEBUG mode as well as accessing to server and fetch data from server whi
   Steps to gh-pages publish
 
   1. npm run build
-  2. git commit new changes (including build results in statics/*)
+  2. git commit new changes (including build results in dist/*)
   3. npm run gh-pages
 
 ## Application State Structure
