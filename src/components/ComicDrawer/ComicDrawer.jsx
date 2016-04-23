@@ -123,12 +123,7 @@ class ComicDrawer extends React.Component {
             if (isFetching) {
               return (
                 <div className={ styles.statusPage }>
-                  <div>
-                    <i className="material-icons">
-                      access_time
-                    </i>
-                    <h2>Loading...</h2>
-                  </div>
+                  <i className="material-spinner" />
                 </div>
               )
             } else if (fetchError) {

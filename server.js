@@ -31,6 +31,10 @@ app.get('/api/*', (req, res) => {
   res.sendFile(`${__dirname}/src${path}`)
 })
 
+app.get('/assets/*', (req, res) => {
+  res.sendFile(`${__dirname}/src/${req.path}`)
+})
+
 app.listen(port, (error) => {
   if (error) {
     console.error(error)

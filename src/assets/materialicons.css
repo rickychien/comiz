@@ -17,9 +17,17 @@
   white-space: nowrap;
   word-wrap: normal;
   direction: ltr;
-  -webkit-font-feature-settings: 'liga';
   -webkit-font-smoothing: antialiased;
-  text-rendering: optimizeLegibility;
   -moz-osx-font-smoothing: grayscale;
+  -webkit-font-feature-settings: 'liga';
   font-feature-settings: 'liga';
+  text-rendering: optimizeLegibility;
+}
+
+:global(.material-spinner) {
+  background-image: url(./material-spinner.svg);
+  background-repeat: no-repeat;
+  background-position: center;
+  width: 164px;
+  height: 164px;
 }
