@@ -1,317 +1,362 @@
 [
   {
-    "id":1,
-    "title":"001",
-    "coverUrl":"http://www.comicbus.com/pics/0/3099.jpg"
+    "id": 1,
+    "title": "001",
+    "coverUrl": "http://www.comicbus.com/pics/0/3099.jpg"
   },
   {
-    "id":325,
-    "title":"暗殺教室",
-    "coverUrl":"http://www.comicbus.com/pics/0/8984.jpg"
+    "id": 325,
+    "title": "暗殺教室",
+    "coverUrl": "http://www.comicbus.com/pics/0/8984.jpg"
   },
   {
-    "id":1206,
-    "title":"初體驗野獸",
-    "coverUrl":"http://www.comicbus.com/pics/0/14047.jpg"
+    "id": 1206,
+    "title": "初體驗野獸",
+    "coverUrl": "http://www.comicbus.com/pics/0/14047.jpg"
   },
   {
-    "id":1351,
-    "title":"粗點心戰爭",
-    "coverUrl":"http://www.comicbus.com/pics/0/11524.jpg"
+    "id": 1351,
+    "title": "粗點心戰爭",
+    "coverUrl": "http://www.comicbus.com/pics/0/11524.jpg"
   },
   {
-    "id":91,
-    "title":"Acma Game",
-    "coverUrl":"http://www.comicbus.com/pics/0/10693.jpg"
+    "id": 91,
+    "title": "Acma Game",
+    "coverUrl": "http://www.comicbus.com/pics/0/10693.jpg"
   },
   {
-    "id":154,
-    "title":"阿瑟比與天空世界的冒險者",
-    "coverUrl":"http://www.comicbus.com/pics/0/13905.jpg"
+    "id": 154,
+    "title": "阿瑟比與天空世界的冒險者",
+    "coverUrl": "http://www.comicbus.com/pics/0/13905.jpg"
   },
   {
-    "id":293,
-    "title":"愛欲的都市叢林",
-    "coverUrl":"http://www.comicbus.com/pics/0/11570.jpg"
+    "id": 293,
+    "title": "愛欲的都市叢林",
+    "coverUrl": "http://www.comicbus.com/pics/0/11570.jpg"
   },
   {
-    "id":744,
-    "title":"變幻魔女",
-    "coverUrl":"http://www.comicbus.com/pics/0/10557.jpg"
+    "id": 744,
+    "title": "變幻魔女",
+    "coverUrl": "http://www.comicbus.com/pics/0/10557.jpg"
   },
   {
-    "id":832,
-    "title":"鉑金終局",
-    "coverUrl":"http://www.comicbus.com/pics/0/13812.jpg"
+    "id": 832,
+    "title": "鉑金終局",
+    "coverUrl": "http://www.comicbus.com/pics/0/13812.jpg"
   },
   {
-    "id":874,
-    "title":"Charlotte",
-    "coverUrl":"http://www.comicbus.com/pics/0/13517.jpg"
+    "id": 874,
+    "title": "Charlotte",
+    "coverUrl": "http://www.comicbus.com/pics/0/13517.jpg"
   },
   {
-    "id":875,
-    "title":"Charlotte 四格漫畫 超越青春吧",
-    "coverUrl":"http://www.comicbus.com/pics/0/13773.jpg"
+    "id": 875,
+    "title": "Charlotte 四格漫畫 超越青春吧",
+    "coverUrl": "http://www.comicbus.com/pics/0/13773.jpg"
   },
   {
-    "id":896,
-    "title":"Concrete Revolutio超人幻想",
-    "coverUrl":"http://www.comicbus.com/pics/0/13731.jpg"
+    "id": 896,
+    "title": "Concrete Revolutio超人幻想",
+    "coverUrl": "http://www.comicbus.com/pics/0/13731.jpg"
   },
   {
-    "id":980,
-    "title":"長門有希醬的消失",
-    "coverUrl":"http://www.comicbus.com/pics/0/6785.jpg"
+    "id": 980,
+    "title": "長門有希醬的消失",
+    "coverUrl": "http://www.comicbus.com/pics/0/6785.jpg"
   },
   {
-    "id":1109,
-    "title":"誠如神之所說Ⅱ",
-    "coverUrl":"http://www.comicbus.com/pics/0/9459.jpg"
+    "id": 1109,
+    "title": "誠如神之所說Ⅱ",
+    "coverUrl": "http://www.comicbus.com/pics/0/9459.jpg"
   },
   {
-    "id":1279,
-    "title":"春秋戰雄",
-    "coverUrl":"http://www.comicbus.com/pics/0/7000.jpg"
+    "id": 1279,
+    "title": "春秋戰雄",
+    "coverUrl": "http://www.comicbus.com/pics/0/7000.jpg"
   },
   {
-    "id":1280,
-    "title":"春刃光華",
-    "coverUrl":"http://www.comicbus.com/pics/0/7970.jpg"
+    "id": 1280,
+    "title": "春刃光華",
+    "coverUrl": "http://www.comicbus.com/pics/0/7970.jpg"
   },
   {
-    "id":1327,
-    "title":"純真的人",
-    "coverUrl":"http://www.comicbus.com/pics/0/10023.jpg"
+    "id": 1327,
+    "title": "純真的人",
+    "coverUrl": "http://www.comicbus.com/pics/0/10023.jpg"
   },
   {
-    "id":1346,
-    "title":"從小開始戀上你",
-    "coverUrl":"http://www.comicbus.com/pics/0/10273.jpg"
+    "id": 1346,
+    "title": "從小開始戀上你",
+    "coverUrl": "http://www.comicbus.com/pics/0/10273.jpg"
   },
   {
-    "id":76,
-    "title":"7thGARDEN",
-    "coverUrl":"http://www.comicbus.com/pics/0/11320.jpg"
+    "id": 76,
+    "title": "7thGARDEN",
+    "coverUrl": "http://www.comicbus.com/pics/0/11320.jpg"
   },
   {
-    "id":593,
-    "title":"棒球大聯盟2nd",
-    "coverUrl":"http://www.comicbus.com/pics/0/12965.jpg"
+    "id": 593,
+    "title": "棒球大聯盟2nd",
+    "coverUrl": "http://www.comicbus.com/pics/0/12965.jpg"
   },
   {
-    "id":1133,
-    "title":"赤赫血物語",
-    "coverUrl":"http://www.comicbus.com/pics/0/10653.jpg"
+    "id": 1133,
+    "title": "赤赫血物語",
+    "coverUrl": "http://www.comicbus.com/pics/0/10653.jpg"
   },
   {
-    "id":1310,
-    "title":"純白之音",
-    "coverUrl":"http://www.comicbus.com/pics/0/7277.jpg"
+    "id": 1310,
+    "title": "純白之音",
+    "coverUrl": "http://www.comicbus.com/pics/0/7277.jpg"
   },
   {
-    "id":377,
-    "title":"Biorg Trinity",
-    "coverUrl":"http://www.comicbus.com/pics/0/9366.jpg"
+    "id": 377,
+    "title": "Biorg Trinity",
+    "coverUrl": "http://www.comicbus.com/pics/0/9366.jpg"
   },
   {
-    "id":550,
-    "title":"百煉霸王與聖約女武神",
-    "coverUrl":"http://www.comicbus.com/pics/0/14002.jpg"
+    "id": 550,
+    "title": "百煉霸王與聖約女武神",
+    "coverUrl": "http://www.comicbus.com/pics/0/14002.jpg"
   },
   {
-    "id":1121,
-    "title":"吃吃睡睡的瑪璐塔",
-    "coverUrl":"http://www.comicbus.com/pics/0/11958.jpg"
+    "id": 1121,
+    "title": "吃吃睡睡的瑪璐塔",
+    "coverUrl": "http://www.comicbus.com/pics/0/11958.jpg"
   },
   {
-    "id":1194,
-    "title":"初戀僵尸",
-    "coverUrl":"http://www.comicbus.com/pics/0/13829.jpg"
+    "id": 1194,
+    "title": "初戀僵尸",
+    "coverUrl": "http://www.comicbus.com/pics/0/13829.jpg"
   },
   {
-    "id":610,
-    "title":"寶石之國",
-    "coverUrl":"http://www.comicbus.com/pics/0/10627.jpg"
+    "id": 610,
+    "title": "寶石之國",
+    "coverUrl": "http://www.comicbus.com/pics/0/10627.jpg"
   },
   {
-    "id":927,
-    "title":"菜花洋果子店的好工作",
-    "coverUrl":"http://www.comicbus.com/pics/0/13287.jpg"
+    "id": 927,
+    "title": "菜花洋果子店的好工作",
+    "coverUrl": "http://www.comicbus.com/pics/0/13287.jpg"
   },
   {
-    "id":1132,
-    "title":"赤坊主的腦洞鎮守府",
-    "coverUrl":"http://www.comicbus.com/pics/0/13770.jpg"
+    "id": 1132,
+    "title": "赤坊主的腦洞鎮守府",
+    "coverUrl": "http://www.comicbus.com/pics/0/13770.jpg"
   },
   {
-    "id":1330,
-    "title":"此花亭奇譚 新連載",
-    "coverUrl":"http://www.comicbus.com/pics/0/12680.jpg"
+    "id": 1330,
+    "title": "此花亭奇譚 新連載",
+    "coverUrl": "http://www.comicbus.com/pics/0/12680.jpg"
   },
   {
-    "id":80,
-    "title":"87CLOCKERS",
-    "coverUrl":"http://www.comicbus.com/pics/0/8318.jpg"
+    "id": 80,
+    "title": "87CLOCKERS",
+    "coverUrl": "http://www.comicbus.com/pics/0/8318.jpg"
   },
   {
-    "id":503,
-    "title":"白熊不明局",
-    "coverUrl":"http://www.comicbus.com/pics/0/13899.jpg"
+    "id": 503,
+    "title": "白熊不明局",
+    "coverUrl": "http://www.comicbus.com/pics/0/13899.jpg"
   },
   {
-    "id":557,
-    "title":"百姓貴族",
-    "coverUrl":"http://www.comicbus.com/pics/0/7183.jpg"
+    "id": 557,
+    "title": "百姓貴族",
+    "coverUrl": "http://www.comicbus.com/pics/0/7183.jpg"
   },
   {
-    "id":1003,
-    "title":"超級機密",
-    "coverUrl":"http://www.comicbus.com/pics/0/13867.jpg"
+    "id": 1003,
+    "title": "超級機密",
+    "coverUrl": "http://www.comicbus.com/pics/0/13867.jpg"
   },
   {
-    "id":1377,
-    "title":"DFO死亡幻想歌劇",
-    "coverUrl":"http://www.comicbus.com/pics/0/13795.jpg"
+    "id": 1377,
+    "title": "DFO死亡幻想歌劇",
+    "coverUrl": "http://www.comicbus.com/pics/0/13795.jpg"
   },
   {
-    "id":344,
-    "title":"傲首熱舞 歡迎光臨鹿高競技舞蹈部",
-    "coverUrl":"http://www.comicbus.com/pics/0/13594.jpg"
+    "id": 344,
+    "title": "傲首熱舞 歡迎光臨鹿高競技舞蹈部",
+    "coverUrl": "http://www.comicbus.com/pics/0/13594.jpg"
   },
   {
-    "id":395,
-    "title":"Bloody+Mary",
-    "coverUrl":"http://www.comicbus.com/pics/0/11051.jpg"
+    "id": 395,
+    "title": "Bloody+Mary",
+    "coverUrl": "http://www.comicbus.com/pics/0/11051.jpg"
   },
   {
-    "id":464,
-    "title":"霸劍的皇姬阿爾緹娜",
-    "coverUrl":"http://www.comicbus.com/pics/0/13143.jpg"
+    "id": 464,
+    "title": "霸劍的皇姬阿爾緹娜",
+    "coverUrl": "http://www.comicbus.com/pics/0/13143.jpg"
   },
   {
-    "id":319,
-    "title":"暗黑破壞神在身邊",
-    "coverUrl":"http://www.comicbus.com/pics/0/9500.jpg"
+    "id": 319,
+    "title": "暗黑破壞神在身邊",
+    "coverUrl": "http://www.comicbus.com/pics/0/9500.jpg"
   },
   {
-    "id":723,
-    "title":"蝙蝠飼養記",
-    "coverUrl":"http://www.comicbus.com/pics/0/14056.jpg"
+    "id": 723,
+    "title": "蝙蝠飼養記",
+    "coverUrl": "http://www.comicbus.com/pics/0/14056.jpg"
   },
   {
-    "id":785,
-    "title":"飆速宅男",
-    "coverUrl":"http://www.comicbus.com/pics/0/10009.jpg"
+    "id": 785,
+    "title": "飆速宅男",
+    "coverUrl": "http://www.comicbus.com/pics/0/10009.jpg"
   },
   {
-    "id":1155,
-    "title":"蟲奉行",
-    "coverUrl":"http://www.comicbus.com/pics/0/7703.jpg"
+    "id": 1155,
+    "title": "蟲奉行",
+    "coverUrl": "http://www.comicbus.com/pics/0/7703.jpg"
   },
   {
-    "id":1020,
-    "title":"超能力者齊木楠雄的災難",
-    "coverUrl":"http://www.comicbus.com/pics/0/9028.jpg"
+    "id": 1020,
+    "title": "超能力者齊木楠雄的災難",
+    "coverUrl": "http://www.comicbus.com/pics/0/9028.jpg"
   },
   {
-    "id":62,
-    "title":"3月的獅子",
-    "coverUrl":"http://www.comicbus.com/pics/0/5491.jpg"
+    "id": 62,
+    "title": "3月的獅子",
+    "coverUrl": "http://www.comicbus.com/pics/0/5491.jpg"
   },
   {
-    "id":906,
-    "title":"CRIMINALE日常",
-    "coverUrl":"http://www.comicbus.com/pics/0/13887.jpg"
+    "id": 906,
+    "title": "CRIMINALE日常",
+    "coverUrl": "http://www.comicbus.com/pics/0/13887.jpg"
   },
   {
-    "id":311,
-    "title":"俺物語",
-    "coverUrl":"http://www.comicbus.com/pics/0/9174.jpg"
+    "id": 311,
+    "title": "俺物語",
+    "coverUrl": "http://www.comicbus.com/pics/0/9174.jpg"
   },
   {
-    "id":535,
-    "title":"百合的我與惡魔的她",
-    "coverUrl":"http://www.comicbus.com/pics/0/13558.jpg"
+    "id": 535,
+    "title": "百合的我與惡魔的她",
+    "coverUrl": "http://www.comicbus.com/pics/0/13558.jpg"
   },
   {
-    "id":733,
-    "title":"邊緣行動",
-    "coverUrl":"http://www.comicbus.com/pics/0/10130.jpg"
+    "id": 733,
+    "title": "邊緣行動",
+    "coverUrl": "http://www.comicbus.com/pics/0/10130.jpg"
   },
   {
-    "id":60,
-    "title":"3LDK的國王",
-    "coverUrl":"http://www.comicbus.com/pics/0/11199.jpg"
+    "id": 60,
+    "title": "3LDK的國王",
+    "coverUrl": "http://www.comicbus.com/pics/0/11199.jpg"
   },
   {
-    "id":624,
-    "title":"暴力偵探",
-    "coverUrl":"http://www.comicbus.com/pics/0/11274.jpg"
+    "id": 624,
+    "title": "暴力偵探",
+    "coverUrl": "http://www.comicbus.com/pics/0/11274.jpg"
   },
   {
-    "id":905,
-    "title":"CRIMINALE",
-    "coverUrl":"http://www.comicbus.com/pics/0/13888.jpg"
+    "id": 905,
+    "title": "CRIMINALE",
+    "coverUrl": "http://www.comicbus.com/pics/0/13888.jpg"
   },
   {
-    "id":1227,
-    "title":"雛鳥的華爾茲",
-    "coverUrl":"http://www.comicbus.com/pics/0/12985.jpg"
+    "id": 1227,
+    "title": "雛鳥的華爾茲",
+    "coverUrl": "http://www.comicbus.com/pics/0/12985.jpg"
   },
   {
-    "id":443,
-    "title":"巴比倫塔的惡魔商人",
-    "coverUrl":"http://www.comicbus.com/pics/0/12829.jpg"
+    "id": 443,
+    "title": "巴比倫塔的惡魔商人",
+    "coverUrl": "http://www.comicbus.com/pics/0/12829.jpg"
   },
   {
-    "id":763,
-    "title":"變態提督的日常",
-    "coverUrl":"http://www.comicbus.com/pics/0/13368.jpg"
+    "id": 763,
+    "title": "變態提督的日常",
+    "coverUrl": "http://www.comicbus.com/pics/0/13368.jpg"
   },
   {
-    "id":886,
-    "title":"Classi9",
-    "coverUrl":"http://www.comicbus.com/pics/0/13226.jpg"
+    "id": 886,
+    "title": "Classi9",
+    "coverUrl": "http://www.comicbus.com/pics/0/13226.jpg"
   },
   {
-    "id":1068,
-    "title":"朝5晚9",
-    "coverUrl":"http://www.comicbus.com/pics/0/8460.jpg"
+    "id": 1068,
+    "title": "朝5晚9",
+    "coverUrl": "http://www.comicbus.com/pics/0/8460.jpg"
   },
   {
-    "id":66,
-    "title":"4D",
-    "coverUrl":"http://www.comicbus.com/pics/0/13790.jpg"
+    "id": 66,
+    "title": "4D",
+    "coverUrl": "http://www.comicbus.com/pics/0/13790.jpg"
   },
   {
-    "id":504,
-    "title":"白熊咖啡廳",
-    "coverUrl":"http://www.comicbus.com/pics/0/8799.jpg"
+    "id": 504,
+    "title": "白熊咖啡廳",
+    "coverUrl": "http://www.comicbus.com/pics/0/8799.jpg"
   },
   {
-    "id":505,
-    "title":"白雪愛麗絲",
-    "coverUrl":"http://www.comicbus.com/pics/0/12476.jpg"
+    "id": 505,
+    "title": "白雪愛麗絲",
+    "coverUrl": "http://www.comicbus.com/pics/0/12476.jpg"
   },
   {
-    "id":986,
-    "title":"常磐來也",
-    "coverUrl":"http://www.comicbus.com/pics/0/12356.jpg"
+    "id": 986,
+    "title": "常磐來也",
+    "coverUrl": "http://www.comicbus.com/pics/0/12356.jpg"
   },
   {
-    "id":247,
-    "title":"愛情喜劇的白癡",
-    "coverUrl":"http://www.comicbus.com/pics/0/13412.jpg"
+    "id": 247,
+    "title": "愛情喜劇的白癡",
+    "coverUrl": "http://www.comicbus.com/pics/0/13412.jpg"
   },
   {
-    "id":554,
-    "title":"百萬迷宮",
-    "coverUrl":"http://www.comicbus.com/pics/0/14083.jpg"
+    "id": 554,
+    "title": "百萬迷宮",
+    "coverUrl": "http://www.comicbus.com/pics/0/14083.jpg"
   },
   {
-    "id":943,
-    "title":"蒼龍近侍",
-    "coverUrl":"http://www.comicbus.com/pics/0/14053.jpg"
+    "id": 943,
+    "title": "蒼龍近侍",
+    "coverUrl": "http://www.comicbus.com/pics/0/14053.jpg"
+  },
+  {
+    "id": 9164,
+    "title": "世界第一邪惡魔女",
+    "coverUrl": "http://www.comicbus.com/pics/0/11671.jpg"
+  },
+  {
+    "id": 9165,
+    "title": "水珠HoneyBoy",
+    "coverUrl": "http://www.comicbus.com/pics/0/10737.jpg"
+  },
+  {
+    "id": 9166,
+    "title": "排第四的許婚候補",
+    "coverUrl": "http://www.comicbus.com/pics/0/14121.jpg"
+  },
+  {
+    "id": 9154,
+    "title": "聖斗士星矢 聖斗少女翔",
+    "coverUrl": "http://www.comicbus.com/pics/0/11282.jpg"
+  },
+  {
+    "id": 9155,
+    "title": "聖斗士星矢 Episode.G Assassin",
+    "coverUrl": "http://www.comicbus.com/pics/0/13865.jpg"
+  },
+  {
+    "id": 9156,
+    "title": "軍事宅轉生到異世界",
+    "coverUrl": "http://www.comicbus.com/pics/0/13882.jpg"
+  },
+  {
+    "id": 9157,
+    "title": "瞬間萊爾",
+    "coverUrl": "http://www.comicbus.com/pics/0/14081.jpg"
+  },
+  {
+    "id": 9147,
+    "title": "魔女的使命",
+    "coverUrl": "http://www.comicbus.com/pics/0/7789.jpg"
+  },
+  {
+    "id": 9148,
+    "title": "盛氣凌人",
+    "coverUrl": "http://www.comicbus.com/pics/0/10525.jpg"
   }
 ]
