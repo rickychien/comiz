@@ -21,11 +21,13 @@ A fantastic comic viewer in the world.
 ## Contribute
 
 1. Install npm packages
+
   ```
   npm install
   ```
 
 2. Start webpack dev server
+
   ```
   npm start
   ```
@@ -34,32 +36,28 @@ A fantastic comic viewer in the world.
 
 ### Development Guide
 
-#### Run on DEBUG mode (default)
+#### Development
+
   ```
   npm start
   ```
-it will enable [redux-logger] and fetch fake data from local at [src/api/](https://github.com/rickychien/comiz/blob/master/src/api/))
 
-#### Run on DEBUG mode with accessing to server
-  ```
-  DEBUG=SERVER npm start
-  ```
-it runs DEBUG mode as well as accessing to server and fetch data from server which url is defined at [src/actions/index.js](https://github.com/rickychien/comiz/blob/master/src/actions/index.js#L2)
+  It will enable [redux-logger] and fetch fake data from local at [src/api/](https://github.com/rickychien/comiz/blob/master/src/api/))
 
-#### Build with production
+#### Production
 
-  Production build will exclude unnecessary resources, setup server url and minimize resources size as small as possible to optimize website experience.
+  Production build will exclude unnecessary resources (ex: [redux-logger] only for debugging), ship with server url and minimize resources as small as possible to optimize website experience.
 
-#### Package all dist resources into ./dist/* (it also run clean before packaging)
   ```
   npm run build
   ```
 
-  It's up to you to spin up a local server in dist folder to see production result, for example launching a python server
+  It's up to you to spin up a local server in dist folder to see production result, for example launching a python server in dist
 
   ```
   python -m SimpleHTTPServer
   ```
+
   and go to visit <http://localhost:8000>
 
 #### Clean dist resources

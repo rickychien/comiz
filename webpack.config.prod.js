@@ -22,9 +22,9 @@ module.exports = {
       compress: { warnings: false },
     }),
     new webpack.DefinePlugin({
-      DEBUG: false,
       'process.env': {
-        'NODE_ENV': '"production"'
+        'NODE_ENV': JSON.stringify('production'),
+        'SERVER_URL': JSON.stringify('https://atecomic.wcpan.me'),
       }
     }),
   ],

@@ -1,5 +1,4 @@
-const SERVER_URL =
-  (DEBUG && DEBUG !== 'SERVER') ? '' : 'https://atecomic.wcpan.me'
+const SERVER_URL = process.env.SERVER_URL
 
 // Filter comics by category
 

@@ -5,8 +5,11 @@ import rootReducer from '../reducers'
 export default function configureStore(initialState) {
   const middlewares = [
     thunkMiddleware,
-    DEBUG && require('redux-logger')(),
-  ].filter(Boolean)
+  ]
+
+  if (process.env.NODE_ENV !== 'production') {
+    middlewares.push(require('redux-logger')())
+  }
 
   return createStore(
     rootReducer,
