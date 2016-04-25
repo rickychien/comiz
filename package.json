@@ -11,7 +11,7 @@
     "gh-pages": "git subtree push --prefix dist origin gh-pages"
   },
   "author": "Ricky Chien <ricky060709@gmail.com>",
-  "license": "ISC",
+  "license": "MIT",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/rickychien/comiz.git"
