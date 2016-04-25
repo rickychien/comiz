@@ -4,9 +4,9 @@
   "description": "Comic viewer",
   "main": "index.js",
   "scripts": {
-    "build": "npm run clean && ./node_modules/.bin/webpack --progress --colors --config ./webpack.prod.config.js && cp ./src/index.html ./dist/",
+    "build": "npm run clean && $(npm bin)/webpack --progress --colors --config ./webpack.prod.config.js && cp ./src/index.html ./dist/",
     "clean": "rm -rf ./dist",
-    "lint": "./node_modules/.bin/eslint 'src/**/*.+(js|jsx)'",
+    "lint": "$(npm bin)/eslint 'src/**/*.+(js|jsx)'",
     "test": "echo \"Error: no test specified\" && exit 1",
     "gh-pages": "git subtree push --prefix dist origin gh-pages"
   },
