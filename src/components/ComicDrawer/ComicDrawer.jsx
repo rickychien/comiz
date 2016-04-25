@@ -1,9 +1,9 @@
 import React, { PropTypes } from 'react'
 import Swipeable from 'react-swipeable'
 
-import { AppBar } from '../AppBar'
-import { CheckItem } from '../CheckItem'
-import { ComicEpisodeContainer } from '../ComicEpisode'
+import AppBar from '../AppBar'
+import CheckItem from '../CheckItem'
+import ComicEpisodeContainer from '../ComicEpisode'
 
 import styles from './ComicDrawer.css'
 

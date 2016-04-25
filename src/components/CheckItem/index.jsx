@@ -1,2 +1,1 @@
-import CheckItem from './CheckItem'
-export { CheckItem }
+export default from './CheckItem'

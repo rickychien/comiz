@@ -1,77 +1,31 @@
 import React, { PropTypes } from 'react'
 import { connect } from 'react-redux'
 
-import { AppBar } from '../AppBar'
-import { FlatButton } from '../FlatButton'
-import { ComicDrawerContainer } from '../ComicDrawer'
-import { ComicListContainer } from '../ComicList'
-import { ComicViewerContainer } from '../ComicViewer'
-import { SearchBarContainer } from '../SearchBar'
-import { SelectFieldContainer } from '../SelectField'
+import ComicDrawer from '../ComicDrawer'
 
-import * as Actions from '../../actions'
-
-function AppContainer({
-  showComicViewer,
-  shrink,
-  onBackClick,
-  onComicDrawerClick,
-}) {
+function AppContainer({ open, comicId, children }) {
   return (
     <div>
-      {
-        !showComicViewer ? (
-          <div>
-            <AppBar title="Comiz" materialIcon="fingerprint" shrink={ shrink }>
-              <SelectFieldContainer />
-              <SearchBarContainer />
-            </AppBar>
-            <ComicListContainer shrink={ shrink } />
-          </div>
-        ) : (
-          <div>
-            <AppBar
-              materialIcon="arrow_back"
-              onLogoClick={ onBackClick }
-              transparent
-            >
-              <FlatButton materialIcon="book" onClick={ onComicDrawerClick } />
-            </AppBar>
-            <ComicViewerContainer />
-          </div>
-        )
-      }
-      <ComicDrawerContainer />
+      { children }
+      <ComicDrawer open={ open } comicId={ comicId } />
     </div>
   )
 }
 
-function mapStateToProps(state) {
-  return {
-    showComicViewer: state.comicViewer.open,
-    shrink: state.comicDrawer.open,
-  }
-}
-
-function mapDispatchToProps(dispatch) {
-  return {
-    onBackClick() {
-      dispatch(Actions.hideComicViewer())
-    },
-    onComicDrawerClick() {
-      dispatch(Actions.showComicDrawer())
-    },
-  }
-}
-
 AppContainer.propTypes = {
-  showComicViewer: PropTypes.bool,
-  shrink: PropTypes.bool,
-  onBackClick: PropTypes.func,
-  onComicDrawerClick: PropTypes.func,
+  open: PropTypes.bool.isRequired,
+  comicId: PropTypes.number.isRequired,
+  children: PropTypes.node,
+}
+
+function mapStateToProps(state, ownProps) {
+  const id = ownProps.location.query.id
+  return {
+    open: !!id,
+    comicId: parseInt(id, 10) || state.comicDrawer.comicId,
+  }
 }
 
 export default connect(
-  mapStateToProps,
-  mapDispatchToProps
+  mapStateToProps
 )(AppContainer)

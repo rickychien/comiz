@@ -1,6 +1,35 @@
 const SERVER_URL = process.env.SERVER_URL
 
-// Filter comics by category
+export function toggleFavorite(comicId) {
+  return {
+    type: 'TOGGLE_FAVORITE',
+    comicId,
+  }
+}
+
+export function markRead(comicId, episodeId) {
+  return {
+    type: 'MARK_READ',
+    comicId,
+    episodeId,
+  }
+}
+
+export function unmarkRead(comicId, episodeId) {
+  return {
+    type: 'UNMARK_READ',
+    comicId,
+    episodeId,
+  }
+}
+
+export function toggleRead(comicId, episodeId) {
+  return {
+    type: 'TOGGLE_READ',
+    comicId,
+    episodeId,
+  }
+}
 
 export function filterCategory(category) {
   return {
@@ -9,8 +38,6 @@ export function filterCategory(category) {
   }
 }
 
-// Filter comics by query string
-
 export function filterQuery(query) {
   return {
     type: 'FILTER_QUERY',
@@ -18,24 +45,28 @@ export function filterQuery(query) {
   }
 }
 
-// Show comic drawer
-
-export function showComicDrawer(comicId) {
+export function updateComicDrawer(comicId) {
   return {
-    type: 'SHOW_COMIC_DRAWER',
+    type: 'UPDATE_COMIC_DRAWER',
     comicId,
   }
 }
 
-// Hide comic drawer
-
-export function hideComicDrawer() {
+export function updateComicList(offset, comicsPerPage) {
   return {
-    type: 'HIDE_COMIC_DRAWER',
+    type: 'UPDATE_COMIC_LIST',
+    offset,
+    comicsPerPage,
   }
 }
 
-// Fetch comics from server
+export function updateComicViewer(comicId, episodeId) {
+  return {
+    type: 'UPDATE_COMIC_VIEWER',
+    comicId,
+    episodeId,
+  }
+}
 
 function fetchComicsRequest() {
   return {
@@ -70,18 +101,6 @@ export function fetchComics() {
   }
 }
 
-// Update comic list for pagination
-
-export function updateComicList(offset, comicsPerPage) {
-  return {
-    type: 'UPDATE_COMIC_LIST',
-    offset,
-    comicsPerPage,
-  }
-}
-
-// Fetch single comic item from server
-
 function fetchComicRequest() {
   return {
     type: 'FETCH_COMIC_REQUEST',
@@ -114,8 +133,6 @@ export function fetchComic(comicId) {
     return false
   }
 }
-
-// Fetch comic episodes from server
 
 function fetchEpisodesRequest(comicId) {
   return {
@@ -152,55 +169,6 @@ export function fetchEpisodes(comicId) {
     return false
   }
 }
-
-// Toggle favorite
-
-export function toggleFavorite(comicId) {
-  return {
-    type: 'TOGGLE_FAVORITE',
-    comicId,
-  }
-}
-
-// Mark read
-
-export function markRead(comicId, episodeId) {
-  return {
-    type: 'MARK_READ',
-    comicId,
-    episodeId,
-  }
-}
-
-// Unmark read
-
-export function unmarkRead(comicId, episodeId) {
-  return {
-    type: 'UNMARK_READ',
-    comicId,
-    episodeId,
-  }
-}
-
-// Show comic viewer
-
-export function showComicViewer(comicId, episodeId) {
-  return {
-    type: 'SHOW_COMIC_VIEWER',
-    comicId,
-    episodeId,
-  }
-}
-
-// Hide comic viewer
-
-export function hideComicViewer() {
-  return {
-    type: 'HIDE_COMIC_VIEWER',
-  }
-}
-
-// Fetch comic episode pages from server
 
 function fetchPagesRequest(comicId, episodeId) {
   return {

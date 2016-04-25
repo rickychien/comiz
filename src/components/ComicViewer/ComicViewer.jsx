@@ -1,6 +1,7 @@
 import React, { PropTypes } from 'react'
 
-import { FlatButton } from '../FlatButton'
+import AppBar from '../AppBar'
+import FlatButton from '../FlatButton'
 
 import styles from './ComicViewer.css'
 
@@ -13,9 +14,14 @@ function ComicViewer({
   nextEpisode,
   onPrevEpisodeClick,
   onNextEpisodeClick,
+  onBackClick,
+  onComicDrawerClick,
 }) {
   return (
     <div className={ styles.comicViewer }>
+      <AppBar materialIcon="arrow_back" onLogoClick={ onBackClick } transparent>
+        <FlatButton materialIcon="book" onClick={ onComicDrawerClick } />
+      </AppBar>
       {
         (() => {
           if (isFetching) {
@@ -90,6 +96,7 @@ function ComicViewer({
 
 ComicViewer.defaultProps = {
   pages: [],
+  episode: {},
   isFetching: false,
   fetchError: null,
   prevEpisodeDisabled: true,
@@ -105,6 +112,8 @@ ComicViewer.propTypes = {
   nextEpisode: PropTypes.object,
   onPrevEpisodeClick: PropTypes.func,
   onNextEpisodeClick: PropTypes.func,
+  onBackClick: PropTypes.func,
+  onComicDrawerClick: PropTypes.func,
 }
 
 export default ComicViewer

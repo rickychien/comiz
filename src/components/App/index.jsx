@@ -1,2 +1,1 @@
-import AppContainer from './AppContainer'
-export { AppContainer }
+export default from './AppContainer'

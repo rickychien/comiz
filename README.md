@@ -94,9 +94,32 @@ A fantastic comic viewer in the world.
     ]
   },
 
+  filter: {
+    category: 'SHOW_LATEST',
+    categories: {
+      SHOW_LATEST: 'Latest',
+      SHOW_FAVORITE: 'favorite'
+    },
+    query: 'user query string'
+  },
+
+  comicDrawer: {
+    comicId: 1
+  },
+
+  comicList: {
+    offset: 0,
+    comicsPerPage: 35
+  },
+
+  comicViewer: {
+    comicId: 1,
+    episodeId: 1
+  },
+
   comics: {
     isFetching: false,
-    fetchError: false,
+    fetchError: null,
     entries: {
       1: {
         id: 1,
@@ -112,7 +135,7 @@ A fantastic comic viewer in the world.
   episodes: {
     comicId: 1,
     isFetching: false,
-    fetchError: false,
+    fetchError: null,
     entries: {
       1: {
         id: 1,
@@ -129,36 +152,16 @@ A fantastic comic viewer in the world.
     comicId: 1,
     episodeId: 2,
     isFetching: false,
-    fetchError: false,
+    fetchError: null,
     entries: [
       'http://path/to/page1',
       'http://path/to/page2'
     ]
   },
 
-  comicDrawer: {
-    open: false,
-    comicId: 1
-  },
-
-  comicList: {
-    offset: 0,
-    comicsPerPage: 35
-  },
-
-  comicViewer: {
-    open: false,
-    comicId: 1,
-    episodeId: 1
-  },
-
-  filter: {
-    category: 'SHOW_LATEST',
-    categories: {
-      SHOW_LATEST: 'Latest',
-      SHOW_FAVORITE: 'favorite'
-    },
-    query: 'user query string'
+  // Use for react-router
+  routing: {
+    ...
   }
 }
 ```

@@ -36,6 +36,15 @@ function unmarkRead(reads, comicId, episodeId) {
   return [...reads]
 }
 
+function toggleRead(reads, comicId, episodeId) {
+  const found = reads.find(read => (
+    read.comicId === comicId && read.episodeId === episodeId
+  ))
+
+  return found ?
+    unmarkRead(reads, comicId, episodeId) : markRead(reads, comicId, episodeId)
+}
+
 export default function (state = initialState, action) {
   switch (action.type) {
     case 'TOGGLE_FAVORITE':
@@ -52,6 +61,11 @@ export default function (state = initialState, action) {
       return {
         ...state,
         reads: unmarkRead(state.reads, action.comicId, action.episodeId),
+      }
+    case 'TOGGLE_READ':
+      return {
+        ...state,
+        reads: toggleRead(state.reads, action.comicId, action.episodeId),
       }
     default:
       return state

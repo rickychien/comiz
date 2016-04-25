@@ -1,6 +1,9 @@
 import React, { PropTypes } from 'react'
 
-import { ComicItemContainer } from '../ComicItem'
+import AppBar from '../AppBar'
+import ComicItem from '../ComicItem'
+import SearchBar from '../SearchBar'
+import SelectField from '../SelectField'
 
 import styles from './ComicList.css'
 
@@ -13,6 +16,7 @@ function ComicList({
   disableNextPageClick,
   onPrevPageClick,
   onNextPageClick,
+  onComicItemClick,
 }) {
   let comicListStyles = styles.container
   if (shrink) {
@@ -20,56 +24,74 @@ function ComicList({
   }
 
   return (
-    (() => {
-      if (isFetching && comics.length === 0) {
-        return (
-          <div className={ styles.statusPage }>
-            <i className="material-spinner" />
-          </div>
-        )
-      } else if (fetchError && comics.length === 0) {
-        return (
-          <div className={ styles.statusPage }>
-            <div>
-              <i className="material-icons">sentiment_very_dissatisfied</i>
-              <h2>Unable to find comics</h2>
-            </div>
-          </div>
-        )
-      }
-
-      return (
-        <div className={ comicListStyles }>
-          {
-            !disablePrevPageClick && (
-              <div className={ styles.prevPage } onClick={ onPrevPageClick }>
-                <i className={ `material-icons ${styles.expand}` }>
-                  arrow_drop_up
-                </i>
+    <div>
+      <AppBar materialIcon="fingerprint" title="Comiz" shrink={ shrink }>
+        <SelectField />
+        <SearchBar />
+      </AppBar>
+      {
+        (() => {
+          if (isFetching && comics.length === 0) {
+            return (
+              <div className={ styles.statusPage }>
+                <i className="material-spinner" />
+              </div>
+            )
+          } else if (fetchError && comics.length === 0) {
+            return (
+              <div className={ styles.statusPage }>
+                <div>
+                  <i className="material-icons">sentiment_very_dissatisfied</i>
+                  <h2>Unable to find comics</h2>
+                </div>
               </div>
             )
           }
-          <div className={ styles.comicList }>
-            <div className={ styles.comicListInner }>
+
+          return (
+            <div className={ comicListStyles }>
               {
-                comics.map((comic) => (
-                  <ComicItemContainer key={ comic.id } comic={ comic } />
-                ))
+                !disablePrevPageClick && (
+                  <div
+                    className={ styles.prevPage }
+                    onClick={ onPrevPageClick }
+                  >
+                    <i className={ `material-icons ${styles.expand}` }>
+                      arrow_drop_up
+                    </i>
+                  </div>
+                )
+              }
+            <div className={ styles.comicList }>
+              <div className={ styles.comicListInner }>
+                {
+                  comics.map((comic) => (
+                    <ComicItem
+                      key={ comic.id }
+                      comic={ comic }
+                      onClick={ onComicItemClick }
+                    />
+                  ))
+                }
+              </div>
+            </div>
+              {
+                !disableNextPageClick && (
+                  <div
+                    className={ styles.nextPage }
+                    onClick={ onNextPageClick }
+                  >
+                    <i className={ `material-icons ${styles.expand}` }>
+                      arrow_drop_down
+                    </i>
+                  </div>
+                )
               }
             </div>
-          </div>
-          {
-            !disableNextPageClick && (
-              <div className={ styles.nextPage } onClick={ onNextPageClick }>
-                <i className={ `material-icons ${styles.expand}` }>
-                  arrow_drop_down
-                </i>
-              </div>
-            )
-          }
-        </div>
-      )
-    })()
+          )
+        })()
+      }
+    </div>
   )
 }
 
@@ -91,6 +113,7 @@ ComicList.propTypes = {
   disableNextPageClick: PropTypes.bool,
   onPrevPageClick: PropTypes.func,
   onNextPageClick: PropTypes.func,
+  onComicItemClick: PropTypes.func,
 }
 
 export default ComicList

@@ -1,4 +1,5 @@
 import { combineReducers } from 'redux'
+import { routerReducer } from 'react-router-redux'
 
 import comics from './comics'
 import episodes from './episodes'
@@ -18,4 +19,5 @@ export default combineReducers({
   comicViewer,
   filter,
   userPrefs,
+  routing: routerReducer,
 })

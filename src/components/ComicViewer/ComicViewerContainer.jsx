@@ -1,5 +1,6 @@
 import React, { PropTypes } from 'react'
 import { connect } from 'react-redux'
+import { browserHistory } from 'react-router'
 
 import ComicViewer from './ComicViewer'
 
@@ -10,68 +11,88 @@ class ComicViewerContainer extends React.Component {
   static propTypes = {
     comicId: PropTypes.number.isRequired,
     episodeId: PropTypes.number.isRequired,
-    isFetching: PropTypes.bool.isRequired,
-    fetchError: PropTypes.object,
     episodes: PropTypes.object.isRequired,
-    pages: PropTypes.array.isRequired,
+    pages: PropTypes.object.isRequired,
+    comicViewer: PropTypes.object.isRequired,
     dispatch: PropTypes.func.isRequired,
   }
 
   componentDidMount() {
-    const { dispatch, comicId, episodeId } = this.props
-    dispatch(Actions.fetchPages(comicId, episodeId))
+    this.handleDataFetch()
   }
 
-  componentWillReceiveProps(nextProps) {
-    const { dispatch, comicId, episodeId } = nextProps
-    if (comicId !== this.props.comicId || episodeId !== this.props.episodeId) {
-      dispatch(Actions.fetchPages(comicId, episodeId))
-    }
+  componentWillUpdate(nextProps) {
+    this.handleDataFetch(nextProps)
   }
 
   onPrevEpisodeClick = () => this.goNextEpisodeByOffset(-1)
 
   onNextEpisodeClick = () => this.goNextEpisodeByOffset(+1)
 
+  onBackClick = () => {
+    browserHistory.push('/comics')
+  }
+
+  onComicDrawerClick = () => {
+    const { comicId, episodeId } = this.props
+    browserHistory.push(`/viewer?id=${comicId}&cid=${comicId}&eid=${episodeId}`)
+  }
+
+  handleDataFetch = (nextProps) => {
+    const { dispatch, comicId, episodeId, episodes, pages, comicViewer } =
+          nextProps || this.props
+    if (!comicId || !episodeId) return
+
+    if (comicId !== episodes.comicId) {
+      dispatch(Actions.fetchEpisodes(comicId))
+    }
+
+    if (comicId !== pages.comicId || episodeId !== pages.episodeId) {
+      dispatch(Actions.fetchPages(comicId, episodeId))
+    }
+
+    if (comicId !== comicViewer.comicId || episodeId !== comicViewer.episodeId) {
+      dispatch(Actions.updateComicViewer(comicId, episodeId))
+    }
+  }
+
   goNextEpisodeByOffset = (offset) => {
-    const { dispatch, comicId, episodeId, episodes } = this.props
-    const episode = episodes[episodeId + offset]
-    if (episode) {
-      dispatch(Actions.showComicViewer(comicId, episode.id))
-      dispatch(Actions.fetchPages(comicId, episode.id))
+    const { comicId, episodeId, episodes } = this.props
+    if (episodes.entries[episodeId + offset]) {
+      browserHistory.push(`/viewer?cid=${comicId}&eid=${episodeId + offset}`)
     }
   }
 
   render() {
-    const { episodeId, episodes, isFetching, fetchError, pages } = this.props
+    const { episodeId, episodes, pages } = this.props
 
     return (
       <ComicViewer
-        pages={ pages }
-        episode= { episodes[episodeId] }
-        isFetching= { isFetching }
-        fetchError={ fetchError }
-        prevEpisode={ episodes[episodeId - 1] }
-        nextEpisode={ episodes[episodeId + 1] }
+        pages={ pages.entries }
+        episode={ episodes.entries[episodeId] }
+        isFetching={ pages.isFetching }
+        fetchError={ pages.fetchError }
+        prevEpisode={ episodes.entries[episodeId - 1] }
+        nextEpisode={ episodes.entries[episodeId + 1] }
         onPrevEpisodeClick={ this.onPrevEpisodeClick }
         onNextEpisodeClick={ this.onNextEpisodeClick }
+        onBackClick={ this.onBackClick }
+        onComicDrawerClick={ this.onComicDrawerClick }
       />
     )
   }
 
 }
 
-function mapStateToProps(state) {
-  const { comicId, episodeId } = state.comicViewer
-  const { isFetching, fetchError } = state.pages
+function mapStateToProps(state, ownProps) {
+  const { cid, eid } = ownProps.location.query
 
   return {
-    comicId,
-    episodeId,
-    isFetching,
-    fetchError,
-    episodes: state.episodes.entries,
-    pages: state.pages.entries,
+    comicId: parseInt(cid, 10),
+    episodeId: parseInt(eid, 10),
+    episodes: state.episodes,
+    pages: state.pages,
+    comicViewer: state.comicViewer,
   }
 }
 

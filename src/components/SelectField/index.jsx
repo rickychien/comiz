@@ -1,4 +1,1 @@
-import SelectField from './SelectField'
-import SelectFieldContainer from './SelectFieldContainer'
-
-export { SelectField, SelectFieldContainer }
+export default from './SelectFieldContainer'
