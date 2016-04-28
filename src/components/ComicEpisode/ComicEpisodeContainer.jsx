@@ -1,4 +1,5 @@
 import { connect } from 'react-redux'
+import { browserHistory } from 'react-router'
 
 import ComicEpisode from './ComicEpisode'
 
@@ -16,18 +17,14 @@ function mapStateToProps(state, ownProps) {
   }
 }
 
-function mapDispatchToProps(dispatch) {
+function mapDispatchToProps(dispatch, ownProps) {
+  const { comic, episode } = ownProps
   return {
-    onEpisodeClick(comicId, episodeId) {
-      dispatch(Actions.showComicViewer(comicId, episodeId))
-      dispatch(Actions.hideComicDrawer())
+    onEpisodeClick() {
+      browserHistory.push(`/viewer?cid=${comic.id}&eid=${episode.id}`)
     },
-    onEpisodeRightClick(comicId, episodeId, markRead) {
-      if (markRead) {
-        dispatch(Actions.unmarkRead(comicId, episodeId))
-      } else {
-        dispatch(Actions.markRead(comicId, episodeId))
-      }
+    onEpisodeRightClick() {
+      dispatch(Actions.toggleRead(comic.id, episode.id))
     },
   }
 }

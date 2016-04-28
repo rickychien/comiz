@@ -17,19 +17,17 @@ export default function (state = initialState, action) {
       return Object.assign({}, state, {
         isFetching: true,
         fetchError: null,
-        comicId: 0,
+        comicId: action.comicId,
       })
     case 'FETCH_EPISODES_SUCCESS':
       return Object.assign({}, state, {
         isFetching: false,
         entries: mergeEntries({}, action.episodes),
-        comicId: action.comicId,
       })
     case 'FETCH_EPISODES_FAILURE':
       return Object.assign({}, state, {
         isFetching: false,
         fetchError: action.error,
-        comicId: 0,
       })
     default:
       return state

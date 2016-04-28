@@ -12,8 +12,8 @@ export default function (state = initialState, action) {
       return Object.assign({}, state, {
         isFetching: true,
         fetchError: null,
-        comicId: 0,
-        episodeId: 0,
+        comicId: action.comicId,
+        episodeId: action.episodeId,
       })
     case 'FETCH_PAGES_SUCCESS':
       return Object.assign({}, state, {
@@ -26,8 +26,6 @@ export default function (state = initialState, action) {
       return Object.assign({}, state, {
         isFetching: false,
         fetchError: action.error,
-        comicId: 0,
-        episodeId: 0,
       })
     default:
       return state

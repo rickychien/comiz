@@ -1,4 +1,1 @@
-import ComicViewer from './ComicViewer'
-import ComicViewerContainer from './ComicViewerContainer'
-
-export { ComicViewer, ComicViewerContainer }
+export default from './ComicViewerContainer'

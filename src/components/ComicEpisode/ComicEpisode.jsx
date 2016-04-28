@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react'
 
-import { FlatButton } from '../FlatButton'
+import FlatButton from '../FlatButton'
 
 import styles from './ComicEpisode.css'
 
@@ -12,12 +12,6 @@ function ComicEpisode({
   onEpisodeClick,
   onEpisodeRightClick,
 }) {
-  function onClick() {
-    if (onEpisodeClick) {
-      onEpisodeClick(comic.id, episode.id)
-    }
-  }
-
   function onContextMenu(evt) {
     evt.preventDefault()
     if (onEpisodeRightClick) {
@@ -32,7 +26,7 @@ function ComicEpisode({
     <FlatButton
       title={ episode.title }
       extraStyles={ extraStyles }
-      onClick={ onClick }
+      onClick={ onEpisodeClick }
       onContextMenu={ onContextMenu }
     />
   )

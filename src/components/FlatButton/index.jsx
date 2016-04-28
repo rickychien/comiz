@@ -1,2 +1,1 @@
-import FlatButton from './FlatButton'
-export { FlatButton }
+export default from './FlatButton'

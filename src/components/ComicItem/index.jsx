@@ -1,4 +1,1 @@
-import ComicItem from './ComicItem'
-import ComicItemContainer from './ComicItemContainer'
-
-export { ComicItem, ComicItemContainer }
+export default from './ComicItem'
