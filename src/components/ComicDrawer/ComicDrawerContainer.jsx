@@ -63,7 +63,7 @@ class ComicDrawerContainer extends React.Component {
         }
       }, 200)
     } else {
-      if (comicId !== this.props.comicId) {
+      if (comicId !== comicDrawer.comicId) {
         dispatch(Actions.fetchComic(comicId))
       }
     }
@@ -86,7 +86,7 @@ class ComicDrawerContainer extends React.Component {
     return (
       <ComicDrawer
         open={ this.props.open }
-        comic={ comics.entries[this.props.comicId] || {} }
+        comic={ comics.entries[this.props.comicId] }
         episodes={ episodesArray }
         favorite={ this.props.favorite }
         isFetching={ comics.isFetching || episodes.isFetching }

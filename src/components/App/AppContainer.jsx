@@ -3,13 +3,27 @@ import { connect } from 'react-redux'
 
 import ComicDrawer from '../ComicDrawer'
 
-function AppContainer({ open, comicId, location, children }) {
-  return (
-    <div>
-      { children }
-      <ComicDrawer open={ open } comicId={ comicId } location={ location } />
-    </div>
-  )
+import * as Actions from '../../actions'
+
+class AppContainer extends React.Component {
+
+  componentWillUpdate(nextProps) {
+    if (!nextProps.location.query.id) {
+      nextProps.dispatch(Actions.updateComicDrawer(0))
+    }
+  }
+
+  render() {
+    const { open, comicId, location, children } = this.props
+
+    return (
+      <div>
+        { children }
+        <ComicDrawer open={ open } comicId={ comicId } location={ location } />
+      </div>
+    )
+  }
+
 }
 
 AppContainer.propTypes = {
