@@ -23,7 +23,8 @@ module.exports = {
     new webpack.DefinePlugin({
       'process.env': {
         'NODE_ENV': JSON.stringify('development'),
-        'SERVER_URL': JSON.stringify(''),
+        'SERVER_URL': JSON.stringify((process.env.SERVER === '1') ?
+          'https://atecomic.wcpan.me' : ''),
       }
     }),
   ],

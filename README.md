@@ -44,6 +44,12 @@ A fantastic comic viewer in the world.
 
   It will enable [redux-logger] and fetch fake data from local at [src/api/](https://github.com/rickychien/comiz/blob/master/src/api/))
 
+
+  ```
+  SERVER=1 npm start
+  ```
+  To enable test server in development mode
+
 #### Production
 
   Production build will exclude unnecessary resources (ex: [redux-logger] only for debugging), ship with server url and minimize resources as small as possible to optimize website experience.

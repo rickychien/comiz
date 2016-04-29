@@ -28,11 +28,14 @@ class ComicListContainer extends React.Component {
 
   componentDidMount() {
     const { dispatch, comics, location, offset } = this.props
-    browserHistory.push({ query: { ...location.query, offset } })
+
     if (Object.keys(comics).length === 0) {
       dispatch(Actions.fetchComics())
     }
+
     this.updateComicPerPage()
+    browserHistory.push({ query: { ...location.query, offset } })
+
     window.addEventListener('resize', this.updateComicPerPage)
   }
 

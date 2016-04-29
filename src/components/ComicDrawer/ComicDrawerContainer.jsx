@@ -39,18 +39,18 @@ class ComicDrawerContainer extends React.Component {
           nextProps || this.props
     if (!open || !comicId) return
 
-    if (nextProps) {
-      if (comicId !== this.props.comicId) {
-        dispatch(Actions.fetchComic(comicId))
-      }
-    } else {
+    if (!nextProps) {
       // This part only enter when componentDidMount
       const timer = setInterval(() => {
         if (!this.props.comics.isFetching) {
           clearInterval(timer)
           dispatch(Actions.fetchComic(comicId))
         }
-      }, 100)
+      }, 200)
+    } else {
+      if (comicId !== this.props.comicId) {
+        dispatch(Actions.fetchComic(comicId))
+      }
     }
 
     if (comicId !== episodes.comicId) {
