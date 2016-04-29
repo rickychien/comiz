@@ -120,7 +120,7 @@ class ComicDrawer extends React.Component {
         <AppBar materialIcon="close" onLogoClick={ this.handleClose } />
         {
           (() => {
-            if (isFetching) {
+            if (isFetching || (!comic.mtime && !fetchError)) {
               return (
                 <div className={ styles.statusPage }>
                   <i className="material-spinner" />
