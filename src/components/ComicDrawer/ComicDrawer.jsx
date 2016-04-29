@@ -48,7 +48,7 @@ class ComicDrawer extends React.Component {
   }
 
   componentWillUnmount() {
-    window.removeEventListener('keyup', this.onKeyUp);
+    window.removeEventListener('keyup', this.onKeyUp)
   }
 
   onSwipingRight = (evt, xDelta) => {

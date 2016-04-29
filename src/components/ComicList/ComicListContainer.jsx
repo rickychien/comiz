@@ -44,7 +44,7 @@ class ComicListContainer extends React.Component {
   }
 
   componentWillUnmount() {
-    window.removeEventListener('resize', this.updateComicPerPage);
+    window.removeEventListener('resize', this.updateComicPerPage)
   }
 
   onPrevPageClick = () => this.goNextComicsByOffset(-1)

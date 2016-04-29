@@ -6,7 +6,7 @@
   "scripts": {
     "build": "npm run clean && $(npm bin)/webpack --progress --colors --config ./webpack.config.prod.js && cp ./src/index.html ./dist/",
     "clean": "rm -rf ./dist",
-    "lint": "$(npm bin)/eslint 'src/**/*.+(js|jsx)'",
+    "lint": "$(npm bin)/eslint --fix 'src/**/*.+(js|jsx)'",
     "test": "echo \"Error: no test specified\" && exit 1",
     "gh-pages": "git subtree push --prefix dist origin gh-pages"
   },

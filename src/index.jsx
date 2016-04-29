@@ -33,12 +33,12 @@ const store = configureStore(initialState)
 const history = syncHistoryWithStore(browserHistory, store)
 
 render(
-  <Provider store={store}>
-    <Router history={history}>
-      <Route path="/" component={App}>
+  <Provider store={ store }>
+    <Router history={ history }>
+      <Route path="/" component={ App }>
         <IndexRedirect to="comics" />
-        <Route path="comics" component={ComicList} />
-        <Route path="viewer" component={ComicViewer} />
+        <Route path="comics" component={ ComicList } />
+        <Route path="viewer" component={ ComicViewer } />
       </Route>
     </Router>
   </Provider>,

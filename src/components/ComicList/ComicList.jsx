@@ -62,19 +62,19 @@ function ComicList({
                   </div>
                 )
               }
-            <div className={ styles.comicList }>
-              <div className={ styles.comicListInner }>
-                {
-                  comics.map((comic) => (
-                    <ComicItem
-                      key={ comic.id }
-                      comic={ comic }
-                      onClick={ onComicItemClick }
-                    />
-                  ))
-                }
+              <div className={ styles.comicList }>
+                <div className={ styles.comicListInner }>
+                  {
+                    comics.map((comic) => (
+                      <ComicItem
+                        key={ comic.id }
+                        comic={ comic }
+                        onClick={ onComicItemClick }
+                      />
+                    ))
+                  }
+                </div>
               </div>
-            </div>
               {
                 !disableNextPageClick && (
                   <div

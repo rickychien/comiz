@@ -5,7 +5,11 @@ parserOptions:
     experimentalObjectRestSpread: true
 extends: airbnb
 rules:
-  semi: off
+  semi:
+    - error
+    - never
   no-case-declarations: off
-globals:
-    DEBUG: true
+  global-require: off
+  react/jsx-curly-spacing:
+    - error
+    - always
