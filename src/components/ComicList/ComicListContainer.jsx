@@ -29,7 +29,11 @@ class ComicListContainer extends React.Component {
   componentDidMount() {
     const { dispatch, comics, location, offset } = this.props
 
-    if (Object.keys(comics).length === 0) {
+    // Re-fetch when necessary
+    // comic length would be 0 when user first time visits ComicList
+    // comic length would be 1 if there has exact 1 comic fetched by other page
+    // ex: Visit ComicList from ComicViewer along with an opened ComicDrawer
+    if (Object.keys(comics).length <= 1) {
       dispatch(Actions.fetchComics())
     }
 
