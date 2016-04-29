@@ -15,6 +15,7 @@ class ComicDrawerContainer extends React.Component {
     episodes: PropTypes.object.isRequired,
     favorite: PropTypes.bool.isRequired,
     comicDrawer: PropTypes.object.isRequired,
+    location: PropTypes.object.isRequired,
     dispatch: PropTypes.func.isRequired,
   }
 
@@ -39,8 +40,9 @@ class ComicDrawerContainer extends React.Component {
   }
 
   onCloseClick = () => {
-    const { pathname, search } = location
-    browserHistory.push(pathname + search.replace(/id=[\d]+&?/, ''))
+    const { pathname, query } = this.props.location
+    delete query.id
+    browserHistory.push({ pathname, query })
   }
 
   onFavoriteClick = () => {

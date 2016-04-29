@@ -3,11 +3,11 @@ import { connect } from 'react-redux'
 
 import ComicDrawer from '../ComicDrawer'
 
-function AppContainer({ open, comicId, children }) {
+function AppContainer({ open, comicId, location, children }) {
   return (
     <div>
       { children }
-      <ComicDrawer open={ open } comicId={ comicId } />
+      <ComicDrawer open={ open } comicId={ comicId } location={ location } />
     </div>
   )
 }
@@ -15,6 +15,7 @@ function AppContainer({ open, comicId, children }) {
 AppContainer.propTypes = {
   open: PropTypes.bool.isRequired,
   comicId: PropTypes.number.isRequired,
+  location: PropTypes.object.isRequired,
   children: PropTypes.node,
 }
 
