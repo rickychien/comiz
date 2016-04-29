@@ -14,11 +14,24 @@ class ComicDrawerContainer extends React.Component {
     comics: PropTypes.object.isRequired,
     episodes: PropTypes.object.isRequired,
     favorite: PropTypes.bool.isRequired,
+    comicDrawer: PropTypes.object.isRequired,
     dispatch: PropTypes.func.isRequired,
   }
 
   componentDidMount() {
     this.handleDataFetch()
+  }
+
+  shouldComponentUpdate(nextProps) {
+    const { open, comicId, comics, favorite } = this.props
+    const comic = nextProps.comics.entries[nextProps.comicId]
+
+    return nextProps.open !== open ||
+      nextProps.comicId !== comicId ||
+      (nextProps.comics.isFetching !== comics.isFetching) ||
+      (comic && comic.mtime) ||
+      (nextProps.comics.fetchError && nextProps.episodes.fetchError) ||
+      nextProps.favorite !== favorite
   }
 
   componentWillUpdate(nextProps) {
