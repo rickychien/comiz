@@ -4,12 +4,14 @@ import { connect } from 'react-redux'
 import ComicViewer from './ComicViewer'
 
 import * as Actions from '../../actions'
+import { App } from '../../constants'
 import { hashHistory } from '../../services'
 
 class ComicViewerContainer extends React.Component {
 
   static propTypes = {
     comicId: PropTypes.number.isRequired,
+    comic: PropTypes.object,
     episodeId: PropTypes.number.isRequired,
     episodes: PropTypes.object.isRequired,
     pages: PropTypes.object.isRequired,
@@ -39,9 +41,13 @@ class ComicViewerContainer extends React.Component {
   }
 
   handleDataFetch = (nextProps) => {
-    const { dispatch, comicId, episodeId, episodes, pages, comicViewer } =
+    const { comicId, comic, episodeId, episodes, pages, comicViewer, dispatch } =
           nextProps || this.props
     if (!comicId || !episodeId) return
+
+    if (!nextProps && !comic) {
+      this.props.dispatch(Actions.fetchComic(comicId))
+    }
 
     if (comicId !== episodes.comicId) {
       dispatch(Actions.fetchEpisodes(comicId))
@@ -54,6 +60,10 @@ class ComicViewerContainer extends React.Component {
     if (comicId !== comicViewer.comicId || episodeId !== comicViewer.episodeId) {
       dispatch(Actions.updateComicViewer(comicId, episodeId))
     }
+
+    const episode = episodes.entries[episodeId]
+    document.title = (comic && episode) ?
+      `${comic.title} - ${episode.title} - ${App.title}` : App.title
   }
 
   goNextEpisodeByOffset = (offset) => {
@@ -89,6 +99,7 @@ function mapStateToProps(state, ownProps) {
 
   return {
     comicId: parseInt(cid, 10),
+    comic: state.comics.entries[cid],
     episodeId: parseInt(eid, 10),
     episodes: state.episodes,
     pages: state.pages,
