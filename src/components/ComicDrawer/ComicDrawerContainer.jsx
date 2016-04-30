@@ -1,10 +1,10 @@
 import React, { PropTypes } from 'react'
-import { hashHistory } from 'react-router'
 import { connect } from 'react-redux'
 
 import ComicDrawer from './ComicDrawer'
 
 import * as Actions from '../../actions'
+import { hashHistory } from '../../services'
 
 class ComicDrawerContainer extends React.Component {
 

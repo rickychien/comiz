@@ -1,8 +1,10 @@
 import React from 'react'
 import { render } from 'react-dom'
 import { Provider } from 'react-redux'
-import { IndexRedirect, Router, Route, hashHistory } from 'react-router'
+import { IndexRedirect, Router, Route } from 'react-router'
 import { syncHistoryWithStore } from 'react-router-redux'
+
+import { hashHistory } from './services'
 import configureStore from './store'
 
 import App from './components/App'
