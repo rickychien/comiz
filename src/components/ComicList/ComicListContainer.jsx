@@ -43,6 +43,12 @@ class ComicListContainer extends React.Component {
     window.addEventListener('resize', this.updateComicPerPage)
   }
 
+  componentWillUpdate(nextProps) {
+    if (nextProps.shrink !== this.props.shrink) {
+      this.updateComicPerPage(nextProps.shrink)
+    }
+  }
+
   componentWillUnmount() {
     window.removeEventListener('resize', this.updateComicPerPage)
   }
@@ -56,8 +62,9 @@ class ComicListContainer extends React.Component {
     hashHistory.push({ query: { ...location.query, id: comicId } })
   }
 
-  getComicsPerPage = () => {
-    const screenWidth = window.innerWidth
+  getComicsPerPage = (shrink) => {
+    let screenWidth = window.innerWidth
+    screenWidth = shrink ? screenWidth - 300 : screenWidth
     let imgWidth = 120
 
     if (screenWidth >= 370) {
@@ -113,9 +120,9 @@ class ComicListContainer extends React.Component {
     window.scrollTo(0, 0)
   }
 
-  updateComicPerPage = () => {
+  updateComicPerPage = (shrink) => {
     const { dispatch, offset, comicsPerPage } = this.props
-    const newComicsPerPage = this.getComicsPerPage()
+    const newComicsPerPage = this.getComicsPerPage(shrink)
 
     if (comicsPerPage !== newComicsPerPage) {
       dispatch(Actions.updateComicList(offset, newComicsPerPage))
