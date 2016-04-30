@@ -146,10 +146,12 @@ class ComicListContainer extends React.Component {
 
 function mapStateToProps(state, ownProps) {
   const { offset, comicsPerPage } = state.comicList
+
   return {
     comics: state.comics.entries,
     isFetching: state.comics.isFetching,
     fetchError: state.comics.fetchError,
+    shrink: !!ownProps.location.query.id,
     filter: state.filter,
     favorites: state.userPrefs.favorites,
     offset: parseInt(ownProps.location.query.offset, 10) || offset,
