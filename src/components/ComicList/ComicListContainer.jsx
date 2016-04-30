@@ -4,6 +4,7 @@ import { connect } from 'react-redux'
 import ComicList from './ComicList'
 
 import * as Actions from '../../actions'
+import { App } from '../../constants'
 import { hashHistory } from '../../services'
 
 class ComicListContainer extends React.Component {
@@ -44,6 +45,11 @@ class ComicListContainer extends React.Component {
   }
 
   componentDidUpdate(prevProps) {
+    const { comics, location } = this.props
+    const comic = comics[location.query.id]
+
+    document.title = comic ? `${comic.title} - ${App.title}` : App.title
+
     if (prevProps.shrink !== this.props.shrink) {
       this.updateComicPerPage()
     }
