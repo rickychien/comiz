@@ -1,10 +1,10 @@
 import React, { PropTypes } from 'react'
 import { connect } from 'react-redux'
+import { push } from 'react-router-redux'
 
 import ComicDrawer from './ComicDrawer'
 
 import * as Actions from '../../actions'
-import { hashHistory } from '../../services'
 
 class ComicDrawerContainer extends React.Component {
 
@@ -42,7 +42,7 @@ class ComicDrawerContainer extends React.Component {
   onCloseClick = () => {
     const { pathname, query } = this.props.location
     delete query.id
-    hashHistory.push({ pathname, query })
+    this.props.dispatch(push({ pathname, query }))
   }
 
   onFavoriteClick = () => {

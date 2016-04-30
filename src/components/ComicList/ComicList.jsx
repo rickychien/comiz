@@ -12,6 +12,7 @@ function ComicList({
   isFetching,
   fetchError,
   shrink,
+  location,
   disablePrevPageClick,
   disableNextPageClick,
   onPrevPageClick,
@@ -26,8 +27,8 @@ function ComicList({
   return (
     <div>
       <AppBar materialIcon="fingerprint" title="Comiz" shrink={ shrink }>
-        <SelectField />
-        <SearchBar />
+        <SelectField hashQuery={ location.query } />
+        <SearchBar hashQuery={ location.query } />
       </AppBar>
       {
         (() => {
@@ -109,6 +110,7 @@ ComicList.propTypes = {
   isFetching: PropTypes.bool,
   fetchError: PropTypes.object,
   shrink: PropTypes.bool,
+  location: PropTypes.object,
   disablePrevPageClick: PropTypes.bool,
   disableNextPageClick: PropTypes.bool,
   onPrevPageClick: PropTypes.func,

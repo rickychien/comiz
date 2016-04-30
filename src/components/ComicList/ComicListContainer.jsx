@@ -1,11 +1,11 @@
 import React, { PropTypes } from 'react'
 import { connect } from 'react-redux'
+import { push } from 'react-router-redux'
 
 import ComicList from './ComicList'
 
 import * as Actions from '../../actions'
 import { App } from '../../constants'
-import { hashHistory } from '../../services'
 
 class ComicListContainer extends React.Component {
 
@@ -28,7 +28,7 @@ class ComicListContainer extends React.Component {
   }
 
   componentDidMount() {
-    const { comics, location, offset, dispatch } = this.props
+    const { comics, location: { query }, offset, dispatch } = this.props
 
     // Re-fetch when necessary
     // comic length would be 0 when user first time visits ComicList
@@ -39,7 +39,8 @@ class ComicListContainer extends React.Component {
     }
 
     this.updateComicPerPage()
-    hashHistory.push({ query: { ...location.query, offset } })
+    dispatch(push({ query: { ...query, offset } }))
+    dispatch(Actions.updateComicList(parseInt(query.offset, 10) || offset))
 
     window.addEventListener('resize', this.updateComicPerPage)
   }
@@ -64,8 +65,8 @@ class ComicListContainer extends React.Component {
   onNextPageClick = () => this.goNextComicsByOffset(+1)
 
   onComicItemClick = (comicId) => {
-    const { location } = this.props
-    hashHistory.push({ query: { ...location.query, id: comicId } })
+    const { location, dispatch } = this.props
+    dispatch(push({ query: { ...location.query, id: comicId } }))
   }
 
   getComicsPerPage = () => {
@@ -122,7 +123,7 @@ class ComicListContainer extends React.Component {
     const { dispatch, offset, location } = this.props
     const newOffset = offset + val
     dispatch(Actions.updateComicList(newOffset))
-    hashHistory.push({ query: { ...location.query, offset: newOffset } })
+    dispatch(push({ query: { ...location.query, offset: newOffset } }))
     window.scrollTo(0, 0)
   }
 
@@ -146,6 +147,7 @@ class ComicListContainer extends React.Component {
         isFetching={ isFetching }
         fetchError={ fetchError }
         shrink={ shrink }
+        location={ this.props.location }
         disablePrevPageClick={ !allComics[idx - comicsPerPage] }
         disableNextPageClick={ !allComics[idx + comicsPerPage] }
         onPrevPageClick={ this.onPrevPageClick }
@@ -167,7 +169,7 @@ function mapStateToProps(state, ownProps) {
     shrink: !!ownProps.location.query.id,
     filter: state.filter,
     favorites: state.userPrefs.favorites,
-    offset: parseInt(ownProps.location.query.offset, 10) || offset,
+    offset,
     comicsPerPage,
   }
 }

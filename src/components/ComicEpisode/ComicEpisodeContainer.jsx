@@ -1,9 +1,9 @@
 import { connect } from 'react-redux'
+import { push } from 'react-router-redux'
 
 import ComicEpisode from './ComicEpisode'
 
 import * as Actions from '../../actions'
-import { hashHistory } from '../../services'
 
 function mapStateToProps(state, ownProps) {
   const { comicId, episodeId } = state.comicViewer
@@ -21,7 +21,7 @@ function mapDispatchToProps(dispatch, ownProps) {
   const { comic, episode } = ownProps
   return {
     onEpisodeClick() {
-      hashHistory.push(`/viewer?cid=${comic.id}&eid=${episode.id}`)
+      dispatch(push(`/viewer?cid=${comic.id}&eid=${episode.id}`))
     },
     onEpisodeRightClick() {
       dispatch(Actions.toggleRead(comic.id, episode.id))

@@ -1,11 +1,11 @@
 import React, { PropTypes } from 'react'
 import { connect } from 'react-redux'
+import { push } from 'react-router-redux'
 
 import ComicViewer from './ComicViewer'
 
 import * as Actions from '../../actions'
 import { App } from '../../constants'
-import { hashHistory } from '../../services'
 
 class ComicViewerContainer extends React.Component {
 
@@ -32,12 +32,12 @@ class ComicViewerContainer extends React.Component {
   onNextEpisodeClick = () => this.goNextEpisodeByOffset(+1)
 
   onBackClick = () => {
-    hashHistory.push('/comics')
+    this.props.dispatch(push('/comics'))
   }
 
   onComicDrawerClick = () => {
-    const { comicId, episodeId } = this.props
-    hashHistory.push(`/viewer?id=${comicId}&cid=${comicId}&eid=${episodeId}`)
+    const { comicId, episodeId, dispatch } = this.props
+    dispatch(push(`/viewer?id=${comicId}&cid=${comicId}&eid=${episodeId}`))
   }
 
   handleDataFetch = (nextProps) => {
@@ -67,9 +67,9 @@ class ComicViewerContainer extends React.Component {
   }
 
   goNextEpisodeByOffset = (offset) => {
-    const { comicId, episodeId, episodes } = this.props
+    const { comicId, episodeId, episodes, dispatch } = this.props
     if (episodes.entries[episodeId + offset]) {
-      hashHistory.push(`/viewer?cid=${comicId}&eid=${episodeId + offset}`)
+      dispatch(push(`/viewer?cid=${comicId}&eid=${episodeId + offset}`))
     }
   }
 
