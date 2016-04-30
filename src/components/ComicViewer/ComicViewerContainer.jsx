@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react'
 import { connect } from 'react-redux'
-import { browserHistory } from 'react-router'
+import { hashHistory } from 'react-router'
 
 import ComicViewer from './ComicViewer'
 
@@ -30,12 +30,12 @@ class ComicViewerContainer extends React.Component {
   onNextEpisodeClick = () => this.goNextEpisodeByOffset(+1)
 
   onBackClick = () => {
-    browserHistory.push('/comics')
+    hashHistory.push('/comics')
   }
 
   onComicDrawerClick = () => {
     const { comicId, episodeId } = this.props
-    browserHistory.push(`/viewer?id=${comicId}&cid=${comicId}&eid=${episodeId}`)
+    hashHistory.push(`/viewer?id=${comicId}&cid=${comicId}&eid=${episodeId}`)
   }
 
   handleDataFetch = (nextProps) => {
@@ -59,7 +59,7 @@ class ComicViewerContainer extends React.Component {
   goNextEpisodeByOffset = (offset) => {
     const { comicId, episodeId, episodes } = this.props
     if (episodes.entries[episodeId + offset]) {
-      browserHistory.push(`/viewer?cid=${comicId}&eid=${episodeId + offset}`)
+      hashHistory.push(`/viewer?cid=${comicId}&eid=${episodeId + offset}`)
     }
   }
 

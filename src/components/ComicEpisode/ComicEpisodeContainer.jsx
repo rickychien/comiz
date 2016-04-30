@@ -1,5 +1,5 @@
 import { connect } from 'react-redux'
-import { browserHistory } from 'react-router'
+import { hashHistory } from 'react-router'
 
 import ComicEpisode from './ComicEpisode'
 
@@ -21,7 +21,7 @@ function mapDispatchToProps(dispatch, ownProps) {
   const { comic, episode } = ownProps
   return {
     onEpisodeClick() {
-      browserHistory.push(`/viewer?cid=${comic.id}&eid=${episode.id}`)
+      hashHistory.push(`/viewer?cid=${comic.id}&eid=${episode.id}`)
     },
     onEpisodeRightClick() {
       dispatch(Actions.toggleRead(comic.id, episode.id))

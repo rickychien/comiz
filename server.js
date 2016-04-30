@@ -20,8 +20,12 @@ app.use(webpackDevMiddleware(compiler, {
 
 app.use(webpackHotMiddleware(compiler))
 
+app.get('/', (req, res) => {
+  res.sendFile(`${__dirname}/src/index.html`)
+})
+
 app.get('/api/*', (req, res) => {
-  // Imitate RESTful API pattern
+  // Simulate RESTful API request for development
   let path = req.path
   path = /\/comics\/[\d]+(\/episodes)?/.test(path) ? `${path}/data` : path
   res.sendFile(`${__dirname}/src${path}`)
@@ -29,10 +33,6 @@ app.get('/api/*', (req, res) => {
 
 app.get('/assets/*', (req, res) => {
   res.sendFile(`${__dirname}/src/${req.path}`)
-})
-
-app.get('*', (req, res) => {
-  res.sendFile(`${__dirname}/src/index.html`)
 })
 
 app.listen(port, (error) => {

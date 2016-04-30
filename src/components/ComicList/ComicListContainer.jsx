@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react'
 import { connect } from 'react-redux'
-import { browserHistory } from 'react-router'
+import { hashHistory } from 'react-router'
 
 import ComicList from './ComicList'
 
@@ -38,7 +38,7 @@ class ComicListContainer extends React.Component {
     }
 
     this.updateComicPerPage()
-    browserHistory.push({ query: { ...location.query, offset } })
+    hashHistory.push({ query: { ...location.query, offset } })
 
     window.addEventListener('resize', this.updateComicPerPage)
   }
@@ -53,7 +53,7 @@ class ComicListContainer extends React.Component {
 
   onComicItemClick = (comicId) => {
     const { location } = this.props
-    browserHistory.push({ query: { ...location.query, id: comicId } })
+    hashHistory.push({ query: { ...location.query, id: comicId } })
   }
 
   getComicsPerPage = () => {
@@ -109,7 +109,7 @@ class ComicListContainer extends React.Component {
     const { dispatch, offset, location } = this.props
     const newOffset = offset + val
     dispatch(Actions.updateComicList(newOffset))
-    browserHistory.push({ query: { ...location.query, offset: newOffset } })
+    hashHistory.push({ query: { ...location.query, offset: newOffset } })
     window.scrollTo(0, 0)
   }
 

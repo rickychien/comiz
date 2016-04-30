@@ -1,7 +1,7 @@
 import React from 'react'
 import { render } from 'react-dom'
 import { Provider } from 'react-redux'
-import { IndexRedirect, Router, Route, browserHistory } from 'react-router'
+import { IndexRedirect, Router, Route, hashHistory } from 'react-router'
 import { syncHistoryWithStore } from 'react-router-redux'
 import configureStore from './store'
 
@@ -30,11 +30,10 @@ const initialState = {
 }
 
 const store = configureStore(initialState)
-const history = syncHistoryWithStore(browserHistory, store)
 
 render(
   <Provider store={ store }>
-    <Router history={ history }>
+    <Router history={ syncHistoryWithStore(hashHistory, store) }>
       <Route path="/" component={ App }>
         <IndexRedirect to="comics" />
         <Route path="comics" component={ ComicList } />
