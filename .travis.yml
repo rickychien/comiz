@@ -19,3 +19,7 @@ env:
   matrix:
     - TEST_TYPE=build
     - TEST_TYPE=lint
+
+branches:
+  only:
+    - master
