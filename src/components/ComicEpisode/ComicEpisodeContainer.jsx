@@ -1,9 +1,9 @@
 import { connect } from 'react-redux'
-import { hashHistory } from 'react-router'
 
 import ComicEpisode from './ComicEpisode'
 
 import * as Actions from '../../actions'
+import { hashHistory } from '../../services'
 
 function mapStateToProps(state, ownProps) {
   const { comicId, episodeId } = state.comicViewer
