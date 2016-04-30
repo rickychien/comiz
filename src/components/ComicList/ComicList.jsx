@@ -37,7 +37,7 @@ function ComicList({
                 <i className="material-spinner" />
               </div>
             )
-          } else if (fetchError && comics.length <= 1) {
+          } else if (fetchError && comics.length === 0) {
             return (
               <div className={ styles.statusPage }>
                 <div>
