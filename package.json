@@ -1,6 +1,6 @@
 {
   "name": "comiz",
-  "version": "0.6.0",
+  "version": "0.7.0",
   "description": "Comic viewer",
   "main": "index.js",
   "scripts": {
