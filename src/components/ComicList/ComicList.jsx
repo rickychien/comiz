@@ -31,13 +31,13 @@ function ComicList({
       </AppBar>
       {
         (() => {
-          if (isFetching && comics.length === 0) {
+          if (isFetching && comics.length <= 1) {
             return (
               <div className={ styles.statusPage }>
                 <i className="material-spinner" />
               </div>
             )
-          } else if (fetchError && comics.length === 0) {
+          } else if (fetchError && comics.length <= 1) {
             return (
               <div className={ styles.statusPage }>
                 <div>
