@@ -38,17 +38,17 @@ A fantastic comic viewer in the world.
 
 #### Development
 
+  To enable [redux-logger] and fetch fake data from local at [src/api/](https://github.com/rickychien/comiz/blob/master/src/api/))
+
   ```
   npm start
   ```
 
-  It will enable [redux-logger] and fetch fake data from local at [src/api/](https://github.com/rickychien/comiz/blob/master/src/api/))
-
+  To enable test server in development mode
 
   ```
   SERVER=1 npm start
   ```
-  To enable test server in development mode
 
 #### Production
 
