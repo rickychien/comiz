@@ -1,5 +1,4 @@
 import { connect } from 'react-redux'
-import { push } from 'react-router-redux'
 
 import SelectField from './SelectField'
 
@@ -17,12 +16,10 @@ function mapStateToProps(state) {
   }
 }
 
-function mapDispatchToProps(dispatch, ownProps) {
+function mapDispatchToProps(dispatch) {
   return {
     onChange: (evt) => {
       dispatch(Actions.filterCategory(evt.target.value))
-      dispatch(Actions.updateComicList(0))
-      dispatch(push({ query: { ...ownProps.hashQuery, offset: 0 } }))
     },
   }
 }

@@ -13,10 +13,6 @@ function ComicList({
   fetchError,
   shrink,
   location,
-  disablePrevPageClick,
-  disableNextPageClick,
-  onPrevPageClick,
-  onNextPageClick,
   onComicItemClick,
 }) {
   let comicListStyles = styles.container
@@ -51,18 +47,6 @@ function ComicList({
 
           return (
             <div className={ comicListStyles }>
-              {
-                !disablePrevPageClick && (
-                  <div
-                    className={ styles.prevPage }
-                    onClick={ onPrevPageClick }
-                  >
-                    <i className={ `material-icons ${styles.expand}` }>
-                      arrow_drop_up
-                    </i>
-                  </div>
-                )
-              }
               <div className={ styles.comicList }>
                 <div className={ styles.comicListInner }>
                   {
@@ -76,18 +60,6 @@ function ComicList({
                   }
                 </div>
               </div>
-              {
-                !disableNextPageClick && (
-                  <div
-                    className={ styles.nextPage }
-                    onClick={ onNextPageClick }
-                  >
-                    <i className={ `material-icons ${styles.expand}` }>
-                      arrow_drop_down
-                    </i>
-                  </div>
-                )
-              }
             </div>
           )
         })()
@@ -101,8 +73,6 @@ ComicList.defaultProps = {
   isFetching: false,
   fetchError: null,
   shrink: false,
-  disablePrevPageClick: true,
-  disableNextPageClick: true,
 }
 
 ComicList.propTypes = {
@@ -111,10 +81,6 @@ ComicList.propTypes = {
   fetchError: PropTypes.object,
   shrink: PropTypes.bool,
   location: PropTypes.object,
-  disablePrevPageClick: PropTypes.bool,
-  disableNextPageClick: PropTypes.bool,
-  onPrevPageClick: PropTypes.func,
-  onNextPageClick: PropTypes.func,
   onComicItemClick: PropTypes.func,
 }
 

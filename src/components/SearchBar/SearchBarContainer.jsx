@@ -1,5 +1,4 @@
 import { connect } from 'react-redux'
-import { push } from 'react-router-redux'
 
 import SearchBar from './SearchBar'
 
@@ -11,12 +10,10 @@ function mapStateToProps(state) {
   }
 }
 
-function mapDispatchToProps(dispatch, ownProps) {
+function mapDispatchToProps(dispatch) {
   return {
     onChange(evt) {
       dispatch(Actions.filterQuery(evt.target.value))
-      dispatch(Actions.updateComicList(0))
-      dispatch(push({ query: { ...ownProps.hashQuery, offset: 0 } }))
     },
   }
 }

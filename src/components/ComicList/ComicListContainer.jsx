@@ -11,7 +11,6 @@ class ComicListContainer extends React.Component {
 
   static defaultProps = {
     shrink: false,
-    offset: 0,
   }
 
   static propTypes = {
@@ -21,14 +20,14 @@ class ComicListContainer extends React.Component {
     fetchError: PropTypes.object,
     filter: PropTypes.object.isRequired,
     favorites: PropTypes.array.isRequired,
-    offset: PropTypes.number,
+    offset: PropTypes.number.isRequired,
     comicsPerPage: PropTypes.number.isRequired,
     location: PropTypes.object,
     dispatch: PropTypes.func.isRequired,
   }
 
   componentDidMount() {
-    const { comics, location: { query }, offset, dispatch } = this.props
+    const { comics, dispatch } = this.props
 
     // Re-fetch when necessary
     // comic length would be 0 when user first time visits ComicList
@@ -38,11 +37,10 @@ class ComicListContainer extends React.Component {
       dispatch(Actions.fetchComics())
     }
 
-    this.updateComicPerPage()
-    dispatch(push({ query: { ...query, offset } }))
-    dispatch(Actions.updateComicList(parseInt(query.offset, 10) || offset))
+    this.onResize()
 
-    window.addEventListener('resize', this.updateComicPerPage)
+    window.addEventListener('resize', this.onResize)
+    window.addEventListener('scroll', this.onScroll)
   }
 
   componentDidUpdate(prevProps) {
@@ -52,17 +50,24 @@ class ComicListContainer extends React.Component {
     document.title = comic ? `${comic.title} - ${App.title}` : App.title
 
     if (prevProps.shrink !== this.props.shrink) {
-      this.updateComicPerPage()
+      this.onResize()
     }
   }
 
   componentWillUnmount() {
-    window.removeEventListener('resize', this.updateComicPerPage)
+    window.removeEventListener('resize', this.onResize)
+    window.removeEventListener('scroll', this.onScroll)
   }
 
-  onPrevPageClick = () => this.goNextComicsByOffset(-1)
+  onResize = () => {
+    this.props.dispatch(Actions.updateComicList(null, this.getComicsPerPage()))
+  }
 
-  onNextPageClick = () => this.goNextComicsByOffset(+1)
+  onScroll = () => {
+    if (window.innerHeight + window.scrollY >= document.body.offsetHeight) {
+      this.props.dispatch(Actions.updateComicList(this.props.offset + 1))
+    }
+  }
 
   onComicItemClick = (comicId) => {
     const { location, dispatch } = this.props
@@ -119,39 +124,16 @@ class ComicListContainer extends React.Component {
     return comicArray.filter(comic => reg.test(comic.title))
   }
 
-  goNextComicsByOffset = (val) => {
-    const { dispatch, offset, location } = this.props
-    const newOffset = offset + val
-    dispatch(Actions.updateComicList(newOffset))
-    dispatch(push({ query: { ...location.query, offset: newOffset } }))
-    window.scrollTo(0, 0)
-  }
-
-  updateComicPerPage = () => {
-    const { dispatch, offset, comicsPerPage } = this.props
-    const newComicsPerPage = this.getComicsPerPage()
-
-    if (comicsPerPage !== newComicsPerPage) {
-      dispatch(Actions.updateComicList(offset, newComicsPerPage))
-    }
-  }
-
   render() {
     const { isFetching, fetchError, shrink, offset, comicsPerPage } = this.props
-    const allComics = this.getAllComics()
-    const idx = offset * comicsPerPage
 
     return (
       <ComicList
-        comics={ allComics.slice(idx, (offset + 1) * comicsPerPage) }
+        comics={ this.getAllComics().slice(0, offset * comicsPerPage) }
         isFetching={ isFetching }
         fetchError={ fetchError }
         shrink={ shrink }
         location={ this.props.location }
-        disablePrevPageClick={ !allComics[idx - comicsPerPage] }
-        disableNextPageClick={ !allComics[idx + comicsPerPage] }
-        onPrevPageClick={ this.onPrevPageClick }
-        onNextPageClick={ this.onNextPageClick }
         onComicItemClick={ this.onComicItemClick }
       />
     )
@@ -160,8 +142,6 @@ class ComicListContainer extends React.Component {
 }
 
 function mapStateToProps(state, ownProps) {
-  const { offset, comicsPerPage } = state.comicList
-
   return {
     comics: state.comics.entries,
     isFetching: state.comics.isFetching,
@@ -169,8 +149,8 @@ function mapStateToProps(state, ownProps) {
     shrink: !!ownProps.location.query.id,
     filter: state.filter,
     favorites: state.userPrefs.favorites,
-    offset,
-    comicsPerPage,
+    offset: state.comicList.offset,
+    comicsPerPage: state.comicList.comicsPerPage,
   }
 }
 
