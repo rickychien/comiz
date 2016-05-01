@@ -1,6 +1,5 @@
 import React, { PropTypes } from 'react'
 import { connect } from 'react-redux'
-import { push } from 'react-router-redux'
 
 import ComicList from './ComicList'
 
@@ -9,12 +8,7 @@ import { App } from '../../constants'
 
 class ComicListContainer extends React.Component {
 
-  static defaultProps = {
-    shrink: false,
-  }
-
   static propTypes = {
-    shrink: PropTypes.bool,
     comics: PropTypes.object.isRequired,
     isFetching: PropTypes.bool.isRequired,
     fetchError: PropTypes.object,
@@ -38,20 +32,11 @@ class ComicListContainer extends React.Component {
     }
 
     this.onResize()
+    dispatch(Actions.updateComicDrawer(false))
+    document.title = App.title
 
     window.addEventListener('resize', this.onResize)
     window.addEventListener('scroll', this.onScroll)
-  }
-
-  componentDidUpdate(prevProps) {
-    const { comics, location } = this.props
-    const comic = comics[location.query.id]
-
-    document.title = comic ? `${comic.title} - ${App.title}` : App.title
-
-    if (prevProps.shrink !== this.props.shrink) {
-      this.onResize()
-    }
   }
 
   componentWillUnmount() {
@@ -70,13 +55,11 @@ class ComicListContainer extends React.Component {
   }
 
   onComicItemClick = (comicId) => {
-    const { location, dispatch } = this.props
-    dispatch(push({ query: { ...location.query, id: comicId } }))
+    this.props.dispatch(Actions.updateComicDrawer(true, comicId))
   }
 
   getComicsPerPage = () => {
-    let screenWidth = window.innerWidth
-    screenWidth = this.props.shrink ? screenWidth - 300 : screenWidth
+    const screenWidth = window.innerWidth
     let imgWidth = 120
 
     if (screenWidth >= 370) {
@@ -125,14 +108,13 @@ class ComicListContainer extends React.Component {
   }
 
   render() {
-    const { isFetching, fetchError, shrink, offset, comicsPerPage } = this.props
+    const { isFetching, fetchError, offset, comicsPerPage } = this.props
 
     return (
       <ComicList
         comics={ this.getAllComics().slice(0, offset * comicsPerPage) }
         isFetching={ isFetching }
         fetchError={ fetchError }
-        shrink={ shrink }
         onComicItemClick={ this.onComicItemClick }
       />
     )
@@ -140,12 +122,11 @@ class ComicListContainer extends React.Component {
 
 }
 
-function mapStateToProps(state, ownProps) {
+function mapStateToProps(state) {
   return {
     comics: state.comics.entries,
     isFetching: state.comics.isFetching,
     fetchError: state.comics.fetchError,
-    shrink: !!ownProps.location.query.id,
     filter: state.filter,
     favorites: state.userPrefs.favorites,
     offset: state.comicList.offset,

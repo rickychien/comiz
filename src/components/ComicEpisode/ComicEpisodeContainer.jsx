@@ -18,13 +18,14 @@ function mapStateToProps(state, ownProps) {
 }
 
 function mapDispatchToProps(dispatch, ownProps) {
-  const { comic, episode } = ownProps
+  const { comic: { id: cid }, episode: { id: eid } } = ownProps
+
   return {
     onEpisodeClick() {
-      dispatch(push(`/viewer?cid=${comic.id}&eid=${episode.id}`))
+      dispatch(push({ pathname: 'viewer', query: { cid, eid } }))
     },
     onEpisodeRightClick() {
-      dispatch(Actions.toggleRead(comic.id, episode.id))
+      dispatch(Actions.toggleRead(cid, eid))
     },
   }
 }

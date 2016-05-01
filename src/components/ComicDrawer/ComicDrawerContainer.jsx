@@ -1,6 +1,5 @@
 import React, { PropTypes } from 'react'
 import { connect } from 'react-redux'
-import { push } from 'react-router-redux'
 
 import ComicDrawer from './ComicDrawer'
 
@@ -14,21 +13,14 @@ class ComicDrawerContainer extends React.Component {
     comics: PropTypes.object.isRequired,
     episodes: PropTypes.object.isRequired,
     favorite: PropTypes.bool.isRequired,
-    comicDrawer: PropTypes.object.isRequired,
-    location: PropTypes.object.isRequired,
     dispatch: PropTypes.func.isRequired,
   }
 
-  componentDidMount() {
-    this.handleDataFetch()
-  }
-
   shouldComponentUpdate(nextProps) {
-    const { open, comicId, comics, favorite } = this.props
+    const { comicId, comics, favorite } = this.props
     const comic = nextProps.comics.entries[nextProps.comicId]
 
-    return nextProps.open !== open ||
-      nextProps.comicId !== comicId ||
+    return nextProps.comicId !== comicId ||
       (nextProps.comics.isFetching !== comics.isFetching) ||
       (comic && comic.mtime) ||
       (nextProps.comics.fetchError && nextProps.episodes.fetchError) ||
@@ -36,57 +28,36 @@ class ComicDrawerContainer extends React.Component {
   }
 
   componentWillUpdate(nextProps) {
-    this.handleDataFetch(nextProps)
+    const { open, comicId, episodes, dispatch } = nextProps
+
+    if (!open || !comicId) return
+
+    if (comicId !== this.props.comicId) {
+      dispatch(Actions.fetchComic(comicId))
+    }
+
+    if (comicId !== episodes.comicId) {
+      dispatch(Actions.fetchEpisodes(comicId))
+    }
   }
 
   onCloseClick = () => {
-    const { pathname, query } = this.props.location
-    delete query.id
-    this.props.dispatch(push({ pathname, query }))
+    this.props.dispatch(Actions.updateComicDrawer(false))
   }
 
   onFavoriteClick = () => {
     this.props.dispatch(Actions.toggleFavorite(this.props.comicId))
   }
 
-  handleDataFetch = (nextProps) => {
-    const { dispatch, open, comicId, episodes, comicDrawer } =
-          nextProps || this.props
-    if (!open || !comicId) return
-
-    if (!nextProps) {
-      // This part only enter when componentDidMount
-      const timer = setInterval(() => {
-        if (!this.props.comics.isFetching) {
-          clearInterval(timer)
-          dispatch(Actions.fetchComic(comicId))
-        }
-      }, 200)
-    } else {
-      if (comicId !== comicDrawer.comicId) {
-        dispatch(Actions.fetchComic(comicId))
-      }
-    }
-
-    if (comicId !== episodes.comicId) {
-      dispatch(Actions.fetchEpisodes(comicId))
-    }
-
-    if (comicId !== comicDrawer.comicId) {
-      dispatch(Actions.updateComicDrawer(comicId))
-    }
-  }
-
   render() {
-    const comics = this.props.comics
-    const episodes = this.props.episodes
+    const { open, comicId, comics, episodes } = this.props
     const episodesArray = Object.keys(episodes.entries)
       .map(key => episodes.entries[key]).reverse()
 
     return (
       <ComicDrawer
-        open={ this.props.open }
-        comic={ comics.entries[this.props.comicId] }
+        open={ open }
+        comic={ comics.entries[comicId] }
         episodes={ episodesArray }
         favorite={ this.props.favorite }
         isFetching={ comics.isFetching || episodes.isFetching }
@@ -99,16 +70,15 @@ class ComicDrawerContainer extends React.Component {
 
 }
 
-function mapStateToProps(state, ownProps) {
-  const { open, comicId } = ownProps
+function mapStateToProps(state) {
+  const { comicDrawer: { open, comicId }, comics, episodes } = state
 
   return {
     open,
     comicId,
-    comics: state.comics,
-    episodes: state.episodes,
+    comics,
+    episodes,
     favorite: state.userPrefs.favorites.indexOf(comicId) !== -1,
-    comicDrawer: state.comicDrawer,
   }
 }
 

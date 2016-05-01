@@ -1,1 +1,1 @@
-export default from './AppContainer'
+export default from './App'

@@ -45,9 +45,10 @@ export function filterQuery(query) {
   }
 }
 
-export function updateComicDrawer(comicId) {
+export function updateComicDrawer(open, comicId) {
   return {
     type: 'UPDATE_COMIC_DRAWER',
+    open,
     comicId,
   }
 }

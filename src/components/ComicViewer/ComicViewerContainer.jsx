@@ -21,6 +21,7 @@ class ComicViewerContainer extends React.Component {
 
   componentDidMount() {
     this.handleDataFetch()
+    this.props.dispatch(Actions.updateComicDrawer(false))
   }
 
   componentWillUpdate(nextProps) {
@@ -32,22 +33,17 @@ class ComicViewerContainer extends React.Component {
   onNextEpisodeClick = () => this.goNextEpisodeByOffset(+1)
 
   onBackClick = () => {
-    this.props.dispatch(push('/comics'))
+    this.props.dispatch(push('/'))
   }
 
   onComicDrawerClick = () => {
-    const { comicId, episodeId, dispatch } = this.props
-    dispatch(push(`/viewer?id=${comicId}&cid=${comicId}&eid=${episodeId}`))
+    this.props.dispatch(Actions.updateComicDrawer(true, this.props.comicId))
   }
 
   handleDataFetch = (nextProps) => {
     const { comicId, comic, episodeId, episodes, pages, comicViewer, dispatch } =
           nextProps || this.props
     if (!comicId || !episodeId) return
-
-    if (!nextProps && !comic) {
-      this.props.dispatch(Actions.fetchComic(comicId))
-    }
 
     if (comicId !== episodes.comicId) {
       dispatch(Actions.fetchEpisodes(comicId))
