@@ -16,23 +16,14 @@ class ComicDrawerContainer extends React.Component {
     dispatch: PropTypes.func.isRequired,
   }
 
-  shouldComponentUpdate(nextProps) {
-    const { comicId, comics, favorite } = this.props
-    const comic = nextProps.comics.entries[nextProps.comicId]
-
-    return nextProps.comicId !== comicId ||
-      (nextProps.comics.isFetching !== comics.isFetching) ||
-      (comic && comic.mtime) ||
-      (nextProps.comics.fetchError && nextProps.episodes.fetchError) ||
-      nextProps.favorite !== favorite
-  }
-
   componentWillUpdate(nextProps) {
-    const { open, comicId, episodes, dispatch } = nextProps
+    const { open, comicId, comics, episodes, dispatch } = nextProps
+    const comic = comics.entries[comicId]
 
     if (!open || !comicId) return
 
-    if (comicId !== this.props.comicId) {
+    if (comicId !== this.props.comicId ||
+        !comics.fetchError && (!comic || !comic.mtime)) {
       dispatch(Actions.fetchComic(comicId))
     }
 
