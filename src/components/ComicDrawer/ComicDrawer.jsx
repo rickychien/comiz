@@ -106,81 +106,86 @@ class ComicDrawer extends React.Component {
     } = this.props
 
     let comicDrawerStyles = styles.comicDrawer
+    let overlayStyles = null
     if (this.state.open) {
       comicDrawerStyles = comicDrawerStyles.concat(` ${styles.open}`)
+      overlayStyles = styles.overlay
     }
 
     return (
-      <Swipeable
-        className={ comicDrawerStyles }
-        style={ this.getStyles() }
-        onSwipingRight={ this.onSwipingRight }
-        onSwipedRight={ this.onSwipedRight }
-      >
-        <AppBar materialIcon="close" onLogoClick={ this.handleClose } />
-        {
-          (() => {
-            if (isFetching || (!comic.mtime && !fetchError)) {
-              return (
-                <div className={ styles.statusPage }>
-                  <i className="material-spinner" />
-                </div>
-              )
-            } else if (fetchError) {
-              return (
-                <div className={ styles.statusPage }>
-                  <div>
-                    <i className="material-icons">
-                      sentiment_very_dissatisfied
-                    </i>
-                    <h2>Unable to find comic</h2>
+      <div>
+        <div className={ overlayStyles } onClick={ this.handleClose } />
+        <Swipeable
+          className={ comicDrawerStyles }
+          style={ this.getStyles() }
+          onSwipingRight={ this.onSwipingRight }
+          onSwipedRight={ this.onSwipedRight }
+        >
+          <AppBar materialIcon="close" onLogoClick={ this.handleClose } />
+          {
+            (() => {
+              if (isFetching || (!comic.mtime && !fetchError)) {
+                return (
+                  <div className={ styles.statusPage }>
+                    <i className="material-spinner" />
                   </div>
-                </div>
-              )
-            }
+                )
+              } else if (fetchError) {
+                return (
+                  <div className={ styles.statusPage }>
+                    <div>
+                      <i className="material-icons">
+                        sentiment_very_dissatisfied
+                      </i>
+                      <h2>Unable to find comic</h2>
+                    </div>
+                  </div>
+                )
+              }
 
-            return (
-              <div>
-                <div className={ styles.cover }>
-                  <img
-                    className={ styles.img }
-                    src={ comic.coverUrl }
-                    alt="cover"
-                  />
-                </div>
-                <div className={ styles.overview }>
-                  <div className={ styles.about }>
-                    <CheckItem
-                      checked={ favorite }
-                      iconUncheck="star_border"
-                      iconChecked="star"
-                      title={ comic.title }
-                      subTitle={ comic.author }
-                      onClick={ onFavoriteClick }
+              return (
+                <div>
+                  <div className={ styles.cover }>
+                    <img
+                      className={ styles.img }
+                      src={ comic.coverUrl }
+                      alt="cover"
                     />
                   </div>
-                  <hr className={ styles.hr } />
-                  <div className={ styles.brief }>{ comic.brief }</div>
-                  <hr className={ styles.hr } />
-                  <div className={ styles.episodes }>
-                    <div className={ styles.episodesInner }>
-                      {
-                        episodes.map((episode) => (
-                          <ComicEpisodeContainer
-                            key={ episode.id }
-                            comic={ comic }
-                            episode={ episode }
-                          />
-                        ))
-                      }
+                  <div className={ styles.overview }>
+                    <div className={ styles.about }>
+                      <CheckItem
+                        checked={ favorite }
+                        iconUncheck="star_border"
+                        iconChecked="star"
+                        title={ comic.title }
+                        subTitle={ comic.author }
+                        onClick={ onFavoriteClick }
+                      />
+                    </div>
+                    <hr className={ styles.hr } />
+                    <div className={ styles.brief }>{ comic.brief }</div>
+                    <hr className={ styles.hr } />
+                    <div className={ styles.episodes }>
+                      <div className={ styles.episodesInner }>
+                        {
+                          episodes.map((episode) => (
+                            <ComicEpisodeContainer
+                              key={ episode.id }
+                              comic={ comic }
+                              episode={ episode }
+                            />
+                          ))
+                        }
+                      </div>
                     </div>
                   </div>
                 </div>
-              </div>
-            )
-          })()
-        }
-      </Swipeable>
+              )
+            })()
+          }
+        </Swipeable>
+      </div>
     )
   }
 

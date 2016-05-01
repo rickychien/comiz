@@ -11,17 +11,11 @@ function ComicList({
   comics,
   isFetching,
   fetchError,
-  shrink,
   onComicItemClick,
 }) {
-  let comicListStyles = styles.container
-  if (shrink) {
-    comicListStyles = comicListStyles.concat(` ${styles.containerShrink}`)
-  }
-
   return (
     <div>
-      <AppBar materialIcon="fingerprint" title="Comiz" shrink={ shrink }>
+      <AppBar materialIcon="fingerprint" title="Comiz">
         <SelectField />
         <SearchBar />
       </AppBar>
@@ -45,7 +39,7 @@ function ComicList({
           }
 
           return (
-            <div className={ comicListStyles }>
+            <div className={ styles.container }>
               <div className={ styles.comicList }>
                 <div className={ styles.comicListInner }>
                   {
@@ -71,14 +65,12 @@ ComicList.defaultProps = {
   comics: [],
   isFetching: false,
   fetchError: null,
-  shrink: false,
 }
 
 ComicList.propTypes = {
   comics: PropTypes.array,
   isFetching: PropTypes.bool,
   fetchError: PropTypes.object,
-  shrink: PropTypes.bool,
   onComicItemClick: PropTypes.func,
 }
 

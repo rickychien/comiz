@@ -9,12 +9,6 @@
   padding: 60px auto 10px auto;
 }
 
-@media screen and (min-width: 500px) {
-  .containerShrink {
-    width: calc(100% - var(--nav-width));
-  }
-}
-
 .comicListInner {
   display: flex;
   justify-content: center;
