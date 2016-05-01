@@ -21,7 +21,6 @@ class ComicViewerContainer extends React.Component {
 
   componentDidMount() {
     this.handleDataFetch()
-    this.props.dispatch(Actions.updateComicDrawer(false))
   }
 
   componentWillUpdate(nextProps) {
@@ -41,7 +40,7 @@ class ComicViewerContainer extends React.Component {
   }
 
   handleDataFetch = (nextProps) => {
-    const { comicId, comic, episodeId, episodes, pages, comicViewer, dispatch } =
+    const { comicId, comic, episodeId, episodes, pages, dispatch } =
           nextProps || this.props
 
     if (!comicId || !episodeId) return
@@ -58,19 +57,15 @@ class ComicViewerContainer extends React.Component {
       dispatch(Actions.fetchPages(comicId, episodeId))
     }
 
-    if (comicId !== comicViewer.comicId || episodeId !== comicViewer.episodeId) {
-      dispatch(Actions.updateComicViewer(comicId, episodeId))
-    }
-
     const episode = episodes.entries[episodeId]
     document.title = (comic && episode) ?
       `${comic.title} - ${episode.title} - ${App.title}` : App.title
   }
 
   goNextEpisodeByOffset = (offset) => {
-    const { comicId: cid, episodeId: eid, episodes, dispatch } = this.props
-    if (episodes.entries[eid + offset]) {
-      dispatch(push({ pathname: 'viewer', query: { cid, eid: eid + offset } }))
+    const { comicId, episodeId, episodes, dispatch } = this.props
+    if (episodes.entries[episodeId + offset]) {
+      dispatch(push(`/viewer?cid=${comicId}&eid=${episodeId + offset}`))
     }
   }
 

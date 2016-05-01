@@ -32,7 +32,6 @@ class ComicListContainer extends React.Component {
     }
 
     this.onResize()
-    dispatch(Actions.updateComicDrawer(false))
     document.title = App.title
 
     window.addEventListener('resize', this.onResize)

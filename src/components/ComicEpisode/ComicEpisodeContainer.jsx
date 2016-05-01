@@ -22,7 +22,7 @@ function mapDispatchToProps(dispatch, ownProps) {
 
   return {
     onEpisodeClick() {
-      dispatch(push({ pathname: 'viewer', query: { cid, eid } }))
+      dispatch(push(`/viewer?cid=${cid}&eid=${eid}`))
       dispatch(Actions.updateComicDrawer(false))
     },
     onEpisodeRightClick() {

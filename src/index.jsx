@@ -35,7 +35,19 @@ const initialState = {
 const store = configureStore(initialState)
 
 function updateCategory(nextState) {
-  store.dispatch(Actions.filterCategory(nextState.params.category))
+  const { category } = nextState.params
+
+  if (category) {
+    store.dispatch(Actions.filterCategory(nextState.params.category))
+  }
+}
+
+function updateComicViewer(nextState) {
+  const { cid, eid } = nextState.location.query
+
+  if (cid && eid) {
+    store.dispatch(Actions.updateComicViewer(cid, eid))
+  }
 }
 
 render(
@@ -48,7 +60,11 @@ render(
           component={ ComicList }
           onEnter={ updateCategory }
         />
-        <Route path="viewer" component={ ComicViewer } />
+        <Route
+          path="viewer"
+          component={ ComicViewer }
+          onEnter={ updateComicViewer }
+        />
         <Redirect from="*" to="comics/latest" />
       </Route>
     </Router>
