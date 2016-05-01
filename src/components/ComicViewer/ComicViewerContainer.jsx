@@ -43,7 +43,12 @@ class ComicViewerContainer extends React.Component {
   handleDataFetch = (nextProps) => {
     const { comicId, comic, episodeId, episodes, pages, comicViewer, dispatch } =
           nextProps || this.props
+
     if (!comicId || !episodeId) return
+
+    if (!nextProps && !comic) {
+      this.props.dispatch(Actions.fetchComic(comicId))
+    }
 
     if (comicId !== episodes.comicId) {
       dispatch(Actions.fetchEpisodes(comicId))
