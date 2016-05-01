@@ -1,9 +1,10 @@
 import React from 'react'
 import { render } from 'react-dom'
 import { Provider } from 'react-redux'
-import { IndexRedirect, Router, Route } from 'react-router'
+import { IndexRedirect, Redirect, Router, Route } from 'react-router'
 import { syncHistoryWithStore } from 'react-router-redux'
 
+import * as Actions from './actions'
 import { hashHistory } from './services'
 import configureStore from './store'
 
@@ -33,13 +34,22 @@ const initialState = {
 
 const store = configureStore(initialState)
 
+function updateCategory(nextState) {
+  store.dispatch(Actions.filterCategory(nextState.params.category))
+}
+
 render(
   <Provider store={ store }>
     <Router history={ syncHistoryWithStore(hashHistory, store) }>
       <Route path="/" component={ App }>
-        <IndexRedirect to="comics" />
-        <Route path="comics" component={ ComicList } />
+        <IndexRedirect to="comics/latest" />
+        <Route
+          path="comics/:category"
+          component={ ComicList }
+          onEnter={ updateCategory }
+        />
         <Route path="viewer" component={ ComicViewer } />
+        <Redirect from="*" to="comics/latest" />
       </Route>
     </Router>
   </Provider>,

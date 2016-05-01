@@ -68,9 +68,9 @@ class ComicViewerContainer extends React.Component {
   }
 
   goNextEpisodeByOffset = (offset) => {
-    const { comicId, episodeId, episodes, dispatch } = this.props
-    if (episodes.entries[episodeId + offset]) {
-      dispatch(push(`/viewer?cid=${comicId}&eid=${episodeId + offset}`))
+    const { comicId: cid, episodeId: eid, episodes, dispatch } = this.props
+    if (episodes.entries[eid + offset]) {
+      dispatch(push({ pathname: 'viewer', query: { cid, eid: eid + offset } }))
     }
   }
 

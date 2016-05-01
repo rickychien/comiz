@@ -1,8 +1,7 @@
 import { connect } from 'react-redux'
+import { push } from 'react-router-redux'
 
 import SelectField from './SelectField'
-
-import * as Actions from '../../actions'
 
 function mapStateToProps(state) {
   const { category, categories } = state.filter
@@ -19,7 +18,7 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
   return {
     onChange: (evt) => {
-      dispatch(Actions.filterCategory(evt.target.value))
+      dispatch(push(`/comics/${evt.target.value}`))
     },
   }
 }

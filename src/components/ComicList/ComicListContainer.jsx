@@ -92,10 +92,10 @@ class ComicListContainer extends React.Component {
 
     let comicArray
     switch (filter.category) {
-      case 'SHOW_LATEST':
+      case 'latest':
         comicArray = Object.keys(comics).map(key => comics[key])
         break
-      case 'SHOW_FAVORITE':
+      case 'favorite':
         comicArray = favorites
           .map(comicId => comics[comicId])
           .filter(comic => comic)

@@ -1,8 +1,8 @@
 const initialState = {
-  category: 'SHOW_LATEST',
+  category: 'latest',
   categories: {
-    SHOW_LATEST: 'Latest',
-    SHOW_FAVORITE: 'Favorite',
+    latest: 'Latest',
+    favorite: 'Favorite',
   },
   query: '',
 }
