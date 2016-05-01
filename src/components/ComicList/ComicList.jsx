@@ -12,7 +12,6 @@ function ComicList({
   isFetching,
   fetchError,
   shrink,
-  location,
   onComicItemClick,
 }) {
   let comicListStyles = styles.container
@@ -23,8 +22,8 @@ function ComicList({
   return (
     <div>
       <AppBar materialIcon="fingerprint" title="Comiz" shrink={ shrink }>
-        <SelectField hashQuery={ location.query } />
-        <SearchBar hashQuery={ location.query } />
+        <SelectField />
+        <SearchBar />
       </AppBar>
       {
         (() => {
@@ -80,7 +79,6 @@ ComicList.propTypes = {
   isFetching: PropTypes.bool,
   fetchError: PropTypes.object,
   shrink: PropTypes.bool,
-  location: PropTypes.object,
   onComicItemClick: PropTypes.func,
 }
 

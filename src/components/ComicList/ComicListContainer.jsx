@@ -133,7 +133,6 @@ class ComicListContainer extends React.Component {
         isFetching={ isFetching }
         fetchError={ fetchError }
         shrink={ shrink }
-        location={ this.props.location }
         onComicItemClick={ this.onComicItemClick }
       />
     )
