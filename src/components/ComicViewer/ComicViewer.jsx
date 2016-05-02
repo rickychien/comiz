@@ -1,9 +1,11 @@
 import React, { PropTypes } from 'react'
+import InlineSVG from 'svg-inline-react'
 
 import AppBar from '../AppBar'
 import FlatButton from '../FlatButton'
 
 import styles from './ComicViewer.css'
+import spinner from '../../assets/material-spinner.svg'
 
 function ComicViewer({
   pages,
@@ -27,7 +29,7 @@ function ComicViewer({
           if (isFetching) {
             return (
               <div className={ styles.statusPage }>
-                <i className="material-spinner" />
+                <InlineSVG src={ spinner } />
               </div>
             )
           } else if (fetchError) {

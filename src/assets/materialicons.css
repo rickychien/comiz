@@ -23,11 +23,3 @@
   font-feature-settings: 'liga';
   text-rendering: optimizeLegibility;
 }
-
-:global(.material-spinner) {
-  background-image: url(./material-spinner.svg);
-  background-repeat: no-repeat;
-  background-position: center;
-  width: 164px;
-  height: 164px;
-}

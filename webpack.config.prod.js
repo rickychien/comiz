@@ -42,8 +42,12 @@ module.exports = {
         },
       },
       {
-        test: /\.jpe?g$|\.gif$|\.png|\.woff2?|\.ttf|\.eot|\.svg$/,
+        test: /\.(gif|png|ttf|eot|jpe?g|woff2?)$/,
         loader: 'url',
+      },
+      {
+        test: /\.svg/,
+        loader: 'svg-inline',
       },
       {
         test: /\.css$/,
