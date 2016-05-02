@@ -1,6 +1,6 @@
 const initialState = {
   isFetching: false,
-  fetchError: null,
+  fetchError: false,
   entries: {},
   comicId: 0,
 }
@@ -16,18 +16,18 @@ export default function (state = initialState, action) {
     case 'FETCH_EPISODES_REQUEST':
       return Object.assign({}, state, {
         isFetching: true,
-        fetchError: null,
-        comicId: action.comicId,
+        fetchError: false,
+        comicId: action.payload.comicId,
       })
     case 'FETCH_EPISODES_SUCCESS':
       return Object.assign({}, state, {
         isFetching: false,
-        entries: mergeEntries({}, action.episodes),
+        entries: mergeEntries({}, action.payload),
       })
     case 'FETCH_EPISODES_FAILURE':
       return Object.assign({}, state, {
         isFetching: false,
-        fetchError: action.error,
+        fetchError: true,
       })
     default:
       return state

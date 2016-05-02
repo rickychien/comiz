@@ -15,7 +15,7 @@ class ComicDrawer extends React.Component {
     open: false,
     width: 300,
     isFetching: false,
-    fetchError: null,
+    fetchError: false,
     comic: {},
   }
 
@@ -23,7 +23,7 @@ class ComicDrawer extends React.Component {
     open: PropTypes.bool,
     width: PropTypes.number,
     isFetching: PropTypes.bool,
-    fetchError: PropTypes.object,
+    fetchError: PropTypes.bool,
     comic: PropTypes.object.isRequired,
     episodes: PropTypes.array.isRequired,
     favorite: PropTypes.bool,

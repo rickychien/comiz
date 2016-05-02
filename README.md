@@ -125,7 +125,7 @@ A fantastic comic viewer in the world.
 
   comics: {
     isFetching: false,
-    fetchError: null,
+    fetchError: false,
     entries: {
       1: {
         id: 1,
@@ -141,7 +141,7 @@ A fantastic comic viewer in the world.
   episodes: {
     comicId: 1,
     isFetching: false,
-    fetchError: null,
+    fetchError: false,
     entries: {
       1: {
         id: 1,
@@ -158,7 +158,7 @@ A fantastic comic viewer in the world.
     comicId: 1,
     episodeId: 2,
     isFetching: false,
-    fetchError: null,
+    fetchError: false,
     entries: [
       'http://path/to/page1',
       'http://path/to/page2'

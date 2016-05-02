@@ -7,8 +7,8 @@ export default function (state = initialState, action) {
   switch (action.type) {
     case 'UPDATE_COMIC_DRAWER':
       return {
-        open: action.open,
-        comicId: action.comicId || state.comicId,
+        open: action.payload.open,
+        comicId: action.payload.comicId || state.comicId,
       }
     default:
       return state

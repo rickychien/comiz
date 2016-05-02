@@ -11,7 +11,7 @@ class ComicListContainer extends React.Component {
   static propTypes = {
     comics: PropTypes.object.isRequired,
     isFetching: PropTypes.bool.isRequired,
-    fetchError: PropTypes.object,
+    fetchError: PropTypes.bool.isRequired,
     filter: PropTypes.object.isRequired,
     favorites: PropTypes.array.isRequired,
     offset: PropTypes.number.isRequired,

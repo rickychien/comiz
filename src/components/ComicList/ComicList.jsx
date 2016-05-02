@@ -66,13 +66,13 @@ function ComicList({
 ComicList.defaultProps = {
   comics: [],
   isFetching: false,
-  fetchError: null,
+  fetchError: false,
 }
 
 ComicList.propTypes = {
   comics: PropTypes.array,
   isFetching: PropTypes.bool,
-  fetchError: PropTypes.object,
+  fetchError: PropTypes.bool,
   onComicItemClick: PropTypes.func,
 }
 

@@ -100,7 +100,7 @@ ComicViewer.defaultProps = {
   pages: [],
   episode: {},
   isFetching: false,
-  fetchError: null,
+  fetchError: false,
   prevEpisodeDisabled: true,
   nextEpisodeDisabled: true,
 }
@@ -109,7 +109,7 @@ ComicViewer.propTypes = {
   pages: PropTypes.array,
   episode: PropTypes.object,
   isFetching: PropTypes.bool,
-  fetchError: PropTypes.object,
+  fetchError: PropTypes.bool,
   prevEpisode: PropTypes.object,
   nextEpisode: PropTypes.object,
   onPrevEpisodeClick: PropTypes.func,

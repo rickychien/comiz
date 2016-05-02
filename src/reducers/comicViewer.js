@@ -6,7 +6,7 @@ const initialState = {
 export default function (state = initialState, action) {
   switch (action.type) {
     case 'UPDATE_COMIC_VIEWER':
-      return { comicId: action.comicId, episodeId: action.episodeId }
+      return { comicId: action.payload.comicId, episodeId: action.payload.episodeId }
     default:
       return state
   }

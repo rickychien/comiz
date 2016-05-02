@@ -50,22 +50,22 @@ export default function (state = initialState, action) {
     case 'TOGGLE_FAVORITE':
       return {
         ...state,
-        favorites: toggleFavorite(state.favorites, action.comicId),
+        favorites: toggleFavorite(state.favorites, action.payload.comicId),
       }
     case 'MARK_READ':
       return {
         ...state,
-        reads: markRead(state.reads, action.comicId, action.episodeId),
+        reads: markRead(state.reads, action.payload.comicId, action.payload.episodeId),
       }
     case 'UNMARK_READ':
       return {
         ...state,
-        reads: unmarkRead(state.reads, action.comicId, action.episodeId),
+        reads: unmarkRead(state.reads, action.payload.comicId, action.payload.episodeId),
       }
     case 'TOGGLE_READ':
       return {
         ...state,
-        reads: toggleRead(state.reads, action.comicId, action.episodeId),
+        reads: toggleRead(state.reads, action.payload.comicId, action.payload.episodeId),
       }
     default:
       return state

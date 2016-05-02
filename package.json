@@ -29,6 +29,7 @@
     "react-swipeable": "^3.3.0",
     "redux": "^3.5.2",
     "redux-logger": "^2.6.1",
+    "redux-promise-middleware": "^3.0.0",
     "redux-thunk": "^2.0.1",
     "svg-inline-react": "^1.0.1",
     "url-loader": "^0.5.7"
