@@ -38,14 +38,6 @@ module.exports = {
         test: /\.jsx?$/,
         loader: 'babel',
         exclude: /node_modules/,
-        query: {
-          presets: ['es2015', 'react', 'stage-1', 'stage-2'],
-          env: {
-            development: {
-              presets: ['react-hmre'],
-            },
-          },
-        },
       },
       {
         test: /\.(gif|png|ttf|eot|jpe?g|woff2?)$/,
