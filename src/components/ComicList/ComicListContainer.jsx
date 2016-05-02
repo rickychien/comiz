@@ -44,7 +44,10 @@ class ComicListContainer extends React.Component {
   }
 
   onResize = () => {
-    this.props.dispatch(Actions.updateComicList(null, this.getComicsPerPage()))
+    const comicsPerPage = this.getComicsPerPage()
+    if (comicsPerPage !== this.props.comicsPerPage) {
+      this.props.dispatch(Actions.updateComicList(null, comicsPerPage))
+    }
   }
 
   onScroll = () => {
