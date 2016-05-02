@@ -13,6 +13,11 @@ A fantastic comic viewer in the world.
 
 * [react] - A declarative, efficient, and flexible JavaScript library for building user interfaces.
 * [redux] - a predictable state container for JavaScript apps.
+* [react-redux] - Official React bindings for Redux
+* [react-router-redux] - Ruthlessly simple bindings to keep react-router and redux in sync
+* [react-router] - A complete routing library for React
+* [redux-promise-middleware] - Redux middleware for resolving and rejecting promises with conditional optimistic updates.
+* [redux-thunk] - Allows you to write action creators that return a function instead of an action.
 * [webpack] - module bundler.
 * [babel] - A compiler for writing next generation JavaScript.
 * [css-modules] - Modulize CSS.
@@ -101,15 +106,16 @@ A fantastic comic viewer in the world.
   },
 
   filter: {
-    category: 'SHOW_LATEST',
+    category: 'latest',
     categories: {
-      SHOW_LATEST: 'Latest',
-      SHOW_FAVORITE: 'favorite'
+      latest: 'Latest',
+      favorite: 'favorite'
     },
-    query: 'user query string'
+    query: '<user query>'
   },
 
   comicDrawer: {
+    open: false,
     comicId: 1
   },
 
@@ -176,6 +182,11 @@ A fantastic comic viewer in the world.
 [npm]: https://www.npmjs.com/
 [react]: https://github.com/facebook/react
 [redux]: http://redux.js.org/
+[react-redux]: https://github.com/reactjs/react-redux
+[react-router-redux]: https://github.com/reactjs/react-router-redux
+[react-router]: https://github.com/reactjs/react-router
+[redux-promise-middleware]: https://github.com/pburtchaell/redux-promise-middleware
+[redux-thunk]: https://github.com/gaearon/redux-thunk
 [webpack]: https://github.com/webpack/webpack
 [babel]: https://github.com/babel/babel
 [css-modules]: https://github.com/css-modules/css-modules
