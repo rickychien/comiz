@@ -32,7 +32,7 @@ A fantastic comic viewer in the world.
   npm start
   ```
 
-3. Visit <http://localhost:3990> in browser
+3. Visit <http://localhost:8000> in browser
 
 ### Development Guide
 

@@ -8,7 +8,7 @@ const config = require('./webpack.config')
 
 const compiler = webpack(config)
 const app = express()
-const port = 3990
+const port = 8000
 
 app.use(webpackDevMiddleware(compiler, {
   noInfo: true,
