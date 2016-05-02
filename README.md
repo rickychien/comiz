@@ -83,9 +83,15 @@ A fantastic comic viewer in the world.
 
   Steps to gh-pages publish
 
-  1. npm run build
-  2. git commit new changes (including build results in dist/*)
-  3. npm run gh-pages
+  ```
+  npm run build
+  ```
+  ```
+  git commit new changes (including build results in dist/*)
+  ```
+  ```
+  npm run gh-pages
+  ```
 
 ## Application State Structure
 
