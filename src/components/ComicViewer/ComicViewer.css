@@ -9,17 +9,21 @@
   max-width: 100%;
 }
 
-@media screen and (max-width: 500px) {
-  .img {
-    width: 100%;
-  }
-}
-
 .title {
   color: var(--main-color);
   font-size: 40px;
   margin: 40px 0 20px 0;
   height: auto;
+}
+
+@media screen and (max-width: 500px) {
+  .img {
+    width: 100%;
+  }
+
+  .title {
+    font-size: 22px;
+  }
 }
 
 .navigateEpisode {
