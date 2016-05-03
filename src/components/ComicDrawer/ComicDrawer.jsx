@@ -34,6 +34,8 @@ class ComicDrawer extends React.Component {
   state = {
     open: false,
     xDelta: 0,
+    lockX: false,
+    lockY: false,
   }
 
   componentDidMount() {
@@ -53,19 +55,42 @@ class ComicDrawer extends React.Component {
     window.removeEventListener('keyup', this.onKeyUp)
   }
 
-  onSwipingRight = (evt, xDelta) => {
-    this.setState({
-      xDelta,
-    })
+  onSwiping = (evt, xDelta, yDelta) => {
+    const { lockX, lockY } = this.state
+    const dXAbs = Math.abs(xDelta)
+    const dYAbs = Math.abs(yDelta)
+    const threshold = 10
+    evt.stopPropagation()
+
+    if ((lockX && !lockY) ||
+        !lockX && !lockY && dXAbs > threshold && dYAbs <= threshold) {
+      this.setState({
+        xDelta,
+        lockX: true,
+        lockY: false,
+      })
+    }
+
+    if ((!lockX && lockY) ||
+        !lockX && !lockY && dXAbs <= threshold && dYAbs > threshold) {
+      this.setState({
+        xDelta: 0,
+        lockX: false,
+        lockY: true,
+      })
+    } else if (evt.cancelable) {
+      evt.preventDefault()
+    }
   }
 
-  onSwipedRight = (evt, xDelta) => {
-    const width = this.props.width
-    if (width - Math.abs(xDelta) < (width / 2)) {
+  onSwiped = (evt, xDelta) => {
+    if (xDelta < -(this.props.width / 2) && this.state.lockX) {
       this.handleClose()
     } else {
       this.setState({
         xDelta: 0,
+        lockX: false,
+        lockY: false,
       })
     }
   }
@@ -81,7 +106,8 @@ class ComicDrawer extends React.Component {
       return {}
     }
 
-    const x = -this.props.width + this.state.xDelta
+    let x = -this.props.width - this.state.xDelta
+    x = x < -this.props.width ? -this.props.width : x
     return {
       transform: `translate3d(${x}px, 0, 0)`,
     }
@@ -90,6 +116,8 @@ class ComicDrawer extends React.Component {
   handleClose = () => {
     this.setState({
       open: false,
+      lockX: false,
+      lockY: false,
     })
 
     if (this.props.onCloseClick) {
@@ -120,8 +148,8 @@ class ComicDrawer extends React.Component {
         <Swipeable
           className={ comicDrawerStyles }
           style={ this.getStyles() }
-          onSwipingRight={ this.onSwipingRight }
-          onSwipedRight={ this.onSwipedRight }
+          onSwiping={ this.onSwiping }
+          onSwiped={ this.onSwiped }
         >
           <AppBar materialIcon="close" onLogoClick={ this.handleClose } />
           {
