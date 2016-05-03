@@ -27,16 +27,30 @@ class ComicViewerContainer extends React.Component {
     this.handleDataFetch(nextProps)
   }
 
-  onPrevEpisodeClick = () => this.goNextEpisodeByOffset(-1)
-
-  onNextEpisodeClick = () => this.goNextEpisodeByOffset(+1)
-
   onBackClick = () => {
     this.props.dispatch(push('/'))
   }
 
   onComicDrawerClick = () => {
     this.props.dispatch(Actions.updateComicDrawer(true, this.props.comicId))
+  }
+
+  onPrevEpisodeClick = () => this.handleEpisodeNavigation(-1)
+
+  onNextEpisodeClick = () => this.handleEpisodeNavigation(+1)
+
+  getNextEpisodeIdByOffset = (offset) => {
+    const { episodeId, episodes } = this.props
+    const episodeKeys = Object.keys(episodes.entries)
+    return episodeKeys[episodeKeys.indexOf(`${episodeId}`) + offset]
+  }
+
+  handleEpisodeNavigation = (offset) => {
+    const { comicId, dispatch } = this.props
+    const nextEpisodeId = this.getNextEpisodeIdByOffset(offset)
+    if (nextEpisodeId) {
+      dispatch(push(`/viewer?cid=${comicId}&eid=${nextEpisodeId}`))
+    }
   }
 
   handleDataFetch = (nextProps) => {
@@ -62,24 +76,17 @@ class ComicViewerContainer extends React.Component {
       `${comic.title} - ${episode.title} - ${App.title}` : App.title
   }
 
-  goNextEpisodeByOffset = (offset) => {
-    const { comicId, episodeId, episodes, dispatch } = this.props
-    if (episodes.entries[episodeId + offset]) {
-      dispatch(push(`/viewer?cid=${comicId}&eid=${episodeId + offset}`))
-    }
-  }
-
   render() {
-    const { episodeId, episodes, pages } = this.props
+    const { episodeId, episodes: { entries: episodes }, pages } = this.props
 
     return (
       <ComicViewer
         pages={ pages.entries }
-        episode={ episodes.entries[episodeId] }
+        episode={ episodes[episodeId] }
         isFetching={ pages.isFetching }
         fetchError={ pages.fetchError }
-        prevEpisode={ episodes.entries[episodeId - 1] }
-        nextEpisode={ episodes.entries[episodeId + 1] }
+        prevEpisode={ episodes[this.getNextEpisodeIdByOffset(-1)] }
+        nextEpisode={ episodes[this.getNextEpisodeIdByOffset(+1)] }
         onPrevEpisodeClick={ this.onPrevEpisodeClick }
         onNextEpisodeClick={ this.onNextEpisodeClick }
         onBackClick={ this.onBackClick }
