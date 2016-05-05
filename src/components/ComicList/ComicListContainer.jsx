@@ -27,7 +27,7 @@ class ComicListContainer extends React.Component {
     // comic length would be 0 when user first time visits ComicList
     // comic length would be 1 if there has exact 1 comic fetched by other page
     // ex: Visit ComicList from ComicViewer along with an opened ComicDrawer
-    if (Object.keys(comics).length <= 1) {
+    if (comics.size <= 1) {
       dispatch(Actions.fetchComics())
     }
 
@@ -92,21 +92,19 @@ class ComicListContainer extends React.Component {
       return []
     }
 
-    let comicArray
+    let items
     switch (filter.category) {
       case 'latest':
-        comicArray = Object.keys(comics).map(key => comics[key])
+        items = Array.from(comics, val => val[1])
         break
       case 'favorite':
-        comicArray = favorites
-          .map(comicId => comics[comicId])
-          .filter(comic => comic)
+        items = favorites.map(comics.get.bind(comics)).filter(comic => comic)
         break
       default:
         return []
     }
 
-    return comicArray.filter(comic => reg.test(comic.title))
+    return items.filter(comic => reg.test(comic.title))
   }
 
   render() {

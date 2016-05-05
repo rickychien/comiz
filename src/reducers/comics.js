@@ -1,13 +1,13 @@
 const initialState = {
   isFetching: false,
   fetchError: false,
-  entries: {},
+  entries: new Map(),
 }
 
-function mergeEntries(object, array) {
+function mergeEntries(entries, array) {
   return array.reduce((prev, curr) => (
-    Object.assign(prev, { [curr.id]: curr })
-  ), Object.assign({}, object))
+    Object.assign(prev, prev.set(curr.id, curr))
+  ), entries)
 }
 
 export default function (state = initialState, action) {

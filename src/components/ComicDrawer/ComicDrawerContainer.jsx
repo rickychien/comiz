@@ -18,12 +18,12 @@ class ComicDrawerContainer extends React.Component {
 
   componentWillUpdate(nextProps) {
     const { open, comicId, comics, episodes, dispatch } = nextProps
-    const comic = comics.entries[comicId]
+    const comic = comics.entries.get(comicId)
 
     if (!open || !comicId) return
 
     if (comicId !== this.props.comicId ||
-        !comics.fetchError && (!comic || !comic.mtime)) {
+        !comics.fetchError && (!comic || !comic.author)) {
       dispatch(Actions.fetchComic(comicId))
     }
 
@@ -48,7 +48,7 @@ class ComicDrawerContainer extends React.Component {
     return (
       <ComicDrawer
         open={ open }
-        comic={ comics.entries[comicId] }
+        comic={ comics.entries.get(comicId) }
         episodes={ episodesArray }
         favorite={ this.props.favorite }
         isFetching={ comics.isFetching || episodes.isFetching }
