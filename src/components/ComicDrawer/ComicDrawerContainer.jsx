@@ -42,14 +42,12 @@ class ComicDrawerContainer extends React.Component {
 
   render() {
     const { open, comicId, comics, episodes } = this.props
-    const episodesArray = Object.keys(episodes.entries)
-      .map(key => episodes.entries[key]).reverse()
 
     return (
       <ComicDrawer
         open={ open }
         comic={ comics.entries.get(comicId) }
-        episodes={ episodesArray }
+        episodes={ Array.from(episodes.entries, val => val[1]).reverse() }
         favorite={ this.props.favorite }
         isFetching={ comics.isFetching || episodes.isFetching }
         fetchError={ comics.fetchError || episodes.fetchError }

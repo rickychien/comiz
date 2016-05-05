@@ -41,8 +41,8 @@ class ComicViewerContainer extends React.Component {
 
   getNextEpisodeIdByOffset = (offset) => {
     const { episodeId, episodes } = this.props
-    const episodeKeys = Object.keys(episodes.entries)
-    return episodeKeys[episodeKeys.indexOf(`${episodeId}`) + offset]
+    const episodeIds = Array.from(episodes.entries, val => val[0])
+    return episodeIds[episodeIds.indexOf(episodeId) + offset]
   }
 
   handleEpisodeNavigation = (offset) => {
@@ -71,7 +71,7 @@ class ComicViewerContainer extends React.Component {
       dispatch(Actions.fetchPages(comicId, episodeId))
     }
 
-    const episode = episodes.entries[episodeId]
+    const episode = episodes.entries.get(episodeId)
     document.title = (comic && episode) ?
       `${comic.title} - ${episode.title} - ${App.title}` : App.title
   }
@@ -82,11 +82,11 @@ class ComicViewerContainer extends React.Component {
     return (
       <ComicViewer
         pages={ pages.entries }
-        episode={ episodes[episodeId] }
+        episode={ episodes.get(episodeId) }
         isFetching={ pages.isFetching }
         fetchError={ pages.fetchError }
-        prevEpisode={ episodes[this.getNextEpisodeIdByOffset(-1)] }
-        nextEpisode={ episodes[this.getNextEpisodeIdByOffset(+1)] }
+        prevEpisode={ episodes.get(this.getNextEpisodeIdByOffset(-1)) }
+        nextEpisode={ episodes.get(this.getNextEpisodeIdByOffset(+1)) }
         onPrevEpisodeClick={ this.onPrevEpisodeClick }
         onNextEpisodeClick={ this.onNextEpisodeClick }
         onBackClick={ this.onBackClick }
@@ -102,7 +102,7 @@ function mapStateToProps(state, ownProps) {
 
   return {
     comicId: parseInt(cid, 10),
-    comic: state.comics.entries[cid],
+    comic: state.comics.entries.get(cid),
     episodeId: parseInt(eid, 10),
     episodes: state.episodes,
     pages: state.pages,
