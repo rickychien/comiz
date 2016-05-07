@@ -64,16 +64,18 @@ function ComicViewer({
                   </div>
                 )
               }
-              {
-                pages.map((page, i) => (
-                  <img
-                    key={ i }
-                    className={ styles.img }
-                    src={ page }
-                    alt={ `page ${i}` }
-                  />
-                ))
-              }
+              <div className={ styles.comics }>
+                {
+                  pages.map((page, i) => (
+                    <img
+                      key={ i }
+                      className={ styles.img }
+                      src={ page }
+                      alt={ `page ${i}` }
+                    />
+                  ))
+                }
+              </div>
               {
                 nextEpisode && (
                   <div

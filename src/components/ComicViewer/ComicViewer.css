@@ -4,7 +4,7 @@
 }
 
 .img {
-  margin: 15px 0;
+  margin: 15px 5px;
   border-radius: 8px;
   max-width: 100%;
 }
@@ -14,6 +14,14 @@
   font-size: 40px;
   margin: 40px 0 20px 0;
   height: auto;
+}
+
+.comics {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row-reverse;
+  justify-content: center;
+  align-items: flex-start;
 }
 
 @media screen and (max-width: 500px) {
