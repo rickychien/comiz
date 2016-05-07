@@ -102,7 +102,7 @@ function mapStateToProps(state, ownProps) {
 
   return {
     comicId: parseInt(cid, 10),
-    comic: state.comics.entries.get(cid),
+    comic: state.comics.entries.get(parseInt(cid, 10)),
     episodeId: parseInt(eid, 10),
     episodes: state.episodes,
     pages: state.pages,
