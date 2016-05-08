@@ -8,6 +8,7 @@ function CheckItem({
   iconChecked,
   title,
   subTitle,
+  subTitle2,
   onClick,
 }) {
   return (
@@ -22,8 +23,9 @@ function CheckItem({
         <i className={ `material-icons ${styles.uncheck}` }>{ iconUncheck }</i>
         <i className={ `material-icons ${styles.checked}` }>{ iconChecked }</i>
       </div>
-      <div className={ styles.title }>{ title }</div>
+      <div>{ title }</div>
       <div className={ styles.subTitle }>{ subTitle }</div>
+      <div className={ styles.subTitle }>{ subTitle2 }</div>
     </label>
   )
 }
@@ -38,6 +40,7 @@ CheckItem.propTypes = {
   iconChecked: PropTypes.string.isRequired,
   title: PropTypes.string,
   subTitle: PropTypes.string,
+  subTitle2: PropTypes.string,
   onClick: PropTypes.func,
 }
 

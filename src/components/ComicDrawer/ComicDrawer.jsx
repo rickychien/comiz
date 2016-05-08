@@ -182,32 +182,29 @@ class ComicDrawer extends React.Component {
                       alt="cover"
                     />
                   </div>
-                  <div className={ styles.overview }>
-                    <div className={ styles.about }>
-                      <CheckItem
-                        checked={ favorite }
-                        iconUncheck="star_border"
-                        iconChecked="star"
-                        title={ comic.title }
-                        subTitle={ comic.author }
-                        onClick={ onFavoriteClick }
-                      />
-                    </div>
-                    <hr className={ styles.hr } />
-                    <div className={ styles.brief }>{ comic.brief }</div>
-                    <hr className={ styles.hr } />
-                    <div className={ styles.episodes }>
-                      <div className={ styles.episodesInner }>
-                        {
-                          episodes.map((episode) => (
-                            <ComicEpisodeContainer
-                              key={ episode.id }
-                              comic={ comic }
-                              episode={ episode }
-                            />
-                          ))
-                        }
-                      </div>
+                  <CheckItem
+                    checked={ favorite }
+                    iconUncheck="star_border"
+                    iconChecked="star"
+                    title={ comic.title }
+                    subTitle={ comic.author }
+                    subTitle2={ new Date(comic.mtime).toLocaleDateString() }
+                    onClick={ onFavoriteClick }
+                  />
+                  <hr className={ styles.hr } />
+                  <div className={ styles.brief }>{ comic.brief }</div>
+                  <hr className={ styles.hr } />
+                  <div className={ styles.episodes }>
+                    <div className={ styles.episodesInner }>
+                      {
+                        episodes.map((episode) => (
+                          <ComicEpisodeContainer
+                            key={ episode.id }
+                            comic={ comic }
+                            episode={ episode }
+                          />
+                        ))
+                      }
                     </div>
                   </div>
                 </div>
