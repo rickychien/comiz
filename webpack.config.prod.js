@@ -39,7 +39,7 @@ module.exports = {
       },
       {
         test: /\.(gif|png|ttf|eot|jpe?g|woff2?)$/,
-        loader: 'url',
+        loader: 'file-loader?name=assets/[name].[ext]',
       },
       {
         test: /\.svg/,
