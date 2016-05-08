@@ -4,7 +4,7 @@
   "description": "Comic viewer",
   "main": "index.js",
   "scripts": {
-    "build": "npm run clean && NODE_ENV=production $(npm bin)/webpack --progress --colors --config ./webpack.config.prod.js && cp ./src/index.html ./src/favicon.svg ./dist/",
+    "build": "npm run clean && NODE_ENV=production $(npm bin)/webpack --progress --colors --config ./webpack.config.prod.js && cp ./src/index.html ./src/favicon.png ./dist/",
     "clean": "rm -rf ./dist",
     "lint": "$(npm bin)/eslint --fix 'src/**/*.+(js|jsx)'",
     "test": "echo \"Error: no test specified\" && exit 1",

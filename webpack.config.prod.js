@@ -42,7 +42,7 @@ module.exports = {
         loader: 'url',
       },
       {
-        test: /^(?!favicon).+\.svg/,
+        test: /\.svg/,
         loader: 'svg-inline',
       },
       {
