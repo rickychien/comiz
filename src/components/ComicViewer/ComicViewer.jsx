@@ -45,23 +45,27 @@ function ComicViewer({
 
           return (
             <div className={ styles.comicViewer }>
-              {
-                <div className={ styles.title }>
-                  { episode.title }
-                </div>
-              }
+              <div className={ styles.title }>
+                { episode.title }
+              </div>
               {
                 prevEpisode && (
-                  <div
-                    className={ styles.prevEpisode }
+                  <FlatButton
+                    materialIcon="chevron_left"
+                    extraStyles={ styles.episodeButton }
+                    title={ prevEpisode.title }
                     onClick={ onPrevEpisodeClick }
-                  >
-                    <FlatButton
-                      materialIcon="chevron_left"
-                      extraStyles={ styles.episodeButton }
-                      title={ prevEpisode.title }
-                    />
-                  </div>
+                  />
+                )
+              }
+              {
+                nextEpisode && (
+                  <FlatButton
+                    materialIcon="chevron_right"
+                    extraStyles={ styles.episodeButton }
+                    title={ nextEpisode.title }
+                    onClick={ onNextEpisodeClick }
+                  />
                 )
               }
               <div className={ styles.comics }>
@@ -77,17 +81,23 @@ function ComicViewer({
                 }
               </div>
               {
+                prevEpisode && (
+                  <FlatButton
+                    materialIcon="chevron_left"
+                    extraStyles={ styles.episodeButton }
+                    title={ prevEpisode.title }
+                    onClick={ onPrevEpisodeClick }
+                  />
+                )
+              }
+              {
                 nextEpisode && (
-                  <div
-                    className={ styles.nextEpisode }
+                  <FlatButton
+                    materialIcon="chevron_right"
+                    extraStyles={ styles.episodeButton }
+                    title={ nextEpisode.title }
                     onClick={ onNextEpisodeClick }
-                  >
-                    <FlatButton
-                      materialIcon="chevron_right"
-                      extraStyles={ styles.episodeButton }
-                      title={ nextEpisode.title }
-                    />
-                  </div>
+                  />
                 )
               }
             </div>

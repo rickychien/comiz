@@ -34,33 +34,8 @@
   }
 }
 
-.navigateEpisode {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  cursor: pointer;
-  width: 100%;
-  height: auto;
-  margin: 0 auto;
-}
-
-.prevEpisode {
-  composes: navigateEpisode;
-  top: 5px;
-}
-
-.nextEpisode {
-  composes: navigateEpisode;
-  bottom: 5px;
-}
-
 .episodeButton {
   color: rgba(213, 213, 213, 0.8);
-}
-
-.navigateEpisode:hover .episodeButton {
-  color: #bdc5da;
 }
 
 .statusPage {
