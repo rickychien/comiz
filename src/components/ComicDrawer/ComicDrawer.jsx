@@ -188,7 +188,14 @@ class ComicDrawer extends React.Component {
                     iconChecked="star"
                     title={ comic.title }
                     subTitle={ comic.author }
-                    subTitle2={ new Date(comic.mtime).toLocaleDateString() }
+                    subTitle2={ new Date(comic.mtime)
+                      .toLocaleDateString('zh-TW', {
+                        weekday: 'long',
+                        year: 'numeric',
+                        month: 'long',
+                        day: 'numeric',
+                      })
+                    }
                     onClick={ onFavoriteClick }
                   />
                   <hr className={ styles.hr } />
