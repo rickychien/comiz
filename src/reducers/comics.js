@@ -21,7 +21,7 @@ export default function (state = initialState, action) {
     case 'FETCH_COMICS_SUCCESS':
       return Object.assign({}, state, {
         isFetching: false,
-        entries: mergeEntries(state.entries, action.payload),
+        entries: mergeEntries(new Map(), action.payload),
       })
     case 'FETCH_COMIC_SUCCESS':
       return Object.assign({}, state, {
