@@ -14,7 +14,6 @@ import ComicViewer from './components/ComicViewer'
 
 import './index.css'
 import './assets/materialicons.css'
-import './assets/favicon.png'
 
 function getStoreUserPrefs(key) {
   let result

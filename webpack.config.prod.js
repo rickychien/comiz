@@ -9,7 +9,7 @@ module.exports = {
   output: {
     path: `${__dirname}/dist/`,
     filename: '[name].js',
-    publicPath: '/',
+    publicPath: '/comiz/',
   },
   plugins: [
     new webpack.ProvidePlugin({
@@ -39,10 +39,10 @@ module.exports = {
       },
       {
         test: /\.(gif|png|ttf|eot|jpe?g|woff2?)$/,
-        loader: 'file-loader?name=assets/[name].[ext]',
+        loader: 'url',
       },
       {
-        test: /\.svg/,
+        test: /^(?!favicon).+\.svg/,
         loader: 'svg-inline',
       },
       {

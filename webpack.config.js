@@ -40,10 +40,10 @@ module.exports = {
       },
       {
         test: /\.(gif|png|ttf|eot|jpe?g|woff2?)$/,
-        loader: 'file-loader?name=[name].[ext]',
+        loader: 'url',
       },
       {
-        test: /\.svg/,
+        test: /^(?!favicon).+\.svg/,
         loader: 'svg-inline',
       },
       {
