@@ -52,6 +52,7 @@ export default function (state = initialState, action) {
         ...state,
         favorites: toggleFavorite(state.favorites, action.payload.comicId),
       }
+    case 'FETCH_PAGES_SUCCESS':
     case 'MARK_READ':
       return {
         ...state,

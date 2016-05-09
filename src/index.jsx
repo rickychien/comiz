@@ -4,7 +4,7 @@ import { Provider } from 'react-redux'
 import { IndexRedirect, Redirect, Router, Route } from 'react-router'
 import { syncHistoryWithStore } from 'react-router-redux'
 
-import * as Actions from './actions'
+import Actions from './actions'
 import { hashHistory } from './services'
 import configureStore from './store'
 

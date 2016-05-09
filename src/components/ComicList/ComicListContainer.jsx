@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 
 import ComicList from './ComicList'
 
-import * as Actions from '../../actions'
+import Actions from '../../actions'
 import { App } from '../../constants'
 
 class ComicListContainer extends React.Component {

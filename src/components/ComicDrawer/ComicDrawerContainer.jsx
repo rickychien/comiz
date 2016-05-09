@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 
 import ComicDrawer from './ComicDrawer'
 
-import * as Actions from '../../actions'
+import Actions from '../../actions'
 
 class ComicDrawerContainer extends React.Component {
 

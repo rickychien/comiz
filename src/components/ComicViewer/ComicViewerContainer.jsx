@@ -4,7 +4,7 @@ import { push } from 'react-router-redux'
 
 import ComicViewer from './ComicViewer'
 
-import * as Actions from '../../actions'
+import Actions from '../../actions'
 import { App } from '../../constants'
 
 class ComicViewerContainer extends React.Component {

@@ -3,7 +3,7 @@ import { push } from 'react-router-redux'
 
 import ComicEpisode from './ComicEpisode'
 
-import * as Actions from '../../actions'
+import Actions from '../../actions'
 
 function mapStateToProps(state, ownProps) {
   const { comicId, episodeId } = state.comicViewer
