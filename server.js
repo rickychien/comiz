@@ -32,7 +32,7 @@ app.get('/api/*', (req, res) => {
   // Simulate RESTful API request for development
   let path = req.path
   path = /\/comics\/[\d]+(\/episodes)?/.test(path) ? `${path}/data` : path
-  res.sendFile(`${__dirname}/src${path}`)
+  res.sendFile(`${__dirname}/src/${path}`)
 })
 
 app.get('/assets/*', (req, res) => {

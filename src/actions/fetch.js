@@ -1,3 +1,5 @@
+import fetch from 'isomorphic-fetch'
+
 const HOST = process.env.SERVER_URL
 
 export function fetchComics() {

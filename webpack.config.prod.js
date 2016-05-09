@@ -12,9 +12,6 @@ module.exports = {
     publicPath: '/comiz/',
   },
   plugins: [
-    new webpack.ProvidePlugin({
-      fetch: 'imports?this=>global!exports?global.fetch!isomorphic-fetch',
-    }),
     new webpack.optimize.OccurenceOrderPlugin(),
     new webpack.optimize.DedupePlugin(),
     new webpack.optimize.UglifyJsPlugin({

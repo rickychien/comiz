@@ -13,3 +13,7 @@ rules:
   react/jsx-curly-spacing:
     - error
     - always
+env:
+  browser: true
+  mocha: true
+  node: true
