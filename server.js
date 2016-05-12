@@ -24,6 +24,10 @@ app.get('/', (req, res) => {
   res.sendFile(`${__dirname}/src/index.html`)
 })
 
+app.get('/*', (req, res) => {
+  res.sendFile(`${__dirname}/src/${req.path}`)
+})
+
 app.get('/api/*', (req, res) => {
   // Simulate RESTful API request for development
   let path = req.path
