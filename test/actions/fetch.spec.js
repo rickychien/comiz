@@ -1,4 +1,4 @@
-import assert from 'assert'
+import expect from 'expect'
 import fs from 'fs'
 import nock from 'nock'
 
@@ -38,11 +38,11 @@ describe('fetch actions', () => {
 
       return store.dispatch(actions.fetchComics())
       .then(() => {
-        assert.strictEqual(store.getActions()[0].type, `${type}_REQUEST`)
-        assert.strictEqual(store.getActions()[1].type, `${type}_SUCCESS`)
+        expect(store.getActions()[0].type).toEqual(`${type}_REQUEST`)
+        expect(store.getActions()[1].type).toEqual(`${type}_SUCCESS`)
 
         const data = JSON.parse(fs.readFileSync(file))
-        assert.deepStrictEqual(store.getActions()[1].payload, data)
+        expect(store.getActions()[1].payload).toEqual(data)
       })
     })
 
@@ -59,8 +59,8 @@ describe('fetch actions', () => {
 
       return store.dispatch(actions.fetchComics())
       .then(() => {
-        assert.strictEqual(store.getActions()[0].type, `${type}_REQUEST`)
-        assert.strictEqual(store.getActions()[1].type, `${type}_FAILURE`)
+        expect(store.getActions()[0].type).toEqual(`${type}_REQUEST`)
+        expect(store.getActions()[1].type).toEqual(`${type}_FAILURE`)
       })
     })
 
@@ -75,7 +75,7 @@ describe('fetch actions', () => {
         .get(query)
         .replyWithFile(200, file)
 
-      assert.strictEqual(store.dispatch(actions.fetchComics()), false)
+      expect(store.dispatch(actions.fetchComics())).toBe(false)
     })
   })
 
@@ -98,11 +98,11 @@ describe('fetch actions', () => {
 
       return store.dispatch(actions.fetchComic(comicId))
       .then(() => {
-        assert.strictEqual(store.getActions()[0].type, `${type}_REQUEST`)
-        assert.strictEqual(store.getActions()[1].type, `${type}_SUCCESS`)
+        expect(store.getActions()[0].type).toEqual(`${type}_REQUEST`)
+        expect(store.getActions()[1].type).toEqual(`${type}_SUCCESS`)
 
         const data = JSON.parse(fs.readFileSync(file))
-        assert.deepStrictEqual(store.getActions()[1].payload, data)
+        expect(store.getActions()[1].payload).toEqual(data)
       })
     })
 
@@ -119,8 +119,8 @@ describe('fetch actions', () => {
 
       return store.dispatch(actions.fetchComic(comicId))
       .then(() => {
-        assert.strictEqual(store.getActions()[0].type, `${type}_REQUEST`)
-        assert.strictEqual(store.getActions()[1].type, `${type}_FAILURE`)
+        expect(store.getActions()[0].type).toEqual(`${type}_REQUEST`)
+        expect(store.getActions()[1].type).toEqual(`${type}_FAILURE`)
       })
     })
 
@@ -135,7 +135,7 @@ describe('fetch actions', () => {
         .get(query)
         .replyWithFile(200, file)
 
-      assert.strictEqual(store.dispatch(actions.fetchComic(comicId)), false)
+      expect(store.dispatch(actions.fetchComic(comicId))).toBe(false)
     })
   })
 
@@ -158,11 +158,11 @@ describe('fetch actions', () => {
 
       return store.dispatch(actions.fetchEpisodes(comicId))
       .then(() => {
-        assert.strictEqual(store.getActions()[0].type, `${type}_REQUEST`)
-        assert.strictEqual(store.getActions()[1].type, `${type}_SUCCESS`)
+        expect(store.getActions()[0].type).toEqual(`${type}_REQUEST`)
+        expect(store.getActions()[1].type).toEqual(`${type}_SUCCESS`)
 
         const data = JSON.parse(fs.readFileSync(file))
-        assert.deepStrictEqual(store.getActions()[1].payload, data)
+        expect(store.getActions()[1].payload).toEqual(data)
       })
     })
 
@@ -179,8 +179,8 @@ describe('fetch actions', () => {
 
       return store.dispatch(actions.fetchEpisodes(comicId))
       .then(() => {
-        assert.strictEqual(store.getActions()[0].type, `${type}_REQUEST`)
-        assert.strictEqual(store.getActions()[1].type, `${type}_FAILURE`)
+        expect(store.getActions()[0].type).toEqual(`${type}_REQUEST`)
+        expect(store.getActions()[1].type).toEqual(`${type}_FAILURE`)
       })
     })
 
@@ -195,7 +195,7 @@ describe('fetch actions', () => {
         .get(query)
         .replyWithFile(200, file)
 
-      assert.strictEqual(store.dispatch(actions.fetchEpisodes(comicId)), false)
+      expect(store.dispatch(actions.fetchEpisodes(comicId))).toBe(false)
     })
   })
 
@@ -219,11 +219,11 @@ describe('fetch actions', () => {
 
       return store.dispatch(actions.fetchPages(comicId, episodeId))
       .then(() => {
-        assert.strictEqual(store.getActions()[0].type, `${type}_REQUEST`)
-        assert.strictEqual(store.getActions()[1].type, `${type}_SUCCESS`)
+        expect(store.getActions()[0].type).toEqual(`${type}_REQUEST`)
+        expect(store.getActions()[1].type).toEqual(`${type}_SUCCESS`)
 
         const data = JSON.parse(fs.readFileSync(file))
-        assert.deepStrictEqual(store.getActions()[1].payload, data)
+        expect(store.getActions()[1].payload).toEqual(data)
       })
     })
 
@@ -240,8 +240,8 @@ describe('fetch actions', () => {
 
       return store.dispatch(actions.fetchPages(comicId, episodeId))
       .then(() => {
-        assert.strictEqual(store.getActions()[0].type, `${type}_REQUEST`)
-        assert.strictEqual(store.getActions()[1].type, `${type}_FAILURE`)
+        expect(store.getActions()[0].type).toEqual(`${type}_REQUEST`)
+        expect(store.getActions()[1].type).toEqual(`${type}_FAILURE`)
       })
     })
 
@@ -256,10 +256,7 @@ describe('fetch actions', () => {
         .get(query)
         .replyWithFile(200, file)
 
-      assert.strictEqual(
-        store.dispatch(actions.fetchPages(comicId, episodeId)),
-        false
-      )
+      expect(store.dispatch(actions.fetchPages(comicId, episodeId))).toBe(false)
     })
   })
 })

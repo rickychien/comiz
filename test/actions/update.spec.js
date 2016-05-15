@@ -1,4 +1,4 @@
-import assert from 'assert'
+import expect from 'expect'
 import * as actions from '../../src/actions/update'
 
 describe('update actions', () => {
@@ -7,7 +7,7 @@ describe('update actions', () => {
     it(`should create ${type} action`, () => {
       const open = true
       const comicId = 1
-      assert.deepEqual(actions.updateComicDrawer(open, comicId), {
+      expect(actions.updateComicDrawer(open, comicId)).toEqual({
         type,
         payload: {
           open,
@@ -22,7 +22,7 @@ describe('update actions', () => {
     it(`should create ${type} action`, () => {
       const offset = 2
       const comicsPerPage = 30
-      assert.deepEqual(actions.updateComicList(offset, comicsPerPage), {
+      expect(actions.updateComicList(offset, comicsPerPage)).toEqual({
         type,
         payload: {
           offset,
@@ -37,7 +37,7 @@ describe('update actions', () => {
     it(`should create ${type} action`, () => {
       const comicId = 2
       const episodeId = 3
-      assert.deepEqual(actions.updateComicViewer(comicId, episodeId), {
+      expect(actions.updateComicViewer(comicId, episodeId)).toEqual({
         type,
         payload: {
           comicId,

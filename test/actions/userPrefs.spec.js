@@ -1,4 +1,4 @@
-import assert from 'assert'
+import expect from 'expect'
 import * as actions from '../../src/actions/userPrefs'
 
 describe('userPrefs actions', () => {
@@ -6,7 +6,7 @@ describe('userPrefs actions', () => {
     const type = 'TOGGLE_FAVORITE'
     it(`should create ${type} action`, () => {
       const comicId = true
-      assert.deepEqual(actions.toggleFavorite(comicId), {
+      expect(actions.toggleFavorite(comicId)).toEqual({
         type,
         payload: {
           comicId,
@@ -20,7 +20,7 @@ describe('userPrefs actions', () => {
     it(`should create ${type} action`, () => {
       const comicId = 2
       const episodeId = 30
-      assert.deepEqual(actions.markRead(comicId, episodeId), {
+      expect(actions.markRead(comicId, episodeId)).toEqual({
         type,
         payload: {
           comicId,
@@ -35,7 +35,7 @@ describe('userPrefs actions', () => {
     it(`should create ${type} action`, () => {
       const comicId = 2
       const episodeId = 3
-      assert.deepEqual(actions.unmarkRead(comicId, episodeId), {
+      expect(actions.unmarkRead(comicId, episodeId)).toEqual({
         type,
         payload: {
           comicId,
@@ -50,7 +50,7 @@ describe('userPrefs actions', () => {
     it(`should create ${type} action`, () => {
       const comicId = 2
       const episodeId = 3
-      assert.deepEqual(actions.toggleRead(comicId, episodeId), {
+      expect(actions.toggleRead(comicId, episodeId)).toEqual({
         type,
         payload: {
           comicId,
