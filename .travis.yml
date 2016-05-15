@@ -1,7 +1,7 @@
 language: node_js
 
 node_js:
-  - 5
+  - 6
 
 git:
   depth: 3
@@ -19,3 +19,4 @@ env:
   matrix:
     - TEST_TYPE=build
     - TEST_TYPE=lint
+    - TEST_TYPE=test

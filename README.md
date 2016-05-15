@@ -6,7 +6,7 @@ A fantastic comic viewer in the world.
 
 ## Prerequisites
 
-* [node] >= 5.x
+* [node] >= 6.x
 * [npm] >= 3.x
 
 ## Techniques
