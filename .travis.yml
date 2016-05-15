@@ -19,3 +19,4 @@ env:
   matrix:
     - TEST_TYPE=build
     - TEST_TYPE=lint
+    - TEST_TYPE=test
