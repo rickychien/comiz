@@ -7,7 +7,7 @@ const initialState = {
 function mergeEntries(entries, array) {
   return array.reduce((prev, curr) => (
     Object.assign(prev, prev.set(curr.id, curr))
-  ), entries)
+  ), new Map(entries))
 }
 
 export default function (state = initialState, action) {
