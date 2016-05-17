@@ -18,11 +18,9 @@ function AppBar({
     <div className={ appBarStyles }>
       <div className={ styles.logo } onClick={ onLogoClick }>
         <div className={ styles.icon }>
-          <i className="material-icons">
-            { materialIcon }
-          </i>
+          <i className="material-icons">{ materialIcon }</i>
         </div>
-          { title && <h1 className={ styles.title }> { title }</h1> }
+        { title && <h1 className={ styles.title }>{ title }</h1> }
       </div>
       <div className={ styles.children }>{ children }</div>
     </div>
