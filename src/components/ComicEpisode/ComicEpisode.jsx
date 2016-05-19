@@ -34,6 +34,7 @@ function ComicEpisode({
 
 ComicEpisode.defaultProps = {
   highlight: false,
+  markRead: false,
 }
 
 ComicEpisode.propTypes = {
