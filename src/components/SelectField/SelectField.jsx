@@ -30,13 +30,13 @@ SelectField.defaultProps = {
 }
 
 SelectField.propTypes = {
-  selectedValue: PropTypes.string,
+  selectedValue: PropTypes.string.isRequired,
   menuItems: PropTypes.arrayOf(
     PropTypes.shape({
       text: PropTypes.string,
       value: PropTypes.string,
     })
-  ),
+  ).isRequired,
   onChange: PropTypes.func,
 }
 
