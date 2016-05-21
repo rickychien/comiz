@@ -46,8 +46,17 @@ function updateComicViewer(nextState) {
   const { cid, eid } = nextState.location.query
 
   if (cid && eid) {
-    store.dispatch(Actions.updateComicViewer(cid, eid))
+    store.dispatch(Actions.updateComicViewer(
+      parseInt(cid, 10), parseInt(eid, 10)))
   }
+}
+
+function onComicViewerEnter(nextState) {
+  updateComicViewer(nextState)
+}
+
+function onComicViewerChange(prevState, nextState) {
+  updateComicViewer(nextState)
 }
 
 render(
@@ -63,7 +72,8 @@ render(
         <Route
           path="viewer"
           component={ ComicViewer }
-          onEnter={ updateComicViewer }
+          onEnter={ onComicViewerEnter }
+          onChange={ onComicViewerChange }
         />
         <Redirect from="*" to="comics/latest" />
       </Route>

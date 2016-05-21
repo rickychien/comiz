@@ -1,4 +1,5 @@
 import fetch from 'isomorphic-fetch'
+import { markRead } from './userPrefs'
 
 const HOST = process.env.SERVER_URL
 
@@ -73,7 +74,10 @@ export function fetchPages(comicId, episodeId) {
           promise: new Promise((resolve, reject) => {
             fetch(`${HOST}/api/v1/comics/${comicId}/episodes/${episodeId}/pages`)
             .then(response => response.json())
-            .then(resolve)
+            .then(data => {
+              dispatch(markRead(comicId, episodeId))
+              resolve(data)
+            })
             .catch(reject)
           }),
         },

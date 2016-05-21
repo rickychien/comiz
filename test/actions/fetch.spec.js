@@ -220,10 +220,11 @@ describe('fetch actions', () => {
       return store.dispatch(actions.fetchPages(comicId, episodeId))
       .then(() => {
         expect(store.getActions()[0].type).toEqual(`${type}_REQUEST`)
-        expect(store.getActions()[1].type).toEqual(`${type}_SUCCESS`)
+        expect(store.getActions()[1].type).toEqual('MARK_READ')
+        expect(store.getActions()[2].type).toEqual(`${type}_SUCCESS`)
 
         const data = JSON.parse(fs.readFileSync(file))
-        expect(store.getActions()[1].payload).toEqual(data)
+        expect(store.getActions()[2].payload).toEqual(data)
       })
     })
 

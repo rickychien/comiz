@@ -11,6 +11,7 @@ function mapStateToProps(state, ownProps) {
   const markRead = state.userPrefs.reads.find(read => (
     read.comicId === comic.id && read.episodeId === episode.id
   ))
+
   return {
     highlight: comicId === comic.id && episodeId === episode.id,
     markRead: !!markRead,
