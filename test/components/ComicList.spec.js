@@ -15,10 +15,6 @@ describe('<ComicList />', () => {
     }
   })
 
-  afterEach(() => {
-    expect.restoreSpies()
-  })
-
   it('should render correctly', () => {
     const wrapper = shallow(<ComicList { ...props } />)
     expect(wrapper.is('div')).toBe(true)
