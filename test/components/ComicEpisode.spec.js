@@ -2,7 +2,6 @@ import expect from 'expect'
 import { shallow } from 'enzyme'
 import React from 'react'
 import { ComicEpisode } from '../../src/components/ComicEpisode'
-import FlatButton from '../../src/components/FlatButton'
 
 describe('<ComicEpisode />', () => {
   let props
@@ -24,7 +23,7 @@ describe('<ComicEpisode />', () => {
 
   it('should render correctly', () => {
     const wrapper = shallow(<ComicEpisode { ...props } />)
-    expect(wrapper.is(FlatButton)).toBe(true)
+    expect(wrapper.is('FlatButton')).toBe(true)
     expect(wrapper.first().prop('extraStyles')).toBe('')
   })
 
