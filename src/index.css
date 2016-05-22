@@ -17,3 +17,10 @@ body {
   margin: 0;
   font-size: 13px;
 }
+
+:global(.loading-spinner) {
+  background-image: url(./assets/loading-spinner.svg);
+  background-repeat: no-repeat;
+  width: 40px;
+  height: 40px;
+}

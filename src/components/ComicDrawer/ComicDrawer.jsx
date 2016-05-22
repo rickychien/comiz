@@ -1,13 +1,11 @@
 import React, { PropTypes } from 'react'
 import Swipeable from 'react-swipeable'
-import InlineSVG from 'svg-inline-react'
 
 import AppBar from '../AppBar'
 import CheckItem from '../CheckItem'
 import ComicEpisodeContainer from '../ComicEpisode'
 
 import styles from './ComicDrawer.css'
-import spinner from '../../assets/material-spinner.svg'
 
 class ComicDrawer extends React.Component {
 
@@ -157,7 +155,7 @@ class ComicDrawer extends React.Component {
               if (isFetching || (!comic.mtime && !fetchError)) {
                 return (
                   <div className={ styles.statusPage }>
-                    <InlineSVG src={ spinner } />
+                    <i className="loading-spinner" />
                   </div>
                 )
               } else if (fetchError) {
