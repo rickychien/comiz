@@ -42,7 +42,7 @@ function ComicViewer({
           }
 
           return (
-            <div className={ styles.comicViewer }>
+            <div>
               <div className={ styles.title }>
                 { episode.title }
               </div>
@@ -66,7 +66,7 @@ function ComicViewer({
                   />
                 )
               }
-              <div className={ styles.comics }>
+              <div className={ styles.pages }>
                 {
                   pages.map((page, i) => (
                     <img

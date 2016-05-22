@@ -16,7 +16,7 @@
   height: auto;
 }
 
-.comics {
+.pages {
   display: flex;
   flex-wrap: wrap;
   flex-direction: row-reverse;
