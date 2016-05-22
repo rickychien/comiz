@@ -36,12 +36,8 @@ module.exports = {
         exclude: /node_modules/,
       },
       {
-        test: /\.(gif|png|ttf|eot|jpe?g|woff2?)$/,
+        test: /\.(gif|svg|png|ttf|eot|jpe?g|woff2?)$/,
         loader: 'url',
-      },
-      {
-        test: /\.svg/,
-        loader: 'svg-inline',
       },
       {
         test: /\.css$/,

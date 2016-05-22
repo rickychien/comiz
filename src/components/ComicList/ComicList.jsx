@@ -1,5 +1,4 @@
 import React, { PropTypes } from 'react'
-import InlineSVG from 'svg-inline-react'
 
 import AppBar from '../AppBar'
 import ComicItem from '../ComicItem'
@@ -7,7 +6,6 @@ import SearchBar from '../SearchBar'
 import SelectField from '../SelectField'
 
 import styles from './ComicList.css'
-import spinner from '../../assets/material-spinner.svg'
 
 function ComicList({
   comics,
@@ -26,7 +24,7 @@ function ComicList({
           if (isFetching && comics.length <= 1) {
             return (
               <div className={ styles.statusPage }>
-                <InlineSVG src={ spinner } />
+                <i className="loading-spinner" />
               </div>
             )
           } else if (fetchError && comics.length === 0) {
