@@ -10,7 +10,7 @@
     "test": "NODE_ENV=test SERVER_URL='http://localhost:8000' $(npm bin)/mocha --require ./test/setup.js --compilers js:babel-core/register --recursive",
     "test:watch": "npm test -- --watch",
     "coverage": "$(npm bin)/nyc npm test",
-    "coveralls": "$(npm bin)/nyc --reporter=text-lcov npm test | coveralls",
+    "coveralls": "$(npm bin)/nyc --reporter=text-lcov npm test | $(npm bin)/coveralls",
     "gh-pages": "git subtree push --prefix dist origin gh-pages"
   },
   "author": "Ricky Chien <ricky060709@gmail.com>",
