@@ -1,7 +1,7 @@
 # Comiz
 
-![Build Status](https://img.shields.io/travis/rickychien/comiz/master.svg?style=flat-square)
-![Coverage Status](https://img.shields.io/coveralls/rickychien/comiz/master.svg?style=flat-square)
+[![Build Status](https://img.shields.io/travis/rickychien/comiz/master.svg?style=flat-square)](https://travis-ci.org/rickychien/comiz)
+[![Coverage Status](https://img.shields.io/coveralls/jekyll/jekyll/master.svg)](https://coveralls.io/github/rickychien/comiz)
 
 A fantastic comic viewer in the world.
 
