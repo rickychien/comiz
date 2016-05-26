@@ -9,7 +9,7 @@
     "lint": "$(npm bin)/eslint --fix 'src/**/*.+(js|jsx)'",
     "test": "NODE_ENV=test SERVER_URL='http://localhost:8000' $(npm bin)/mocha --require ./test/setup.js --compilers js:babel-core/register --recursive",
     "test:watch": "npm test -- --watch",
-    "coverage": "$(npm bin)/nyc npm test",
+    "coverage": "$(npm bin)/nyc --extension .jsx npm test",
     "coveralls": "$(npm bin)/nyc --reporter=text-lcov npm test | $(npm bin)/coveralls",
     "gh-pages": "git subtree push --prefix dist origin gh-pages"
   },
