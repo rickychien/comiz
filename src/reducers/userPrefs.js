@@ -11,7 +11,7 @@ function toggleFavorite(favorites, comicId) {
   } else {
     newFavorites.splice(idx, 1)
   }
-  localStorage.setItem('userPrefs.favorites', JSON.stringify(favorites.sort()))
+  localStorage.setItem('userPrefs.favorites', JSON.stringify(newFavorites.sort()))
   return newFavorites
 }
 
