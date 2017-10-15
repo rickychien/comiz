@@ -37,7 +37,7 @@ describe('<AppBar />', () => {
   it('should render correctly with transparent', () => {
     props.transparent = true
 
-    const wrapper = shallow(<AppBar {...props} />)
+    const wrapper = shallow(<AppBar { ...props } />)
     expect(wrapper.is('div')).toBe(true)
     expect(wrapper.first().props().className).toBe('appBar appBarTransparent')
     expect(wrapper.find('h1').length).toBe(0)

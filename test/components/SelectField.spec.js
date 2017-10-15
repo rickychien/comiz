@@ -8,7 +8,6 @@ describe('<SelectField />', () => {
 
   beforeEach(() => {
     props = {
-      selectedValue: 'B',
       menuItems: [{
         value: 'A',
         text: 'item A',
@@ -20,6 +19,7 @@ describe('<SelectField />', () => {
         text: 'item C',
       }],
       onChange: undefined,
+      selectedValue: 'B',
     }
   })
 

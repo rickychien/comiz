@@ -1,20 +1,19 @@
 import PropTypes from 'prop-types'
 import React from 'react'
-import { withRouter } from 'react-router-dom'
 
 import styles from './SelectField.css'
 
 function SelectField({
-  match,
   menuItems,
   onChange,
+  seletedValue,
 }) {
   return (
     <div className={ styles.selectField }>
       <div>
         <select
           className={ styles.select }
-          value={ match.params.category }
+          value={ seletedValue }
           onChange={ onChange }
         >
           {
@@ -36,7 +35,6 @@ SelectField.defaultProps = {
 }
 
 SelectField.propTypes = {
-  match: PropTypes.object.isRequired,
   menuItems: PropTypes.arrayOf(
     PropTypes.shape({
       text: PropTypes.string,
@@ -44,6 +42,7 @@ SelectField.propTypes = {
     })
   ).isRequired,
   onChange: PropTypes.func,
+  seletedValue: PropTypes.string.isRequired,
 }
 
-export default withRouter(SelectField)
+export default SelectField

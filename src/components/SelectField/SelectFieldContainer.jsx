@@ -3,7 +3,7 @@ import { withRouter } from 'react-router-dom'
 
 import SelectField from './SelectField'
 
-function mapStateToProps(state) {
+function mapStateToProps(state, ownProps) {
   const { categories } = state.filter
   const menuItems = Object.keys(categories).map((item) => (
     { text: categories[item], value: item }
@@ -11,6 +11,7 @@ function mapStateToProps(state) {
 
   return {
     menuItems,
+    seletedValue: ownProps.match.params.category,
   }
 }
 
