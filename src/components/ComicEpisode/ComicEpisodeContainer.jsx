@@ -1,5 +1,5 @@
 import { connect } from 'react-redux'
-import { push } from 'react-router-redux'
+import { withRouter } from 'react-router-dom'
 
 import ComicEpisode from './ComicEpisode'
 
@@ -23,7 +23,7 @@ function mapDispatchToProps(dispatch, ownProps) {
 
   return {
     onEpisodeClick() {
-      dispatch(push(`/viewer?cid=${cid}&eid=${eid}`))
+      ownProps.history.push(`/viewer?cid=${cid}&eid=${eid}`)
       dispatch(Actions.updateComicDrawer(false))
     },
     onEpisodeRightClick() {
@@ -32,7 +32,7 @@ function mapDispatchToProps(dispatch, ownProps) {
   }
 }
 
-export default connect(
+export default withRouter(connect(
   mapStateToProps,
-  mapDispatchToProps
-)(ComicEpisode)
+  mapDispatchToProps,
+)(ComicEpisode))

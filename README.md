@@ -7,15 +7,15 @@ A fantastic comic viewer in the world.
 
 ## Prerequisites
 
-* [node] >= 6.x
-* [npm] >= 3.x
+* [node] >= 8.0
+* [npm] >= 5.0
+* [yarn] >= 1.0
 
 ## Techniques
 
 * [react] - A declarative, efficient, and flexible JavaScript library for building user interfaces.
 * [redux] - a predictable state container for JavaScript apps.
 * [react-redux] - Official React bindings for Redux
-* [react-router-redux] - Ruthlessly simple bindings to keep react-router and redux in sync
 * [react-router] - A complete routing library for React
 * [redux-promise-middleware] - Redux middleware for resolving and rejecting promises with conditional optimistic updates.
 * [redux-thunk] - Allows you to write action creators that return a function instead of an action.
@@ -26,16 +26,16 @@ A fantastic comic viewer in the world.
 
 ## Contribute
 
-1. Install npm packages
+1. Install packages by [npm] or [yarn]
 
   ```
-  npm install
+  yarn install
   ```
 
 2. Start webpack dev server
 
   ```
-  npm start
+  yarn start
   ```
 
 3. Visit <http://localhost:8000> in browser
@@ -47,13 +47,13 @@ A fantastic comic viewer in the world.
   To enable [redux-logger] and fetch fake data from local at [src/api/](https://github.com/rickychien/comiz/blob/master/src/api/))
 
   ```
-  npm start
+  yarn start
   ```
 
   To enable test server in development mode
 
   ```
-  SERVER=1 npm start
+  SERVER=1 yarn start
   ```
 
 #### Production
@@ -61,7 +61,7 @@ A fantastic comic viewer in the world.
   Production build will exclude unnecessary resources (ex: [redux-logger] only for debugging), ship with server url and minimize resources as small as possible to optimize website experience.
 
   ```
-  npm run build
+  yarn build
   ```
 
   It's up to you to spin up a local server in dist folder to see production result, for example launching a python server in dist
@@ -74,53 +74,30 @@ A fantastic comic viewer in the world.
 
 #### Clean dist resources
   ```
-  npm run clean
+  yarn clean
   ```
 
-#### Push to gh-pages (it requires ```npm run build``` and follow a ```git commit``` before publishing)
+#### Push to gh-pages (it requires ```yarn build``` and follow a ```git commit``` before publishing)
   ```
-  npm run gh-pages
+  yarn gh-pages
   ```
 
   Steps to gh-pages publish
 
   ```
-  npm run build
+  yarn build
   ```
   ```
   git commit new changes (including build results in dist/*)
   ```
   ```
-  npm run gh-pages
+  yarn gh-pages
   ```
 
 ## Application State Structure
 
 ```js
 {
-  userPrefs: {
-    favorites: [1, 3, 7],
-    reads: [
-      {
-        comicId: 1,
-        episodeId: 1
-      },
-      {
-        comicId: 1,
-        episodeId: 2
-      }
-    ]
-  },
-
-  filter: {
-    category: 'latest',
-    categories: {
-      latest: 'Latest',
-      favorite: 'favorite'
-    },
-    query: '<user query>'
-  },
-
   comicDrawer: {
     open: false,
     comicId: 1
@@ -167,6 +144,14 @@ A fantastic comic viewer in the world.
     }
   },
 
+  filter: {
+    categories: {
+      latest: 'Latest',
+      favorite: 'favorite'
+    },
+    query: '<user query>'
+  },
+
   pages: {
     comicId: 1,
     episodeId: 2,
@@ -178,19 +163,28 @@ A fantastic comic viewer in the world.
     ]
   },
 
-  // Use for react-router
-  routing: {
-    ...
+  userPrefs: {
+    favorites: [1, 3, 7],
+    reads: [
+      {
+        comicId: 1,
+        episodeId: 1
+      },
+      {
+        comicId: 1,
+        episodeId: 2
+      }
+    ]
   }
 }
 ```
 
 [node]: https://nodejs.org/
 [npm]: https://www.npmjs.com/
+[yarn]: https://yarnpkg.com/
 [react]: https://github.com/facebook/react
 [redux]: http://redux.js.org/
 [react-redux]: https://github.com/reactjs/react-redux
-[react-router-redux]: https://github.com/reactjs/react-router-redux
 [react-router]: https://github.com/reactjs/react-router
 [redux-promise-middleware]: https://github.com/pburtchaell/redux-promise-middleware
 [redux-thunk]: https://github.com/gaearon/redux-thunk

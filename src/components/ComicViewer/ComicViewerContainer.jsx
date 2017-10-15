@@ -1,6 +1,7 @@
-import React, { PropTypes } from 'react'
+import PropTypes from 'prop-types'
+import React from 'react'
 import { connect } from 'react-redux'
-import { push } from 'react-router-redux'
+import { withRouter } from 'react-router-dom'
 
 import ComicViewer from './ComicViewer'
 
@@ -15,6 +16,7 @@ class ComicViewerContainer extends React.Component {
     episodeId: PropTypes.number.isRequired,
     episodes: PropTypes.object.isRequired,
     pages: PropTypes.object.isRequired,
+    push: PropTypes.func.isRequired,
     comicViewer: PropTypes.object.isRequired,
     dispatch: PropTypes.func.isRequired,
   }
@@ -28,7 +30,7 @@ class ComicViewerContainer extends React.Component {
   }
 
   onBackClick = () => {
-    this.props.dispatch(push('/'))
+    this.props.push('/')
   }
 
   onComicDrawerClick = () => {
@@ -46,10 +48,10 @@ class ComicViewerContainer extends React.Component {
   }
 
   handleEpisodeNavigation = (offset) => {
-    const { comicId, dispatch } = this.props
+    const { comicId, push } = this.props
     const nextEpisodeId = this.getNextEpisodeIdByOffset(offset)
     if (nextEpisodeId) {
-      dispatch(push(`/viewer?cid=${comicId}&eid=${nextEpisodeId}`))
+      push(`/viewer?cid=${comicId}&eid=${nextEpisodeId}`)
     }
   }
 
@@ -98,18 +100,21 @@ class ComicViewerContainer extends React.Component {
 }
 
 function mapStateToProps(state, ownProps) {
-  const { cid, eid } = ownProps.location.query
+  const query = new URLSearchParams(ownProps.location.search)
+  const cid = query.get('cid')
+  const eid = query.get('eid')
 
   return {
     comicId: parseInt(cid, 10),
     comic: state.comics.entries.get(parseInt(cid, 10)),
+    comicViewer: state.comicViewer,
     episodeId: parseInt(eid, 10),
     episodes: state.episodes,
     pages: state.pages,
-    comicViewer: state.comicViewer,
+    push: ownProps.history.push,
   }
 }
 
-export default connect(
-  mapStateToProps
-)(ComicViewerContainer)
+export default withRouter(connect(
+  mapStateToProps,
+)(ComicViewerContainer))

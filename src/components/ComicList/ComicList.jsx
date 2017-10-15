@@ -1,4 +1,5 @@
-import React, { PropTypes } from 'react'
+import PropTypes from 'prop-types'
+import React from 'react'
 
 import AppBar from '../AppBar'
 import ComicItem from '../ComicItem'
@@ -9,8 +10,8 @@ import styles from './ComicList.css'
 
 function ComicList({
   comics,
-  isFetching,
   fetchError,
+  isFetching,
   onComicItemClick,
 }) {
   return (

@@ -1,14 +1,12 @@
 import React from 'react'
 import { render } from 'react-dom'
 import { Provider } from 'react-redux'
-import { IndexRedirect, Redirect, Router, Route } from 'react-router'
-import { syncHistoryWithStore } from 'react-router-redux'
+import { Redirect, Route, Switch } from 'react-router'
+import { HashRouter } from 'react-router-dom'
 
-import Actions from './actions'
-import { hashHistory } from './services'
 import configureStore from './store'
 
-import App from './components/App'
+import ComicDrawer from './components/ComicDrawer'
 import ComicList from './components/ComicList'
 import ComicViewer from './components/ComicViewer'
 
@@ -34,50 +32,18 @@ const initialState = {
 
 const store = configureStore(initialState)
 
-function updateCategory(nextState) {
-  const { category } = nextState.params
-
-  if (category) {
-    store.dispatch(Actions.filterCategory(nextState.params.category))
-  }
-}
-
-function updateComicViewer(nextState) {
-  const { cid, eid } = nextState.location.query
-
-  if (cid && eid) {
-    store.dispatch(Actions.updateComicViewer(
-      parseInt(cid, 10), parseInt(eid, 10)))
-  }
-}
-
-function onComicViewerEnter(nextState) {
-  updateComicViewer(nextState)
-}
-
-function onComicViewerChange(prevState, nextState) {
-  updateComicViewer(nextState)
-}
-
 render(
   <Provider store={ store }>
-    <Router history={ syncHistoryWithStore(hashHistory, store) }>
-      <Route path="/" component={ App }>
-        <IndexRedirect to="comics/latest" />
-        <Route
-          path="comics/:category"
-          component={ ComicList }
-          onEnter={ updateCategory }
-        />
-        <Route
-          path="viewer"
-          component={ ComicViewer }
-          onEnter={ onComicViewerEnter }
-          onChange={ onComicViewerChange }
-        />
-        <Redirect from="*" to="comics/latest" />
-      </Route>
-    </Router>
+    <HashRouter>
+      <div>
+        <Switch>
+          <Route path="/comics/:category" component={ ComicList } />
+          <Route path="/viewer" component={ ComicViewer } />
+          <Redirect from="*" to="comics/latest" />
+        </Switch>
+        <ComicDrawer />
+      </div>
+    </HashRouter>
   </Provider>,
   document.getElementById('root')
 )

@@ -1,4 +1,3 @@
-import fetch from 'isomorphic-fetch'
 import { markRead } from './userPrefs'
 
 const HOST = process.env.SERVER_URL

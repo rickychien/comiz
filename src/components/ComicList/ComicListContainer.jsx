@@ -1,4 +1,5 @@
-import React, { PropTypes } from 'react'
+import PropTypes from 'prop-types'
+import React from 'react'
 import { connect } from 'react-redux'
 
 import ComicList from './ComicList'
@@ -14,9 +15,9 @@ class ComicListContainer extends React.Component {
     fetchError: PropTypes.bool.isRequired,
     filter: PropTypes.object.isRequired,
     favorites: PropTypes.array.isRequired,
+    match: PropTypes.object.isRequired,
     offset: PropTypes.number.isRequired,
     comicsPerPage: PropTypes.number.isRequired,
-    location: PropTypes.object,
     dispatch: PropTypes.func.isRequired,
   }
 
@@ -83,7 +84,7 @@ class ComicListContainer extends React.Component {
   }
 
   getAllComics = () => {
-    const { comics, filter, favorites } = this.props
+    const { comics, filter, favorites, match } = this.props
     let reg
 
     try {
@@ -93,7 +94,7 @@ class ComicListContainer extends React.Component {
     }
 
     let items
-    switch (filter.category) {
+    switch (match.params.category) {
       case 'latest':
         items = Array.from(comics, val => val[1])
         break

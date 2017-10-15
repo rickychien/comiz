@@ -1,29 +1,28 @@
 import { connect } from 'react-redux'
-import { push } from 'react-router-redux'
+import { withRouter } from 'react-router-dom'
 
 import SelectField from './SelectField'
 
 function mapStateToProps(state) {
-  const { category, categories } = state.filter
+  const { categories } = state.filter
   const menuItems = Object.keys(categories).map((item) => (
     { text: categories[item], value: item }
   ))
 
   return {
-    selectedValue: category,
     menuItems,
   }
 }
 
-function mapDispatchToProps(dispatch) {
+function mapDispatchToProps(dispatch, ownProps) {
   return {
     onChange: (evt) => {
-      dispatch(push(`/comics/${evt.target.value}`))
+      ownProps.history.push(`/comics/${evt.target.value}`)
     },
   }
 }
 
-export default connect(
+export default withRouter(connect(
   mapStateToProps,
-  mapDispatchToProps
-)(SelectField)
+  mapDispatchToProps,
+)(SelectField))
