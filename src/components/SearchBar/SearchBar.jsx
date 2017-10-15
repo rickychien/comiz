@@ -4,7 +4,10 @@ import React from 'react'
 import styles from './SearchBar.css'
 
 class SearchBar extends React.PureComponent {
-
+  static defaultProps = {
+    onChange: null,
+    value: '',
+  }
   static propTypes = {
     onChange: PropTypes.func,
     value: PropTypes.string,
@@ -27,7 +30,6 @@ class SearchBar extends React.PureComponent {
       </div>
     )
   }
-
 }
 
 export default SearchBar

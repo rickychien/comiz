@@ -6,15 +6,18 @@ import FlatButton from '../FlatButton'
 import styles from './ComicEpisode.css'
 
 class ComicEpisode extends React.PureComponent {
-
   static defaultProps = {
+    comic: {},
+    episode: {},
     highlight: false,
     markRead: false,
+    onEpisodeClick: null,
+    onEpisodeRightClick: null,
   }
 
   static propTypes = {
-    comic: PropTypes.object.isRequired,
-    episode: PropTypes.object.isRequired,
+    comic: PropTypes.object,
+    episode: PropTypes.object,
     highlight: PropTypes.bool,
     markRead: PropTypes.bool,
     onEpisodeClick: PropTypes.func,
@@ -22,7 +25,9 @@ class ComicEpisode extends React.PureComponent {
   }
 
   onContextMenu = (evt) => {
-    const { comic, episode, markRead, onEpisodeRightClick } = this.props
+    const {
+      comic, episode, markRead, onEpisodeRightClick,
+    } = this.props
 
     evt.preventDefault()
     if (onEpisodeRightClick) {
@@ -50,7 +55,6 @@ class ComicEpisode extends React.PureComponent {
       />
     )
   }
-
 }
 
 export default ComicEpisode

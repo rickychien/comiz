@@ -9,13 +9,16 @@ import ComicEpisodeContainer from '../ComicEpisode'
 import styles from './ComicDrawer.css'
 
 class ComicDrawer extends React.Component {
-
   static defaultProps = {
     open: false,
     width: 300,
     isFetching: false,
     fetchError: false,
     comic: {},
+    episodes: [],
+    favorite: false,
+    onCloseClick: null,
+    onFavoriteClick: null,
   }
 
   static propTypes = {
@@ -23,8 +26,8 @@ class ComicDrawer extends React.Component {
     width: PropTypes.number,
     isFetching: PropTypes.bool,
     fetchError: PropTypes.bool,
-    comic: PropTypes.object.isRequired,
-    episodes: PropTypes.array.isRequired,
+    comic: PropTypes.object,
+    episodes: PropTypes.array,
     favorite: PropTypes.bool,
     onCloseClick: PropTypes.func,
     onFavoriteClick: PropTypes.func,
@@ -62,7 +65,7 @@ class ComicDrawer extends React.Component {
     evt.stopPropagation()
 
     if ((lockX && !lockY) ||
-        !lockX && !lockY && dXAbs > threshold && dYAbs <= threshold) {
+        (!lockX && !lockY && dXAbs > threshold && dYAbs <= threshold)) {
       this.setState({
         xDelta,
         lockX: true,
@@ -71,7 +74,7 @@ class ComicDrawer extends React.Component {
     }
 
     if ((!lockX && lockY) ||
-        !lockX && !lockY && dXAbs <= threshold && dYAbs > threshold) {
+        (!lockX && !lockY && dXAbs <= threshold && dYAbs > threshold)) {
       this.setState({
         xDelta: 0,
         lockX: false,
@@ -143,7 +146,13 @@ class ComicDrawer extends React.Component {
 
     return (
       <div>
-        <div className={ overlayStyles } onClick={ this.handleClose } />
+        <div
+          className={ overlayStyles }
+          role="button"
+          tabIndex="0"
+          onClick={ this.handleClose }
+          onKeyPress={ this.handleClose }
+        />
         <Swipeable
           className={ comicDrawerStyles }
           style={ this.getStyles() }
@@ -183,8 +192,6 @@ class ComicDrawer extends React.Component {
                   </div>
                   <CheckItem
                     checked={ favorite }
-                    iconUncheck="star_border"
-                    iconChecked="star"
                     title={ comic.title }
                     subTitle={ comic.author }
                     subTitle2={ new Date(comic.mtime)
@@ -203,7 +210,7 @@ class ComicDrawer extends React.Component {
                   <div className={ styles.episodes }>
                     <div className={ styles.episodesInner }>
                       {
-                        episodes.map((episode) => (
+                        episodes.map(episode => (
                           <ComicEpisodeContainer
                             key={ episode.id }
                             comic={ comic }
@@ -221,7 +228,6 @@ class ComicDrawer extends React.Component {
       </div>
     )
   }
-
 }
 
 export default ComicDrawer

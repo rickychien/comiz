@@ -3,17 +3,17 @@ import React from 'react'
 
 import AppBar from '../AppBar'
 import ComicItem from '../ComicItem'
-import SearchBar from '../SearchBar'
-import SelectField from '../SelectField'
+import SearchBarContainer from '../SearchBar'
+import SelectFieldContainer from '../SelectField'
 
 import styles from './ComicList.css'
 
 class ComicList extends React.PureComponent {
-
   static defaultProps = {
     comics: [],
     isFetching: false,
     fetchError: false,
+    onComicItemClick: null,
   }
 
   static propTypes = {
@@ -34,8 +34,8 @@ class ComicList extends React.PureComponent {
     return (
       <div>
         <AppBar materialIcon="fingerprint" title="Comiz">
-          <SelectField />
-          <SearchBar />
+          <SelectFieldContainer />
+          <SearchBarContainer />
         </AppBar>
         {
           (() => {
@@ -61,7 +61,7 @@ class ComicList extends React.PureComponent {
                 <div className={ styles.comicList }>
                   <div className={ styles.comicListInner }>
                     {
-                      comics.map((comic) => (
+                      comics.map(comic => (
                         <ComicItem
                           key={ comic.id }
                           comic={ comic }

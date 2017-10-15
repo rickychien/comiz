@@ -4,20 +4,16 @@ import React from 'react'
 import styles from './SelectField.css'
 
 class SelectField extends React.PureComponent {
-
   static defaultProps = {
     menuItems: [],
+    onChange: null,
+    seletedValue: null,
   }
 
   static propTypes = {
-    menuItems: PropTypes.arrayOf(
-      PropTypes.shape({
-        text: PropTypes.string,
-        value: PropTypes.string,
-      })
-    ).isRequired,
+    menuItems: PropTypes.array,
     onChange: PropTypes.func,
-    seletedValue: PropTypes.string.isRequired,
+    seletedValue: PropTypes.string,
   }
 
   render() {
@@ -32,7 +28,7 @@ class SelectField extends React.PureComponent {
             onChange={ onChange }
           >
             {
-              menuItems.map((item) => (
+              menuItems.map(item => (
                 <option key={ item.value } value={ item.value } >
                   { item.text }
                 </option>
@@ -44,7 +40,6 @@ class SelectField extends React.PureComponent {
       </div>
     )
   }
-
 }
 
 export default SelectField

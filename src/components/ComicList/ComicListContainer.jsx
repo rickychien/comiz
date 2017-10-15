@@ -8,7 +8,6 @@ import Actions from '../../actions'
 import { App } from '../../constants'
 
 class ComicListContainer extends React.Component {
-
   static propTypes = {
     comics: PropTypes.object.isRequired,
     isFetching: PropTypes.bool.isRequired,
@@ -84,7 +83,9 @@ class ComicListContainer extends React.Component {
   }
 
   getAllComics = () => {
-    const { comics, filter, favorites, match } = this.props
+    const {
+      comics, filter, favorites, match,
+    } = this.props
     let reg
 
     try {
@@ -109,7 +110,9 @@ class ComicListContainer extends React.Component {
   }
 
   render() {
-    const { isFetching, fetchError, offset, comicsPerPage } = this.props
+    const {
+      isFetching, fetchError, offset, comicsPerPage,
+    } = this.props
 
     return (
       <ComicList
@@ -120,7 +123,6 @@ class ComicListContainer extends React.Component {
       />
     )
   }
-
 }
 
 function mapStateToProps(state) {
@@ -135,6 +137,4 @@ function mapStateToProps(state) {
   }
 }
 
-export default connect(
-  mapStateToProps
-)(ComicListContainer)
+export default connect(mapStateToProps)(ComicListContainer)

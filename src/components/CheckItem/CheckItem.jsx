@@ -4,15 +4,16 @@ import React from 'react'
 import styles from './CheckItem.css'
 
 class CheckItem extends React.PureComponent {
-
   static defaultProps = {
     checked: false,
+    title: null,
+    subTitle: null,
+    subTitle2: null,
+    onClick: null,
   }
 
   static propTypes = {
     checked: PropTypes.bool,
-    iconUncheck: PropTypes.string.isRequired,
-    iconChecked: PropTypes.string.isRequired,
     title: PropTypes.string,
     subTitle: PropTypes.string,
     subTitle2: PropTypes.string,
@@ -22,8 +23,6 @@ class CheckItem extends React.PureComponent {
   render() {
     const {
       checked,
-      iconUncheck,
-      iconChecked,
       title,
       subTitle,
       subTitle2,
@@ -39,8 +38,8 @@ class CheckItem extends React.PureComponent {
             defaultChecked={ checked }
             onClick={ onClick }
           />
-          <i className={ `material-icons ${styles.uncheck}` }>{ iconUncheck }</i>
-          <i className={ `material-icons ${styles.checked}` }>{ iconChecked }</i>
+          <i className={ `material-icons ${styles.uncheck}` }>star_border</i>
+          <i className={ `material-icons ${styles.checked}` }>star</i>
         </div>
         <div>{ title }</div>
         <div className={ styles.subTitle }>{ subTitle }</div>
@@ -48,7 +47,6 @@ class CheckItem extends React.PureComponent {
       </label>
     )
   }
-
 }
 
 export default CheckItem

@@ -7,7 +7,6 @@ import ComicDrawer from './ComicDrawer'
 import Actions from '../../actions'
 
 class ComicDrawerContainer extends React.Component {
-
   static propTypes = {
     open: PropTypes.bool.isRequired,
     comicId: PropTypes.number.isRequired,
@@ -18,13 +17,15 @@ class ComicDrawerContainer extends React.Component {
   }
 
   componentWillUpdate(nextProps) {
-    const { open, comicId, comics, episodes, dispatch } = nextProps
+    const {
+      open, comicId, comics, episodes, dispatch,
+    } = nextProps
     const comic = comics.entries.get(comicId)
 
     if (!open || !comicId) return
 
-    if (comicId !== this.props.comicId ||
-        !comics.fetchError && (!comic || !comic.author)) {
+    if ((comicId !== this.props.comicId) ||
+        (!comics.fetchError && (!comic || !comic.author))) {
       dispatch(Actions.fetchComic(comicId))
     }
 
@@ -42,7 +43,9 @@ class ComicDrawerContainer extends React.Component {
   }
 
   render() {
-    const { open, comicId, comics, episodes } = this.props
+    const {
+      open, comicId, comics, episodes,
+    } = this.props
 
     return (
       <ComicDrawer
@@ -57,7 +60,6 @@ class ComicDrawerContainer extends React.Component {
       />
     )
   }
-
 }
 
 function mapStateToProps(state) {
@@ -72,6 +74,4 @@ function mapStateToProps(state) {
   }
 }
 
-export default connect(
-  mapStateToProps
-)(ComicDrawerContainer)
+export default connect(mapStateToProps)(ComicDrawerContainer)

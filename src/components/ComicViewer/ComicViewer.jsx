@@ -7,14 +7,17 @@ import FlatButton from '../FlatButton'
 import styles from './ComicViewer.css'
 
 class ComicViewer extends React.PureComponent {
-
   static defaultProps = {
     pages: [],
     episode: {},
     isFetching: false,
     fetchError: false,
-    prevEpisodeDisabled: true,
-    nextEpisodeDisabled: true,
+    prevEpisode: null,
+    nextEpisode: null,
+    onPrevEpisodeClick: null,
+    onNextEpisodeClick: null,
+    onBackClick: null,
+    onComicDrawerClick: null,
   }
 
   static propTypes = {
@@ -95,12 +98,12 @@ class ComicViewer extends React.PureComponent {
                 }
                 <div className={ styles.pages }>
                   {
-                    pages.map((page, i) => (
+                    pages.map(page => (
                       <img
-                        key={ i }
+                        key={ page }
                         className={ styles.img }
                         src={ page }
-                        alt={ `page ${i}` }
+                        alt={ page }
                       />
                     ))
                   }

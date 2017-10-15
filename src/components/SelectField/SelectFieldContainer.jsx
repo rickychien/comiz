@@ -5,7 +5,7 @@ import SelectField from './SelectField'
 
 function mapStateToProps(state, ownProps) {
   const { categories } = state.filter
-  const menuItems = Object.keys(categories).map((item) => (
+  const menuItems = Object.keys(categories).map(item => (
     { text: categories[item], value: item }
   ))
 

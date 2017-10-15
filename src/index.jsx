@@ -6,9 +6,9 @@ import { HashRouter } from 'react-router-dom'
 
 import configureStore from './store'
 
-import ComicDrawer from './components/ComicDrawer'
-import ComicList from './components/ComicList'
-import ComicViewer from './components/ComicViewer'
+import ComicDrawerContainer from './components/ComicDrawer'
+import ComicListContainer from './components/ComicList'
+import ComicViewerContainer from './components/ComicViewer'
 
 import './index.css'
 import './assets/materialicons.css'
@@ -37,13 +37,13 @@ render(
     <HashRouter>
       <div>
         <Switch>
-          <Route path="/comics/:category" component={ ComicList } />
-          <Route path="/viewer" component={ ComicViewer } />
+          <Route path="/comics/:category" component={ ComicListContainer } />
+          <Route path="/viewer" component={ ComicViewerContainer } />
           <Redirect from="*" to="comics/latest" />
         </Switch>
-        <ComicDrawer />
+        <ComicDrawerContainer />
       </div>
     </HashRouter>
   </Provider>,
-  document.getElementById('root')
+  document.getElementById('root'),
 )

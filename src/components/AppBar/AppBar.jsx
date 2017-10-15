@@ -4,9 +4,12 @@ import React from 'react'
 import styles from './AppBar.css'
 
 class AppBar extends React.PureComponent {
-
   static defaultProps = {
+    materialIcon: null,
+    title: null,
     transparent: false,
+    onLogoClick: null,
+    children: null,
   }
 
   static propTypes = {
@@ -33,7 +36,13 @@ class AppBar extends React.PureComponent {
 
     return (
       <div className={ appBarStyles }>
-        <div className={ styles.logo } onClick={ onLogoClick }>
+        <div
+          className={ styles.logo }
+          role="button"
+          tabIndex="0"
+          onClick={ onLogoClick }
+          onKeyPress={ onLogoClick }
+        >
           <div className={ styles.icon }>
             <i className="material-icons">{ materialIcon }</i>
           </div>
@@ -43,7 +52,6 @@ class AppBar extends React.PureComponent {
       </div>
     )
   }
-
 }
 
 export default AppBar

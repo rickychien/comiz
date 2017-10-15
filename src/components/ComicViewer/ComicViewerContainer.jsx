@@ -9,16 +9,30 @@ import Actions from '../../actions'
 import { App } from '../../constants'
 
 class ComicViewerContainer extends React.Component {
+  static defaultProps = {
+    comicId: 0,
+    comic: {},
+    episodeId: 0,
+    episodes: {},
+    pages: {},
+    push: null,
+    fetchComic: null,
+    fetchEpisodes: null,
+    fetchPages: null,
+    updateComicDrawer: null,
+  }
 
   static propTypes = {
-    comicId: PropTypes.number.isRequired,
+    comicId: PropTypes.number,
     comic: PropTypes.object,
-    episodeId: PropTypes.number.isRequired,
-    episodes: PropTypes.object.isRequired,
-    pages: PropTypes.object.isRequired,
-    push: PropTypes.func.isRequired,
-    comicViewer: PropTypes.object.isRequired,
-    dispatch: PropTypes.func.isRequired,
+    episodeId: PropTypes.number,
+    episodes: PropTypes.object,
+    pages: PropTypes.object,
+    push: PropTypes.func,
+    fetchComic: PropTypes.func,
+    fetchEpisodes: PropTypes.func,
+    fetchPages: PropTypes.func,
+    updateComicDrawer: PropTypes.func,
   }
 
   componentDidMount() {
@@ -34,7 +48,7 @@ class ComicViewerContainer extends React.Component {
   }
 
   onComicDrawerClick = () => {
-    this.props.dispatch(Actions.updateComicDrawer(true, this.props.comicId))
+    this.props.updateComicDrawer(true, this.props.comicId)
   }
 
   onPrevEpisodeClick = () => this.handleEpisodeNavigation(-1)
@@ -56,21 +70,32 @@ class ComicViewerContainer extends React.Component {
   }
 
   handleDataFetch = (nextProps) => {
-    const { comicId, comic, episodeId, episodes, pages, dispatch } =
-          nextProps || this.props
+    const {
+      comicId,
+      episodeId,
+      episodes,
+      pages,
+    } = nextProps || this.props
+
+    const {
+      comic,
+      fetchComic,
+      fetchEpisodes,
+      fetchPages,
+    } = this.props
 
     if (!comicId || !episodeId) return
 
     if (!nextProps && !comic) {
-      this.props.dispatch(Actions.fetchComic(comicId))
+      fetchComic(comicId)
     }
 
     if (comicId !== episodes.comicId) {
-      dispatch(Actions.fetchEpisodes(comicId))
+      fetchEpisodes(comicId)
     }
 
     if (comicId !== pages.comicId || episodeId !== pages.episodeId) {
-      dispatch(Actions.fetchPages(comicId, episodeId))
+      fetchPages(comicId, episodeId)
     }
 
     const episode = episodes.entries.get(episodeId)
@@ -96,7 +121,6 @@ class ComicViewerContainer extends React.Component {
       />
     )
   }
-
 }
 
 function mapStateToProps(state, ownProps) {
@@ -115,6 +139,24 @@ function mapStateToProps(state, ownProps) {
   }
 }
 
+function mapDispatchToProps(dispatch) {
+  return {
+    fetchComic(comicId) {
+      dispatch(Actions.fetchComic(comicId))
+    },
+    fetchEpisodes(comicId) {
+      dispatch(Actions.fetchEpisodes(comicId))
+    },
+    fetchPages(comicId, episodeId) {
+      dispatch(Actions.fetchPages(comicId, episodeId))
+    },
+    updateComicDrawer(open, comicId) {
+      dispatch(Actions.updateComicDrawer(open, comicId))
+    },
+  }
+}
+
 export default withRouter(connect(
   mapStateToProps,
+  mapDispatchToProps,
 )(ComicViewerContainer))
