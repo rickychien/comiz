@@ -23,6 +23,9 @@ class ComicListContainer extends React.Component {
   componentDidMount() {
     const { comics, dispatch } = this.props
 
+    // Reset scrollbar to the top
+    window.scrollTo(0, 0)
+
     // Re-fetch when necessary
     // comic length would be 0 when user first time visits ComicList
     // comic length would be 1 if there has exact 1 comic fetched by other page
