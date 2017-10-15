@@ -13,9 +13,8 @@ module.exports = {
     publicPath: '/',
   },
   plugins: [
-    new webpack.optimize.OccurenceOrderPlugin(),
     new webpack.HotModuleReplacementPlugin(),
-    new webpack.NoErrorsPlugin(),
+    new webpack.NoEmitOnErrorsPlugin(),
     new webpack.DefinePlugin({
       'process.env': {
         'NODE_ENV': JSON.stringify('development'),
@@ -25,24 +24,34 @@ module.exports = {
     }),
   ],
   resolve: {
-    extensions: ['', '.js', '.jsx'],
+    extensions: ['.js', '.jsx'],
   },
-  devtool: 'source-map',
   module: {
-    loaders: [
+    rules: [
       {
         test: /\.jsx?$/,
-        loader: 'babel',
+        use: 'babel-loader',
         exclude: /node_modules/,
       },
       {
         test: /\.(gif|svg|png|ttf|eot|jpe?g|woff2?)$/,
-        loader: 'url',
+        use: 'url-loader',
       },
       {
         test: /\.css$/,
-        loader: 'style!css?modules&importLoaders=1&localIdentName=[name]_[local]__[hash:base64:5]',
+        use: [
+          'style-loader',
+          {
+            loader: 'css-loader',
+            options: {
+              modules: true,
+              importLoaders: 1,
+              localIdentName: '[path][name]_[local]__[hash:base64:5]',
+            },
+          },
+        ],
       },
     ],
   },
+  devtool: 'source-map',
 }

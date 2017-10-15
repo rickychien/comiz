@@ -12,8 +12,6 @@ module.exports = {
     publicPath: '/comiz/',
   },
   plugins: [
-    new webpack.optimize.OccurenceOrderPlugin(),
-    new webpack.optimize.DedupePlugin(),
     new webpack.optimize.UglifyJsPlugin({
       compress: { warnings: false },
     }),
@@ -25,22 +23,32 @@ module.exports = {
     }),
   ],
   resolve: {
-    extensions: ['', '.js', '.jsx'],
+    extensions: ['.js', '.jsx'],
   },
   module: {
-    loaders: [
+    rules: [
       {
         test: /\.jsx?$/,
-        loader: 'babel',
+        use: 'babel-loader',
         exclude: /node_modules/,
       },
       {
         test: /\.(gif|svg|png|ttf|eot|jpe?g|woff2?)$/,
-        loader: 'url',
+        use: 'url-loader',
       },
       {
         test: /\.css$/,
-        loader: 'style!css?modules&importLoaders=1&localIdentName=[name]_[local]__[hash:base64:5]',
+        use: [
+          'style-loader',
+          {
+            loader: 'css-loader',
+            options: {
+              modules: true,
+              importLoaders: 1,
+              localIdentName: '[path][name]_[local]__[hash:base64:5]',
+            },
+          },
+        ],
       },
     ],
   },
