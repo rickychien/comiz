@@ -5,46 +5,52 @@ import FlatButton from '../FlatButton'
 
 import styles from './ComicEpisode.css'
 
-function ComicEpisode({
-  comic,
-  episode,
-  highlight,
-  markRead,
-  onEpisodeClick,
-  onEpisodeRightClick,
-}) {
-  function onContextMenu(evt) {
+class ComicEpisode extends React.PureComponent {
+
+  static defaultProps = {
+    highlight: false,
+    markRead: false,
+  }
+
+  static propTypes = {
+    comic: PropTypes.object.isRequired,
+    episode: PropTypes.object.isRequired,
+    highlight: PropTypes.bool,
+    markRead: PropTypes.bool,
+    onEpisodeClick: PropTypes.func,
+    onEpisodeRightClick: PropTypes.func,
+  }
+
+  onContextMenu = (evt) => {
+    const { comic, episode, markRead, onEpisodeRightClick } = this.props
+
     evt.preventDefault()
     if (onEpisodeRightClick) {
       onEpisodeRightClick(comic.id, episode.id, markRead)
     }
   }
 
-  let extraStyles = highlight ? styles.highlight : ''
-  extraStyles = extraStyles || (markRead ? styles.markRead : '')
+  render() {
+    const {
+      episode,
+      highlight,
+      markRead,
+      onEpisodeClick,
+    } = this.props
 
-  return (
-    <FlatButton
-      title={ episode.title }
-      extraStyles={ extraStyles }
-      onClick={ onEpisodeClick }
-      onContextMenu={ onContextMenu }
-    />
-  )
-}
+    let extraStyles = highlight ? styles.highlight : ''
+    extraStyles = extraStyles || (markRead ? styles.markRead : '')
 
-ComicEpisode.defaultProps = {
-  highlight: false,
-  markRead: false,
-}
+    return (
+      <FlatButton
+        title={ episode.title }
+        extraStyles={ extraStyles }
+        onClick={ onEpisodeClick }
+        onContextMenu={ this.onContextMenu }
+      />
+    )
+  }
 
-ComicEpisode.propTypes = {
-  comic: PropTypes.object.isRequired,
-  episode: PropTypes.object.isRequired,
-  highlight: PropTypes.bool,
-  markRead: PropTypes.bool,
-  onEpisodeClick: PropTypes.func,
-  onEpisodeRightClick: PropTypes.func,
 }
 
 export default ComicEpisode

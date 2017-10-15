@@ -3,24 +3,30 @@ import React from 'react'
 
 import styles from './ComicItem.css'
 
-function ComicItem({ comic, onClick }) {
-  function onComicItemClick() {
+class ComicItem extends React.PureComponent {
+
+  static propTypes = {
+    comic: PropTypes.object.isRequired,
+    onClick: PropTypes.func,
+  }
+
+  onComicItemClick = () => {
+    const { comic, onClick } = this.props
     if (onClick) {
       onClick(comic.id)
     }
   }
 
-  return (
-    <div className={ styles.comic } onClick={ onComicItemClick }>
-      <img className={ styles.img } src={ comic.coverUrl } alt="cover" />
-      <div className={ styles.title }>{ comic.title }</div>
-    </div>
-  )
-}
+  render() {
+    const { comic } = this.props
 
-ComicItem.propTypes = {
-  comic: PropTypes.object.isRequired,
-  onClick: PropTypes.func,
+    return (
+      <div className={ styles.comic } onClick={ this.onComicItemClick }>
+        <img className={ styles.img } src={ comic.coverUrl } alt="cover" />
+        <div className={ styles.title }>{ comic.title }</div>
+      </div>
+    )
+  }
 }
 
 export default ComicItem
